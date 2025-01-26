@@ -21,9 +21,9 @@ local M = {}
 ------------------------------------------------------------------------
 -- AVM Dependencies
 ------------------------------------------------------------------------
+---@diagnostic disable-next-line: unused-local
 local avm_path = (...):match("(.-)[^%.]+$")
----@module 'avm._debug'
-local _debug = require(avm_path .. "_debug")
+
 
 ---Disable warnings for _ex type overloaded functions
 ---@diagnostic disable: redundant-return-value, duplicate-set-field
@@ -250,7 +250,7 @@ function M.copy_ex(src, src_index, src_count) end
 ---@return nil
 function M.copy_ex(src, src_index, src_count, dest, dest_index)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
-	local dest_or_new = dest and (_debug.check_array("dest", dest,dest_index or 1,src_count) or dest) or M.new_array(type(src[src_index]), src_count+(dest_index or 1 or 1)-1)
+	local dest_or_new = dest or M.new_array(type(src[src_index]), src_count+(dest_index or 1 or 1)-1)
 	-- assert(dest, "bad argument 'dest' (expected array or sequence, got nil)")
 	M.copy_array_into(src, src_index, src_count, dest_or_new, dest_index or 1)
 	return dest_or_new
@@ -292,7 +292,7 @@ function M.reverse_ex(src, src_index, src_count, dest, dest_index)
 	local src_offset = src_index - 1
 	local dest_offset = dest_index and (dest_index - 1) or 0
 	local n = src_count
-	dest = dest and (_debug.check_array("dest", dest,dest_offset+1,n) or dest) or M.new_array(type(src[src_index]), n+(dest_offset+1 or 1)-1)
+	dest = dest or M.new_array(type(src[src_index]), n+(dest_offset+1 or 1)-1)
 	for i=1,n do
 		dest[dest_offset+i] = src[src_offset + n-i+1]
 	end
@@ -2205,7 +2205,7 @@ function M.map_ex(f, a1, a1_index, a1_count) end
 ---@param dest_index? integer
 function M.map_ex(f, a1, a1_index, a1_count, dest, dest_index)
 	assert(a1, "bad argument 'a1' (expected array or sequence, got nil)")
-	dest = dest and (_debug.check_array("dest", dest,dest_index or 1,a1_count) or dest) or M.new_array(type(a1), a1_count+(dest_index or 1 or 1)-1)
+	dest = dest or M.new_array(type(a1), a1_count+(dest_index or 1 or 1)-1)
 	local o = dest_index and (dest_index-1) or 0
 	local a1_o = a1_index - 1
 	for i=1,a1_count do
@@ -2255,7 +2255,7 @@ function M.map_2_ex(f, a1, a1_index, a1_count, a2, a2_index) end
 function M.map_2_ex(f, a1, a1_index, a1_count, a2, a2_index, dest, dest_index)
 	assert(a1, "bad argument 'a1' (expected array or sequence, got nil)")
 	assert(a2, "bad argument 'a2' (expected array or sequence, got nil)")
-	dest = dest and (_debug.check_array("dest", dest,dest_index or 1,a1_count) or dest) or M.new_array(type(a1), a1_count+(dest_index or 1 or 1)-1)
+	dest = dest or M.new_array(type(a1), a1_count+(dest_index or 1 or 1)-1)
 	local o = dest_index and (dest_index-1) or 0
 	local a1_o = a1_index - 1
 	local a2_o = a2_index - 1
@@ -2311,7 +2311,7 @@ function M.map_3_ex(f, a1, a1_index, a1_count, a2, a2_index, a3, a3_index, dest,
 	assert(a1, "bad argument 'a1' (expected array or sequence, got nil)")
 	assert(a2, "bad argument 'a2' (expected array or sequence, got nil)")
 	assert(a3, "bad argument 'a3' (expected array or sequence, got nil)")
-	dest = dest and (_debug.check_array("dest", dest,dest_index or 1,a1_count) or dest) or M.new_array(type(a1), a1_count+(dest_index or 1 or 1)-1)
+	dest = dest or M.new_array(type(a1), a1_count+(dest_index or 1 or 1)-1)
 	local o = dest_index and (dest_index-1) or 0
 	local a1_o = a1_index - 1
 	local a2_o = a2_index - 1
@@ -2373,7 +2373,7 @@ function M.map_4_ex(f, a1, a1_index, a1_count, a2, a2_index, a3, a3_index, a4, a
 	assert(a2, "bad argument 'a2' (expected array or sequence, got nil)")
 	assert(a3, "bad argument 'a3' (expected array or sequence, got nil)")
 	assert(a4, "bad argument 'a4' (expected array or sequence, got nil)")
-	dest = dest and (_debug.check_array("dest", dest,dest_index or 1,a1_count) or dest) or M.new_array(type(a1), a1_count+(dest_index or 1 or 1)-1)
+	dest = dest or M.new_array(type(a1), a1_count+(dest_index or 1 or 1)-1)
 	local o = dest_index and (dest_index-1) or 0
 	local a1_o = a1_index - 1
 	local a2_o = a2_index - 1
@@ -2471,7 +2471,7 @@ function M.add_ex(a, a_index, a_count, b, b_index) end
 function M.add_ex(a, a_index, a_count, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
-	dest = dest and (_debug.check_array("dest", dest,dest_index or 1,a_count) or dest) or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
+	dest = dest or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
 	local ao = (a_index - 1)
 	local bo = (b_index - 1)
 	local o = dest_index and (dest_index - 1) or 0
@@ -2505,7 +2505,7 @@ function M.add_constant_ex(a, a_index, a_count, c) end
 ---@return nil
 function M.add_constant_ex(a, a_index, a_count, c, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
-	dest = dest and (_debug.check_array("dest", dest,dest_index or 1,a_count) or dest) or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
+	dest = dest or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
 	local o = dest_index and (dest_index - 1) or 0
 	local ao = (a_index - 1)
 	local n = a_count
@@ -2595,7 +2595,7 @@ function M.sub_ex(a, a_index, a_count, b, b_index) end
 function M.sub_ex(a, a_index, a_count, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
-	dest = dest and (_debug.check_array("dest", dest,dest_index or 1,a_count) or dest) or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
+	dest = dest or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
 	local ao = (a_index - 1)
 	local bo = (b_index - 1)
 	local o = dest_index and (dest_index - 1) or 0
@@ -2629,7 +2629,7 @@ function M.sub_constant_ex(a, a_index, a_count, c) end
 ---@return nil
 function M.sub_constant_ex(a, a_index, a_count, c, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
-	dest = dest and (_debug.check_array("dest", dest,dest_index or 1,a_count) or dest) or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
+	dest = dest or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
 	local o = dest_index and (dest_index - 1) or 0
 	local ao = (a_index - 1)
 	local n = a_count
@@ -2719,7 +2719,7 @@ function M.mul_ex(a, a_index, a_count, b, b_index) end
 function M.mul_ex(a, a_index, a_count, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
-	dest = dest and (_debug.check_array("dest", dest,dest_index or 1,a_count) or dest) or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
+	dest = dest or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
 	local ao = (a_index - 1)
 	local bo = (b_index - 1)
 	local o = dest_index and (dest_index - 1) or 0
@@ -2753,7 +2753,7 @@ function M.mul_constant_ex(a, a_index, a_count, c) end
 ---@return nil
 function M.mul_constant_ex(a, a_index, a_count, c, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
-	dest = dest and (_debug.check_array("dest", dest,dest_index or 1,a_count) or dest) or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
+	dest = dest or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
 	local o = dest_index and (dest_index - 1) or 0
 	local ao = (a_index - 1)
 	local n = a_count
@@ -2843,7 +2843,7 @@ function M.div_ex(a, a_index, a_count, b, b_index) end
 function M.div_ex(a, a_index, a_count, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
-	dest = dest and (_debug.check_array("dest", dest,dest_index or 1,a_count) or dest) or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
+	dest = dest or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
 	local ao = (a_index - 1)
 	local bo = (b_index - 1)
 	local o = dest_index and (dest_index - 1) or 0
@@ -2877,7 +2877,7 @@ function M.div_constant_ex(a, a_index, a_count, c) end
 ---@return nil
 function M.div_constant_ex(a, a_index, a_count, c, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
-	dest = dest and (_debug.check_array("dest", dest,dest_index or 1,a_count) or dest) or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
+	dest = dest or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
 	local o = dest_index and (dest_index - 1) or 0
 	local ao = (a_index - 1)
 	local n = a_count
@@ -2967,7 +2967,7 @@ function M.mod_ex(a, a_index, a_count, b, b_index) end
 function M.mod_ex(a, a_index, a_count, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
-	dest = dest and (_debug.check_array("dest", dest,dest_index or 1,a_count) or dest) or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
+	dest = dest or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
 	local ao = (a_index - 1)
 	local bo = (b_index - 1)
 	local o = dest_index and (dest_index - 1) or 0
@@ -3001,7 +3001,7 @@ function M.mod_constant_ex(a, a_index, a_count, c) end
 ---@return nil
 function M.mod_constant_ex(a, a_index, a_count, c, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
-	dest = dest and (_debug.check_array("dest", dest,dest_index or 1,a_count) or dest) or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
+	dest = dest or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
 	local o = dest_index and (dest_index - 1) or 0
 	local ao = (a_index - 1)
 	local n = a_count
@@ -3091,7 +3091,7 @@ function M.pow_ex(a, a_index, a_count, b, b_index) end
 function M.pow_ex(a, a_index, a_count, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
-	dest = dest and (_debug.check_array("dest", dest,dest_index or 1,a_count) or dest) or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
+	dest = dest or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
 	local ao = (a_index - 1)
 	local bo = (b_index - 1)
 	local o = dest_index and (dest_index - 1) or 0
@@ -3125,7 +3125,7 @@ function M.pow_constant_ex(a, a_index, a_count, c) end
 ---@return nil
 function M.pow_constant_ex(a, a_index, a_count, c, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
-	dest = dest and (_debug.check_array("dest", dest,dest_index or 1,a_count) or dest) or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
+	dest = dest or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
 	local o = dest_index and (dest_index - 1) or 0
 	local ao = (a_index - 1)
 	local n = a_count
@@ -3215,7 +3215,7 @@ function M.equal_ex(a, a_index, a_count, b, b_index) end
 function M.equal_ex(a, a_index, a_count, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
-	dest = dest and (_debug.check_array("dest", dest,dest_index or 1,a_count) or dest) or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
+	dest = dest or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
 	local ao = (a_index - 1)
 	local bo = (b_index - 1)
 	local o = dest_index and (dest_index - 1) or 0
@@ -3249,7 +3249,7 @@ function M.equal_constant_ex(a, a_index, a_count, c) end
 ---@return nil
 function M.equal_constant_ex(a, a_index, a_count, c, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
-	dest = dest and (_debug.check_array("dest", dest,dest_index or 1,a_count) or dest) or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
+	dest = dest or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
 	local o = dest_index and (dest_index - 1) or 0
 	local ao = (a_index - 1)
 	local n = a_count
@@ -3339,7 +3339,7 @@ function M.not_equal_ex(a, a_index, a_count, b, b_index) end
 function M.not_equal_ex(a, a_index, a_count, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
-	dest = dest and (_debug.check_array("dest", dest,dest_index or 1,a_count) or dest) or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
+	dest = dest or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
 	local ao = (a_index - 1)
 	local bo = (b_index - 1)
 	local o = dest_index and (dest_index - 1) or 0
@@ -3373,7 +3373,7 @@ function M.not_equal_constant_ex(a, a_index, a_count, c) end
 ---@return nil
 function M.not_equal_constant_ex(a, a_index, a_count, c, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
-	dest = dest and (_debug.check_array("dest", dest,dest_index or 1,a_count) or dest) or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
+	dest = dest or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
 	local o = dest_index and (dest_index - 1) or 0
 	local ao = (a_index - 1)
 	local n = a_count
@@ -3463,7 +3463,7 @@ function M.less_than_ex(a, a_index, a_count, b, b_index) end
 function M.less_than_ex(a, a_index, a_count, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
-	dest = dest and (_debug.check_array("dest", dest,dest_index or 1,a_count) or dest) or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
+	dest = dest or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
 	local ao = (a_index - 1)
 	local bo = (b_index - 1)
 	local o = dest_index and (dest_index - 1) or 0
@@ -3497,7 +3497,7 @@ function M.less_than_constant_ex(a, a_index, a_count, c) end
 ---@return nil
 function M.less_than_constant_ex(a, a_index, a_count, c, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
-	dest = dest and (_debug.check_array("dest", dest,dest_index or 1,a_count) or dest) or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
+	dest = dest or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
 	local o = dest_index and (dest_index - 1) or 0
 	local ao = (a_index - 1)
 	local n = a_count
@@ -3587,7 +3587,7 @@ function M.less_than_or_equal_ex(a, a_index, a_count, b, b_index) end
 function M.less_than_or_equal_ex(a, a_index, a_count, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
-	dest = dest and (_debug.check_array("dest", dest,dest_index or 1,a_count) or dest) or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
+	dest = dest or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
 	local ao = (a_index - 1)
 	local bo = (b_index - 1)
 	local o = dest_index and (dest_index - 1) or 0
@@ -3621,7 +3621,7 @@ function M.less_than_or_equal_constant_ex(a, a_index, a_count, c) end
 ---@return nil
 function M.less_than_or_equal_constant_ex(a, a_index, a_count, c, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
-	dest = dest and (_debug.check_array("dest", dest,dest_index or 1,a_count) or dest) or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
+	dest = dest or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
 	local o = dest_index and (dest_index - 1) or 0
 	local ao = (a_index - 1)
 	local n = a_count
@@ -3711,7 +3711,7 @@ function M.greater_than_ex(a, a_index, a_count, b, b_index) end
 function M.greater_than_ex(a, a_index, a_count, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
-	dest = dest and (_debug.check_array("dest", dest,dest_index or 1,a_count) or dest) or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
+	dest = dest or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
 	local ao = (a_index - 1)
 	local bo = (b_index - 1)
 	local o = dest_index and (dest_index - 1) or 0
@@ -3745,7 +3745,7 @@ function M.greater_than_constant_ex(a, a_index, a_count, c) end
 ---@return nil
 function M.greater_than_constant_ex(a, a_index, a_count, c, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
-	dest = dest and (_debug.check_array("dest", dest,dest_index or 1,a_count) or dest) or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
+	dest = dest or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
 	local o = dest_index and (dest_index - 1) or 0
 	local ao = (a_index - 1)
 	local n = a_count
@@ -3835,7 +3835,7 @@ function M.greater_than_or_equal_ex(a, a_index, a_count, b, b_index) end
 function M.greater_than_or_equal_ex(a, a_index, a_count, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
-	dest = dest and (_debug.check_array("dest", dest,dest_index or 1,a_count) or dest) or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
+	dest = dest or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
 	local ao = (a_index - 1)
 	local bo = (b_index - 1)
 	local o = dest_index and (dest_index - 1) or 0
@@ -3869,7 +3869,7 @@ function M.greater_than_or_equal_constant_ex(a, a_index, a_count, c) end
 ---@return nil
 function M.greater_than_or_equal_constant_ex(a, a_index, a_count, c, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
-	dest = dest and (_debug.check_array("dest", dest,dest_index or 1,a_count) or dest) or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
+	dest = dest or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
 	local o = dest_index and (dest_index - 1) or 0
 	local ao = (a_index - 1)
 	local n = a_count
@@ -3959,7 +3959,7 @@ function M.min_ex(a, a_index, a_count, b, b_index) end
 function M.min_ex(a, a_index, a_count, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
-	dest = dest and (_debug.check_array("dest", dest,dest_index or 1,a_count) or dest) or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
+	dest = dest or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
 	local ao = (a_index - 1)
 	local bo = (b_index - 1)
 	local o = dest_index and (dest_index - 1) or 0
@@ -3993,7 +3993,7 @@ function M.min_constant_ex(a, a_index, a_count, c) end
 ---@return nil
 function M.min_constant_ex(a, a_index, a_count, c, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
-	dest = dest and (_debug.check_array("dest", dest,dest_index or 1,a_count) or dest) or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
+	dest = dest or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
 	local o = dest_index and (dest_index - 1) or 0
 	local ao = (a_index - 1)
 	local n = a_count
@@ -4083,7 +4083,7 @@ function M.max_ex(a, a_index, a_count, b, b_index) end
 function M.max_ex(a, a_index, a_count, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
-	dest = dest and (_debug.check_array("dest", dest,dest_index or 1,a_count) or dest) or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
+	dest = dest or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
 	local ao = (a_index - 1)
 	local bo = (b_index - 1)
 	local o = dest_index and (dest_index - 1) or 0
@@ -4117,7 +4117,7 @@ function M.max_constant_ex(a, a_index, a_count, c) end
 ---@return nil
 function M.max_constant_ex(a, a_index, a_count, c, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
-	dest = dest and (_debug.check_array("dest", dest,dest_index or 1,a_count) or dest) or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
+	dest = dest or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
 	local o = dest_index and (dest_index - 1) or 0
 	local ao = (a_index - 1)
 	local n = a_count
@@ -4207,7 +4207,7 @@ function M.almost_equal_ex(a, a_index, a_count, b, b_index) end
 function M.almost_equal_ex(a, a_index, a_count, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
-	dest = dest and (_debug.check_array("dest", dest,dest_index or 1,a_count) or dest) or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
+	dest = dest or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
 	local ao = (a_index - 1)
 	local bo = (b_index - 1)
 	local o = dest_index and (dest_index - 1) or 0
@@ -4241,7 +4241,7 @@ function M.almost_equal_constant_ex(a, a_index, a_count, c) end
 ---@return nil
 function M.almost_equal_constant_ex(a, a_index, a_count, c, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
-	dest = dest and (_debug.check_array("dest", dest,dest_index or 1,a_count) or dest) or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
+	dest = dest or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
 	local o = dest_index and (dest_index - 1) or 0
 	local ao = (a_index - 1)
 	local n = a_count
@@ -4297,7 +4297,7 @@ function M.almost_equal_with_nan_ex(a, a_index, a_count, b, b_index) end
 function M.almost_equal_with_nan_ex(a, a_index, a_count, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
-	dest = dest and (_debug.check_array("dest", dest,dest_index or 1,a_count) or dest) or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
+	dest = dest or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
 	local ao = (a_index - 1)
 	local bo = (b_index - 1)
 	local o = dest_index and (dest_index - 1) or 0
@@ -4361,7 +4361,7 @@ function M.mul_add_ex(a, a_index, a_count, b, b_index, c, c_index, dest, dest_in
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
 	assert(c, "bad argument 'c' (expected array, got nil)")
-	dest = dest and (_debug.check_array("dest", dest,dest_index or 1,a_count) or dest) or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
+	dest = dest or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
 	local o = dest_index and (dest_index-1) or 0
 	local ao = a_index - 1
 	local bo = b_index - 1
@@ -4433,7 +4433,7 @@ function M.mul_add_constant_ex(a, a_index, a_count, b, b_index, c) end
 function M.mul_add_constant_ex(a, a_index, a_count, b, b_index, c, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
-	dest = dest and (_debug.check_array("dest", dest,dest_index or 1,a_count) or dest) or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
+	dest = dest or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
 	local o = dest_index and (dest_index-1) or 0
 	local ao = a_index - 1
 	local bo = b_index - 1
@@ -4507,7 +4507,7 @@ function M.lerp_ex(a, a_index, a_count, b, b_index, t, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
 	assert(t, "bad argument 't' (expected number, got nil)")
-	dest = dest and (_debug.check_array("dest", dest,dest_index or 1,a_count) or dest) or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
+	dest = dest or M.new_array(type(a[a_index]), a_count+(dest_index or 1 or 1)-1)
 	local o = dest_index and (dest_index-1) or 0
 	local ao = a_index - 1
 	local bo = b_index - 1

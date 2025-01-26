@@ -12,9 +12,12 @@ local M = {}
 ------------------------------------------------------------------------
 -- AVM Dependencies
 ------------------------------------------------------------------------
+---@diagnostic disable-next-line: unused-local
 local avm_path = (...):match("(.-)[^%.]+$")
+
 ---@module 'avm._debug'
 local _debug = require(avm_path .. "_debug")
+
 ---@module 'avm.array'
 local array = require(avm_path .. "array")
 

@@ -21,9 +21,12 @@ local M = {}
 ------------------------------------------------------------------------
 -- AVM Dependencies
 ------------------------------------------------------------------------
+---@diagnostic disable-next-line: unused-local
 local avm_path = (...):match("(.-)[^%.]+$")
+
 ---@module 'avm._debug'
 local _debug = require(avm_path .. "_debug")
+
 
 ---Disable warnings for _ex type overloaded functions
 ---@diagnostic disable: redundant-return-value, duplicate-set-field
