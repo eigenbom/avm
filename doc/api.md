@@ -1,4 +1,4 @@
-# array_module
+# array
 Functions for working with numerical arrays  
 
 Examples:  
@@ -18,7 +18,7 @@ assert(array.all_equals_constant(c, 11))
 ## add
 
 ```lua
-function array_module.add(a: avm.array<T>, b: avm.seq<T>)
+function array.add(a: avm.array<T>, b: avm.seq<T>)
   -> avm.array<number>
 ```
 
@@ -29,7 +29,7 @@ Apply the addition operator to two arrays
 ## add_constant
 
 ```lua
-function array_module.add_constant(a: avm.array<T>, c: <T>|avm.array<T>)
+function array.add_constant(a: avm.array<T>, c: <T>|avm.array<T>)
   -> avm.array<number>
 ```
 
@@ -48,47 +48,43 @@ add_constant({1,2,3,4,...}, {x,y}) -- {1+x, 2+y, 3+x, 4+y}
 ## add_constant_ex
 
 ```lua
-function array_module.add_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function array.add_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
 Apply the addition operator to each element of a slice with a constant and store the result in a destination
-See: [array_module.add_constant](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#2426#9)
 
 ## add_constant_ex
 
 ```lua
-function array_module.add_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>)
+function array.add_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>)
   -> avm.array<number>
 ```
 
 Apply the addition operator to each element of a slice with a constant
-See: [array_module.add_constant](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#2426#9)
 
 ## add_ex
 
 ```lua
-function array_module.add_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
+function array.add_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
   -> avm.array<number>
 ```
 
 Apply the addition operator to two slices and return the result
-See: [array_module.add](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#2400#9)
 
 ## add_ex
 
 ```lua
-function array_module.add_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function array.add_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
 Apply the addition operator to two slices and store the result in a destination
-See: [array_module.add](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#2400#9)
 
 ## all_almost_equals
 
 ```lua
-function array_module.all_almost_equals(a: avm.array<number>, b: avm.array<number>, epsilon?: number)
+function array.all_almost_equals(a: avm.array<number>, b: avm.array<number>, epsilon?: number)
   -> boolean
 ```
 
@@ -97,7 +93,7 @@ true if the arrays are almost equal (differ by epsilon or less)
 ## all_almost_equals_constant
 
 ```lua
-function array_module.all_almost_equals_constant(a: avm.array<number>, constant: number, epsilon?: number)
+function array.all_almost_equals_constant(a: avm.array<number>, constant: number, epsilon?: number)
   -> boolean
 ```
 
@@ -106,7 +102,7 @@ function array_module.all_almost_equals_constant(a: avm.array<number>, constant:
 ## all_almost_equals_constant_ex
 
 ```lua
-function array_module.all_almost_equals_constant_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, a_count: integer, constant: number, epsilon?: number)
+function array.all_almost_equals_constant_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, a_count: integer, constant: number, epsilon?: number)
   -> boolean
 ```
 
@@ -115,7 +111,7 @@ function array_module.all_almost_equals_constant_ex(a: avm.seq_number|{ [integer
 ## all_almost_equals_ex
 
 ```lua
-function array_module.all_almost_equals_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, a_count: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, epsilon?: number)
+function array.all_almost_equals_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, a_count: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, epsilon?: number)
   -> boolean
 ```
 
@@ -124,7 +120,7 @@ true if a[1,#a] and b[1,#a] are almost equal (differ by epsilon or less)
 ## all_almost_equals_with_nan
 
 ```lua
-function array_module.all_almost_equals_with_nan(a: avm.array<number>, b: avm.array<number>, epsilon?: number)
+function array.all_almost_equals_with_nan(a: avm.array<number>, b: avm.array<number>, epsilon?: number)
   -> boolean
 ```
 
@@ -135,7 +131,7 @@ nan is considered equal to itself
 ## all_equals
 
 ```lua
-function array_module.all_equals(a: avm.array<T>, b: avm.array<T>)
+function array.all_equals(a: avm.array<T>, b: avm.array<T>)
   -> boolean
 ```
 
@@ -144,7 +140,7 @@ true if the arrays are equal and #a==#b
 ## all_equals_constant
 
 ```lua
-function array_module.all_equals_constant(a: avm.array<T>, constant: <T>)
+function array.all_equals_constant(a: avm.array<T>, constant: <T>)
   -> boolean
 ```
 
@@ -153,7 +149,7 @@ function array_module.all_equals_constant(a: avm.array<T>, constant: <T>)
 ## all_equals_constant_ex
 
 ```lua
-function array_module.all_equals_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, constant: <T>)
+function array.all_equals_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, constant: <T>)
   -> boolean
 ```
 
@@ -162,7 +158,7 @@ function array_module.all_equals_constant_ex(a: avm.seq<T>, a_index: integer, a_
 ## all_equals_ex
 
 ```lua
-function array_module.all_equals_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
+function array.all_equals_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
   -> boolean
 ```
 
@@ -171,7 +167,7 @@ true if the slices are equal
 ## almost_equal
 
 ```lua
-function array_module.almost_equal(a: avm.array<T>, b: avm.seq<T>)
+function array.almost_equal(a: avm.array<T>, b: avm.seq<T>)
   -> boolean[]
 ```
 
@@ -182,7 +178,7 @@ Apply the almost equal operator to two arrays
 ## almost_equal_constant
 
 ```lua
-function array_module.almost_equal_constant(a: avm.array<T>, c: <T>|avm.array<T>)
+function array.almost_equal_constant(a: avm.array<T>, c: <T>|avm.array<T>)
   -> boolean[]
 ```
 
@@ -201,47 +197,43 @@ add_constant({1,2,3,4,...}, {x,y}) -- {1+x, 2+y, 3+x, 4+y}
 ## almost_equal_constant_ex
 
 ```lua
-function array_module.almost_equal_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>, dest: avm.seq<boolean>, dest_index?: integer)
+function array.almost_equal_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>, dest: avm.seq<boolean>, dest_index?: integer)
   -> nil
 ```
 
 Apply the almost equal operator to each element of a slice with a constant and store the result in a destination
-See: [array_module.almost_equal_constant](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#4162#9)
 
 ## almost_equal_constant_ex
 
 ```lua
-function array_module.almost_equal_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>)
+function array.almost_equal_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>)
   -> boolean[]
 ```
 
 Apply the almost equal operator to each element of a slice with a constant
-See: [array_module.almost_equal_constant](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#4162#9)
 
 ## almost_equal_ex
 
 ```lua
-function array_module.almost_equal_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
+function array.almost_equal_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
   -> boolean[]
 ```
 
 Apply the almost equal operator to two slices and return the result
-See: [array_module.almost_equal](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#4136#9)
 
 ## almost_equal_ex
 
 ```lua
-function array_module.almost_equal_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer, dest: avm.seq<boolean>, dest_index?: integer)
+function array.almost_equal_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer, dest: avm.seq<boolean>, dest_index?: integer)
   -> nil
 ```
 
 Apply the almost equal operator to two slices and store the result in a destination
-See: [array_module.almost_equal](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#4136#9)
 
 ## almost_equal_with_nan
 
 ```lua
-function array_module.almost_equal_with_nan(a: avm.array<T>, b: avm.seq<T>)
+function array.almost_equal_with_nan(a: avm.array<T>, b: avm.seq<T>)
   -> avm.seq<boolean>
 ```
 
@@ -252,38 +244,35 @@ Apply the almost equal (but NaN==NaN) operator to two arrays
 ## almost_equal_with_nan_ex
 
 ```lua
-function array_module.almost_equal_with_nan_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
+function array.almost_equal_with_nan_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
   -> avm.seq<boolean>
 ```
 
 Apply the almost equal (but NaN==NaN) operator to two slices and return the result
-See: [array_module.almost_equal_with_nan](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#4260#9)
 
 ## almost_equal_with_nan_ex
 
 ```lua
-function array_module.almost_equal_with_nan_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer, dest: boolean[], dest_index?: integer)
+function array.almost_equal_with_nan_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer, dest: boolean[], dest_index?: integer)
   -> nil
 ```
 
 Apply the almost equal (but NaN==NaN) operator to two slices and store the result in a destination
-See: [array_module.almost_equal_with_nan](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#4260#9)
 
 ## append
 
 ```lua
-function array_module.append(src: avm.array<T>, dest: avm.array<T>)
+function array.append(src: avm.array<T>, dest: avm.array<T>)
 ```
 
 Append an array `src` onto the end of an array `dest`
 
 Equivalent to `copy_into(src, dest, length(dest))`
-See: [array_module.extend](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#1948#9)
 
 ## copy
 
 ```lua
-function array_module.copy(src: avm.array<T>)
+function array.copy(src: avm.array<T>)
   -> avm.array<T>
 ```
 
@@ -292,7 +281,7 @@ Copy an array elements into a new array
 ## copy_array
 
 ```lua
-function array_module.copy_array(src: avm.seq<T>, src_index: integer, src_count: integer)
+function array.copy_array(src: avm.seq<T>, src_index: integer, src_count: integer)
   -> avm.array<T>
 ```
 
@@ -305,7 +294,7 @@ Optionally redefine this to support custom platform and userdata
 ## copy_array_into
 
 ```lua
-function array_module.copy_array_into(src: avm.seq<T>, src_index: integer, src_count: integer, dest: avm.seq<T>, dest_index: integer)
+function array.copy_array_into(src: avm.seq<T>, src_index: integer, src_count: integer, dest: avm.seq<T>, dest_index: integer)
 ```
 
 Copy an array
@@ -317,7 +306,7 @@ Optionally redefine this to support custom platform and userdata
 ## copy_ex
 
 ```lua
-function array_module.copy_ex(src: avm.seq<T>, src_index: integer, src_count: integer)
+function array.copy_ex(src: avm.seq<T>, src_index: integer, src_count: integer)
   -> avm.array<T>
 ```
 
@@ -326,7 +315,7 @@ Copy a slice
 ## copy_ex
 
 ```lua
-function array_module.copy_ex(src: avm.seq<T>, src_index: integer, src_count: integer, dest: avm.seq<T>, dest_index?: integer)
+function array.copy_ex(src: avm.seq<T>, src_index: integer, src_count: integer, dest: avm.seq<T>, dest_index?: integer)
   -> nil
 ```
 
@@ -335,7 +324,7 @@ Copy a slice to a destination
 ## div
 
 ```lua
-function array_module.div(a: avm.array<T>, b: avm.seq<T>)
+function array.div(a: avm.array<T>, b: avm.seq<T>)
   -> avm.array<number>
 ```
 
@@ -346,7 +335,7 @@ Apply the division operator to two arrays
 ## div_constant
 
 ```lua
-function array_module.div_constant(a: avm.array<T>, c: <T>|avm.array<T>)
+function array.div_constant(a: avm.array<T>, c: <T>|avm.array<T>)
   -> avm.array<number>
 ```
 
@@ -365,47 +354,43 @@ add_constant({1,2,3,4,...}, {x,y}) -- {1+x, 2+y, 3+x, 4+y}
 ## div_constant_ex
 
 ```lua
-function array_module.div_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>)
+function array.div_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>)
   -> avm.array<number>
 ```
 
 Apply the division operator to each element of a slice with a constant
-See: [array_module.div_constant](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#2798#9)
 
 ## div_constant_ex
 
 ```lua
-function array_module.div_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function array.div_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
 Apply the division operator to each element of a slice with a constant and store the result in a destination
-See: [array_module.div_constant](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#2798#9)
 
 ## div_ex
 
 ```lua
-function array_module.div_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
+function array.div_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
   -> avm.array<number>
 ```
 
 Apply the division operator to two slices and return the result
-See: [array_module.div](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#2772#9)
 
 ## div_ex
 
 ```lua
-function array_module.div_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function array.div_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
 Apply the division operator to two slices and store the result in a destination
-See: [array_module.div](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#2772#9)
 
 ## equal
 
 ```lua
-function array_module.equal(a: avm.array<T>, b: avm.seq<T>)
+function array.equal(a: avm.array<T>, b: avm.seq<T>)
   -> boolean[]
 ```
 
@@ -416,7 +401,7 @@ Apply the equal operator to two arrays
 ## equal_constant
 
 ```lua
-function array_module.equal_constant(a: avm.array<T>, c: <T>|avm.array<T>)
+function array.equal_constant(a: avm.array<T>, c: <T>|avm.array<T>)
   -> boolean[]
 ```
 
@@ -435,58 +420,53 @@ add_constant({1,2,3,4,...}, {x,y}) -- {1+x, 2+y, 3+x, 4+y}
 ## equal_constant_ex
 
 ```lua
-function array_module.equal_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>)
+function array.equal_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>)
   -> boolean[]
 ```
 
 Apply the equal operator to each element of a slice with a constant
-See: [array_module.equal_constant](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#3170#9)
 
 ## equal_constant_ex
 
 ```lua
-function array_module.equal_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>, dest: avm.seq<boolean>, dest_index?: integer)
+function array.equal_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>, dest: avm.seq<boolean>, dest_index?: integer)
   -> nil
 ```
 
 Apply the equal operator to each element of a slice with a constant and store the result in a destination
-See: [array_module.equal_constant](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#3170#9)
 
 ## equal_ex
 
 ```lua
-function array_module.equal_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer, dest: avm.seq<boolean>, dest_index?: integer)
+function array.equal_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer, dest: avm.seq<boolean>, dest_index?: integer)
   -> nil
 ```
 
 Apply the equal operator to two slices and store the result in a destination
-See: [array_module.equal](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#3144#9)
 
 ## equal_ex
 
 ```lua
-function array_module.equal_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
+function array.equal_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
   -> boolean[]
 ```
 
 Apply the equal operator to two slices and return the result
-See: [array_module.equal](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#3144#9)
 
 ## extend
 
 ```lua
-function array_module.extend(dest: avm.array<T>, src: avm.array<T>)
+function array.extend(dest: avm.array<T>, src: avm.array<T>)
 ```
 
 Extend an array `dest` with `src`
 
 Equivalent to `copy_into(src, dest, length(dest))`
-See: [array_module.append](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#1927#9)
 
 ## fill
 
 ```lua
-function array_module.fill(constant: <T>, count: integer)
+function array.fill(constant: <T>, count: integer)
   -> avm.array<T>
 ```
 
@@ -495,7 +475,7 @@ create an array filled with a constant value
 ## fill_into
 
 ```lua
-function array_module.fill_into(constant: <T>, count: integer, dest: avm.seq<T>, dest_index?: integer)
+function array.fill_into(constant: <T>, count: integer, dest: avm.seq<T>, dest_index?: integer)
 ```
 
 fill a sequence with a constant
@@ -503,7 +483,7 @@ fill a sequence with a constant
 ## flatten
 
 ```lua
-function array_module.flatten(src: any)
+function array.flatten(src: any)
   -> any[]
 ```
 
@@ -511,24 +491,22 @@ Flatten a table of data
 
 Example:
 * `flatten({{1,2,3},{4,5,6}}})` -> `{1,2,3,4,5,6}`
-See: [array_module.reshape](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#321#9)
 
 ## flatten_into
 
 ```lua
-function array_module.flatten_into(src: any, dest: any, dest_index?: integer)
+function array.flatten_into(src: any, dest: any, dest_index?: integer)
 ```
 
 Flatten a table of data into a destination
 
 Example:
 * `flatten({{1,2,3},{4,5,6}}})` -> `{1,2,3,4,5,6}`
-See: [array_module.reshape](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#321#9)
 
 ## generate
 
 ```lua
-function array_module.generate(count: integer, f: fun(index: integer):<T>)
+function array.generate(count: integer, f: fun(index: integer):<T>)
   -> avm.array<T>
 ```
 
@@ -538,7 +516,7 @@ Return a new an array with elements
 ## generate_into
 
 ```lua
-function array_module.generate_into(count: integer, f: fun(index: integer):<T>, dest: avm.seq<T>, dest_index?: integer)
+function array.generate_into(count: integer, f: fun(index: integer):<T>, dest: avm.seq<T>, dest_index?: integer)
 ```
 
 Fill a destination with elements
@@ -547,7 +525,7 @@ Fill a destination with elements
 ## get_2
 
 ```lua
-function array_module.get_2(src: avm.seq<T>, src_index: integer)
+function array.get_2(src: avm.seq<T>, src_index: integer)
   -> <T>, <T>
 ```
 
@@ -556,7 +534,7 @@ Get 2 values from a slice
 ## get_3
 
 ```lua
-function array_module.get_3(src: avm.seq<T>, src_index: integer)
+function array.get_3(src: avm.seq<T>, src_index: integer)
   -> <T>, <T>, <T>
 ```
 
@@ -565,7 +543,7 @@ Get 3 values from a slice
 ## get_4
 
 ```lua
-function array_module.get_4(src: avm.seq<T>, src_index: integer)
+function array.get_4(src: avm.seq<T>, src_index: integer)
   -> <T> * 4
 ```
 
@@ -574,7 +552,7 @@ Get 4 values from a slice
 ## get_5
 
 ```lua
-function array_module.get_5(src: avm.seq<T>, src_index: integer)
+function array.get_5(src: avm.seq<T>, src_index: integer)
   -> <T> * 5
 ```
 
@@ -583,7 +561,7 @@ Get 5 values from a slice
 ## get_6
 
 ```lua
-function array_module.get_6(src: avm.seq<T>, src_index: integer)
+function array.get_6(src: avm.seq<T>, src_index: integer)
   -> <T> * 6
 ```
 
@@ -592,7 +570,7 @@ Get 6 values from a slice
 ## get_7
 
 ```lua
-function array_module.get_7(src: avm.seq<T>, src_index: integer)
+function array.get_7(src: avm.seq<T>, src_index: integer)
   -> <T> * 7
 ```
 
@@ -601,7 +579,7 @@ Get 7 values from a slice
 ## get_8
 
 ```lua
-function array_module.get_8(src: avm.seq<T>, src_index: integer)
+function array.get_8(src: avm.seq<T>, src_index: integer)
   -> <T> * 8
 ```
 
@@ -610,7 +588,7 @@ Get 8 values from a slice
 ## get_9
 
 ```lua
-function array_module.get_9(src: avm.seq<T>, src_index: integer)
+function array.get_9(src: avm.seq<T>, src_index: integer)
   -> <T> * 9
 ```
 
@@ -619,7 +597,7 @@ Get 9 values from a slice
 ## get_10
 
 ```lua
-function array_module.get_10(src: avm.seq<T>, src_index: integer)
+function array.get_10(src: avm.seq<T>, src_index: integer)
   -> <T> * 10
 ```
 
@@ -628,7 +606,7 @@ Get 10 values from a slice
 ## get_11
 
 ```lua
-function array_module.get_11(src: avm.seq<T>, src_index: integer)
+function array.get_11(src: avm.seq<T>, src_index: integer)
   -> <T> * 11
 ```
 
@@ -637,7 +615,7 @@ Get 11 values from a slice
 ## get_12
 
 ```lua
-function array_module.get_12(src: avm.seq<T>, src_index: integer)
+function array.get_12(src: avm.seq<T>, src_index: integer)
   -> <T> * 12
 ```
 
@@ -646,7 +624,7 @@ Get 12 values from a slice
 ## get_13
 
 ```lua
-function array_module.get_13(src: avm.seq<T>, src_index: integer)
+function array.get_13(src: avm.seq<T>, src_index: integer)
   -> <T> * 13
 ```
 
@@ -655,7 +633,7 @@ Get 13 values from a slice
 ## get_14
 
 ```lua
-function array_module.get_14(src: avm.seq<T>, src_index: integer)
+function array.get_14(src: avm.seq<T>, src_index: integer)
   -> <T> * 14
 ```
 
@@ -664,7 +642,7 @@ Get 14 values from a slice
 ## get_15
 
 ```lua
-function array_module.get_15(src: avm.seq<T>, src_index: integer)
+function array.get_15(src: avm.seq<T>, src_index: integer)
   -> <T> * 15
 ```
 
@@ -673,7 +651,7 @@ Get 15 values from a slice
 ## get_16
 
 ```lua
-function array_module.get_16(src: avm.seq<T>, src_index: integer)
+function array.get_16(src: avm.seq<T>, src_index: integer)
   -> <T> * 16
 ```
 
@@ -682,7 +660,7 @@ Get 16 values from a slice
 ## greater_than
 
 ```lua
-function array_module.greater_than(a: avm.array<T>, b: avm.seq<T>)
+function array.greater_than(a: avm.array<T>, b: avm.seq<T>)
   -> boolean[]
 ```
 
@@ -693,7 +671,7 @@ Apply the greater than operator to two arrays
 ## greater_than_constant
 
 ```lua
-function array_module.greater_than_constant(a: avm.array<T>, c: <T>|avm.array<T>)
+function array.greater_than_constant(a: avm.array<T>, c: <T>|avm.array<T>)
   -> boolean[]
 ```
 
@@ -712,47 +690,43 @@ add_constant({1,2,3,4,...}, {x,y}) -- {1+x, 2+y, 3+x, 4+y}
 ## greater_than_constant_ex
 
 ```lua
-function array_module.greater_than_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>, dest: avm.seq<boolean>, dest_index?: integer)
+function array.greater_than_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>, dest: avm.seq<boolean>, dest_index?: integer)
   -> nil
 ```
 
 Apply the greater than operator to each element of a slice with a constant and store the result in a destination
-See: [array_module.greater_than_constant](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#3666#9)
 
 ## greater_than_constant_ex
 
 ```lua
-function array_module.greater_than_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>)
+function array.greater_than_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>)
   -> boolean[]
 ```
 
 Apply the greater than operator to each element of a slice with a constant
-See: [array_module.greater_than_constant](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#3666#9)
 
 ## greater_than_ex
 
 ```lua
-function array_module.greater_than_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
+function array.greater_than_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
   -> boolean[]
 ```
 
 Apply the greater than operator to two slices and return the result
-See: [array_module.greater_than](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#3640#9)
 
 ## greater_than_ex
 
 ```lua
-function array_module.greater_than_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer, dest: avm.seq<boolean>, dest_index?: integer)
+function array.greater_than_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer, dest: avm.seq<boolean>, dest_index?: integer)
   -> nil
 ```
 
 Apply the greater than operator to two slices and store the result in a destination
-See: [array_module.greater_than](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#3640#9)
 
 ## greater_than_or_equal
 
 ```lua
-function array_module.greater_than_or_equal(a: avm.array<T>, b: avm.seq<T>)
+function array.greater_than_or_equal(a: avm.array<T>, b: avm.seq<T>)
   -> boolean[]
 ```
 
@@ -763,7 +737,7 @@ Apply the greater than or equal to operator to two arrays
 ## greater_than_or_equal_constant
 
 ```lua
-function array_module.greater_than_or_equal_constant(a: avm.array<T>, c: <T>|avm.array<T>)
+function array.greater_than_or_equal_constant(a: avm.array<T>, c: <T>|avm.array<T>)
   -> boolean[]
 ```
 
@@ -782,50 +756,45 @@ add_constant({1,2,3,4,...}, {x,y}) -- {1+x, 2+y, 3+x, 4+y}
 ## greater_than_or_equal_constant_ex
 
 ```lua
-function array_module.greater_than_or_equal_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>)
+function array.greater_than_or_equal_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>)
   -> boolean[]
 ```
 
 Apply the greater than or equal to operator to each element of a slice with a constant
-See: [array_module.greater_than_or_equal_constant](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#3790#9)
 
 ## greater_than_or_equal_constant_ex
 
 ```lua
-function array_module.greater_than_or_equal_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>, dest: avm.seq<boolean>, dest_index?: integer)
+function array.greater_than_or_equal_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>, dest: avm.seq<boolean>, dest_index?: integer)
   -> nil
 ```
 
 Apply the greater than or equal to operator to each element of a slice with a constant and store the result in a destination
-See: [array_module.greater_than_or_equal_constant](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#3790#9)
 
 ## greater_than_or_equal_ex
 
 ```lua
-function array_module.greater_than_or_equal_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
+function array.greater_than_or_equal_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
   -> boolean[]
 ```
 
 Apply the greater than or equal to operator to two slices and return the result
-See: [array_module.greater_than_or_equal](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#3764#9)
 
 ## greater_than_or_equal_ex
 
 ```lua
-function array_module.greater_than_or_equal_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer, dest: avm.seq<boolean>, dest_index?: integer)
+function array.greater_than_or_equal_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer, dest: avm.seq<boolean>, dest_index?: integer)
   -> nil
 ```
 
 Apply the greater than or equal to operator to two slices and store the result in a destination
-See: [array_module.greater_than_or_equal](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#3764#9)
 
 ## grow_array
 
 ```lua
-function array_module.grow_array(dest: avm.seq<T>, dest_index: integer, dest_count: integer)
+function array.grow_array(dest: avm.seq<T>, dest_index: integer, dest_count: integer)
 ```
 
-TODO: This function should only grow array if the array checks are on
 Grow an array or sequence to span the range [index, index + count - 1]
 
 Optionally redefine this to support custom platform and userdata
@@ -833,7 +802,7 @@ Optionally redefine this to support custom platform and userdata
 ## is_array
 
 ```lua
-function array_module.is_array(src: any)
+function array.is_array(src: any)
   -> boolean
 ```
 
@@ -844,7 +813,7 @@ Optionally redefine this to support custom platform and userdata
 ## join
 
 ```lua
-function array_module.join(a: avm.array<T>, b: avm.array<T>)
+function array.join(a: avm.array<T>, b: avm.array<T>)
   -> avm.array<T>
 ```
 
@@ -853,7 +822,7 @@ Create an array with elements `[a_1, ..., a_n, b_1, ..., b_n]`
 ## join_ex
 
 ```lua
-function array_module.join_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer, b_count: integer)
+function array.join_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer, b_count: integer)
   -> avm.array<T>
 ```
 
@@ -862,7 +831,7 @@ Return an array with elements `[a_i, ..., a_(i+count), b_i, ..., b_(i+count)]`
 ## length
 
 ```lua
-function array_module.length(src: any)
+function array.length(src: any)
   -> integer
 ```
 
@@ -873,7 +842,7 @@ Optionally redefine this to support custom platform and userdata
 ## lerp
 
 ```lua
-function array_module.lerp(a: avm.array<T>, b: avm.seq<T>, t: number)
+function array.lerp(a: avm.array<T>, b: avm.seq<T>, t: number)
   -> avm.array<T>
 ```
 
@@ -884,7 +853,7 @@ Linearly interpolate between arrays and return an array
 ## lerp_ex
 
 ```lua
-function array_module.lerp_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer, t: number, dest: avm.seq<T>, dest_index?: integer)
+function array.lerp_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer, t: number, dest: avm.seq<T>, dest_index?: integer)
   -> nil
 ```
 
@@ -895,7 +864,7 @@ Linearly interpolate between slices into a destination
 ## lerp_ex
 
 ```lua
-function array_module.lerp_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer, t: number)
+function array.lerp_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer, t: number)
   -> avm.array<T>
 ```
 
@@ -906,7 +875,7 @@ Linearly interpolate between slices and return an array
 ## less_than
 
 ```lua
-function array_module.less_than(a: avm.array<T>, b: avm.seq<T>)
+function array.less_than(a: avm.array<T>, b: avm.seq<T>)
   -> boolean[]
 ```
 
@@ -917,7 +886,7 @@ Apply the less than operator to two arrays
 ## less_than_constant
 
 ```lua
-function array_module.less_than_constant(a: avm.array<T>, c: <T>|avm.array<T>)
+function array.less_than_constant(a: avm.array<T>, c: <T>|avm.array<T>)
   -> boolean[]
 ```
 
@@ -936,47 +905,43 @@ add_constant({1,2,3,4,...}, {x,y}) -- {1+x, 2+y, 3+x, 4+y}
 ## less_than_constant_ex
 
 ```lua
-function array_module.less_than_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>)
+function array.less_than_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>)
   -> boolean[]
 ```
 
 Apply the less than operator to each element of a slice with a constant
-See: [array_module.less_than_constant](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#3418#9)
 
 ## less_than_constant_ex
 
 ```lua
-function array_module.less_than_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>, dest: avm.seq<boolean>, dest_index?: integer)
+function array.less_than_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>, dest: avm.seq<boolean>, dest_index?: integer)
   -> nil
 ```
 
 Apply the less than operator to each element of a slice with a constant and store the result in a destination
-See: [array_module.less_than_constant](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#3418#9)
 
 ## less_than_ex
 
 ```lua
-function array_module.less_than_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
+function array.less_than_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
   -> boolean[]
 ```
 
 Apply the less than operator to two slices and return the result
-See: [array_module.less_than](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#3392#9)
 
 ## less_than_ex
 
 ```lua
-function array_module.less_than_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer, dest: avm.seq<boolean>, dest_index?: integer)
+function array.less_than_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer, dest: avm.seq<boolean>, dest_index?: integer)
   -> nil
 ```
 
 Apply the less than operator to two slices and store the result in a destination
-See: [array_module.less_than](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#3392#9)
 
 ## less_than_or_equal
 
 ```lua
-function array_module.less_than_or_equal(a: avm.array<T>, b: avm.seq<T>)
+function array.less_than_or_equal(a: avm.array<T>, b: avm.seq<T>)
   -> boolean[]
 ```
 
@@ -987,7 +952,7 @@ Apply the less than or equal to operator to two arrays
 ## less_than_or_equal_constant
 
 ```lua
-function array_module.less_than_or_equal_constant(a: avm.array<T>, c: <T>|avm.array<T>)
+function array.less_than_or_equal_constant(a: avm.array<T>, c: <T>|avm.array<T>)
   -> boolean[]
 ```
 
@@ -1006,47 +971,43 @@ add_constant({1,2,3,4,...}, {x,y}) -- {1+x, 2+y, 3+x, 4+y}
 ## less_than_or_equal_constant_ex
 
 ```lua
-function array_module.less_than_or_equal_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>)
+function array.less_than_or_equal_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>)
   -> boolean[]
 ```
 
 Apply the less than or equal to operator to each element of a slice with a constant
-See: [array_module.less_than_or_equal_constant](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#3542#9)
 
 ## less_than_or_equal_constant_ex
 
 ```lua
-function array_module.less_than_or_equal_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>, dest: avm.seq<boolean>, dest_index?: integer)
+function array.less_than_or_equal_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>, dest: avm.seq<boolean>, dest_index?: integer)
   -> nil
 ```
 
 Apply the less than or equal to operator to each element of a slice with a constant and store the result in a destination
-See: [array_module.less_than_or_equal_constant](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#3542#9)
 
 ## less_than_or_equal_ex
 
 ```lua
-function array_module.less_than_or_equal_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
+function array.less_than_or_equal_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
   -> boolean[]
 ```
 
 Apply the less than or equal to operator to two slices and return the result
-See: [array_module.less_than_or_equal](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#3516#9)
 
 ## less_than_or_equal_ex
 
 ```lua
-function array_module.less_than_or_equal_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer, dest: avm.seq<boolean>, dest_index?: integer)
+function array.less_than_or_equal_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer, dest: avm.seq<boolean>, dest_index?: integer)
   -> nil
 ```
 
 Apply the less than or equal to operator to two slices and store the result in a destination
-See: [array_module.less_than_or_equal](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#3516#9)
 
 ## map
 
 ```lua
-function array_module.map(f: fun(v1: <T1>):<U>, a1: avm.array<T1>)
+function array.map(f: fun(v1: <T1>):<U>, a1: avm.array<T1>)
   -> avm.array<U>
 ```
 
@@ -1056,7 +1017,7 @@ Apply a function to each element of the arrays and return an array
 ## map_2
 
 ```lua
-function array_module.map_2(f: fun(v1: <T1>, v2: <T2>):<U>, a1: avm.array<T1>, a2: avm.array<T2>)
+function array.map_2(f: fun(v1: <T1>, v2: <T2>):<U>, a1: avm.array<T1>, a2: avm.array<T2>)
   -> avm.array<U>
 ```
 
@@ -1066,27 +1027,25 @@ Apply a function to each element of the arrays and return an array
 ## map_2_ex
 
 ```lua
-function array_module.map_2_ex(f: fun(v1: <T1>, v2: <T2>):<U>, a1: avm.seq<T1>, a1_index: any, a1_count: any, a2: avm.seq<T2>, a2_index: integer)
+function array.map_2_ex(f: fun(v1: <T1>, v2: <T2>):<U>, a1: avm.seq<T1>, a1_index: any, a1_count: any, a2: avm.seq<T2>, a2_index: integer)
   -> avm.array<U>
 ```
 
 Apply a function to each element of the sequences and return an array
-See: [array_module.map_2](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#2224#9)
 
 ## map_2_ex
 
 ```lua
-function array_module.map_2_ex(f: fun(v1: <T1>, v2: <T2>):<U>, a1: avm.seq<T1>, a1_index: any, a1_count: any, a2: avm.seq<T2>, a2_index: integer, dest: avm.seq<U>, dest_index?: integer)
+function array.map_2_ex(f: fun(v1: <T1>, v2: <T2>):<U>, a1: avm.seq<T1>, a1_index: any, a1_count: any, a2: avm.seq<T2>, a2_index: integer, dest: avm.seq<U>, dest_index?: integer)
   -> avm.seq<U>
 ```
 
 Apply a function to each element of the sequences and fill a target a destination
-See: [array_module.map_2](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#2224#9)
 
 ## map_3
 
 ```lua
-function array_module.map_3(f: fun(v1: <T1>, v2: <T2>, v3: <T3>):<U>, a1: avm.array<T1>, a2: avm.array<T2>, a3: avm.array<T3>)
+function array.map_3(f: fun(v1: <T1>, v2: <T2>, v3: <T3>):<U>, a1: avm.array<T1>, a2: avm.array<T2>, a3: avm.array<T3>)
   -> avm.array<U>
 ```
 
@@ -1096,27 +1055,25 @@ Apply a function to each element of the arrays and return an array
 ## map_3_ex
 
 ```lua
-function array_module.map_3_ex(f: fun(v1: <T1>, v2: <T2>, v3: <T3>):<U>, a1: avm.seq<T1>, a1_index: any, a1_count: any, a2: avm.seq<T2>, a2_index: any, a3: avm.seq<T3>, a3_index: integer)
+function array.map_3_ex(f: fun(v1: <T1>, v2: <T2>, v3: <T3>):<U>, a1: avm.seq<T1>, a1_index: any, a1_count: any, a2: avm.seq<T2>, a2_index: any, a3: avm.seq<T3>, a3_index: integer)
   -> avm.array<U>
 ```
 
 Apply a function to each element of the sequences and return an array
-See: [array_module.map_3](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#2276#9)
 
 ## map_3_ex
 
 ```lua
-function array_module.map_3_ex(f: fun(v1: <T1>, v2: <T2>, v3: <T3>):<U>, a1: avm.seq<T1>, a1_index: any, a1_count: any, a2: avm.seq<T2>, a2_index: any, a3: avm.seq<T3>, a3_index: integer, dest: avm.seq<U>, dest_index?: integer)
+function array.map_3_ex(f: fun(v1: <T1>, v2: <T2>, v3: <T3>):<U>, a1: avm.seq<T1>, a1_index: any, a1_count: any, a2: avm.seq<T2>, a2_index: any, a3: avm.seq<T3>, a3_index: integer, dest: avm.seq<U>, dest_index?: integer)
   -> avm.seq<U>
 ```
 
 Apply a function to each element of the sequences and fill a target a destination
-See: [array_module.map_3](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#2276#9)
 
 ## map_4
 
 ```lua
-function array_module.map_4(f: fun(v1: <T1>, v2: <T2>, v3: <T3>, v4: <T4>):<U>, a1: avm.array<T1>, a2: avm.array<T2>, a3: avm.array<T3>, a4: avm.array<T4>)
+function array.map_4(f: fun(v1: <T1>, v2: <T2>, v3: <T3>, v4: <T4>):<U>, a1: avm.array<T1>, a2: avm.array<T2>, a3: avm.array<T3>, a4: avm.array<T4>)
   -> avm.array<U>
 ```
 
@@ -1126,47 +1083,43 @@ Apply a function to each element of the arrays and return an array
 ## map_4_ex
 
 ```lua
-function array_module.map_4_ex(f: fun(v1: <T1>, v2: <T2>, v3: <T3>, v4: <T4>):<U>, a1: avm.seq<T1>, a1_index: any, a1_count: any, a2: avm.seq<T2>, a2_index: any, a3: avm.seq<T3>, a3_index: any, a4: avm.seq<T4>, a4_index: integer)
+function array.map_4_ex(f: fun(v1: <T1>, v2: <T2>, v3: <T3>, v4: <T4>):<U>, a1: avm.seq<T1>, a1_index: any, a1_count: any, a2: avm.seq<T2>, a2_index: any, a3: avm.seq<T3>, a3_index: any, a4: avm.seq<T4>, a4_index: integer)
   -> avm.array<U>
 ```
 
 Apply a function to each element of the sequences and return an array
-See: [array_module.map_4](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#2334#9)
 
 ## map_4_ex
 
 ```lua
-function array_module.map_4_ex(f: fun(v1: <T1>, v2: <T2>, v3: <T3>, v4: <T4>):<U>, a1: avm.seq<T1>, a1_index: any, a1_count: any, a2: avm.seq<T2>, a2_index: any, a3: avm.seq<T3>, a3_index: any, a4: avm.seq<T4>, a4_index: integer, dest: avm.seq<U>, dest_index?: integer)
+function array.map_4_ex(f: fun(v1: <T1>, v2: <T2>, v3: <T3>, v4: <T4>):<U>, a1: avm.seq<T1>, a1_index: any, a1_count: any, a2: avm.seq<T2>, a2_index: any, a3: avm.seq<T3>, a3_index: any, a4: avm.seq<T4>, a4_index: integer, dest: avm.seq<U>, dest_index?: integer)
   -> avm.seq<U>
 ```
 
 Apply a function to each element of the sequences and fill a target a destination
-See: [array_module.map_4](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#2334#9)
 
 ## map_ex
 
 ```lua
-function array_module.map_ex(f: fun(v1: <T1>):<U>, a1: avm.seq<T1>, a1_index: integer, a1_count: integer)
+function array.map_ex(f: fun(v1: <T1>):<U>, a1: avm.seq<T1>, a1_index: integer, a1_count: integer)
   -> avm.array<U>
 ```
 
 Apply a function to each element of the sequences and return an array
-See: [array_module.map](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#2176#9)
 
 ## map_ex
 
 ```lua
-function array_module.map_ex(f: fun(v1: <T1>):<U>, a1: avm.seq<T1>, a1_index: integer, a1_count: integer, dest: avm.seq<U>, dest_index?: integer)
+function array.map_ex(f: fun(v1: <T1>):<U>, a1: avm.seq<T1>, a1_index: integer, a1_count: integer, dest: avm.seq<U>, dest_index?: integer)
   -> avm.seq<U>
 ```
 
 Apply a function to each element of the sequences and fill a target a destination
-See: [array_module.map](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#2176#9)
 
 ## max
 
 ```lua
-function array_module.max(a: avm.array<T>, b: avm.seq<T>)
+function array.max(a: avm.array<T>, b: avm.seq<T>)
   -> avm.array<T>
 ```
 
@@ -1177,7 +1130,7 @@ Apply the maximum operator to two arrays
 ## max_constant
 
 ```lua
-function array_module.max_constant(a: avm.array<T>, c: <T>|avm.array<T>)
+function array.max_constant(a: avm.array<T>, c: <T>|avm.array<T>)
   -> avm.array<T>
 ```
 
@@ -1196,47 +1149,43 @@ add_constant({1,2,3,4,...}, {x,y}) -- {1+x, 2+y, 3+x, 4+y}
 ## max_constant_ex
 
 ```lua
-function array_module.max_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>)
+function array.max_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>)
   -> avm.array<T>
 ```
 
 Apply the maximum operator to each element of a slice with a constant
-See: [array_module.max_constant](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#4038#9)
 
 ## max_constant_ex
 
 ```lua
-function array_module.max_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>, dest: avm.seq<T>, dest_index?: integer)
+function array.max_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>, dest: avm.seq<T>, dest_index?: integer)
   -> nil
 ```
 
 Apply the maximum operator to each element of a slice with a constant and store the result in a destination
-See: [array_module.max_constant](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#4038#9)
 
 ## max_ex
 
 ```lua
-function array_module.max_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
+function array.max_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
   -> avm.array<T>
 ```
 
 Apply the maximum operator to two slices and return the result
-See: [array_module.max](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#4012#9)
 
 ## max_ex
 
 ```lua
-function array_module.max_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer, dest: avm.seq<T>, dest_index?: integer)
+function array.max_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer, dest: avm.seq<T>, dest_index?: integer)
   -> nil
 ```
 
 Apply the maximum operator to two slices and store the result in a destination
-See: [array_module.max](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#4012#9)
 
 ## min
 
 ```lua
-function array_module.min(a: avm.array<T>, b: avm.seq<T>)
+function array.min(a: avm.array<T>, b: avm.seq<T>)
   -> avm.array<T>
 ```
 
@@ -1247,7 +1196,7 @@ Apply the minimum operator to two arrays
 ## min_constant
 
 ```lua
-function array_module.min_constant(a: avm.array<T>, c: <T>|avm.array<T>)
+function array.min_constant(a: avm.array<T>, c: <T>|avm.array<T>)
   -> avm.array<T>
 ```
 
@@ -1266,47 +1215,43 @@ add_constant({1,2,3,4,...}, {x,y}) -- {1+x, 2+y, 3+x, 4+y}
 ## min_constant_ex
 
 ```lua
-function array_module.min_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>)
+function array.min_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>)
   -> avm.array<T>
 ```
 
 Apply the minimum operator to each element of a slice with a constant
-See: [array_module.min_constant](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#3914#9)
 
 ## min_constant_ex
 
 ```lua
-function array_module.min_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>, dest: avm.seq<T>, dest_index?: integer)
+function array.min_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>, dest: avm.seq<T>, dest_index?: integer)
   -> nil
 ```
 
 Apply the minimum operator to each element of a slice with a constant and store the result in a destination
-See: [array_module.min_constant](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#3914#9)
 
 ## min_ex
 
 ```lua
-function array_module.min_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
+function array.min_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
   -> avm.array<T>
 ```
 
 Apply the minimum operator to two slices and return the result
-See: [array_module.min](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#3888#9)
 
 ## min_ex
 
 ```lua
-function array_module.min_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer, dest: avm.seq<T>, dest_index?: integer)
+function array.min_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer, dest: avm.seq<T>, dest_index?: integer)
   -> nil
 ```
 
 Apply the minimum operator to two slices and store the result in a destination
-See: [array_module.min](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#3888#9)
 
 ## mod
 
 ```lua
-function array_module.mod(a: avm.array<T>, b: avm.seq<T>)
+function array.mod(a: avm.array<T>, b: avm.seq<T>)
   -> avm.array<number>
 ```
 
@@ -1317,7 +1262,7 @@ Apply the modulus operator to two arrays
 ## mod_constant
 
 ```lua
-function array_module.mod_constant(a: avm.array<T>, c: <T>|avm.array<T>)
+function array.mod_constant(a: avm.array<T>, c: <T>|avm.array<T>)
   -> avm.array<number>
 ```
 
@@ -1336,47 +1281,43 @@ add_constant({1,2,3,4,...}, {x,y}) -- {1+x, 2+y, 3+x, 4+y}
 ## mod_constant_ex
 
 ```lua
-function array_module.mod_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function array.mod_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
 Apply the modulus operator to each element of a slice with a constant and store the result in a destination
-See: [array_module.mod_constant](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#2922#9)
 
 ## mod_constant_ex
 
 ```lua
-function array_module.mod_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>)
+function array.mod_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>)
   -> avm.array<number>
 ```
 
 Apply the modulus operator to each element of a slice with a constant
-See: [array_module.mod_constant](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#2922#9)
 
 ## mod_ex
 
 ```lua
-function array_module.mod_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
+function array.mod_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
   -> avm.array<number>
 ```
 
 Apply the modulus operator to two slices and return the result
-See: [array_module.mod](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#2896#9)
 
 ## mod_ex
 
 ```lua
-function array_module.mod_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function array.mod_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
 Apply the modulus operator to two slices and store the result in a destination
-See: [array_module.mod](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#2896#9)
 
 ## mul
 
 ```lua
-function array_module.mul(a: avm.array<T>, b: avm.seq<T>)
+function array.mul(a: avm.array<T>, b: avm.seq<T>)
   -> avm.array<number>
 ```
 
@@ -1387,7 +1328,7 @@ Apply the multiplication operator to two arrays
 ## mul_add
 
 ```lua
-function array_module.mul_add(a: avm.array<T>, b: avm.seq<T>, c: avm.seq<T>)
+function array.mul_add(a: avm.array<T>, b: avm.seq<T>, c: avm.seq<T>)
   -> avm.array<T>
 ```
 
@@ -1398,7 +1339,7 @@ Perform the multiply-add operation on three arrays and return an array
 ## mul_add_constant
 
 ```lua
-function array_module.mul_add_constant(a: avm.array<T>, b: avm.seq<T>, c: <T>|avm.array<T>)
+function array.mul_add_constant(a: avm.array<T>, b: avm.seq<T>, c: <T>|avm.array<T>)
   -> avm.array<T>
 ```
 
@@ -1409,7 +1350,7 @@ Perform the multiply-add operation on two arrays and a constant and return an ar
 ## mul_add_constant_ex
 
 ```lua
-function array_module.mul_add_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer, c: <T>|avm.array<T>)
+function array.mul_add_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer, c: <T>|avm.array<T>)
   -> avm.array<T>
 ```
 
@@ -1420,7 +1361,7 @@ Perform the multiply-add operation on two slices and a constant and return an ar
 ## mul_add_constant_ex
 
 ```lua
-function array_module.mul_add_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer, c: <T>|avm.array<T>, dest: avm.seq<T>, dest_index?: integer)
+function array.mul_add_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer, c: <T>|avm.array<T>, dest: avm.seq<T>, dest_index?: integer)
   -> nil
 ```
 
@@ -1431,7 +1372,7 @@ Perform the multiply-add operation on two slices and a constant into a destinati
 ## mul_add_ex
 
 ```lua
-function array_module.mul_add_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer, c: avm.seq<T>, c_index: integer)
+function array.mul_add_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer, c: avm.seq<T>, c_index: integer)
 ```
 
 Perform the multiply-add operation on three slices and return an array
@@ -1441,7 +1382,7 @@ Perform the multiply-add operation on three slices and return an array
 ## mul_add_ex
 
 ```lua
-function array_module.mul_add_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer, c: avm.seq<T>, c_index: integer, dest: avm.seq<T>, dest_index?: integer)
+function array.mul_add_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer, c: avm.seq<T>, c_index: integer, dest: avm.seq<T>, dest_index?: integer)
   -> avm.seq<T>
 ```
 
@@ -1452,7 +1393,7 @@ Perform the multiply-add operation on three slices into a destination
 ## mul_constant
 
 ```lua
-function array_module.mul_constant(a: avm.array<T>, c: <T>|avm.array<T>)
+function array.mul_constant(a: avm.array<T>, c: <T>|avm.array<T>)
   -> avm.array<number>
 ```
 
@@ -1471,47 +1412,43 @@ add_constant({1,2,3,4,...}, {x,y}) -- {1+x, 2+y, 3+x, 4+y}
 ## mul_constant_ex
 
 ```lua
-function array_module.mul_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>)
+function array.mul_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>)
   -> avm.array<number>
 ```
 
 Apply the multiplication operator to each element of a slice with a constant
-See: [array_module.mul_constant](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#2674#9)
 
 ## mul_constant_ex
 
 ```lua
-function array_module.mul_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function array.mul_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
 Apply the multiplication operator to each element of a slice with a constant and store the result in a destination
-See: [array_module.mul_constant](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#2674#9)
 
 ## mul_ex
 
 ```lua
-function array_module.mul_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
+function array.mul_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
   -> avm.array<number>
 ```
 
 Apply the multiplication operator to two slices and return the result
-See: [array_module.mul](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#2648#9)
 
 ## mul_ex
 
 ```lua
-function array_module.mul_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function array.mul_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
 Apply the multiplication operator to two slices and store the result in a destination
-See: [array_module.mul](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#2648#9)
 
 ## new_array
 
 ```lua
-function array_module.new_array(type: <T>, length: integer)
+function array.new_array(type: <T>, length: integer)
   -> avm.array<T>
 ```
 
@@ -1522,7 +1459,7 @@ Optionally redefine this to support custom platform and userdata
 ## not_equal
 
 ```lua
-function array_module.not_equal(a: avm.array<T>, b: avm.seq<T>)
+function array.not_equal(a: avm.array<T>, b: avm.seq<T>)
   -> boolean[]
 ```
 
@@ -1533,7 +1470,7 @@ Apply the not equal operator to two arrays
 ## not_equal_constant
 
 ```lua
-function array_module.not_equal_constant(a: avm.array<T>, c: <T>|avm.array<T>)
+function array.not_equal_constant(a: avm.array<T>, c: <T>|avm.array<T>)
   -> boolean[]
 ```
 
@@ -1552,62 +1489,56 @@ add_constant({1,2,3,4,...}, {x,y}) -- {1+x, 2+y, 3+x, 4+y}
 ## not_equal_constant_ex
 
 ```lua
-function array_module.not_equal_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>)
+function array.not_equal_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>)
   -> boolean[]
 ```
 
 Apply the not equal operator to each element of a slice with a constant
-See: [array_module.not_equal_constant](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#3294#9)
 
 ## not_equal_constant_ex
 
 ```lua
-function array_module.not_equal_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>, dest: avm.seq<boolean>, dest_index?: integer)
+function array.not_equal_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>, dest: avm.seq<boolean>, dest_index?: integer)
   -> nil
 ```
 
 Apply the not equal operator to each element of a slice with a constant and store the result in a destination
-See: [array_module.not_equal_constant](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#3294#9)
 
 ## not_equal_ex
 
 ```lua
-function array_module.not_equal_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
+function array.not_equal_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
   -> boolean[]
 ```
 
 Apply the not equal operator to two slices and return the result
-See: [array_module.not_equal](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#3268#9)
 
 ## not_equal_ex
 
 ```lua
-function array_module.not_equal_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer, dest: avm.seq<boolean>, dest_index?: integer)
+function array.not_equal_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer, dest: avm.seq<boolean>, dest_index?: integer)
   -> nil
 ```
 
 Apply the not equal operator to two slices and store the result in a destination
-See: [array_module.not_equal](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#3268#9)
 
 ## pop
 
 ```lua
-function array_module.pop(src: avm.array<T>)
+function array.pop(src: avm.array<T>)
   -> <T>
 ```
 
 Pop a value off the end of an array and return it
-
-Equivalent to `table.remove(src)`
 See:
-  * [array_module.pop_1](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#1471#9)
-  * [array_module.pop_2](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#1484#9)
-  * [array_module.pop_3](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#1499#9)
+  * [array.pop_1](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#1461#9)
+  * [array.pop_2](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#1474#9)
+  * [array.pop_3](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#1489#9)
 
 ## pop_1
 
 ```lua
-function array_module.pop_1(src: avm.array<T>)
+function array.pop_1(src: avm.array<T>)
   -> <T>
 ```
 
@@ -1616,7 +1547,7 @@ Pop 1 value(s) off the end of an array and return them
 ## pop_2
 
 ```lua
-function array_module.pop_2(src: avm.array<T>)
+function array.pop_2(src: avm.array<T>)
   -> <T>, <T>
 ```
 
@@ -1625,7 +1556,7 @@ Pop 2 value(s) off the end of an array and return them
 ## pop_3
 
 ```lua
-function array_module.pop_3(src: avm.array<T>)
+function array.pop_3(src: avm.array<T>)
   -> <T>, <T>, <T>
 ```
 
@@ -1634,7 +1565,7 @@ Pop 3 value(s) off the end of an array and return them
 ## pop_4
 
 ```lua
-function array_module.pop_4(src: avm.array<T>)
+function array.pop_4(src: avm.array<T>)
   -> <T> * 4
 ```
 
@@ -1643,7 +1574,7 @@ Pop 4 value(s) off the end of an array and return them
 ## pop_5
 
 ```lua
-function array_module.pop_5(src: avm.array<T>)
+function array.pop_5(src: avm.array<T>)
   -> <T> * 5
 ```
 
@@ -1652,7 +1583,7 @@ Pop 5 value(s) off the end of an array and return them
 ## pop_6
 
 ```lua
-function array_module.pop_6(src: avm.array<T>)
+function array.pop_6(src: avm.array<T>)
   -> <T> * 6
 ```
 
@@ -1661,7 +1592,7 @@ Pop 6 value(s) off the end of an array and return them
 ## pop_7
 
 ```lua
-function array_module.pop_7(src: avm.array<T>)
+function array.pop_7(src: avm.array<T>)
   -> <T> * 7
 ```
 
@@ -1670,7 +1601,7 @@ Pop 7 value(s) off the end of an array and return them
 ## pop_8
 
 ```lua
-function array_module.pop_8(src: avm.array<T>)
+function array.pop_8(src: avm.array<T>)
   -> <T> * 8
 ```
 
@@ -1679,7 +1610,7 @@ Pop 8 value(s) off the end of an array and return them
 ## pop_9
 
 ```lua
-function array_module.pop_9(src: avm.array<T>)
+function array.pop_9(src: avm.array<T>)
   -> <T> * 9
 ```
 
@@ -1688,7 +1619,7 @@ Pop 9 value(s) off the end of an array and return them
 ## pop_10
 
 ```lua
-function array_module.pop_10(src: avm.array<T>)
+function array.pop_10(src: avm.array<T>)
   -> <T> * 10
 ```
 
@@ -1697,7 +1628,7 @@ Pop 10 value(s) off the end of an array and return them
 ## pop_11
 
 ```lua
-function array_module.pop_11(src: avm.array<T>)
+function array.pop_11(src: avm.array<T>)
   -> <T> * 11
 ```
 
@@ -1706,7 +1637,7 @@ Pop 11 value(s) off the end of an array and return them
 ## pop_12
 
 ```lua
-function array_module.pop_12(src: avm.array<T>)
+function array.pop_12(src: avm.array<T>)
   -> <T> * 12
 ```
 
@@ -1715,7 +1646,7 @@ Pop 12 value(s) off the end of an array and return them
 ## pop_13
 
 ```lua
-function array_module.pop_13(src: avm.array<T>)
+function array.pop_13(src: avm.array<T>)
   -> <T> * 13
 ```
 
@@ -1724,7 +1655,7 @@ Pop 13 value(s) off the end of an array and return them
 ## pop_14
 
 ```lua
-function array_module.pop_14(src: avm.array<T>)
+function array.pop_14(src: avm.array<T>)
   -> <T> * 14
 ```
 
@@ -1733,7 +1664,7 @@ Pop 14 value(s) off the end of an array and return them
 ## pop_15
 
 ```lua
-function array_module.pop_15(src: avm.array<T>)
+function array.pop_15(src: avm.array<T>)
   -> <T> * 15
 ```
 
@@ -1742,7 +1673,7 @@ Pop 15 value(s) off the end of an array and return them
 ## pop_16
 
 ```lua
-function array_module.pop_16(src: avm.array<T>)
+function array.pop_16(src: avm.array<T>)
   -> <T> * 16
 ```
 
@@ -1751,7 +1682,7 @@ Pop 16 value(s) off the end of an array and return them
 ## pow
 
 ```lua
-function array_module.pow(a: avm.array<T>, b: avm.seq<T>)
+function array.pow(a: avm.array<T>, b: avm.seq<T>)
   -> avm.array<number>
 ```
 
@@ -1762,7 +1693,7 @@ Apply the exponentiation operator to two arrays
 ## pow_constant
 
 ```lua
-function array_module.pow_constant(a: avm.array<T>, c: <T>|avm.array<T>)
+function array.pow_constant(a: avm.array<T>, c: <T>|avm.array<T>)
   -> avm.array<number>
 ```
 
@@ -1781,47 +1712,43 @@ add_constant({1,2,3,4,...}, {x,y}) -- {1+x, 2+y, 3+x, 4+y}
 ## pow_constant_ex
 
 ```lua
-function array_module.pow_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>)
+function array.pow_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>)
   -> avm.array<number>
 ```
 
 Apply the exponentiation operator to each element of a slice with a constant
-See: [array_module.pow_constant](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#3046#9)
 
 ## pow_constant_ex
 
 ```lua
-function array_module.pow_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function array.pow_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
 Apply the exponentiation operator to each element of a slice with a constant and store the result in a destination
-See: [array_module.pow_constant](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#3046#9)
 
 ## pow_ex
 
 ```lua
-function array_module.pow_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
+function array.pow_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
   -> avm.array<number>
 ```
 
 Apply the exponentiation operator to two slices and return the result
-See: [array_module.pow](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#3020#9)
 
 ## pow_ex
 
 ```lua
-function array_module.pow_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function array.pow_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
 Apply the exponentiation operator to two slices and store the result in a destination
-See: [array_module.pow](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#3020#9)
 
 ## push
 
 ```lua
-function array_module.push(dest: avm.array<T>, ...<T>)
+function array.push(dest: avm.array<T>, ...<T>)
 ```
 
 Push values onto an array
@@ -1831,7 +1758,7 @@ also see `push_1()`, `push_2()`, `push_3()`, etc.
 ## push_1
 
 ```lua
-function array_module.push_1(dest: avm.array<T>, v1: <T>)
+function array.push_1(dest: avm.array<T>, v1: <T>)
 ```
 
 Push 1 value(s) onto an array
@@ -1839,7 +1766,7 @@ Push 1 value(s) onto an array
 ## push_2
 
 ```lua
-function array_module.push_2(dest: avm.array<T>, v1: <T>, v2: <T>)
+function array.push_2(dest: avm.array<T>, v1: <T>, v2: <T>)
 ```
 
 Push 2 value(s) onto an array
@@ -1847,7 +1774,7 @@ Push 2 value(s) onto an array
 ## push_3
 
 ```lua
-function array_module.push_3(dest: avm.array<T>, v1: <T>, v2: <T>, v3: <T>)
+function array.push_3(dest: avm.array<T>, v1: <T>, v2: <T>, v3: <T>)
 ```
 
 Push 3 value(s) onto an array
@@ -1855,7 +1782,7 @@ Push 3 value(s) onto an array
 ## push_4
 
 ```lua
-function array_module.push_4(dest: avm.array<T>, v1: <T>, v2: <T>, v3: <T>, v4: <T>)
+function array.push_4(dest: avm.array<T>, v1: <T>, v2: <T>, v3: <T>, v4: <T>)
 ```
 
 Push 4 value(s) onto an array
@@ -1863,7 +1790,7 @@ Push 4 value(s) onto an array
 ## push_5
 
 ```lua
-function array_module.push_5(dest: avm.array<T>, v1: <T>, v2: <T>, v3: <T>, v4: <T>, v5: <T>)
+function array.push_5(dest: avm.array<T>, v1: <T>, v2: <T>, v3: <T>, v4: <T>, v5: <T>)
 ```
 
 Push 5 value(s) onto an array
@@ -1871,7 +1798,7 @@ Push 5 value(s) onto an array
 ## push_6
 
 ```lua
-function array_module.push_6(dest: avm.array<T>, v1: <T>, v2: <T>, v3: <T>, v4: <T>, v5: <T>, v6: <T>)
+function array.push_6(dest: avm.array<T>, v1: <T>, v2: <T>, v3: <T>, v4: <T>, v5: <T>, v6: <T>)
 ```
 
 Push 6 value(s) onto an array
@@ -1879,7 +1806,7 @@ Push 6 value(s) onto an array
 ## push_7
 
 ```lua
-function array_module.push_7(dest: avm.array<T>, v1: <T>, v2: <T>, v3: <T>, v4: <T>, v5: <T>, v6: <T>, v7: <T>)
+function array.push_7(dest: avm.array<T>, v1: <T>, v2: <T>, v3: <T>, v4: <T>, v5: <T>, v6: <T>, v7: <T>)
 ```
 
 Push 7 value(s) onto an array
@@ -1887,7 +1814,7 @@ Push 7 value(s) onto an array
 ## push_8
 
 ```lua
-function array_module.push_8(dest: avm.array<T>, v1: <T>, v2: <T>, v3: <T>, v4: <T>, v5: <T>, v6: <T>, v7: <T>, v8: <T>)
+function array.push_8(dest: avm.array<T>, v1: <T>, v2: <T>, v3: <T>, v4: <T>, v5: <T>, v6: <T>, v7: <T>, v8: <T>)
 ```
 
 Push 8 value(s) onto an array
@@ -1895,7 +1822,7 @@ Push 8 value(s) onto an array
 ## push_9
 
 ```lua
-function array_module.push_9(dest: avm.array<T>, v1: <T>, v2: <T>, v3: <T>, v4: <T>, v5: <T>, v6: <T>, v7: <T>, v8: <T>, v9: <T>)
+function array.push_9(dest: avm.array<T>, v1: <T>, v2: <T>, v3: <T>, v4: <T>, v5: <T>, v6: <T>, v7: <T>, v8: <T>, v9: <T>)
 ```
 
 Push 9 value(s) onto an array
@@ -1903,7 +1830,7 @@ Push 9 value(s) onto an array
 ## push_10
 
 ```lua
-function array_module.push_10(dest: avm.array<T>, v1: <T>, v2: <T>, v3: <T>, v4: <T>, v5: <T>, v6: <T>, v7: <T>, v8: <T>, v9: <T>, v10: <T>)
+function array.push_10(dest: avm.array<T>, v1: <T>, v2: <T>, v3: <T>, v4: <T>, v5: <T>, v6: <T>, v7: <T>, v8: <T>, v9: <T>, v10: <T>)
 ```
 
 Push 10 value(s) onto an array
@@ -1911,7 +1838,7 @@ Push 10 value(s) onto an array
 ## push_11
 
 ```lua
-function array_module.push_11(dest: avm.array<T>, v1: <T>, v2: <T>, v3: <T>, v4: <T>, v5: <T>, v6: <T>, v7: <T>, v8: <T>, v9: <T>, v10: <T>, v11: <T>)
+function array.push_11(dest: avm.array<T>, v1: <T>, v2: <T>, v3: <T>, v4: <T>, v5: <T>, v6: <T>, v7: <T>, v8: <T>, v9: <T>, v10: <T>, v11: <T>)
 ```
 
 Push 11 value(s) onto an array
@@ -1919,7 +1846,7 @@ Push 11 value(s) onto an array
 ## push_12
 
 ```lua
-function array_module.push_12(dest: avm.array<T>, v1: <T>, v2: <T>, v3: <T>, v4: <T>, v5: <T>, v6: <T>, v7: <T>, v8: <T>, v9: <T>, v10: <T>, v11: <T>, v12: <T>)
+function array.push_12(dest: avm.array<T>, v1: <T>, v2: <T>, v3: <T>, v4: <T>, v5: <T>, v6: <T>, v7: <T>, v8: <T>, v9: <T>, v10: <T>, v11: <T>, v12: <T>)
 ```
 
 Push 12 value(s) onto an array
@@ -1927,7 +1854,7 @@ Push 12 value(s) onto an array
 ## push_13
 
 ```lua
-function array_module.push_13(dest: avm.array<T>, v1: <T>, v2: <T>, v3: <T>, v4: <T>, v5: <T>, v6: <T>, v7: <T>, v8: <T>, v9: <T>, v10: <T>, v11: <T>, v12: <T>, v13: <T>)
+function array.push_13(dest: avm.array<T>, v1: <T>, v2: <T>, v3: <T>, v4: <T>, v5: <T>, v6: <T>, v7: <T>, v8: <T>, v9: <T>, v10: <T>, v11: <T>, v12: <T>, v13: <T>)
 ```
 
 Push 13 value(s) onto an array
@@ -1935,7 +1862,7 @@ Push 13 value(s) onto an array
 ## push_14
 
 ```lua
-function array_module.push_14(dest: avm.array<T>, v1: <T>, v2: <T>, v3: <T>, v4: <T>, v5: <T>, v6: <T>, v7: <T>, v8: <T>, v9: <T>, v10: <T>, v11: <T>, v12: <T>, v13: <T>, v14: <T>)
+function array.push_14(dest: avm.array<T>, v1: <T>, v2: <T>, v3: <T>, v4: <T>, v5: <T>, v6: <T>, v7: <T>, v8: <T>, v9: <T>, v10: <T>, v11: <T>, v12: <T>, v13: <T>, v14: <T>)
 ```
 
 Push 14 value(s) onto an array
@@ -1943,7 +1870,7 @@ Push 14 value(s) onto an array
 ## push_15
 
 ```lua
-function array_module.push_15(dest: avm.array<T>, v1: <T>, v2: <T>, v3: <T>, v4: <T>, v5: <T>, v6: <T>, v7: <T>, v8: <T>, v9: <T>, v10: <T>, v11: <T>, v12: <T>, v13: <T>, v14: <T>, v15: <T>)
+function array.push_15(dest: avm.array<T>, v1: <T>, v2: <T>, v3: <T>, v4: <T>, v5: <T>, v6: <T>, v7: <T>, v8: <T>, v9: <T>, v10: <T>, v11: <T>, v12: <T>, v13: <T>, v14: <T>, v15: <T>)
 ```
 
 Push 15 value(s) onto an array
@@ -1951,7 +1878,7 @@ Push 15 value(s) onto an array
 ## push_16
 
 ```lua
-function array_module.push_16(dest: avm.array<T>, v1: <T>, v2: <T>, v3: <T>, v4: <T>, v5: <T>, v6: <T>, v7: <T>, v8: <T>, v9: <T>, v10: <T>, v11: <T>, v12: <T>, v13: <T>, v14: <T>, v15: <T>, v16: <T>)
+function array.push_16(dest: avm.array<T>, v1: <T>, v2: <T>, v3: <T>, v4: <T>, v5: <T>, v6: <T>, v7: <T>, v8: <T>, v9: <T>, v10: <T>, v11: <T>, v12: <T>, v13: <T>, v14: <T>, v15: <T>, v16: <T>)
 ```
 
 Push 16 value(s) onto an array
@@ -1959,7 +1886,7 @@ Push 16 value(s) onto an array
 ## range
 
 ```lua
-function array_module.range(from: <T>, to: <T>, step_size?: <T>)
+function array.range(from: <T>, to: <T>, step_size?: <T>)
   -> avm.array<T>
 ```
 
@@ -1970,7 +1897,7 @@ create an array with sequential values in `from .. to` in `step_size` increments
 ## range_into
 
 ```lua
-function array_module.range_into(from: number, to: number, step_size: number, dest: avm.seq<T>, dest_index?: integer)
+function array.range_into(from: number, to: number, step_size: number, dest: avm.seq<T>, dest_index?: integer)
 ```
 
 fill a destination with sequential values in `from .. to` in `step_size` increments
@@ -1978,7 +1905,7 @@ fill a destination with sequential values in `from .. to` in `step_size` increme
 ## reshape
 
 ```lua
-function array_module.reshape(src: any, dest_size: integer[])
+function array.reshape(src: any, dest_size: integer[])
   -> table
 ```
 
@@ -1987,24 +1914,23 @@ Reshape a table or an array from nested arrays to a flat array or vice versa
 Examples:
 * `reshape({1,2,3,4,5,6}, {3,2})` -> `{{1,2},{3,4},{5,6}}`
 * `reshape({{1,2,3},{4,5,6}}}, {6})` -> `{1,2,3,4,5,6}`
-See: [array_module.flatten](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#411#9)
 
 ## reshape_into
 
 ```lua
-function array_module.reshape_into(src: any, dest_size: integer[], dest: any, dest_index?: integer)
+function array.reshape_into(src: any, dest_size: integer[], dest: any, dest_index?: integer)
   -> unknown
 ```
 
 Reshape a table or an array into a destination
 See:
-  * [array_module.reshape](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#321#9)
-  * [array_module.flatten](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#411#9)
+  * [array.reshape](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#318#9)
+  * [array.flatten](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#408#9)
 
 ## reverse
 
 ```lua
-function array_module.reverse(src: avm.array<T>)
+function array.reverse(src: avm.array<T>)
   -> avm.array<T>
 ```
 
@@ -2013,7 +1939,7 @@ Reverse an array
 ## reverse_ex
 
 ```lua
-function array_module.reverse_ex(src: avm.seq<T>, src_index: integer, src_count: integer, dest: avm.seq<T>, dest_index?: integer)
+function array.reverse_ex(src: avm.seq<T>, src_index: integer, src_count: integer, dest: avm.seq<T>, dest_index?: integer)
   -> nil
 ```
 
@@ -2022,7 +1948,7 @@ Reverse a slice into a destination
 ## reverse_ex
 
 ```lua
-function array_module.reverse_ex(src: avm.seq<T>, src_index: integer, src_count: integer)
+function array.reverse_ex(src: avm.seq<T>, src_index: integer, src_count: integer)
   -> avm.array<T>
 ```
 
@@ -2031,7 +1957,7 @@ Reverse a slice
 ## set
 
 ```lua
-function array_module.set(dest: avm.seq<T>, dest_index: integer, ...<T>)
+function array.set(dest: avm.seq<T>, dest_index: integer, ...<T>)
 ```
 
 Set values in a slice
@@ -2040,12 +1966,11 @@ dest[dest_index] = v1
 ...
 dest[dest_index + n] = vn
 ```
-See: [array_module.set_2](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#518#9)
 
 ## set_1
 
 ```lua
-function array_module.set_1(dest: avm.seq<T>, dest_index: integer, v1: <T>)
+function array.set_1(dest: avm.seq<T>, dest_index: integer, v1: <T>)
 ```
 
 Set 1 values in a slice
@@ -2054,12 +1979,11 @@ dest[dest_index] = v1
 ...
 dest[dest_index + n] = vn
 ```
-See: [array_module.set](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#481#9)
 
 ## set_2
 
 ```lua
-function array_module.set_2(dest: avm.seq<T>, dest_index: integer, v1: <T>, v2: <T>)
+function array.set_2(dest: avm.seq<T>, dest_index: integer, v1: <T>, v2: <T>)
 ```
 
 Set 2 values in a slice
@@ -2068,12 +1992,11 @@ dest[dest_index] = v1
 ...
 dest[dest_index + n] = vn
 ```
-See: [array_module.set](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#481#9)
 
 ## set_3
 
 ```lua
-function array_module.set_3(dest: avm.seq<T>, dest_index: integer, v1: <T>, v2: <T>, v3: <T>)
+function array.set_3(dest: avm.seq<T>, dest_index: integer, v1: <T>, v2: <T>, v3: <T>)
 ```
 
 Set 3 values in a slice
@@ -2082,12 +2005,11 @@ dest[dest_index] = v1
 ...
 dest[dest_index + n] = vn
 ```
-See: [array_module.set](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#481#9)
 
 ## set_4
 
 ```lua
-function array_module.set_4(dest: avm.seq<T>, dest_index: integer, v1: <T>, v2: <T>, v3: <T>, v4: <T>)
+function array.set_4(dest: avm.seq<T>, dest_index: integer, v1: <T>, v2: <T>, v3: <T>, v4: <T>)
 ```
 
 Set 4 values in a slice
@@ -2096,12 +2018,11 @@ dest[dest_index] = v1
 ...
 dest[dest_index + n] = vn
 ```
-See: [array_module.set](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#481#9)
 
 ## set_5
 
 ```lua
-function array_module.set_5(dest: avm.seq<T>, dest_index: integer, v1: <T>, v2: <T>, v3: <T>, v4: <T>, v5: <T>)
+function array.set_5(dest: avm.seq<T>, dest_index: integer, v1: <T>, v2: <T>, v3: <T>, v4: <T>, v5: <T>)
 ```
 
 Set 5 values in a slice
@@ -2110,12 +2031,11 @@ dest[dest_index] = v1
 ...
 dest[dest_index + n] = vn
 ```
-See: [array_module.set](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#481#9)
 
 ## set_6
 
 ```lua
-function array_module.set_6(dest: avm.seq<T>, dest_index: integer, v1: <T>, v2: <T>, v3: <T>, v4: <T>, v5: <T>, v6: <T>)
+function array.set_6(dest: avm.seq<T>, dest_index: integer, v1: <T>, v2: <T>, v3: <T>, v4: <T>, v5: <T>, v6: <T>)
 ```
 
 Set 6 values in a slice
@@ -2124,12 +2044,11 @@ dest[dest_index] = v1
 ...
 dest[dest_index + n] = vn
 ```
-See: [array_module.set](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#481#9)
 
 ## set_7
 
 ```lua
-function array_module.set_7(dest: avm.seq<T>, dest_index: integer, v1: <T>, v2: <T>, v3: <T>, v4: <T>, v5: <T>, v6: <T>, v7: <T>)
+function array.set_7(dest: avm.seq<T>, dest_index: integer, v1: <T>, v2: <T>, v3: <T>, v4: <T>, v5: <T>, v6: <T>, v7: <T>)
 ```
 
 Set 7 values in a slice
@@ -2138,12 +2057,11 @@ dest[dest_index] = v1
 ...
 dest[dest_index + n] = vn
 ```
-See: [array_module.set](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#481#9)
 
 ## set_8
 
 ```lua
-function array_module.set_8(dest: avm.seq<T>, dest_index: integer, v1: <T>, v2: <T>, v3: <T>, v4: <T>, v5: <T>, v6: <T>, v7: <T>, v8: <T>)
+function array.set_8(dest: avm.seq<T>, dest_index: integer, v1: <T>, v2: <T>, v3: <T>, v4: <T>, v5: <T>, v6: <T>, v7: <T>, v8: <T>)
 ```
 
 Set 8 values in a slice
@@ -2152,12 +2070,11 @@ dest[dest_index] = v1
 ...
 dest[dest_index + n] = vn
 ```
-See: [array_module.set](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#481#9)
 
 ## set_9
 
 ```lua
-function array_module.set_9(dest: avm.seq<T>, dest_index: integer, v1: <T>, v2: <T>, v3: <T>, v4: <T>, v5: <T>, v6: <T>, v7: <T>, v8: <T>, v9: <T>)
+function array.set_9(dest: avm.seq<T>, dest_index: integer, v1: <T>, v2: <T>, v3: <T>, v4: <T>, v5: <T>, v6: <T>, v7: <T>, v8: <T>, v9: <T>)
 ```
 
 Set 9 values in a slice
@@ -2166,12 +2083,11 @@ dest[dest_index] = v1
 ...
 dest[dest_index + n] = vn
 ```
-See: [array_module.set](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#481#9)
 
 ## set_10
 
 ```lua
-function array_module.set_10(dest: avm.seq<T>, dest_index: integer, v1: <T>, v2: <T>, v3: <T>, v4: <T>, v5: <T>, v6: <T>, v7: <T>, v8: <T>, v9: <T>, v10: <T>)
+function array.set_10(dest: avm.seq<T>, dest_index: integer, v1: <T>, v2: <T>, v3: <T>, v4: <T>, v5: <T>, v6: <T>, v7: <T>, v8: <T>, v9: <T>, v10: <T>)
 ```
 
 Set 10 values in a slice
@@ -2180,12 +2096,11 @@ dest[dest_index] = v1
 ...
 dest[dest_index + n] = vn
 ```
-See: [array_module.set](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#481#9)
 
 ## set_11
 
 ```lua
-function array_module.set_11(dest: avm.seq<T>, dest_index: integer, v1: <T>, v2: <T>, v3: <T>, v4: <T>, v5: <T>, v6: <T>, v7: <T>, v8: <T>, v9: <T>, v10: <T>, v11: <T>)
+function array.set_11(dest: avm.seq<T>, dest_index: integer, v1: <T>, v2: <T>, v3: <T>, v4: <T>, v5: <T>, v6: <T>, v7: <T>, v8: <T>, v9: <T>, v10: <T>, v11: <T>)
 ```
 
 Set 11 values in a slice
@@ -2194,12 +2109,11 @@ dest[dest_index] = v1
 ...
 dest[dest_index + n] = vn
 ```
-See: [array_module.set](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#481#9)
 
 ## set_12
 
 ```lua
-function array_module.set_12(dest: avm.seq<T>, dest_index: integer, v1: <T>, v2: <T>, v3: <T>, v4: <T>, v5: <T>, v6: <T>, v7: <T>, v8: <T>, v9: <T>, v10: <T>, v11: <T>, v12: <T>)
+function array.set_12(dest: avm.seq<T>, dest_index: integer, v1: <T>, v2: <T>, v3: <T>, v4: <T>, v5: <T>, v6: <T>, v7: <T>, v8: <T>, v9: <T>, v10: <T>, v11: <T>, v12: <T>)
 ```
 
 Set 12 values in a slice
@@ -2208,12 +2122,11 @@ dest[dest_index] = v1
 ...
 dest[dest_index + n] = vn
 ```
-See: [array_module.set](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#481#9)
 
 ## set_13
 
 ```lua
-function array_module.set_13(dest: avm.seq<T>, dest_index: integer, v1: <T>, v2: <T>, v3: <T>, v4: <T>, v5: <T>, v6: <T>, v7: <T>, v8: <T>, v9: <T>, v10: <T>, v11: <T>, v12: <T>, v13: <T>)
+function array.set_13(dest: avm.seq<T>, dest_index: integer, v1: <T>, v2: <T>, v3: <T>, v4: <T>, v5: <T>, v6: <T>, v7: <T>, v8: <T>, v9: <T>, v10: <T>, v11: <T>, v12: <T>, v13: <T>)
 ```
 
 Set 13 values in a slice
@@ -2222,12 +2135,11 @@ dest[dest_index] = v1
 ...
 dest[dest_index + n] = vn
 ```
-See: [array_module.set](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#481#9)
 
 ## set_14
 
 ```lua
-function array_module.set_14(dest: avm.seq<T>, dest_index: integer, v1: <T>, v2: <T>, v3: <T>, v4: <T>, v5: <T>, v6: <T>, v7: <T>, v8: <T>, v9: <T>, v10: <T>, v11: <T>, v12: <T>, v13: <T>, v14: <T>)
+function array.set_14(dest: avm.seq<T>, dest_index: integer, v1: <T>, v2: <T>, v3: <T>, v4: <T>, v5: <T>, v6: <T>, v7: <T>, v8: <T>, v9: <T>, v10: <T>, v11: <T>, v12: <T>, v13: <T>, v14: <T>)
 ```
 
 Set 14 values in a slice
@@ -2236,12 +2148,11 @@ dest[dest_index] = v1
 ...
 dest[dest_index + n] = vn
 ```
-See: [array_module.set](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#481#9)
 
 ## set_15
 
 ```lua
-function array_module.set_15(dest: avm.seq<T>, dest_index: integer, v1: <T>, v2: <T>, v3: <T>, v4: <T>, v5: <T>, v6: <T>, v7: <T>, v8: <T>, v9: <T>, v10: <T>, v11: <T>, v12: <T>, v13: <T>, v14: <T>, v15: <T>)
+function array.set_15(dest: avm.seq<T>, dest_index: integer, v1: <T>, v2: <T>, v3: <T>, v4: <T>, v5: <T>, v6: <T>, v7: <T>, v8: <T>, v9: <T>, v10: <T>, v11: <T>, v12: <T>, v13: <T>, v14: <T>, v15: <T>)
 ```
 
 Set 15 values in a slice
@@ -2250,12 +2161,11 @@ dest[dest_index] = v1
 ...
 dest[dest_index + n] = vn
 ```
-See: [array_module.set](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#481#9)
 
 ## set_16
 
 ```lua
-function array_module.set_16(dest: avm.seq<T>, dest_index: integer, v1: <T>, v2: <T>, v3: <T>, v4: <T>, v5: <T>, v6: <T>, v7: <T>, v8: <T>, v9: <T>, v10: <T>, v11: <T>, v12: <T>, v13: <T>, v14: <T>, v15: <T>, v16: <T>)
+function array.set_16(dest: avm.seq<T>, dest_index: integer, v1: <T>, v2: <T>, v3: <T>, v4: <T>, v5: <T>, v6: <T>, v7: <T>, v8: <T>, v9: <T>, v10: <T>, v11: <T>, v12: <T>, v13: <T>, v14: <T>, v15: <T>, v16: <T>)
 ```
 
 Set 16 values in a slice
@@ -2264,12 +2174,11 @@ dest[dest_index] = v1
 ...
 dest[dest_index + n] = vn
 ```
-See: [array_module.set](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#481#9)
 
 ## sub
 
 ```lua
-function array_module.sub(a: avm.array<T>, b: avm.seq<T>)
+function array.sub(a: avm.array<T>, b: avm.seq<T>)
   -> avm.array<number>
 ```
 
@@ -2280,7 +2189,7 @@ Apply the subtraction operator to two arrays
 ## sub_constant
 
 ```lua
-function array_module.sub_constant(a: avm.array<T>, c: <T>|avm.array<T>)
+function array.sub_constant(a: avm.array<T>, c: <T>|avm.array<T>)
   -> avm.array<number>
 ```
 
@@ -2299,47 +2208,43 @@ add_constant({1,2,3,4,...}, {x,y}) -- {1+x, 2+y, 3+x, 4+y}
 ## sub_constant_ex
 
 ```lua
-function array_module.sub_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function array.sub_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
 Apply the subtraction operator to each element of a slice with a constant and store the result in a destination
-See: [array_module.sub_constant](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#2550#9)
 
 ## sub_constant_ex
 
 ```lua
-function array_module.sub_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>)
+function array.sub_constant_ex(a: avm.seq<T>, a_index: integer, a_count: integer, c: <T>)
   -> avm.array<number>
 ```
 
 Apply the subtraction operator to each element of a slice with a constant
-See: [array_module.sub_constant](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#2550#9)
 
 ## sub_ex
 
 ```lua
-function array_module.sub_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
+function array.sub_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
   -> avm.array<number>
 ```
 
 Apply the subtraction operator to two slices and return the result
-See: [array_module.sub](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#2524#9)
 
 ## sub_ex
 
 ```lua
-function array_module.sub_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function array.sub_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
 Apply the subtraction operator to two slices and store the result in a destination
-See: [array_module.sub](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#2524#9)
 
 ## unpack_2
 
 ```lua
-function array_module.unpack_2(src: avm.array<T>)
+function array.unpack_2(src: avm.array<T>)
   -> <T>, <T>
 ```
 
@@ -2348,7 +2253,7 @@ Unpack 2 values from an array
 ## unpack_3
 
 ```lua
-function array_module.unpack_3(src: avm.array<T>)
+function array.unpack_3(src: avm.array<T>)
   -> <T>, <T>, <T>
 ```
 
@@ -2357,7 +2262,7 @@ Unpack 3 values from an array
 ## unpack_4
 
 ```lua
-function array_module.unpack_4(src: avm.array<T>)
+function array.unpack_4(src: avm.array<T>)
   -> <T> * 4
 ```
 
@@ -2366,7 +2271,7 @@ Unpack 4 values from an array
 ## unpack_5
 
 ```lua
-function array_module.unpack_5(src: avm.array<T>)
+function array.unpack_5(src: avm.array<T>)
   -> <T> * 5
 ```
 
@@ -2375,7 +2280,7 @@ Unpack 5 values from an array
 ## unpack_6
 
 ```lua
-function array_module.unpack_6(src: avm.array<T>)
+function array.unpack_6(src: avm.array<T>)
   -> <T> * 6
 ```
 
@@ -2384,7 +2289,7 @@ Unpack 6 values from an array
 ## unpack_7
 
 ```lua
-function array_module.unpack_7(src: avm.array<T>)
+function array.unpack_7(src: avm.array<T>)
   -> <T> * 7
 ```
 
@@ -2393,7 +2298,7 @@ Unpack 7 values from an array
 ## unpack_8
 
 ```lua
-function array_module.unpack_8(src: avm.array<T>)
+function array.unpack_8(src: avm.array<T>)
   -> <T> * 8
 ```
 
@@ -2402,7 +2307,7 @@ Unpack 8 values from an array
 ## unpack_9
 
 ```lua
-function array_module.unpack_9(src: avm.array<T>)
+function array.unpack_9(src: avm.array<T>)
   -> <T> * 9
 ```
 
@@ -2411,7 +2316,7 @@ Unpack 9 values from an array
 ## unpack_10
 
 ```lua
-function array_module.unpack_10(src: avm.array<T>)
+function array.unpack_10(src: avm.array<T>)
   -> <T> * 10
 ```
 
@@ -2420,7 +2325,7 @@ Unpack 10 values from an array
 ## unpack_11
 
 ```lua
-function array_module.unpack_11(src: avm.array<T>)
+function array.unpack_11(src: avm.array<T>)
   -> <T> * 11
 ```
 
@@ -2429,7 +2334,7 @@ Unpack 11 values from an array
 ## unpack_12
 
 ```lua
-function array_module.unpack_12(src: avm.array<T>)
+function array.unpack_12(src: avm.array<T>)
   -> <T> * 12
 ```
 
@@ -2438,7 +2343,7 @@ Unpack 12 values from an array
 ## unpack_13
 
 ```lua
-function array_module.unpack_13(src: avm.array<T>)
+function array.unpack_13(src: avm.array<T>)
   -> <T> * 13
 ```
 
@@ -2447,7 +2352,7 @@ Unpack 13 values from an array
 ## unpack_14
 
 ```lua
-function array_module.unpack_14(src: avm.array<T>)
+function array.unpack_14(src: avm.array<T>)
   -> <T> * 14
 ```
 
@@ -2456,7 +2361,7 @@ Unpack 14 values from an array
 ## unpack_15
 
 ```lua
-function array_module.unpack_15(src: avm.array<T>)
+function array.unpack_15(src: avm.array<T>)
   -> <T> * 15
 ```
 
@@ -2465,7 +2370,7 @@ Unpack 15 values from an array
 ## unpack_16
 
 ```lua
-function array_module.unpack_16(src: avm.array<T>)
+function array.unpack_16(src: avm.array<T>)
   -> <T> * 16
 ```
 
@@ -2474,7 +2379,7 @@ Unpack 16 values from an array
 ## zeros
 
 ```lua
-function array_module.zeros(count: integer)
+function array.zeros(count: integer)
   -> avm.array<number>
 ```
 
@@ -7581,7 +7486,7 @@ Get elements of the vector
 
 ---
 
-# format_module
+# format
 Format  
 
 Functions for converting arrays into readable strings  
@@ -7589,7 +7494,7 @@ Functions for converting arrays into readable strings
 ## array
 
 ```lua
-function format_module.array(src: avm.array<T>, separator?: string, format?: string)
+function format.array(src: avm.array<T>, separator?: string, format?: string)
   -> string
 ```
 
@@ -7606,247 +7511,227 @@ format.array({1,2,3}) --> "1, 2, 3"
 ## mat1
 
 ```lua
-function format_module.mat1(src: avm.number1, format?: string)
+function format.mat1(src: avm.number1, format?: string)
   -> string
 ```
 
 Format matrix
 
 @*param* `format` — optional format to apply to each element
-See: [format_module.matrix](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/format.lua#82#9)
 
 ## mat1x1
 
 ```lua
-function format_module.mat1x1(src: avm.number1, format?: string)
+function format.mat1x1(src: avm.number1, format?: string)
   -> string
 ```
 
 Format matrix
 
 @*param* `format` — optional format to apply to each element
-See: [format_module.matrix](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/format.lua#82#9)
 
 ## mat1x2
 
 ```lua
-function format_module.mat1x2(src: avm.number2, format?: string)
+function format.mat1x2(src: avm.number2, format?: string)
   -> string
 ```
 
 Format matrix
 
 @*param* `format` — optional format to apply to each element
-See: [format_module.matrix](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/format.lua#82#9)
 
 ## mat1x3
 
 ```lua
-function format_module.mat1x3(src: avm.number3, format?: string)
+function format.mat1x3(src: avm.number3, format?: string)
   -> string
 ```
 
 Format matrix
 
 @*param* `format` — optional format to apply to each element
-See: [format_module.matrix](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/format.lua#82#9)
 
 ## mat1x4
 
 ```lua
-function format_module.mat1x4(src: avm.number4, format?: string)
+function format.mat1x4(src: avm.number4, format?: string)
   -> string
 ```
 
 Format matrix
 
 @*param* `format` — optional format to apply to each element
-See: [format_module.matrix](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/format.lua#82#9)
 
 ## mat2
 
 ```lua
-function format_module.mat2(src: avm.number4, format?: string)
+function format.mat2(src: avm.number4, format?: string)
   -> string
 ```
 
 Format matrix
 
 @*param* `format` — optional format to apply to each element
-See: [format_module.matrix](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/format.lua#82#9)
 
 ## mat2x1
 
 ```lua
-function format_module.mat2x1(src: avm.number2, format?: string)
+function format.mat2x1(src: avm.number2, format?: string)
   -> string
 ```
 
 Format matrix
 
 @*param* `format` — optional format to apply to each element
-See: [format_module.matrix](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/format.lua#82#9)
 
 ## mat2x2
 
 ```lua
-function format_module.mat2x2(src: avm.number4, format?: string)
+function format.mat2x2(src: avm.number4, format?: string)
   -> string
 ```
 
 Format matrix
 
 @*param* `format` — optional format to apply to each element
-See: [format_module.matrix](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/format.lua#82#9)
 
 ## mat2x3
 
 ```lua
-function format_module.mat2x3(src: avm.number6, format?: string)
+function format.mat2x3(src: avm.number6, format?: string)
   -> string
 ```
 
 Format matrix
 
 @*param* `format` — optional format to apply to each element
-See: [format_module.matrix](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/format.lua#82#9)
 
 ## mat2x4
 
 ```lua
-function format_module.mat2x4(src: avm.number8, format?: string)
+function format.mat2x4(src: avm.number8, format?: string)
   -> string
 ```
 
 Format matrix
 
 @*param* `format` — optional format to apply to each element
-See: [format_module.matrix](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/format.lua#82#9)
 
 ## mat3
 
 ```lua
-function format_module.mat3(src: avm.number9, format?: string)
+function format.mat3(src: avm.number9, format?: string)
   -> string
 ```
 
 Format matrix
 
 @*param* `format` — optional format to apply to each element
-See: [format_module.matrix](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/format.lua#82#9)
 
 ## mat3x1
 
 ```lua
-function format_module.mat3x1(src: avm.number3, format?: string)
+function format.mat3x1(src: avm.number3, format?: string)
   -> string
 ```
 
 Format matrix
 
 @*param* `format` — optional format to apply to each element
-See: [format_module.matrix](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/format.lua#82#9)
 
 ## mat3x2
 
 ```lua
-function format_module.mat3x2(src: avm.number6, format?: string)
+function format.mat3x2(src: avm.number6, format?: string)
   -> string
 ```
 
 Format matrix
 
 @*param* `format` — optional format to apply to each element
-See: [format_module.matrix](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/format.lua#82#9)
 
 ## mat3x3
 
 ```lua
-function format_module.mat3x3(src: avm.number9, format?: string)
+function format.mat3x3(src: avm.number9, format?: string)
   -> string
 ```
 
 Format matrix
 
 @*param* `format` — optional format to apply to each element
-See: [format_module.matrix](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/format.lua#82#9)
 
 ## mat3x4
 
 ```lua
-function format_module.mat3x4(src: avm.number12, format?: string)
+function format.mat3x4(src: avm.number12, format?: string)
   -> string
 ```
 
 Format matrix
 
 @*param* `format` — optional format to apply to each element
-See: [format_module.matrix](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/format.lua#82#9)
 
 ## mat4
 
 ```lua
-function format_module.mat4(src: avm.number16, format?: string)
+function format.mat4(src: avm.number16, format?: string)
   -> string
 ```
 
 Format matrix
 
 @*param* `format` — optional format to apply to each element
-See: [format_module.matrix](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/format.lua#82#9)
 
 ## mat4x1
 
 ```lua
-function format_module.mat4x1(src: avm.number4, format?: string)
+function format.mat4x1(src: avm.number4, format?: string)
   -> string
 ```
 
 Format matrix
 
 @*param* `format` — optional format to apply to each element
-See: [format_module.matrix](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/format.lua#82#9)
 
 ## mat4x2
 
 ```lua
-function format_module.mat4x2(src: avm.number8, format?: string)
+function format.mat4x2(src: avm.number8, format?: string)
   -> string
 ```
 
 Format matrix
 
 @*param* `format` — optional format to apply to each element
-See: [format_module.matrix](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/format.lua#82#9)
 
 ## mat4x3
 
 ```lua
-function format_module.mat4x3(src: avm.number12, format?: string)
+function format.mat4x3(src: avm.number12, format?: string)
   -> string
 ```
 
 Format matrix
 
 @*param* `format` — optional format to apply to each element
-See: [format_module.matrix](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/format.lua#82#9)
 
 ## mat4x4
 
 ```lua
-function format_module.mat4x4(src: avm.number16, format?: string)
+function format.mat4x4(src: avm.number16, format?: string)
   -> string
 ```
 
 Format matrix
 
 @*param* `format` — optional format to apply to each element
-See: [format_module.matrix](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/format.lua#82#9)
 
 ## matrix
 
 ```lua
-function format_module.matrix(src: avm.seq_number|{ [integer]: number }, src_index: integer, num_cols: any, num_rows: any, format?: string, options?: { row_major_order: boolean })
+function format.matrix(src: avm.seq_number|{ [integer]: number }, src_index: integer, num_cols: any, num_rows: any, format?: string, options?: { row_major_order: boolean })
   -> string
 ```
 
@@ -7857,7 +7742,7 @@ By default will assume the data is in column-major order, but this can be change
 ## slice
 
 ```lua
-function format_module.slice(src: avm.seq<T>, src_index: integer, src_count: integer, separator?: string, format?: string)
+function format.slice(src: avm.seq<T>, src_index: integer, src_count: integer, separator?: string, format?: string)
   -> string
 ```
 
@@ -7874,7 +7759,7 @@ format.slice({1,2,3,4}, 1, 3) --> "1, 2, 3"
 ## tabulated
 
 ```lua
-function format_module.tabulated(table_format: any, num_rows: integer, column_1: { data: avm.seq<any>, index: integer, count: integer, group_size: integer, label: string, format: string }, ...{ data: avm.seq<any>, index: integer, count: integer, group_size: integer, label: string, format: string })
+function format.tabulated(table_format: any, num_rows: integer, column_1: { data: avm.seq<any>, index: integer, count: integer, group_size: integer, label: string, format: string }, ...{ data: avm.seq<any>, index: integer, count: integer, group_size: integer, label: string, format: string })
   -> string
 ```
 
@@ -7899,7 +7784,7 @@ Example output for 3 arrays storing position, index and mass:
 
 ---
 
-# iterator_module
+# iterator
 Iterator  
 
 Special purpose iterators  
@@ -7907,7 +7792,7 @@ Special purpose iterators
 ## group_2
 
 ```lua
-function iterator_module.group_2(src: avm.array<T>)
+function iterator.group_2(src: avm.array<T>)
   -> fun():integer, <T>, <T>
 ```
 
@@ -7918,7 +7803,7 @@ NOTE: the returned index is the index of *the group*
 ## group_3
 
 ```lua
-function iterator_module.group_3(src: avm.array<T>)
+function iterator.group_3(src: avm.array<T>)
   -> fun():integer, <T>, <T>, <T>
 ```
 
@@ -7929,7 +7814,7 @@ NOTE: the returned index is the index of *the group*
 ## group_4
 
 ```lua
-function iterator_module.group_4(src: avm.array<T>)
+function iterator.group_4(src: avm.array<T>)
   -> fun():integer, <T> * 4
 ```
 
@@ -7940,7 +7825,7 @@ NOTE: the returned index is the index of *the group*
 ## group_5
 
 ```lua
-function iterator_module.group_5(src: avm.array<T>)
+function iterator.group_5(src: avm.array<T>)
   -> fun():integer, <T> * 5
 ```
 
@@ -7951,7 +7836,7 @@ NOTE: the returned index is the index of *the group*
 ## group_6
 
 ```lua
-function iterator_module.group_6(src: avm.array<T>)
+function iterator.group_6(src: avm.array<T>)
   -> fun():integer, <T> * 6
 ```
 
@@ -7962,7 +7847,7 @@ NOTE: the returned index is the index of *the group*
 ## group_7
 
 ```lua
-function iterator_module.group_7(src: avm.array<T>)
+function iterator.group_7(src: avm.array<T>)
   -> fun():integer, <T> * 7
 ```
 
@@ -7973,7 +7858,7 @@ NOTE: the returned index is the index of *the group*
 ## group_8
 
 ```lua
-function iterator_module.group_8(src: avm.array<T>)
+function iterator.group_8(src: avm.array<T>)
   -> fun():integer, <T> * 8
 ```
 
@@ -7984,7 +7869,7 @@ NOTE: the returned index is the index of *the group*
 ## group_9
 
 ```lua
-function iterator_module.group_9(src: avm.array<T>)
+function iterator.group_9(src: avm.array<T>)
   -> fun():integer, <T> * 9
 ```
 
@@ -7995,7 +7880,7 @@ NOTE: the returned index is the index of *the group*
 ## group_10
 
 ```lua
-function iterator_module.group_10(src: avm.array<T>)
+function iterator.group_10(src: avm.array<T>)
   -> fun():integer, <T> * 10
 ```
 
@@ -8006,7 +7891,7 @@ NOTE: the returned index is the index of *the group*
 ## group_10_ex
 
 ```lua
-function iterator_module.group_10_ex(src: avm.seq<T>, src_index: integer, src_count: integer)
+function iterator.group_10_ex(src: avm.seq<T>, src_index: integer, src_count: integer)
   -> fun():integer, <T> * 10
 ```
 
@@ -8017,7 +7902,7 @@ NOTE: the returned index is the index of *the group*
 ## group_11
 
 ```lua
-function iterator_module.group_11(src: avm.array<T>)
+function iterator.group_11(src: avm.array<T>)
   -> fun():integer, <T> * 11
 ```
 
@@ -8028,7 +7913,7 @@ NOTE: the returned index is the index of *the group*
 ## group_11_ex
 
 ```lua
-function iterator_module.group_11_ex(src: avm.seq<T>, src_index: integer, src_count: integer)
+function iterator.group_11_ex(src: avm.seq<T>, src_index: integer, src_count: integer)
   -> fun():integer, <T> * 11
 ```
 
@@ -8039,7 +7924,7 @@ NOTE: the returned index is the index of *the group*
 ## group_12
 
 ```lua
-function iterator_module.group_12(src: avm.array<T>)
+function iterator.group_12(src: avm.array<T>)
   -> fun():integer, <T> * 12
 ```
 
@@ -8050,7 +7935,7 @@ NOTE: the returned index is the index of *the group*
 ## group_12_ex
 
 ```lua
-function iterator_module.group_12_ex(src: avm.seq<T>, src_index: integer, src_count: integer)
+function iterator.group_12_ex(src: avm.seq<T>, src_index: integer, src_count: integer)
   -> fun():integer, <T> * 12
 ```
 
@@ -8061,7 +7946,7 @@ NOTE: the returned index is the index of *the group*
 ## group_13
 
 ```lua
-function iterator_module.group_13(src: avm.array<T>)
+function iterator.group_13(src: avm.array<T>)
   -> fun():integer, <T> * 13
 ```
 
@@ -8072,7 +7957,7 @@ NOTE: the returned index is the index of *the group*
 ## group_13_ex
 
 ```lua
-function iterator_module.group_13_ex(src: avm.seq<T>, src_index: integer, src_count: integer)
+function iterator.group_13_ex(src: avm.seq<T>, src_index: integer, src_count: integer)
   -> fun():integer, <T> * 13
 ```
 
@@ -8083,7 +7968,7 @@ NOTE: the returned index is the index of *the group*
 ## group_14
 
 ```lua
-function iterator_module.group_14(src: avm.array<T>)
+function iterator.group_14(src: avm.array<T>)
   -> fun():integer, <T> * 14
 ```
 
@@ -8094,7 +7979,7 @@ NOTE: the returned index is the index of *the group*
 ## group_14_ex
 
 ```lua
-function iterator_module.group_14_ex(src: avm.seq<T>, src_index: integer, src_count: integer)
+function iterator.group_14_ex(src: avm.seq<T>, src_index: integer, src_count: integer)
   -> fun():integer, <T> * 14
 ```
 
@@ -8105,7 +7990,7 @@ NOTE: the returned index is the index of *the group*
 ## group_15
 
 ```lua
-function iterator_module.group_15(src: avm.array<T>)
+function iterator.group_15(src: avm.array<T>)
   -> fun():integer, <T> * 15
 ```
 
@@ -8116,7 +8001,7 @@ NOTE: the returned index is the index of *the group*
 ## group_15_ex
 
 ```lua
-function iterator_module.group_15_ex(src: avm.seq<T>, src_index: integer, src_count: integer)
+function iterator.group_15_ex(src: avm.seq<T>, src_index: integer, src_count: integer)
   -> fun():integer, <T> * 15
 ```
 
@@ -8127,7 +8012,7 @@ NOTE: the returned index is the index of *the group*
 ## group_16
 
 ```lua
-function iterator_module.group_16(src: avm.array<T>)
+function iterator.group_16(src: avm.array<T>)
   -> fun():integer, <T> * 16
 ```
 
@@ -8138,7 +8023,7 @@ NOTE: the returned index is the index of *the group*
 ## group_16_ex
 
 ```lua
-function iterator_module.group_16_ex(src: avm.seq<T>, src_index: integer, src_count: integer)
+function iterator.group_16_ex(src: avm.seq<T>, src_index: integer, src_count: integer)
   -> fun():integer, <T> * 16
 ```
 
@@ -8149,7 +8034,7 @@ NOTE: the returned index is the index of *the group*
 ## group_2_ex
 
 ```lua
-function iterator_module.group_2_ex(src: avm.seq<T>, src_index: integer, src_count: integer)
+function iterator.group_2_ex(src: avm.seq<T>, src_index: integer, src_count: integer)
   -> fun():integer, <T>, <T>
 ```
 
@@ -8160,7 +8045,7 @@ NOTE: the returned index is the index of *the group*
 ## group_3_ex
 
 ```lua
-function iterator_module.group_3_ex(src: avm.seq<T>, src_index: integer, src_count: integer)
+function iterator.group_3_ex(src: avm.seq<T>, src_index: integer, src_count: integer)
   -> fun():integer, <T>, <T>, <T>
 ```
 
@@ -8171,7 +8056,7 @@ NOTE: the returned index is the index of *the group*
 ## group_4_ex
 
 ```lua
-function iterator_module.group_4_ex(src: avm.seq<T>, src_index: integer, src_count: integer)
+function iterator.group_4_ex(src: avm.seq<T>, src_index: integer, src_count: integer)
   -> fun():integer, <T> * 4
 ```
 
@@ -8182,7 +8067,7 @@ NOTE: the returned index is the index of *the group*
 ## group_5_ex
 
 ```lua
-function iterator_module.group_5_ex(src: avm.seq<T>, src_index: integer, src_count: integer)
+function iterator.group_5_ex(src: avm.seq<T>, src_index: integer, src_count: integer)
   -> fun():integer, <T> * 5
 ```
 
@@ -8193,7 +8078,7 @@ NOTE: the returned index is the index of *the group*
 ## group_6_ex
 
 ```lua
-function iterator_module.group_6_ex(src: avm.seq<T>, src_index: integer, src_count: integer)
+function iterator.group_6_ex(src: avm.seq<T>, src_index: integer, src_count: integer)
   -> fun():integer, <T> * 6
 ```
 
@@ -8204,7 +8089,7 @@ NOTE: the returned index is the index of *the group*
 ## group_7_ex
 
 ```lua
-function iterator_module.group_7_ex(src: avm.seq<T>, src_index: integer, src_count: integer)
+function iterator.group_7_ex(src: avm.seq<T>, src_index: integer, src_count: integer)
   -> fun():integer, <T> * 7
 ```
 
@@ -8215,7 +8100,7 @@ NOTE: the returned index is the index of *the group*
 ## group_8_ex
 
 ```lua
-function iterator_module.group_8_ex(src: avm.seq<T>, src_index: integer, src_count: integer)
+function iterator.group_8_ex(src: avm.seq<T>, src_index: integer, src_count: integer)
   -> fun():integer, <T> * 8
 ```
 
@@ -8226,7 +8111,7 @@ NOTE: the returned index is the index of *the group*
 ## group_9_ex
 
 ```lua
-function iterator_module.group_9_ex(src: avm.seq<T>, src_index: integer, src_count: integer)
+function iterator.group_9_ex(src: avm.seq<T>, src_index: integer, src_count: integer)
   -> fun():integer, <T> * 9
 ```
 
@@ -8237,7 +8122,7 @@ NOTE: the returned index is the index of *the group*
 ## zip_1
 
 ```lua
-function iterator_module.zip_1(a: avm.array<T>, b: avm.array<T>)
+function iterator.zip_1(a: avm.array<T>, b: avm.array<T>)
   -> fun():integer, <T>, <T>
 ```
 
@@ -8252,7 +8137,7 @@ where `i` is the index of the group,
 ## zip_2
 
 ```lua
-function iterator_module.zip_2(a: avm.array<T>, b: avm.array<T>)
+function iterator.zip_2(a: avm.array<T>, b: avm.array<T>)
   -> fun():integer, <T> * 4
 ```
 
@@ -8267,7 +8152,7 @@ where `i` is the index of the group,
 ## zip_3
 
 ```lua
-function iterator_module.zip_3(a: avm.array<T>, b: avm.array<T>)
+function iterator.zip_3(a: avm.array<T>, b: avm.array<T>)
   -> fun():integer, <T> * 6
 ```
 
@@ -8282,7 +8167,7 @@ where `i` is the index of the group,
 ## zip_4
 
 ```lua
-function iterator_module.zip_4(a: avm.array<T>, b: avm.array<T>)
+function iterator.zip_4(a: avm.array<T>, b: avm.array<T>)
   -> fun():integer, <T> * 8
 ```
 
@@ -8297,7 +8182,7 @@ where `i` is the index of the group,
 ## zip_5
 
 ```lua
-function iterator_module.zip_5(a: avm.array<T>, b: avm.array<T>)
+function iterator.zip_5(a: avm.array<T>, b: avm.array<T>)
   -> fun():integer, <T> * 10
 ```
 
@@ -8312,7 +8197,7 @@ where `i` is the index of the group,
 ## zip_6
 
 ```lua
-function iterator_module.zip_6(a: avm.array<T>, b: avm.array<T>)
+function iterator.zip_6(a: avm.array<T>, b: avm.array<T>)
   -> fun():integer, <T> * 12
 ```
 
@@ -8327,7 +8212,7 @@ where `i` is the index of the group,
 ## zip_7
 
 ```lua
-function iterator_module.zip_7(a: avm.array<T>, b: avm.array<T>)
+function iterator.zip_7(a: avm.array<T>, b: avm.array<T>)
   -> fun():integer, <T> * 14
 ```
 
@@ -8342,7 +8227,7 @@ where `i` is the index of the group,
 ## zip_8
 
 ```lua
-function iterator_module.zip_8(a: avm.array<T>, b: avm.array<T>)
+function iterator.zip_8(a: avm.array<T>, b: avm.array<T>)
   -> fun():integer, <T> * 16
 ```
 
@@ -8357,7 +8242,7 @@ where `i` is the index of the group,
 ## zip_9
 
 ```lua
-function iterator_module.zip_9(a: avm.array<T>, b: avm.array<T>)
+function iterator.zip_9(a: avm.array<T>, b: avm.array<T>)
   -> fun():integer, <T> * 18
 ```
 
@@ -8372,7 +8257,7 @@ where `i` is the index of the group,
 ## zip_10
 
 ```lua
-function iterator_module.zip_10(a: avm.array<T>, b: avm.array<T>)
+function iterator.zip_10(a: avm.array<T>, b: avm.array<T>)
   -> fun():integer, <T> * 20
 ```
 
@@ -8387,7 +8272,7 @@ where `i` is the index of the group,
 ## zip_10_ex
 
 ```lua
-function iterator_module.zip_10_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
+function iterator.zip_10_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
   -> fun():integer, <T> * 20
 ```
 
@@ -8402,7 +8287,7 @@ where `i` is the index of the group,
 ## zip_11
 
 ```lua
-function iterator_module.zip_11(a: avm.array<T>, b: avm.array<T>)
+function iterator.zip_11(a: avm.array<T>, b: avm.array<T>)
   -> fun():integer, <T> * 22
 ```
 
@@ -8417,7 +8302,7 @@ where `i` is the index of the group,
 ## zip_11_ex
 
 ```lua
-function iterator_module.zip_11_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
+function iterator.zip_11_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
   -> fun():integer, <T> * 22
 ```
 
@@ -8432,7 +8317,7 @@ where `i` is the index of the group,
 ## zip_12
 
 ```lua
-function iterator_module.zip_12(a: avm.array<T>, b: avm.array<T>)
+function iterator.zip_12(a: avm.array<T>, b: avm.array<T>)
   -> fun():integer, <T> * 24
 ```
 
@@ -8447,7 +8332,7 @@ where `i` is the index of the group,
 ## zip_12_ex
 
 ```lua
-function iterator_module.zip_12_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
+function iterator.zip_12_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
   -> fun():integer, <T> * 24
 ```
 
@@ -8462,7 +8347,7 @@ where `i` is the index of the group,
 ## zip_13
 
 ```lua
-function iterator_module.zip_13(a: avm.array<T>, b: avm.array<T>)
+function iterator.zip_13(a: avm.array<T>, b: avm.array<T>)
   -> fun():integer, <T> * 26
 ```
 
@@ -8477,7 +8362,7 @@ where `i` is the index of the group,
 ## zip_13_ex
 
 ```lua
-function iterator_module.zip_13_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
+function iterator.zip_13_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
   -> fun():integer, <T> * 26
 ```
 
@@ -8492,7 +8377,7 @@ where `i` is the index of the group,
 ## zip_14
 
 ```lua
-function iterator_module.zip_14(a: avm.array<T>, b: avm.array<T>)
+function iterator.zip_14(a: avm.array<T>, b: avm.array<T>)
   -> fun():integer, <T> * 28
 ```
 
@@ -8507,7 +8392,7 @@ where `i` is the index of the group,
 ## zip_14_ex
 
 ```lua
-function iterator_module.zip_14_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
+function iterator.zip_14_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
   -> fun():integer, <T> * 28
 ```
 
@@ -8522,7 +8407,7 @@ where `i` is the index of the group,
 ## zip_15
 
 ```lua
-function iterator_module.zip_15(a: avm.array<T>, b: avm.array<T>)
+function iterator.zip_15(a: avm.array<T>, b: avm.array<T>)
   -> fun():integer, <T> * 30
 ```
 
@@ -8537,7 +8422,7 @@ where `i` is the index of the group,
 ## zip_15_ex
 
 ```lua
-function iterator_module.zip_15_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
+function iterator.zip_15_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
   -> fun():integer, <T> * 30
 ```
 
@@ -8552,7 +8437,7 @@ where `i` is the index of the group,
 ## zip_16
 
 ```lua
-function iterator_module.zip_16(a: avm.array<T>, b: avm.array<T>)
+function iterator.zip_16(a: avm.array<T>, b: avm.array<T>)
   -> fun():integer, <T> * 32
 ```
 
@@ -8567,7 +8452,7 @@ where `i` is the index of the group,
 ## zip_16_ex
 
 ```lua
-function iterator_module.zip_16_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
+function iterator.zip_16_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
   -> fun():integer, <T> * 32
 ```
 
@@ -8582,7 +8467,7 @@ where `i` is the index of the group,
 ## zip_1_ex
 
 ```lua
-function iterator_module.zip_1_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
+function iterator.zip_1_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
   -> fun():integer, <T>, <T>
 ```
 
@@ -8597,7 +8482,7 @@ where `i` is the index of the group,
 ## zip_2_ex
 
 ```lua
-function iterator_module.zip_2_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
+function iterator.zip_2_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
   -> fun():integer, <T> * 4
 ```
 
@@ -8612,7 +8497,7 @@ where `i` is the index of the group,
 ## zip_3_ex
 
 ```lua
-function iterator_module.zip_3_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
+function iterator.zip_3_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
   -> fun():integer, <T> * 6
 ```
 
@@ -8627,7 +8512,7 @@ where `i` is the index of the group,
 ## zip_4_ex
 
 ```lua
-function iterator_module.zip_4_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
+function iterator.zip_4_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
   -> fun():integer, <T> * 8
 ```
 
@@ -8642,7 +8527,7 @@ where `i` is the index of the group,
 ## zip_5_ex
 
 ```lua
-function iterator_module.zip_5_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
+function iterator.zip_5_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
   -> fun():integer, <T> * 10
 ```
 
@@ -8657,7 +8542,7 @@ where `i` is the index of the group,
 ## zip_6_ex
 
 ```lua
-function iterator_module.zip_6_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
+function iterator.zip_6_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
   -> fun():integer, <T> * 12
 ```
 
@@ -8672,7 +8557,7 @@ where `i` is the index of the group,
 ## zip_7_ex
 
 ```lua
-function iterator_module.zip_7_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
+function iterator.zip_7_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
   -> fun():integer, <T> * 14
 ```
 
@@ -8687,7 +8572,7 @@ where `i` is the index of the group,
 ## zip_8_ex
 
 ```lua
-function iterator_module.zip_8_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
+function iterator.zip_8_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
   -> fun():integer, <T> * 16
 ```
 
@@ -8702,7 +8587,7 @@ where `i` is the index of the group,
 ## zip_9_ex
 
 ```lua
-function iterator_module.zip_9_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
+function iterator.zip_9_ex(a: avm.seq<T>, a_index: integer, a_count: integer, b: avm.seq<T>, b_index: integer)
   -> fun():integer, <T> * 18
 ```
 
@@ -8717,7 +8602,7 @@ where `i` is the index of the group,
 
 ---
 
-# linalg_module
+# linalg
 Linear algebra routines  
 
 Functions for operating on numerical vectors and matrices up to 4 dimensions  
@@ -8725,7 +8610,7 @@ Functions for operating on numerical vectors and matrices up to 4 dimensions
 ## add_2
 
 ```lua
-function linalg_module.add_2(a1: number, a2: number, b1: number, b2: number)
+function linalg.add_2(a1: number, a2: number, b1: number, b2: number)
   -> number, number
 ```
 
@@ -8734,7 +8619,7 @@ Apply the addition operator to two 2-tuples
 ## add_3
 
 ```lua
-function linalg_module.add_3(a1: number, a2: number, a3: number, b1: number, b2: number, b3: number)
+function linalg.add_3(a1: number, a2: number, a3: number, b1: number, b2: number, b3: number)
   -> number, number, number
 ```
 
@@ -8743,7 +8628,7 @@ Apply the addition operator to two 3-tuples
 ## add_4
 
 ```lua
-function linalg_module.add_4(a1: number, a2: number, a3: number, a4: number, b1: number, b2: number, b3: number, b4: number)
+function linalg.add_4(a1: number, a2: number, a3: number, a4: number, b1: number, b2: number, b3: number, b4: number)
   -> number * 4
 ```
 
@@ -8752,7 +8637,7 @@ Apply the addition operator to two 4-tuples
 ## add_mat2
 
 ```lua
-function linalg_module.add_mat2(a: avm.number4, b: avm.number4)
+function linalg.add_mat2(a: avm.number4, b: avm.number4)
   -> number * 4
 ```
 
@@ -8761,7 +8646,7 @@ Apply the addition operator to each element in two 2x2 matrices
 ## add_mat2_constant
 
 ```lua
-function linalg_module.add_mat2_constant(a: avm.number4, c: number)
+function linalg.add_mat2_constant(a: avm.number4, c: number)
   -> number * 4
 ```
 
@@ -8770,7 +8655,7 @@ Apply the addition operator to each element in a 2x2 matrix and a constant
 ## add_mat2_constant_ex
 
 ```lua
-function linalg_module.add_mat2_constant_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
+function linalg.add_mat2_constant_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -8779,7 +8664,7 @@ Apply the addition operator to each element in a 2x2 matrix in a slice and a con
 ## add_mat2_constant_ex
 
 ```lua
-function linalg_module.add_mat2_constant_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, c: number)
+function linalg.add_mat2_constant_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, c: number)
   -> number * 4
 ```
 
@@ -8788,7 +8673,7 @@ Apply the addition operator to each element in a 2x2 matrix in a slice and a con
 ## add_mat2_ex
 
 ```lua
-function linalg_module.add_mat2_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, b: avm.seq_number4|{ [integer]: number }, b_index: integer, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
+function linalg.add_mat2_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, b: avm.seq_number4|{ [integer]: number }, b_index: integer, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -8797,7 +8682,7 @@ Apply the addition operator to each element in two 2d-vectors in a slice and sto
 ## add_mat2_ex
 
 ```lua
-function linalg_module.add_mat2_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, b: avm.seq_number2|{ [integer]: number }, b_index: integer)
+function linalg.add_mat2_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, b: avm.seq_number2|{ [integer]: number }, b_index: integer)
   -> number * 4
 ```
 
@@ -8806,7 +8691,7 @@ Apply the addition operator to each element in two 2x2 matrices in a slice
 ## add_mat3
 
 ```lua
-function linalg_module.add_mat3(a: avm.number9, b: avm.number9)
+function linalg.add_mat3(a: avm.number9, b: avm.number9)
   -> number * 9
 ```
 
@@ -8815,7 +8700,7 @@ Apply the addition operator to each element in two 3x3 matrices
 ## add_mat3_constant
 
 ```lua
-function linalg_module.add_mat3_constant(a: avm.number9, c: number)
+function linalg.add_mat3_constant(a: avm.number9, c: number)
   -> number * 9
 ```
 
@@ -8824,7 +8709,7 @@ Apply the addition operator to each element in a 3x3 matrix and a constant
 ## add_mat3_constant_ex
 
 ```lua
-function linalg_module.add_mat3_constant_ex(a: avm.seq_number9|{ [integer]: number }, a_index: integer, c: number)
+function linalg.add_mat3_constant_ex(a: avm.seq_number9|{ [integer]: number }, a_index: integer, c: number)
   -> number * 9
 ```
 
@@ -8833,7 +8718,7 @@ Apply the addition operator to each element in a 3x3 matrix in a slice and a con
 ## add_mat3_constant_ex
 
 ```lua
-function linalg_module.add_mat3_constant_ex(a: avm.seq_number9|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number9|{ [integer]: number }, dest_index?: integer)
+function linalg.add_mat3_constant_ex(a: avm.seq_number9|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number9|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -8842,7 +8727,7 @@ Apply the addition operator to each element in a 3x3 matrix in a slice and a con
 ## add_mat3_ex
 
 ```lua
-function linalg_module.add_mat3_ex(a: avm.seq_number9|{ [integer]: number }, a_index: integer, b: avm.seq_number3|{ [integer]: number }, b_index: integer)
+function linalg.add_mat3_ex(a: avm.seq_number9|{ [integer]: number }, a_index: integer, b: avm.seq_number3|{ [integer]: number }, b_index: integer)
   -> number * 9
 ```
 
@@ -8851,7 +8736,7 @@ Apply the addition operator to each element in two 3x3 matrices in a slice
 ## add_mat3_ex
 
 ```lua
-function linalg_module.add_mat3_ex(a: avm.seq_number9|{ [integer]: number }, a_index: integer, b: avm.seq_number9|{ [integer]: number }, b_index: integer, dest: avm.seq_number9|{ [integer]: number }, dest_index?: integer)
+function linalg.add_mat3_ex(a: avm.seq_number9|{ [integer]: number }, a_index: integer, b: avm.seq_number9|{ [integer]: number }, b_index: integer, dest: avm.seq_number9|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -8860,7 +8745,7 @@ Apply the addition operator to each element in two 3d-vectors in a slice and sto
 ## add_mat4
 
 ```lua
-function linalg_module.add_mat4(a: avm.number16, b: avm.number16)
+function linalg.add_mat4(a: avm.number16, b: avm.number16)
   -> number * 16
 ```
 
@@ -8869,7 +8754,7 @@ Apply the addition operator to each element in two 4x4 matrices
 ## add_mat4_constant
 
 ```lua
-function linalg_module.add_mat4_constant(a: avm.number16, c: number)
+function linalg.add_mat4_constant(a: avm.number16, c: number)
   -> number * 16
 ```
 
@@ -8878,7 +8763,7 @@ Apply the addition operator to each element in a 4x4 matrix and a constant
 ## add_mat4_constant_ex
 
 ```lua
-function linalg_module.add_mat4_constant_ex(a: avm.seq_number16|{ [integer]: number }, a_index: integer, c: number)
+function linalg.add_mat4_constant_ex(a: avm.seq_number16|{ [integer]: number }, a_index: integer, c: number)
   -> number * 16
 ```
 
@@ -8887,7 +8772,7 @@ Apply the addition operator to each element in a 4x4 matrix in a slice and a con
 ## add_mat4_constant_ex
 
 ```lua
-function linalg_module.add_mat4_constant_ex(a: avm.seq_number16|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number16|{ [integer]: number }, dest_index?: integer)
+function linalg.add_mat4_constant_ex(a: avm.seq_number16|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number16|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -8896,7 +8781,7 @@ Apply the addition operator to each element in a 4x4 matrix in a slice and a con
 ## add_mat4_ex
 
 ```lua
-function linalg_module.add_mat4_ex(a: avm.seq_number16|{ [integer]: number }, a_index: integer, b: avm.seq_number4|{ [integer]: number }, b_index: integer)
+function linalg.add_mat4_ex(a: avm.seq_number16|{ [integer]: number }, a_index: integer, b: avm.seq_number4|{ [integer]: number }, b_index: integer)
   -> number * 16
 ```
 
@@ -8905,7 +8790,7 @@ Apply the addition operator to each element in two 4x4 matrices in a slice
 ## add_mat4_ex
 
 ```lua
-function linalg_module.add_mat4_ex(a: avm.seq_number16|{ [integer]: number }, a_index: integer, b: avm.seq_number16|{ [integer]: number }, b_index: integer, dest: avm.seq_number16|{ [integer]: number }, dest_index?: integer)
+function linalg.add_mat4_ex(a: avm.seq_number16|{ [integer]: number }, a_index: integer, b: avm.seq_number16|{ [integer]: number }, b_index: integer, dest: avm.seq_number16|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -8914,7 +8799,7 @@ Apply the addition operator to each element in two 4d-vectors in a slice and sto
 ## add_vec2
 
 ```lua
-function linalg_module.add_vec2(a: avm.number2, b: avm.number2)
+function linalg.add_vec2(a: avm.number2, b: avm.number2)
   -> number, number
 ```
 
@@ -8923,7 +8808,7 @@ Apply the addition operator to two 2d-vectors
 ## add_vec2_constant
 
 ```lua
-function linalg_module.add_vec2_constant(a: avm.number2, c: number)
+function linalg.add_vec2_constant(a: avm.number2, c: number)
   -> number, number
 ```
 
@@ -8932,7 +8817,7 @@ Apply the addition operator to a 2d-vector and a constant
 ## add_vec2_constant_ex
 
 ```lua
-function linalg_module.add_vec2_constant_ex(a: avm.seq_number2|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number2|{ [integer]: number }, dest_index?: integer)
+function linalg.add_vec2_constant_ex(a: avm.seq_number2|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number2|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -8941,7 +8826,7 @@ Apply the addition operator to a 2d-vector in a slice and a constant and store i
 ## add_vec2_constant_ex
 
 ```lua
-function linalg_module.add_vec2_constant_ex(a: avm.seq_number2|{ [integer]: number }, a_index: integer, c: number)
+function linalg.add_vec2_constant_ex(a: avm.seq_number2|{ [integer]: number }, a_index: integer, c: number)
   -> number, number
 ```
 
@@ -8950,7 +8835,7 @@ Apply the addition operator to a 2d-vector in a slice and a constant
 ## add_vec2_ex
 
 ```lua
-function linalg_module.add_vec2_ex(a: avm.seq_number2|{ [integer]: number }, a_index: integer, b: avm.seq_number2|{ [integer]: number }, b_index: integer, dest: avm.seq_number2|{ [integer]: number }, dest_index?: integer)
+function linalg.add_vec2_ex(a: avm.seq_number2|{ [integer]: number }, a_index: integer, b: avm.seq_number2|{ [integer]: number }, b_index: integer, dest: avm.seq_number2|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -8959,7 +8844,7 @@ Apply the addition operator to two 2d-vectors in a slice and store the result in
 ## add_vec2_ex
 
 ```lua
-function linalg_module.add_vec2_ex(a: avm.seq_number2|{ [integer]: number }, a_index: integer, b: avm.seq_number2|{ [integer]: number }, b_index: integer)
+function linalg.add_vec2_ex(a: avm.seq_number2|{ [integer]: number }, a_index: integer, b: avm.seq_number2|{ [integer]: number }, b_index: integer)
   -> number, number
 ```
 
@@ -8968,7 +8853,7 @@ Apply the addition operator to two 2d-vectors in a slice
 ## add_vec3
 
 ```lua
-function linalg_module.add_vec3(a: avm.number3, b: avm.number3)
+function linalg.add_vec3(a: avm.number3, b: avm.number3)
   -> number, number, number
 ```
 
@@ -8977,7 +8862,7 @@ Apply the addition operator to two 3d-vectors
 ## add_vec3_constant
 
 ```lua
-function linalg_module.add_vec3_constant(a: avm.number3, c: number)
+function linalg.add_vec3_constant(a: avm.number3, c: number)
   -> number, number, number
 ```
 
@@ -8986,7 +8871,7 @@ Apply the addition operator to a 3d-vector and a constant
 ## add_vec3_constant_ex
 
 ```lua
-function linalg_module.add_vec3_constant_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, c: number)
+function linalg.add_vec3_constant_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, c: number)
   -> number, number, number
 ```
 
@@ -8995,7 +8880,7 @@ Apply the addition operator to a 3d-vector in a slice and a constant
 ## add_vec3_constant_ex
 
 ```lua
-function linalg_module.add_vec3_constant_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number3|{ [integer]: number }, dest_index?: integer)
+function linalg.add_vec3_constant_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number3|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -9004,7 +8889,7 @@ Apply the addition operator to a 3d-vector in a slice and a constant and store i
 ## add_vec3_ex
 
 ```lua
-function linalg_module.add_vec3_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, b: avm.seq_number3|{ [integer]: number }, b_index: integer)
+function linalg.add_vec3_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, b: avm.seq_number3|{ [integer]: number }, b_index: integer)
   -> number, number, number
 ```
 
@@ -9013,7 +8898,7 @@ Apply the addition operator to two 3d-vectors in a slice
 ## add_vec3_ex
 
 ```lua
-function linalg_module.add_vec3_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, b: avm.seq_number3|{ [integer]: number }, b_index: integer, dest: avm.seq_number3|{ [integer]: number }, dest_index?: integer)
+function linalg.add_vec3_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, b: avm.seq_number3|{ [integer]: number }, b_index: integer, dest: avm.seq_number3|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -9022,7 +8907,7 @@ Apply the addition operator to two 3d-vectors in a slice and store the result in
 ## add_vec4
 
 ```lua
-function linalg_module.add_vec4(a: avm.number4, b: avm.number4)
+function linalg.add_vec4(a: avm.number4, b: avm.number4)
   -> number * 4
 ```
 
@@ -9031,7 +8916,7 @@ Apply the addition operator to two 4d-vectors
 ## add_vec4_constant
 
 ```lua
-function linalg_module.add_vec4_constant(a: avm.number4, c: number)
+function linalg.add_vec4_constant(a: avm.number4, c: number)
   -> number * 4
 ```
 
@@ -9040,7 +8925,7 @@ Apply the addition operator to a 4d-vector and a constant
 ## add_vec4_constant_ex
 
 ```lua
-function linalg_module.add_vec4_constant_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, c: number)
+function linalg.add_vec4_constant_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, c: number)
   -> number * 4
 ```
 
@@ -9049,7 +8934,7 @@ Apply the addition operator to a 4d-vector in a slice and a constant
 ## add_vec4_constant_ex
 
 ```lua
-function linalg_module.add_vec4_constant_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
+function linalg.add_vec4_constant_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -9058,7 +8943,7 @@ Apply the addition operator to a 4d-vector in a slice and a constant and store i
 ## add_vec4_ex
 
 ```lua
-function linalg_module.add_vec4_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, b: avm.seq_number4|{ [integer]: number }, b_index: integer)
+function linalg.add_vec4_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, b: avm.seq_number4|{ [integer]: number }, b_index: integer)
   -> number * 4
 ```
 
@@ -9067,7 +8952,7 @@ Apply the addition operator to two 4d-vectors in a slice
 ## add_vec4_ex
 
 ```lua
-function linalg_module.add_vec4_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, b: avm.seq_number4|{ [integer]: number }, b_index: integer, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
+function linalg.add_vec4_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, b: avm.seq_number4|{ [integer]: number }, b_index: integer, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -9076,7 +8961,7 @@ Apply the addition operator to two 4d-vectors in a slice and store the result in
 ## cross_product_tuple3
 
 ```lua
-function linalg_module.cross_product_tuple3(ax: number, ay: number, az: number, bx: number, by: number, bz: number)
+function linalg.cross_product_tuple3(ax: number, ay: number, az: number, bx: number, by: number, bz: number)
   -> number, number, number
 ```
 
@@ -9085,7 +8970,7 @@ Cross product of 3d vector
 ## cross_product_vec3
 
 ```lua
-function linalg_module.cross_product_vec3(a: avm.number3, b: avm.number3)
+function linalg.cross_product_vec3(a: avm.number3, b: avm.number3)
   -> number, number, number
 ```
 
@@ -9094,7 +8979,7 @@ Cross product of 3d vector
 ## cross_product_vec3_ex
 
 ```lua
-function linalg_module.cross_product_vec3_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, b: avm.seq_number3|{ [integer]: number }, b_index: integer)
+function linalg.cross_product_vec3_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, b: avm.seq_number3|{ [integer]: number }, b_index: integer)
   -> number, number, number
 ```
 
@@ -9103,7 +8988,7 @@ Cross product of 3d vector in a slice
 ## cross_product_vec3_ex
 
 ```lua
-function linalg_module.cross_product_vec3_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, b: avm.seq_number3|{ [integer]: number }, b_index: integer, dest: avm.seq_number3|{ [integer]: number }, dest_index?: integer)
+function linalg.cross_product_vec3_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, b: avm.seq_number3|{ [integer]: number }, b_index: integer, dest: avm.seq_number3|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -9112,7 +8997,7 @@ Cross product of 3d vector in a slice into a destination
 ## div_2
 
 ```lua
-function linalg_module.div_2(a1: number, a2: number, b1: number, b2: number)
+function linalg.div_2(a1: number, a2: number, b1: number, b2: number)
   -> number, number
 ```
 
@@ -9121,7 +9006,7 @@ Apply the division operator to two 2-tuples
 ## div_3
 
 ```lua
-function linalg_module.div_3(a1: number, a2: number, a3: number, b1: number, b2: number, b3: number)
+function linalg.div_3(a1: number, a2: number, a3: number, b1: number, b2: number, b3: number)
   -> number, number, number
 ```
 
@@ -9130,7 +9015,7 @@ Apply the division operator to two 3-tuples
 ## div_4
 
 ```lua
-function linalg_module.div_4(a1: number, a2: number, a3: number, a4: number, b1: number, b2: number, b3: number, b4: number)
+function linalg.div_4(a1: number, a2: number, a3: number, a4: number, b1: number, b2: number, b3: number, b4: number)
   -> number * 4
 ```
 
@@ -9139,7 +9024,7 @@ Apply the division operator to two 4-tuples
 ## div_mat2
 
 ```lua
-function linalg_module.div_mat2(a: avm.number4, b: avm.number4)
+function linalg.div_mat2(a: avm.number4, b: avm.number4)
   -> number * 4
 ```
 
@@ -9148,7 +9033,7 @@ Apply the division operator to each element in two 2x2 matrices
 ## div_mat2_constant
 
 ```lua
-function linalg_module.div_mat2_constant(a: avm.number4, c: number)
+function linalg.div_mat2_constant(a: avm.number4, c: number)
   -> number * 4
 ```
 
@@ -9157,7 +9042,7 @@ Apply the division operator to each element in a 2x2 matrix and a constant
 ## div_mat2_constant_ex
 
 ```lua
-function linalg_module.div_mat2_constant_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
+function linalg.div_mat2_constant_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -9166,7 +9051,7 @@ Apply the division operator to each element in a 2x2 matrix in a slice and a con
 ## div_mat2_constant_ex
 
 ```lua
-function linalg_module.div_mat2_constant_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, c: number)
+function linalg.div_mat2_constant_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, c: number)
   -> number * 4
 ```
 
@@ -9175,7 +9060,7 @@ Apply the division operator to each element in a 2x2 matrix in a slice and a con
 ## div_mat2_ex
 
 ```lua
-function linalg_module.div_mat2_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, b: avm.seq_number2|{ [integer]: number }, b_index: integer)
+function linalg.div_mat2_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, b: avm.seq_number2|{ [integer]: number }, b_index: integer)
   -> number * 4
 ```
 
@@ -9184,7 +9069,7 @@ Apply the division operator to each element in two 2x2 matrices in a slice
 ## div_mat2_ex
 
 ```lua
-function linalg_module.div_mat2_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, b: avm.seq_number4|{ [integer]: number }, b_index: integer, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
+function linalg.div_mat2_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, b: avm.seq_number4|{ [integer]: number }, b_index: integer, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -9193,7 +9078,7 @@ Apply the division operator to each element in two 2d-vectors in a slice and sto
 ## div_mat3
 
 ```lua
-function linalg_module.div_mat3(a: avm.number9, b: avm.number9)
+function linalg.div_mat3(a: avm.number9, b: avm.number9)
   -> number * 9
 ```
 
@@ -9202,7 +9087,7 @@ Apply the division operator to each element in two 3x3 matrices
 ## div_mat3_constant
 
 ```lua
-function linalg_module.div_mat3_constant(a: avm.number9, c: number)
+function linalg.div_mat3_constant(a: avm.number9, c: number)
   -> number * 9
 ```
 
@@ -9211,7 +9096,7 @@ Apply the division operator to each element in a 3x3 matrix and a constant
 ## div_mat3_constant_ex
 
 ```lua
-function linalg_module.div_mat3_constant_ex(a: avm.seq_number9|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number9|{ [integer]: number }, dest_index?: integer)
+function linalg.div_mat3_constant_ex(a: avm.seq_number9|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number9|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -9220,7 +9105,7 @@ Apply the division operator to each element in a 3x3 matrix in a slice and a con
 ## div_mat3_constant_ex
 
 ```lua
-function linalg_module.div_mat3_constant_ex(a: avm.seq_number9|{ [integer]: number }, a_index: integer, c: number)
+function linalg.div_mat3_constant_ex(a: avm.seq_number9|{ [integer]: number }, a_index: integer, c: number)
   -> number * 9
 ```
 
@@ -9229,7 +9114,7 @@ Apply the division operator to each element in a 3x3 matrix in a slice and a con
 ## div_mat3_ex
 
 ```lua
-function linalg_module.div_mat3_ex(a: avm.seq_number9|{ [integer]: number }, a_index: integer, b: avm.seq_number9|{ [integer]: number }, b_index: integer, dest: avm.seq_number9|{ [integer]: number }, dest_index?: integer)
+function linalg.div_mat3_ex(a: avm.seq_number9|{ [integer]: number }, a_index: integer, b: avm.seq_number9|{ [integer]: number }, b_index: integer, dest: avm.seq_number9|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -9238,7 +9123,7 @@ Apply the division operator to each element in two 3d-vectors in a slice and sto
 ## div_mat3_ex
 
 ```lua
-function linalg_module.div_mat3_ex(a: avm.seq_number9|{ [integer]: number }, a_index: integer, b: avm.seq_number3|{ [integer]: number }, b_index: integer)
+function linalg.div_mat3_ex(a: avm.seq_number9|{ [integer]: number }, a_index: integer, b: avm.seq_number3|{ [integer]: number }, b_index: integer)
   -> number * 9
 ```
 
@@ -9247,7 +9132,7 @@ Apply the division operator to each element in two 3x3 matrices in a slice
 ## div_mat4
 
 ```lua
-function linalg_module.div_mat4(a: avm.number16, b: avm.number16)
+function linalg.div_mat4(a: avm.number16, b: avm.number16)
   -> number * 16
 ```
 
@@ -9256,7 +9141,7 @@ Apply the division operator to each element in two 4x4 matrices
 ## div_mat4_constant
 
 ```lua
-function linalg_module.div_mat4_constant(a: avm.number16, c: number)
+function linalg.div_mat4_constant(a: avm.number16, c: number)
   -> number * 16
 ```
 
@@ -9265,7 +9150,7 @@ Apply the division operator to each element in a 4x4 matrix and a constant
 ## div_mat4_constant_ex
 
 ```lua
-function linalg_module.div_mat4_constant_ex(a: avm.seq_number16|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number16|{ [integer]: number }, dest_index?: integer)
+function linalg.div_mat4_constant_ex(a: avm.seq_number16|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number16|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -9274,7 +9159,7 @@ Apply the division operator to each element in a 4x4 matrix in a slice and a con
 ## div_mat4_constant_ex
 
 ```lua
-function linalg_module.div_mat4_constant_ex(a: avm.seq_number16|{ [integer]: number }, a_index: integer, c: number)
+function linalg.div_mat4_constant_ex(a: avm.seq_number16|{ [integer]: number }, a_index: integer, c: number)
   -> number * 16
 ```
 
@@ -9283,7 +9168,7 @@ Apply the division operator to each element in a 4x4 matrix in a slice and a con
 ## div_mat4_ex
 
 ```lua
-function linalg_module.div_mat4_ex(a: avm.seq_number16|{ [integer]: number }, a_index: integer, b: avm.seq_number4|{ [integer]: number }, b_index: integer)
+function linalg.div_mat4_ex(a: avm.seq_number16|{ [integer]: number }, a_index: integer, b: avm.seq_number4|{ [integer]: number }, b_index: integer)
   -> number * 16
 ```
 
@@ -9292,7 +9177,7 @@ Apply the division operator to each element in two 4x4 matrices in a slice
 ## div_mat4_ex
 
 ```lua
-function linalg_module.div_mat4_ex(a: avm.seq_number16|{ [integer]: number }, a_index: integer, b: avm.seq_number16|{ [integer]: number }, b_index: integer, dest: avm.seq_number16|{ [integer]: number }, dest_index?: integer)
+function linalg.div_mat4_ex(a: avm.seq_number16|{ [integer]: number }, a_index: integer, b: avm.seq_number16|{ [integer]: number }, b_index: integer, dest: avm.seq_number16|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -9301,7 +9186,7 @@ Apply the division operator to each element in two 4d-vectors in a slice and sto
 ## div_vec2
 
 ```lua
-function linalg_module.div_vec2(a: avm.number2, b: avm.number2)
+function linalg.div_vec2(a: avm.number2, b: avm.number2)
   -> number, number
 ```
 
@@ -9310,7 +9195,7 @@ Apply the division operator to two 2d-vectors
 ## div_vec2_constant
 
 ```lua
-function linalg_module.div_vec2_constant(a: avm.number2, c: number)
+function linalg.div_vec2_constant(a: avm.number2, c: number)
   -> number, number
 ```
 
@@ -9319,7 +9204,7 @@ Apply the division operator to a 2d-vector and a constant
 ## div_vec2_constant_ex
 
 ```lua
-function linalg_module.div_vec2_constant_ex(a: avm.seq_number2|{ [integer]: number }, a_index: integer, c: number)
+function linalg.div_vec2_constant_ex(a: avm.seq_number2|{ [integer]: number }, a_index: integer, c: number)
   -> number, number
 ```
 
@@ -9328,7 +9213,7 @@ Apply the division operator to a 2d-vector in a slice and a constant
 ## div_vec2_constant_ex
 
 ```lua
-function linalg_module.div_vec2_constant_ex(a: avm.seq_number2|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number2|{ [integer]: number }, dest_index?: integer)
+function linalg.div_vec2_constant_ex(a: avm.seq_number2|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number2|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -9337,7 +9222,7 @@ Apply the division operator to a 2d-vector in a slice and a constant and store i
 ## div_vec2_ex
 
 ```lua
-function linalg_module.div_vec2_ex(a: avm.seq_number2|{ [integer]: number }, a_index: integer, b: avm.seq_number2|{ [integer]: number }, b_index: integer, dest: avm.seq_number2|{ [integer]: number }, dest_index?: integer)
+function linalg.div_vec2_ex(a: avm.seq_number2|{ [integer]: number }, a_index: integer, b: avm.seq_number2|{ [integer]: number }, b_index: integer, dest: avm.seq_number2|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -9346,7 +9231,7 @@ Apply the division operator to two 2d-vectors in a slice and store the result in
 ## div_vec2_ex
 
 ```lua
-function linalg_module.div_vec2_ex(a: avm.seq_number2|{ [integer]: number }, a_index: integer, b: avm.seq_number2|{ [integer]: number }, b_index: integer)
+function linalg.div_vec2_ex(a: avm.seq_number2|{ [integer]: number }, a_index: integer, b: avm.seq_number2|{ [integer]: number }, b_index: integer)
   -> number, number
 ```
 
@@ -9355,7 +9240,7 @@ Apply the division operator to two 2d-vectors in a slice
 ## div_vec3
 
 ```lua
-function linalg_module.div_vec3(a: avm.number3, b: avm.number3)
+function linalg.div_vec3(a: avm.number3, b: avm.number3)
   -> number, number, number
 ```
 
@@ -9364,7 +9249,7 @@ Apply the division operator to two 3d-vectors
 ## div_vec3_constant
 
 ```lua
-function linalg_module.div_vec3_constant(a: avm.number3, c: number)
+function linalg.div_vec3_constant(a: avm.number3, c: number)
   -> number, number, number
 ```
 
@@ -9373,7 +9258,7 @@ Apply the division operator to a 3d-vector and a constant
 ## div_vec3_constant_ex
 
 ```lua
-function linalg_module.div_vec3_constant_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, c: number)
+function linalg.div_vec3_constant_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, c: number)
   -> number, number, number
 ```
 
@@ -9382,7 +9267,7 @@ Apply the division operator to a 3d-vector in a slice and a constant
 ## div_vec3_constant_ex
 
 ```lua
-function linalg_module.div_vec3_constant_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number3|{ [integer]: number }, dest_index?: integer)
+function linalg.div_vec3_constant_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number3|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -9391,7 +9276,7 @@ Apply the division operator to a 3d-vector in a slice and a constant and store i
 ## div_vec3_ex
 
 ```lua
-function linalg_module.div_vec3_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, b: avm.seq_number3|{ [integer]: number }, b_index: integer)
+function linalg.div_vec3_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, b: avm.seq_number3|{ [integer]: number }, b_index: integer)
   -> number, number, number
 ```
 
@@ -9400,7 +9285,7 @@ Apply the division operator to two 3d-vectors in a slice
 ## div_vec3_ex
 
 ```lua
-function linalg_module.div_vec3_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, b: avm.seq_number3|{ [integer]: number }, b_index: integer, dest: avm.seq_number3|{ [integer]: number }, dest_index?: integer)
+function linalg.div_vec3_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, b: avm.seq_number3|{ [integer]: number }, b_index: integer, dest: avm.seq_number3|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -9409,7 +9294,7 @@ Apply the division operator to two 3d-vectors in a slice and store the result in
 ## div_vec4
 
 ```lua
-function linalg_module.div_vec4(a: avm.number4, b: avm.number4)
+function linalg.div_vec4(a: avm.number4, b: avm.number4)
   -> number * 4
 ```
 
@@ -9418,7 +9303,7 @@ Apply the division operator to two 4d-vectors
 ## div_vec4_constant
 
 ```lua
-function linalg_module.div_vec4_constant(a: avm.number4, c: number)
+function linalg.div_vec4_constant(a: avm.number4, c: number)
   -> number * 4
 ```
 
@@ -9427,7 +9312,7 @@ Apply the division operator to a 4d-vector and a constant
 ## div_vec4_constant_ex
 
 ```lua
-function linalg_module.div_vec4_constant_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, c: number)
+function linalg.div_vec4_constant_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, c: number)
   -> number * 4
 ```
 
@@ -9436,7 +9321,7 @@ Apply the division operator to a 4d-vector in a slice and a constant
 ## div_vec4_constant_ex
 
 ```lua
-function linalg_module.div_vec4_constant_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
+function linalg.div_vec4_constant_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -9445,7 +9330,7 @@ Apply the division operator to a 4d-vector in a slice and a constant and store i
 ## div_vec4_ex
 
 ```lua
-function linalg_module.div_vec4_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, b: avm.seq_number4|{ [integer]: number }, b_index: integer)
+function linalg.div_vec4_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, b: avm.seq_number4|{ [integer]: number }, b_index: integer)
   -> number * 4
 ```
 
@@ -9454,7 +9339,7 @@ Apply the division operator to two 4d-vectors in a slice
 ## div_vec4_ex
 
 ```lua
-function linalg_module.div_vec4_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, b: avm.seq_number4|{ [integer]: number }, b_index: integer, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
+function linalg.div_vec4_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, b: avm.seq_number4|{ [integer]: number }, b_index: integer, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -9463,7 +9348,7 @@ Apply the division operator to two 4d-vectors in a slice and store the result in
 ## equals_mat2
 
 ```lua
-function linalg_module.equals_mat2(a: avm.number4, b: avm.number4, epsilon?: number)
+function linalg.equals_mat2(a: avm.number4, b: avm.number4, epsilon?: number)
   -> boolean
 ```
 
@@ -9472,7 +9357,7 @@ true if the matrices are equal (differ by epsilon or less)
 ## equals_mat2_ex
 
 ```lua
-function linalg_module.equals_mat2_ex(a: avm.seq_number2|{ [integer]: number }, a_index: integer, b: avm.seq_number2|{ [integer]: number }, b_index: integer, epsilon?: number)
+function linalg.equals_mat2_ex(a: avm.seq_number2|{ [integer]: number }, a_index: integer, b: avm.seq_number2|{ [integer]: number }, b_index: integer, epsilon?: number)
   -> boolean
 ```
 
@@ -9481,7 +9366,7 @@ true if the matrices in a slice are equal (differ by epsilon or less)
 ## equals_mat3
 
 ```lua
-function linalg_module.equals_mat3(a: avm.number9, b: avm.number9, epsilon?: number)
+function linalg.equals_mat3(a: avm.number9, b: avm.number9, epsilon?: number)
   -> boolean
 ```
 
@@ -9490,7 +9375,7 @@ true if the matrices are equal (differ by epsilon or less)
 ## equals_mat3_ex
 
 ```lua
-function linalg_module.equals_mat3_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, b: avm.seq_number3|{ [integer]: number }, b_index: integer, epsilon?: number)
+function linalg.equals_mat3_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, b: avm.seq_number3|{ [integer]: number }, b_index: integer, epsilon?: number)
   -> boolean
 ```
 
@@ -9499,7 +9384,7 @@ true if the matrices in a slice are equal (differ by epsilon or less)
 ## equals_mat4
 
 ```lua
-function linalg_module.equals_mat4(a: avm.number16, b: avm.number16, epsilon?: number)
+function linalg.equals_mat4(a: avm.number16, b: avm.number16, epsilon?: number)
   -> boolean
 ```
 
@@ -9508,7 +9393,7 @@ true if the matrices are equal (differ by epsilon or less)
 ## equals_mat4_ex
 
 ```lua
-function linalg_module.equals_mat4_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, b: avm.seq_number4|{ [integer]: number }, b_index: integer, epsilon?: number)
+function linalg.equals_mat4_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, b: avm.seq_number4|{ [integer]: number }, b_index: integer, epsilon?: number)
   -> boolean
 ```
 
@@ -9517,7 +9402,7 @@ true if the matrices in a slice are equal (differ by epsilon or less)
 ## equals_vec2
 
 ```lua
-function linalg_module.equals_vec2(a: avm.number2, b: avm.number2, epsilon?: number)
+function linalg.equals_vec2(a: avm.number2, b: avm.number2, epsilon?: number)
   -> boolean
 ```
 
@@ -9526,7 +9411,7 @@ true if the vectors are equal (differ by epsilon or less)
 ## equals_vec2_ex
 
 ```lua
-function linalg_module.equals_vec2_ex(a: avm.seq_number2|{ [integer]: number }, a_index: integer, b: avm.seq_number2|{ [integer]: number }, b_index: integer, epsilon?: number)
+function linalg.equals_vec2_ex(a: avm.seq_number2|{ [integer]: number }, a_index: integer, b: avm.seq_number2|{ [integer]: number }, b_index: integer, epsilon?: number)
   -> boolean
 ```
 
@@ -9535,7 +9420,7 @@ true if the vectors in a slice are equal (differ by epsilon or less)
 ## equals_vec3
 
 ```lua
-function linalg_module.equals_vec3(a: avm.number3, b: avm.number3, epsilon?: number)
+function linalg.equals_vec3(a: avm.number3, b: avm.number3, epsilon?: number)
   -> boolean
 ```
 
@@ -9544,7 +9429,7 @@ true if the vectors are equal (differ by epsilon or less)
 ## equals_vec3_ex
 
 ```lua
-function linalg_module.equals_vec3_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, b: avm.seq_number3|{ [integer]: number }, b_index: integer, epsilon?: number)
+function linalg.equals_vec3_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, b: avm.seq_number3|{ [integer]: number }, b_index: integer, epsilon?: number)
   -> boolean
 ```
 
@@ -9553,7 +9438,7 @@ true if the vectors in a slice are equal (differ by epsilon or less)
 ## equals_vec4
 
 ```lua
-function linalg_module.equals_vec4(a: avm.number4, b: avm.number4, epsilon?: number)
+function linalg.equals_vec4(a: avm.number4, b: avm.number4, epsilon?: number)
   -> boolean
 ```
 
@@ -9562,7 +9447,7 @@ true if the vectors are equal (differ by epsilon or less)
 ## equals_vec4_ex
 
 ```lua
-function linalg_module.equals_vec4_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, b: avm.seq_number4|{ [integer]: number }, b_index: integer, epsilon?: number)
+function linalg.equals_vec4_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, b: avm.seq_number4|{ [integer]: number }, b_index: integer, epsilon?: number)
   -> boolean
 ```
 
@@ -9571,7 +9456,7 @@ true if the vectors in a slice are equal (differ by epsilon or less)
 ## inner_product_2
 
 ```lua
-function linalg_module.inner_product_2(a1: number, a2: number, b1: number, b2: number)
+function linalg.inner_product_2(a1: number, a2: number, b1: number, b2: number)
   -> number
 ```
 
@@ -9580,7 +9465,7 @@ Inner product of 2d vectors
 ## inner_product_3
 
 ```lua
-function linalg_module.inner_product_3(a1: number, a2: number, a3: number, b1: number, b2: number, b3: number)
+function linalg.inner_product_3(a1: number, a2: number, a3: number, b1: number, b2: number, b3: number)
   -> number
 ```
 
@@ -9589,7 +9474,7 @@ Inner product of 3d vectors
 ## inner_product_vec2
 
 ```lua
-function linalg_module.inner_product_vec2(a: avm.number2, b: avm.number2)
+function linalg.inner_product_vec2(a: avm.number2, b: avm.number2)
   -> number
 ```
 
@@ -9598,7 +9483,7 @@ Inner product of 2d vector
 ## inner_product_vec2_slice
 
 ```lua
-function linalg_module.inner_product_vec2_slice(a: avm.seq_number2|{ [integer]: number }, a_index: integer, b: avm.seq_number2|{ [integer]: number }, b_index: integer)
+function linalg.inner_product_vec2_slice(a: avm.seq_number2|{ [integer]: number }, a_index: integer, b: avm.seq_number2|{ [integer]: number }, b_index: integer)
   -> number
 ```
 
@@ -9607,7 +9492,7 @@ Inner product of 2d vector in a slice
 ## inner_product_vec3
 
 ```lua
-function linalg_module.inner_product_vec3(a: avm.number3, b: avm.number3)
+function linalg.inner_product_vec3(a: avm.number3, b: avm.number3)
   -> number
 ```
 
@@ -9616,7 +9501,7 @@ Inner product of 3d vector
 ## inner_product_vec3_slice
 
 ```lua
-function linalg_module.inner_product_vec3_slice(a: avm.seq_number3|{ [integer]: number }, a_index: integer, b: avm.seq_number3|{ [integer]: number }, b_index: integer)
+function linalg.inner_product_vec3_slice(a: avm.seq_number3|{ [integer]: number }, a_index: integer, b: avm.seq_number3|{ [integer]: number }, b_index: integer)
   -> number
 ```
 
@@ -9625,7 +9510,7 @@ Inner product of 3d vector in a slice
 ## inner_product_vec4
 
 ```lua
-function linalg_module.inner_product_vec4(a: avm.number4, b: avm.number4)
+function linalg.inner_product_vec4(a: avm.number4, b: avm.number4)
   -> number
 ```
 
@@ -9634,7 +9519,7 @@ Inner product of 4d vector
 ## inner_product_vec4_slice
 
 ```lua
-function linalg_module.inner_product_vec4_slice(a: avm.seq_number4|{ [integer]: number }, a_index: integer, b: avm.seq_number4|{ [integer]: number }, b_index: integer)
+function linalg.inner_product_vec4_slice(a: avm.seq_number4|{ [integer]: number }, a_index: integer, b: avm.seq_number4|{ [integer]: number }, b_index: integer)
   -> number
 ```
 
@@ -9643,7 +9528,7 @@ Inner product of 4d vector in a slice
 ## length_2
 
 ```lua
-function linalg_module.length_2(a1: number, a2: number)
+function linalg.length_2(a1: number, a2: number)
   -> number
 ```
 
@@ -9652,7 +9537,7 @@ function linalg_module.length_2(a1: number, a2: number)
 ## length_3
 
 ```lua
-function linalg_module.length_3(a1: number, a2: number, a3: number)
+function linalg.length_3(a1: number, a2: number, a3: number)
   -> number
 ```
 
@@ -9661,7 +9546,7 @@ function linalg_module.length_3(a1: number, a2: number, a3: number)
 ## length_4
 
 ```lua
-function linalg_module.length_4(a1: number, a2: number, a3: number, a4: number)
+function linalg.length_4(a1: number, a2: number, a3: number, a4: number)
   -> number
 ```
 
@@ -9670,7 +9555,7 @@ function linalg_module.length_4(a1: number, a2: number, a3: number, a4: number)
 ## length_squared_2
 
 ```lua
-function linalg_module.length_squared_2(a1: number, a2: number)
+function linalg.length_squared_2(a1: number, a2: number)
   -> number
 ```
 
@@ -9679,7 +9564,7 @@ function linalg_module.length_squared_2(a1: number, a2: number)
 ## length_squared_3
 
 ```lua
-function linalg_module.length_squared_3(a1: number, a2: number, a3: number)
+function linalg.length_squared_3(a1: number, a2: number, a3: number)
   -> number
 ```
 
@@ -9688,7 +9573,7 @@ function linalg_module.length_squared_3(a1: number, a2: number, a3: number)
 ## length_squared_4
 
 ```lua
-function linalg_module.length_squared_4(a1: number, a2: number, a3: number, a4: number)
+function linalg.length_squared_4(a1: number, a2: number, a3: number, a4: number)
   -> number
 ```
 
@@ -9697,7 +9582,7 @@ function linalg_module.length_squared_4(a1: number, a2: number, a3: number, a4: 
 ## length_squared_vec2
 
 ```lua
-function linalg_module.length_squared_vec2(v: avm.number2)
+function linalg.length_squared_vec2(v: avm.number2)
   -> number
 ```
 
@@ -9706,7 +9591,7 @@ function linalg_module.length_squared_vec2(v: avm.number2)
 ## length_squared_vec2_slice
 
 ```lua
-function linalg_module.length_squared_vec2_slice(v: avm.seq_number2|{ [integer]: number }, v_index: integer)
+function linalg.length_squared_vec2_slice(v: avm.seq_number2|{ [integer]: number }, v_index: integer)
   -> number
 ```
 
@@ -9715,7 +9600,7 @@ function linalg_module.length_squared_vec2_slice(v: avm.seq_number2|{ [integer]:
 ## length_squared_vec3
 
 ```lua
-function linalg_module.length_squared_vec3(v: avm.number3)
+function linalg.length_squared_vec3(v: avm.number3)
   -> number
 ```
 
@@ -9724,7 +9609,7 @@ function linalg_module.length_squared_vec3(v: avm.number3)
 ## length_squared_vec3_slice
 
 ```lua
-function linalg_module.length_squared_vec3_slice(v: avm.seq_number3|{ [integer]: number }, v_index: integer)
+function linalg.length_squared_vec3_slice(v: avm.seq_number3|{ [integer]: number }, v_index: integer)
   -> number
 ```
 
@@ -9733,7 +9618,7 @@ function linalg_module.length_squared_vec3_slice(v: avm.seq_number3|{ [integer]:
 ## length_squared_vec4
 
 ```lua
-function linalg_module.length_squared_vec4(v: avm.number4)
+function linalg.length_squared_vec4(v: avm.number4)
   -> number
 ```
 
@@ -9742,7 +9627,7 @@ function linalg_module.length_squared_vec4(v: avm.number4)
 ## length_squared_vec4_slice
 
 ```lua
-function linalg_module.length_squared_vec4_slice(v: avm.seq_number4|{ [integer]: number }, v_index: integer)
+function linalg.length_squared_vec4_slice(v: avm.seq_number4|{ [integer]: number }, v_index: integer)
   -> number
 ```
 
@@ -9751,7 +9636,7 @@ function linalg_module.length_squared_vec4_slice(v: avm.seq_number4|{ [integer]:
 ## length_vec2
 
 ```lua
-function linalg_module.length_vec2(v: avm.number2)
+function linalg.length_vec2(v: avm.number2)
   -> number
 ```
 
@@ -9760,7 +9645,7 @@ function linalg_module.length_vec2(v: avm.number2)
 ## length_vec2_slice
 
 ```lua
-function linalg_module.length_vec2_slice(v: avm.seq_number2|{ [integer]: number }, v_index: integer)
+function linalg.length_vec2_slice(v: avm.seq_number2|{ [integer]: number }, v_index: integer)
   -> number
 ```
 
@@ -9769,7 +9654,7 @@ function linalg_module.length_vec2_slice(v: avm.seq_number2|{ [integer]: number 
 ## length_vec3
 
 ```lua
-function linalg_module.length_vec3(v: avm.number3)
+function linalg.length_vec3(v: avm.number3)
   -> number
 ```
 
@@ -9778,7 +9663,7 @@ function linalg_module.length_vec3(v: avm.number3)
 ## length_vec3_slice
 
 ```lua
-function linalg_module.length_vec3_slice(v: avm.seq_number3|{ [integer]: number }, v_index: integer)
+function linalg.length_vec3_slice(v: avm.seq_number3|{ [integer]: number }, v_index: integer)
   -> number
 ```
 
@@ -9787,7 +9672,7 @@ function linalg_module.length_vec3_slice(v: avm.seq_number3|{ [integer]: number 
 ## length_vec4
 
 ```lua
-function linalg_module.length_vec4(v: avm.number4)
+function linalg.length_vec4(v: avm.number4)
   -> number
 ```
 
@@ -9796,7 +9681,7 @@ function linalg_module.length_vec4(v: avm.number4)
 ## length_vec4_slice
 
 ```lua
-function linalg_module.length_vec4_slice(v: avm.seq_number4|{ [integer]: number }, v_index: integer)
+function linalg.length_vec4_slice(v: avm.seq_number4|{ [integer]: number }, v_index: integer)
   -> number
 ```
 
@@ -9805,7 +9690,7 @@ function linalg_module.length_vec4_slice(v: avm.seq_number4|{ [integer]: number 
 ## mat2_identity
 
 ```lua
-function linalg_module.mat2_identity()
+function linalg.mat2_identity()
   -> number * 4
 ```
 
@@ -9814,7 +9699,7 @@ function linalg_module.mat2_identity()
 ## mat2_zero
 
 ```lua
-function linalg_module.mat2_zero()
+function linalg.mat2_zero()
   -> number * 4
 ```
 
@@ -9823,7 +9708,7 @@ function linalg_module.mat2_zero()
 ## mat3_identity
 
 ```lua
-function linalg_module.mat3_identity()
+function linalg.mat3_identity()
   -> number * 9
 ```
 
@@ -9832,7 +9717,7 @@ function linalg_module.mat3_identity()
 ## mat3_rotate_around_axis
 
 ```lua
-function linalg_module.mat3_rotate_around_axis(radians: number, axis_x: number, axis_y: number, axis_z: number)
+function linalg.mat3_rotate_around_axis(radians: number, axis_x: number, axis_y: number, axis_z: number)
   -> number * 9
 ```
 
@@ -9841,7 +9726,7 @@ function linalg_module.mat3_rotate_around_axis(radians: number, axis_x: number, 
 ## mat3_scale
 
 ```lua
-function linalg_module.mat3_scale(x: number, y: number, z: number)
+function linalg.mat3_scale(x: number, y: number, z: number)
   -> number * 9
 ```
 
@@ -9850,7 +9735,7 @@ function linalg_module.mat3_scale(x: number, y: number, z: number)
 ## mat3_translate
 
 ```lua
-function linalg_module.mat3_translate(x: number, y: number)
+function linalg.mat3_translate(x: number, y: number)
   -> number * 9
 ```
 
@@ -9859,7 +9744,7 @@ function linalg_module.mat3_translate(x: number, y: number)
 ## mat3_zero
 
 ```lua
-function linalg_module.mat3_zero()
+function linalg.mat3_zero()
   -> number * 9
 ```
 
@@ -9868,7 +9753,7 @@ function linalg_module.mat3_zero()
 ## mat4_identity
 
 ```lua
-function linalg_module.mat4_identity()
+function linalg.mat4_identity()
   -> number * 16
 ```
 
@@ -9877,7 +9762,7 @@ function linalg_module.mat4_identity()
 ## mat4_rotate_around_axis
 
 ```lua
-function linalg_module.mat4_rotate_around_axis(radians: number, axis_x: number, axis_y: number, axis_z: number)
+function linalg.mat4_rotate_around_axis(radians: number, axis_x: number, axis_y: number, axis_z: number)
   -> number * 16
 ```
 
@@ -9886,7 +9771,7 @@ function linalg_module.mat4_rotate_around_axis(radians: number, axis_x: number, 
 ## mat4_scale
 
 ```lua
-function linalg_module.mat4_scale(x: number, y: number, z: number)
+function linalg.mat4_scale(x: number, y: number, z: number)
   -> number * 16
 ```
 
@@ -9895,7 +9780,7 @@ function linalg_module.mat4_scale(x: number, y: number, z: number)
 ## mat4_translate
 
 ```lua
-function linalg_module.mat4_translate(x: number, y: number, z: number)
+function linalg.mat4_translate(x: number, y: number, z: number)
   -> number * 16
 ```
 
@@ -9904,7 +9789,7 @@ function linalg_module.mat4_translate(x: number, y: number, z: number)
 ## mat4_zero
 
 ```lua
-function linalg_module.mat4_zero()
+function linalg.mat4_zero()
   -> number * 16
 ```
 
@@ -9913,7 +9798,7 @@ function linalg_module.mat4_zero()
 ## matmul_mat1_mat1
 
 ```lua
-function linalg_module.matmul_mat1_mat1(a: avm.number1, b: avm.number1)
+function linalg.matmul_mat1_mat1(a: avm.number1, b: avm.number1)
   -> number
 ```
 
@@ -9922,7 +9807,7 @@ Multiply a 1x1 matrix with a 1x1 matrix and return a 1x1 matrix
 ## matmul_mat1_mat1_ex
 
 ```lua
-function linalg_module.matmul_mat1_mat1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat1_mat1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number
 ```
 
@@ -9931,7 +9816,7 @@ Multiply a 1x1 matrix in an array or slice with a 1x1 matrix in an array or slic
 ## matmul_mat1_mat1_ex
 
 ```lua
-function linalg_module.matmul_mat1_mat1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat1_mat1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -9942,7 +9827,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat1x1_mat1x1
 
 ```lua
-function linalg_module.matmul_mat1x1_mat1x1(a: avm.number1, b: avm.number1)
+function linalg.matmul_mat1x1_mat1x1(a: avm.number1, b: avm.number1)
   -> number
 ```
 
@@ -9951,7 +9836,7 @@ Multiply a 1x1 matrix with a 1x1 matrix and return a 1x1 matrix
 ## matmul_mat1x1_mat1x1_ex
 
 ```lua
-function linalg_module.matmul_mat1x1_mat1x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat1x1_mat1x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -9962,7 +9847,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat1x1_mat1x1_ex
 
 ```lua
-function linalg_module.matmul_mat1x1_mat1x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat1x1_mat1x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number
 ```
 
@@ -9971,7 +9856,7 @@ Multiply a 1x1 matrix in an array or slice with a 1x1 matrix in an array or slic
 ## matmul_mat1x1_mat2x1
 
 ```lua
-function linalg_module.matmul_mat1x1_mat2x1(a: avm.number1, b: avm.number2)
+function linalg.matmul_mat1x1_mat2x1(a: avm.number1, b: avm.number2)
   -> number, number
 ```
 
@@ -9980,7 +9865,7 @@ Multiply a 1x1 matrix with a 2x1 matrix and return a 2x1 matrix
 ## matmul_mat1x1_mat2x1_ex
 
 ```lua
-function linalg_module.matmul_mat1x1_mat2x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat1x1_mat2x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number, number
 ```
 
@@ -9989,7 +9874,7 @@ Multiply a 1x1 matrix in an array or slice with a 2x1 matrix in an array or slic
 ## matmul_mat1x1_mat2x1_ex
 
 ```lua
-function linalg_module.matmul_mat1x1_mat2x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat1x1_mat2x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -10000,7 +9885,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat1x1_mat3x1
 
 ```lua
-function linalg_module.matmul_mat1x1_mat3x1(a: avm.number1, b: avm.number3)
+function linalg.matmul_mat1x1_mat3x1(a: avm.number1, b: avm.number3)
   -> number, number, number
 ```
 
@@ -10009,7 +9894,7 @@ Multiply a 1x1 matrix with a 3x1 matrix and return a 3x1 matrix
 ## matmul_mat1x1_mat3x1_ex
 
 ```lua
-function linalg_module.matmul_mat1x1_mat3x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat1x1_mat3x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number, number, number
 ```
 
@@ -10018,7 +9903,7 @@ Multiply a 1x1 matrix in an array or slice with a 3x1 matrix in an array or slic
 ## matmul_mat1x1_mat3x1_ex
 
 ```lua
-function linalg_module.matmul_mat1x1_mat3x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat1x1_mat3x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -10029,7 +9914,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat1x1_mat4x1
 
 ```lua
-function linalg_module.matmul_mat1x1_mat4x1(a: avm.number1, b: avm.number4)
+function linalg.matmul_mat1x1_mat4x1(a: avm.number1, b: avm.number4)
   -> number * 4
 ```
 
@@ -10038,7 +9923,7 @@ Multiply a 1x1 matrix with a 4x1 matrix and return a 4x1 matrix
 ## matmul_mat1x1_mat4x1_ex
 
 ```lua
-function linalg_module.matmul_mat1x1_mat4x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat1x1_mat4x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number * 4
 ```
 
@@ -10047,7 +9932,7 @@ Multiply a 1x1 matrix in an array or slice with a 4x1 matrix in an array or slic
 ## matmul_mat1x1_mat4x1_ex
 
 ```lua
-function linalg_module.matmul_mat1x1_mat4x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat1x1_mat4x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -10058,7 +9943,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat1x2_mat1x1
 
 ```lua
-function linalg_module.matmul_mat1x2_mat1x1(a: avm.number2, b: avm.number1)
+function linalg.matmul_mat1x2_mat1x1(a: avm.number2, b: avm.number1)
   -> number, number
 ```
 
@@ -10067,7 +9952,7 @@ Multiply a 1x2 matrix with a 1x1 matrix and return a 1x2 matrix
 ## matmul_mat1x2_mat1x1_ex
 
 ```lua
-function linalg_module.matmul_mat1x2_mat1x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat1x2_mat1x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number, number
 ```
 
@@ -10076,7 +9961,7 @@ Multiply a 1x2 matrix in an array or slice with a 1x1 matrix in an array or slic
 ## matmul_mat1x2_mat1x1_ex
 
 ```lua
-function linalg_module.matmul_mat1x2_mat1x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat1x2_mat1x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -10087,7 +9972,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat1x2_mat2x1
 
 ```lua
-function linalg_module.matmul_mat1x2_mat2x1(a: avm.number2, b: avm.number2)
+function linalg.matmul_mat1x2_mat2x1(a: avm.number2, b: avm.number2)
   -> number * 4
 ```
 
@@ -10096,7 +9981,7 @@ Multiply a 1x2 matrix with a 2x1 matrix and return a 2x2 matrix
 ## matmul_mat1x2_mat2x1_ex
 
 ```lua
-function linalg_module.matmul_mat1x2_mat2x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat1x2_mat2x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number * 4
 ```
 
@@ -10105,7 +9990,7 @@ Multiply a 1x2 matrix in an array or slice with a 2x1 matrix in an array or slic
 ## matmul_mat1x2_mat2x1_ex
 
 ```lua
-function linalg_module.matmul_mat1x2_mat2x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat1x2_mat2x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -10116,7 +10001,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat1x2_mat3x1
 
 ```lua
-function linalg_module.matmul_mat1x2_mat3x1(a: avm.number2, b: avm.number3)
+function linalg.matmul_mat1x2_mat3x1(a: avm.number2, b: avm.number3)
   -> number * 6
 ```
 
@@ -10125,7 +10010,7 @@ Multiply a 1x2 matrix with a 3x1 matrix and return a 3x2 matrix
 ## matmul_mat1x2_mat3x1_ex
 
 ```lua
-function linalg_module.matmul_mat1x2_mat3x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat1x2_mat3x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -10136,7 +10021,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat1x2_mat3x1_ex
 
 ```lua
-function linalg_module.matmul_mat1x2_mat3x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat1x2_mat3x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number * 6
 ```
 
@@ -10145,7 +10030,7 @@ Multiply a 1x2 matrix in an array or slice with a 3x1 matrix in an array or slic
 ## matmul_mat1x2_mat4x1
 
 ```lua
-function linalg_module.matmul_mat1x2_mat4x1(a: avm.number2, b: avm.number4)
+function linalg.matmul_mat1x2_mat4x1(a: avm.number2, b: avm.number4)
   -> number * 8
 ```
 
@@ -10154,7 +10039,7 @@ Multiply a 1x2 matrix with a 4x1 matrix and return a 4x2 matrix
 ## matmul_mat1x2_mat4x1_ex
 
 ```lua
-function linalg_module.matmul_mat1x2_mat4x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat1x2_mat4x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number * 8
 ```
 
@@ -10163,7 +10048,7 @@ Multiply a 1x2 matrix in an array or slice with a 4x1 matrix in an array or slic
 ## matmul_mat1x2_mat4x1_ex
 
 ```lua
-function linalg_module.matmul_mat1x2_mat4x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat1x2_mat4x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -10174,7 +10059,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat1x3_mat1x1
 
 ```lua
-function linalg_module.matmul_mat1x3_mat1x1(a: avm.number3, b: avm.number1)
+function linalg.matmul_mat1x3_mat1x1(a: avm.number3, b: avm.number1)
   -> number, number, number
 ```
 
@@ -10183,7 +10068,7 @@ Multiply a 1x3 matrix with a 1x1 matrix and return a 1x3 matrix
 ## matmul_mat1x3_mat1x1_ex
 
 ```lua
-function linalg_module.matmul_mat1x3_mat1x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat1x3_mat1x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number, number, number
 ```
 
@@ -10192,7 +10077,7 @@ Multiply a 1x3 matrix in an array or slice with a 1x1 matrix in an array or slic
 ## matmul_mat1x3_mat1x1_ex
 
 ```lua
-function linalg_module.matmul_mat1x3_mat1x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat1x3_mat1x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -10203,7 +10088,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat1x3_mat2x1
 
 ```lua
-function linalg_module.matmul_mat1x3_mat2x1(a: avm.number3, b: avm.number2)
+function linalg.matmul_mat1x3_mat2x1(a: avm.number3, b: avm.number2)
   -> number * 6
 ```
 
@@ -10212,7 +10097,7 @@ Multiply a 1x3 matrix with a 2x1 matrix and return a 2x3 matrix
 ## matmul_mat1x3_mat2x1_ex
 
 ```lua
-function linalg_module.matmul_mat1x3_mat2x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat1x3_mat2x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -10223,7 +10108,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat1x3_mat2x1_ex
 
 ```lua
-function linalg_module.matmul_mat1x3_mat2x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat1x3_mat2x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number * 6
 ```
 
@@ -10232,7 +10117,7 @@ Multiply a 1x3 matrix in an array or slice with a 2x1 matrix in an array or slic
 ## matmul_mat1x3_mat3x1
 
 ```lua
-function linalg_module.matmul_mat1x3_mat3x1(a: avm.number3, b: avm.number3)
+function linalg.matmul_mat1x3_mat3x1(a: avm.number3, b: avm.number3)
   -> number * 9
 ```
 
@@ -10241,7 +10126,7 @@ Multiply a 1x3 matrix with a 3x1 matrix and return a 3x3 matrix
 ## matmul_mat1x3_mat3x1_ex
 
 ```lua
-function linalg_module.matmul_mat1x3_mat3x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat1x3_mat3x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number * 9
 ```
 
@@ -10250,7 +10135,7 @@ Multiply a 1x3 matrix in an array or slice with a 3x1 matrix in an array or slic
 ## matmul_mat1x3_mat3x1_ex
 
 ```lua
-function linalg_module.matmul_mat1x3_mat3x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat1x3_mat3x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -10261,7 +10146,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat1x3_mat4x1
 
 ```lua
-function linalg_module.matmul_mat1x3_mat4x1(a: avm.number3, b: avm.number4)
+function linalg.matmul_mat1x3_mat4x1(a: avm.number3, b: avm.number4)
   -> number * 12
 ```
 
@@ -10270,7 +10155,7 @@ Multiply a 1x3 matrix with a 4x1 matrix and return a 4x3 matrix
 ## matmul_mat1x3_mat4x1_ex
 
 ```lua
-function linalg_module.matmul_mat1x3_mat4x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat1x3_mat4x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number * 12
 ```
 
@@ -10279,7 +10164,7 @@ Multiply a 1x3 matrix in an array or slice with a 4x1 matrix in an array or slic
 ## matmul_mat1x3_mat4x1_ex
 
 ```lua
-function linalg_module.matmul_mat1x3_mat4x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat1x3_mat4x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -10290,7 +10175,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat1x4_mat1x1
 
 ```lua
-function linalg_module.matmul_mat1x4_mat1x1(a: avm.number4, b: avm.number1)
+function linalg.matmul_mat1x4_mat1x1(a: avm.number4, b: avm.number1)
   -> number * 4
 ```
 
@@ -10299,7 +10184,7 @@ Multiply a 1x4 matrix with a 1x1 matrix and return a 1x4 matrix
 ## matmul_mat1x4_mat1x1_ex
 
 ```lua
-function linalg_module.matmul_mat1x4_mat1x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat1x4_mat1x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number * 4
 ```
 
@@ -10308,7 +10193,7 @@ Multiply a 1x4 matrix in an array or slice with a 1x1 matrix in an array or slic
 ## matmul_mat1x4_mat1x1_ex
 
 ```lua
-function linalg_module.matmul_mat1x4_mat1x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat1x4_mat1x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -10319,7 +10204,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat1x4_mat2x1
 
 ```lua
-function linalg_module.matmul_mat1x4_mat2x1(a: avm.number4, b: avm.number2)
+function linalg.matmul_mat1x4_mat2x1(a: avm.number4, b: avm.number2)
   -> number * 8
 ```
 
@@ -10328,7 +10213,7 @@ Multiply a 1x4 matrix with a 2x1 matrix and return a 2x4 matrix
 ## matmul_mat1x4_mat2x1_ex
 
 ```lua
-function linalg_module.matmul_mat1x4_mat2x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat1x4_mat2x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -10339,7 +10224,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat1x4_mat2x1_ex
 
 ```lua
-function linalg_module.matmul_mat1x4_mat2x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat1x4_mat2x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number * 8
 ```
 
@@ -10348,7 +10233,7 @@ Multiply a 1x4 matrix in an array or slice with a 2x1 matrix in an array or slic
 ## matmul_mat1x4_mat3x1
 
 ```lua
-function linalg_module.matmul_mat1x4_mat3x1(a: avm.number4, b: avm.number3)
+function linalg.matmul_mat1x4_mat3x1(a: avm.number4, b: avm.number3)
   -> number * 12
 ```
 
@@ -10357,7 +10242,7 @@ Multiply a 1x4 matrix with a 3x1 matrix and return a 3x4 matrix
 ## matmul_mat1x4_mat3x1_ex
 
 ```lua
-function linalg_module.matmul_mat1x4_mat3x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat1x4_mat3x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number * 12
 ```
 
@@ -10366,7 +10251,7 @@ Multiply a 1x4 matrix in an array or slice with a 3x1 matrix in an array or slic
 ## matmul_mat1x4_mat3x1_ex
 
 ```lua
-function linalg_module.matmul_mat1x4_mat3x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat1x4_mat3x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -10377,7 +10262,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat1x4_mat4x1
 
 ```lua
-function linalg_module.matmul_mat1x4_mat4x1(a: avm.number4, b: avm.number4)
+function linalg.matmul_mat1x4_mat4x1(a: avm.number4, b: avm.number4)
   -> number * 16
 ```
 
@@ -10386,7 +10271,7 @@ Multiply a 1x4 matrix with a 4x1 matrix and return a 4x4 matrix
 ## matmul_mat1x4_mat4x1_ex
 
 ```lua
-function linalg_module.matmul_mat1x4_mat4x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat1x4_mat4x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number * 16
 ```
 
@@ -10395,7 +10280,7 @@ Multiply a 1x4 matrix in an array or slice with a 4x1 matrix in an array or slic
 ## matmul_mat1x4_mat4x1_ex
 
 ```lua
-function linalg_module.matmul_mat1x4_mat4x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat1x4_mat4x1_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -10406,7 +10291,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat2_mat2
 
 ```lua
-function linalg_module.matmul_mat2_mat2(a: avm.number4, b: avm.number4)
+function linalg.matmul_mat2_mat2(a: avm.number4, b: avm.number4)
   -> number * 4
 ```
 
@@ -10415,7 +10300,7 @@ Multiply a 2x2 matrix with a 2x2 matrix and return a 2x2 matrix
 ## matmul_mat2_mat2_ex
 
 ```lua
-function linalg_module.matmul_mat2_mat2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat2_mat2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number * 4
 ```
 
@@ -10424,7 +10309,7 @@ Multiply a 2x2 matrix in an array or slice with a 2x2 matrix in an array or slic
 ## matmul_mat2_mat2_ex
 
 ```lua
-function linalg_module.matmul_mat2_mat2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat2_mat2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -10435,7 +10320,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat2_vec2
 
 ```lua
-function linalg_module.matmul_mat2_vec2(a: avm.number4, v: avm.number2)
+function linalg.matmul_mat2_vec2(a: avm.number4, v: avm.number2)
   -> number, number
 ```
 
@@ -10444,7 +10329,7 @@ Multiply a 2x2 matrix and a 2d vector and return a 2d vector
 ## matmul_mat2_vec2_ex
 
 ```lua
-function linalg_module.matmul_mat2_vec2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, v: avm.seq_number|{ [integer]: number }, v_index: integer)
+function linalg.matmul_mat2_vec2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, v: avm.seq_number|{ [integer]: number }, v_index: integer)
   -> number, number
 ```
 
@@ -10453,7 +10338,7 @@ Multiply a 2x2 matrix in a slice and a 2d vector in a slice and return a 2d vect
 ## matmul_mat2_vec2_ex
 
 ```lua
-function linalg_module.matmul_mat2_vec2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, v: avm.seq_number|{ [integer]: number }, v_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat2_vec2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, v: avm.seq_number|{ [integer]: number }, v_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> number, number
 ```
 
@@ -10462,7 +10347,7 @@ Multiply a 2x2 matrix in a slice and a 2d vector in an array or slice into a 2d 
 ## matmul_mat2x1_mat1x2
 
 ```lua
-function linalg_module.matmul_mat2x1_mat1x2(a: avm.number2, b: avm.number2)
+function linalg.matmul_mat2x1_mat1x2(a: avm.number2, b: avm.number2)
   -> number
 ```
 
@@ -10471,7 +10356,7 @@ Multiply a 2x1 matrix with a 1x2 matrix and return a 1x1 matrix
 ## matmul_mat2x1_mat1x2_ex
 
 ```lua
-function linalg_module.matmul_mat2x1_mat1x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat2x1_mat1x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number
 ```
 
@@ -10480,7 +10365,7 @@ Multiply a 2x1 matrix in an array or slice with a 1x2 matrix in an array or slic
 ## matmul_mat2x1_mat1x2_ex
 
 ```lua
-function linalg_module.matmul_mat2x1_mat1x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat2x1_mat1x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -10491,7 +10376,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat2x1_mat2x2
 
 ```lua
-function linalg_module.matmul_mat2x1_mat2x2(a: avm.number2, b: avm.number4)
+function linalg.matmul_mat2x1_mat2x2(a: avm.number2, b: avm.number4)
   -> number, number
 ```
 
@@ -10500,7 +10385,7 @@ Multiply a 2x1 matrix with a 2x2 matrix and return a 2x1 matrix
 ## matmul_mat2x1_mat2x2_ex
 
 ```lua
-function linalg_module.matmul_mat2x1_mat2x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat2x1_mat2x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number, number
 ```
 
@@ -10509,7 +10394,7 @@ Multiply a 2x1 matrix in an array or slice with a 2x2 matrix in an array or slic
 ## matmul_mat2x1_mat2x2_ex
 
 ```lua
-function linalg_module.matmul_mat2x1_mat2x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat2x1_mat2x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -10520,7 +10405,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat2x1_mat3x2
 
 ```lua
-function linalg_module.matmul_mat2x1_mat3x2(a: avm.number2, b: avm.number6)
+function linalg.matmul_mat2x1_mat3x2(a: avm.number2, b: avm.number6)
   -> number, number, number
 ```
 
@@ -10529,7 +10414,7 @@ Multiply a 2x1 matrix with a 3x2 matrix and return a 3x1 matrix
 ## matmul_mat2x1_mat3x2_ex
 
 ```lua
-function linalg_module.matmul_mat2x1_mat3x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat2x1_mat3x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number, number, number
 ```
 
@@ -10538,7 +10423,7 @@ Multiply a 2x1 matrix in an array or slice with a 3x2 matrix in an array or slic
 ## matmul_mat2x1_mat3x2_ex
 
 ```lua
-function linalg_module.matmul_mat2x1_mat3x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat2x1_mat3x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -10549,7 +10434,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat2x1_mat4x2
 
 ```lua
-function linalg_module.matmul_mat2x1_mat4x2(a: avm.number2, b: avm.number8)
+function linalg.matmul_mat2x1_mat4x2(a: avm.number2, b: avm.number8)
   -> number * 4
 ```
 
@@ -10558,7 +10443,7 @@ Multiply a 2x1 matrix with a 4x2 matrix and return a 4x1 matrix
 ## matmul_mat2x1_mat4x2_ex
 
 ```lua
-function linalg_module.matmul_mat2x1_mat4x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat2x1_mat4x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number * 4
 ```
 
@@ -10567,7 +10452,7 @@ Multiply a 2x1 matrix in an array or slice with a 4x2 matrix in an array or slic
 ## matmul_mat2x1_mat4x2_ex
 
 ```lua
-function linalg_module.matmul_mat2x1_mat4x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat2x1_mat4x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -10578,7 +10463,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat2x2_mat1x2
 
 ```lua
-function linalg_module.matmul_mat2x2_mat1x2(a: avm.number4, b: avm.number2)
+function linalg.matmul_mat2x2_mat1x2(a: avm.number4, b: avm.number2)
   -> number, number
 ```
 
@@ -10587,7 +10472,7 @@ Multiply a 2x2 matrix with a 1x2 matrix and return a 1x2 matrix
 ## matmul_mat2x2_mat1x2_ex
 
 ```lua
-function linalg_module.matmul_mat2x2_mat1x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat2x2_mat1x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number, number
 ```
 
@@ -10596,7 +10481,7 @@ Multiply a 2x2 matrix in an array or slice with a 1x2 matrix in an array or slic
 ## matmul_mat2x2_mat1x2_ex
 
 ```lua
-function linalg_module.matmul_mat2x2_mat1x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat2x2_mat1x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -10607,7 +10492,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat2x2_mat2x2
 
 ```lua
-function linalg_module.matmul_mat2x2_mat2x2(a: avm.number4, b: avm.number4)
+function linalg.matmul_mat2x2_mat2x2(a: avm.number4, b: avm.number4)
   -> number * 4
 ```
 
@@ -10616,7 +10501,7 @@ Multiply a 2x2 matrix with a 2x2 matrix and return a 2x2 matrix
 ## matmul_mat2x2_mat2x2_ex
 
 ```lua
-function linalg_module.matmul_mat2x2_mat2x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat2x2_mat2x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -10627,7 +10512,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat2x2_mat2x2_ex
 
 ```lua
-function linalg_module.matmul_mat2x2_mat2x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat2x2_mat2x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number * 4
 ```
 
@@ -10636,7 +10521,7 @@ Multiply a 2x2 matrix in an array or slice with a 2x2 matrix in an array or slic
 ## matmul_mat2x2_mat3x2
 
 ```lua
-function linalg_module.matmul_mat2x2_mat3x2(a: avm.number4, b: avm.number6)
+function linalg.matmul_mat2x2_mat3x2(a: avm.number4, b: avm.number6)
   -> number * 6
 ```
 
@@ -10645,7 +10530,7 @@ Multiply a 2x2 matrix with a 3x2 matrix and return a 3x2 matrix
 ## matmul_mat2x2_mat3x2_ex
 
 ```lua
-function linalg_module.matmul_mat2x2_mat3x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat2x2_mat3x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number * 6
 ```
 
@@ -10654,7 +10539,7 @@ Multiply a 2x2 matrix in an array or slice with a 3x2 matrix in an array or slic
 ## matmul_mat2x2_mat3x2_ex
 
 ```lua
-function linalg_module.matmul_mat2x2_mat3x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat2x2_mat3x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -10665,7 +10550,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat2x2_mat4x2
 
 ```lua
-function linalg_module.matmul_mat2x2_mat4x2(a: avm.number4, b: avm.number8)
+function linalg.matmul_mat2x2_mat4x2(a: avm.number4, b: avm.number8)
   -> number * 8
 ```
 
@@ -10674,7 +10559,7 @@ Multiply a 2x2 matrix with a 4x2 matrix and return a 4x2 matrix
 ## matmul_mat2x2_mat4x2_ex
 
 ```lua
-function linalg_module.matmul_mat2x2_mat4x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat2x2_mat4x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number * 8
 ```
 
@@ -10683,7 +10568,7 @@ Multiply a 2x2 matrix in an array or slice with a 4x2 matrix in an array or slic
 ## matmul_mat2x2_mat4x2_ex
 
 ```lua
-function linalg_module.matmul_mat2x2_mat4x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat2x2_mat4x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -10694,7 +10579,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat2x3_mat1x2
 
 ```lua
-function linalg_module.matmul_mat2x3_mat1x2(a: avm.number6, b: avm.number2)
+function linalg.matmul_mat2x3_mat1x2(a: avm.number6, b: avm.number2)
   -> number, number, number
 ```
 
@@ -10703,7 +10588,7 @@ Multiply a 2x3 matrix with a 1x2 matrix and return a 1x3 matrix
 ## matmul_mat2x3_mat1x2_ex
 
 ```lua
-function linalg_module.matmul_mat2x3_mat1x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat2x3_mat1x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -10714,7 +10599,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat2x3_mat1x2_ex
 
 ```lua
-function linalg_module.matmul_mat2x3_mat1x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat2x3_mat1x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number, number, number
 ```
 
@@ -10723,7 +10608,7 @@ Multiply a 2x3 matrix in an array or slice with a 1x2 matrix in an array or slic
 ## matmul_mat2x3_mat2x2
 
 ```lua
-function linalg_module.matmul_mat2x3_mat2x2(a: avm.number6, b: avm.number4)
+function linalg.matmul_mat2x3_mat2x2(a: avm.number6, b: avm.number4)
   -> number * 6
 ```
 
@@ -10732,7 +10617,7 @@ Multiply a 2x3 matrix with a 2x2 matrix and return a 2x3 matrix
 ## matmul_mat2x3_mat2x2_ex
 
 ```lua
-function linalg_module.matmul_mat2x3_mat2x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat2x3_mat2x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number * 6
 ```
 
@@ -10741,7 +10626,7 @@ Multiply a 2x3 matrix in an array or slice with a 2x2 matrix in an array or slic
 ## matmul_mat2x3_mat2x2_ex
 
 ```lua
-function linalg_module.matmul_mat2x3_mat2x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat2x3_mat2x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -10752,7 +10637,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat2x3_mat3x2
 
 ```lua
-function linalg_module.matmul_mat2x3_mat3x2(a: avm.number6, b: avm.number6)
+function linalg.matmul_mat2x3_mat3x2(a: avm.number6, b: avm.number6)
   -> number * 9
 ```
 
@@ -10761,7 +10646,7 @@ Multiply a 2x3 matrix with a 3x2 matrix and return a 3x3 matrix
 ## matmul_mat2x3_mat3x2_ex
 
 ```lua
-function linalg_module.matmul_mat2x3_mat3x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat2x3_mat3x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number * 9
 ```
 
@@ -10770,7 +10655,7 @@ Multiply a 2x3 matrix in an array or slice with a 3x2 matrix in an array or slic
 ## matmul_mat2x3_mat3x2_ex
 
 ```lua
-function linalg_module.matmul_mat2x3_mat3x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat2x3_mat3x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -10781,7 +10666,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat2x3_mat4x2
 
 ```lua
-function linalg_module.matmul_mat2x3_mat4x2(a: avm.number6, b: avm.number8)
+function linalg.matmul_mat2x3_mat4x2(a: avm.number6, b: avm.number8)
   -> number * 12
 ```
 
@@ -10790,7 +10675,7 @@ Multiply a 2x3 matrix with a 4x2 matrix and return a 4x3 matrix
 ## matmul_mat2x3_mat4x2_ex
 
 ```lua
-function linalg_module.matmul_mat2x3_mat4x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat2x3_mat4x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number * 12
 ```
 
@@ -10799,7 +10684,7 @@ Multiply a 2x3 matrix in an array or slice with a 4x2 matrix in an array or slic
 ## matmul_mat2x3_mat4x2_ex
 
 ```lua
-function linalg_module.matmul_mat2x3_mat4x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat2x3_mat4x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -10810,7 +10695,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat2x4_mat1x2
 
 ```lua
-function linalg_module.matmul_mat2x4_mat1x2(a: avm.number8, b: avm.number2)
+function linalg.matmul_mat2x4_mat1x2(a: avm.number8, b: avm.number2)
   -> number * 4
 ```
 
@@ -10819,7 +10704,7 @@ Multiply a 2x4 matrix with a 1x2 matrix and return a 1x4 matrix
 ## matmul_mat2x4_mat1x2_ex
 
 ```lua
-function linalg_module.matmul_mat2x4_mat1x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat2x4_mat1x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -10830,7 +10715,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat2x4_mat1x2_ex
 
 ```lua
-function linalg_module.matmul_mat2x4_mat1x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat2x4_mat1x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number * 4
 ```
 
@@ -10839,7 +10724,7 @@ Multiply a 2x4 matrix in an array or slice with a 1x2 matrix in an array or slic
 ## matmul_mat2x4_mat2x2
 
 ```lua
-function linalg_module.matmul_mat2x4_mat2x2(a: avm.number8, b: avm.number4)
+function linalg.matmul_mat2x4_mat2x2(a: avm.number8, b: avm.number4)
   -> number * 8
 ```
 
@@ -10848,7 +10733,7 @@ Multiply a 2x4 matrix with a 2x2 matrix and return a 2x4 matrix
 ## matmul_mat2x4_mat2x2_ex
 
 ```lua
-function linalg_module.matmul_mat2x4_mat2x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat2x4_mat2x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number * 8
 ```
 
@@ -10857,7 +10742,7 @@ Multiply a 2x4 matrix in an array or slice with a 2x2 matrix in an array or slic
 ## matmul_mat2x4_mat2x2_ex
 
 ```lua
-function linalg_module.matmul_mat2x4_mat2x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat2x4_mat2x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -10868,7 +10753,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat2x4_mat3x2
 
 ```lua
-function linalg_module.matmul_mat2x4_mat3x2(a: avm.number8, b: avm.number6)
+function linalg.matmul_mat2x4_mat3x2(a: avm.number8, b: avm.number6)
   -> number * 12
 ```
 
@@ -10877,7 +10762,7 @@ Multiply a 2x4 matrix with a 3x2 matrix and return a 3x4 matrix
 ## matmul_mat2x4_mat3x2_ex
 
 ```lua
-function linalg_module.matmul_mat2x4_mat3x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat2x4_mat3x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number * 12
 ```
 
@@ -10886,7 +10771,7 @@ Multiply a 2x4 matrix in an array or slice with a 3x2 matrix in an array or slic
 ## matmul_mat2x4_mat3x2_ex
 
 ```lua
-function linalg_module.matmul_mat2x4_mat3x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat2x4_mat3x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -10897,7 +10782,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat2x4_mat4x2
 
 ```lua
-function linalg_module.matmul_mat2x4_mat4x2(a: avm.number8, b: avm.number8)
+function linalg.matmul_mat2x4_mat4x2(a: avm.number8, b: avm.number8)
   -> number * 16
 ```
 
@@ -10906,7 +10791,7 @@ Multiply a 2x4 matrix with a 4x2 matrix and return a 4x4 matrix
 ## matmul_mat2x4_mat4x2_ex
 
 ```lua
-function linalg_module.matmul_mat2x4_mat4x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat2x4_mat4x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number * 16
 ```
 
@@ -10915,7 +10800,7 @@ Multiply a 2x4 matrix in an array or slice with a 4x2 matrix in an array or slic
 ## matmul_mat2x4_mat4x2_ex
 
 ```lua
-function linalg_module.matmul_mat2x4_mat4x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat2x4_mat4x2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -10926,7 +10811,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat3_mat3
 
 ```lua
-function linalg_module.matmul_mat3_mat3(a: avm.number9, b: avm.number9)
+function linalg.matmul_mat3_mat3(a: avm.number9, b: avm.number9)
   -> number * 9
 ```
 
@@ -10935,7 +10820,7 @@ Multiply a 3x3 matrix with a 3x3 matrix and return a 3x3 matrix
 ## matmul_mat3_mat3_ex
 
 ```lua
-function linalg_module.matmul_mat3_mat3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat3_mat3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number * 9
 ```
 
@@ -10944,7 +10829,7 @@ Multiply a 3x3 matrix in an array or slice with a 3x3 matrix in an array or slic
 ## matmul_mat3_mat3_ex
 
 ```lua
-function linalg_module.matmul_mat3_mat3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat3_mat3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -10955,7 +10840,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat3_vec2
 
 ```lua
-function linalg_module.matmul_mat3_vec2(a: avm.number9, v: avm.number2)
+function linalg.matmul_mat3_vec2(a: avm.number9, v: avm.number2)
   -> number, number
 ```
 
@@ -10966,7 +10851,7 @@ Note: Vector is assumed to be in homogeneous coordinates with unspecified elemen
 ## matmul_mat3_vec2_ex
 
 ```lua
-function linalg_module.matmul_mat3_vec2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, v: avm.seq_number|{ [integer]: number }, v_index: integer)
+function linalg.matmul_mat3_vec2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, v: avm.seq_number|{ [integer]: number }, v_index: integer)
   -> number, number
 ```
 
@@ -10977,7 +10862,7 @@ Note: Vector is assumed to be in homogeneous coordinates with unspecified elemen
 ## matmul_mat3_vec2_ex
 
 ```lua
-function linalg_module.matmul_mat3_vec2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, v: avm.seq_number|{ [integer]: number }, v_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat3_vec2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, v: avm.seq_number|{ [integer]: number }, v_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> number, number
 ```
 
@@ -10988,7 +10873,7 @@ Note: Vector is assumed to be in homogeneous coordinates with unspecified elemen
 ## matmul_mat3_vec3
 
 ```lua
-function linalg_module.matmul_mat3_vec3(a: avm.number9, v: avm.number3)
+function linalg.matmul_mat3_vec3(a: avm.number9, v: avm.number3)
   -> number, number, number
 ```
 
@@ -10997,7 +10882,7 @@ Multiply a 3x3 matrix and a 3d vector and return a 3d vector
 ## matmul_mat3_vec3_ex
 
 ```lua
-function linalg_module.matmul_mat3_vec3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, v: avm.seq_number|{ [integer]: number }, v_index: integer)
+function linalg.matmul_mat3_vec3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, v: avm.seq_number|{ [integer]: number }, v_index: integer)
   -> number, number, number
 ```
 
@@ -11006,7 +10891,7 @@ Multiply a 3x3 matrix in a slice and a 3d vector in a slice and return a 3d vect
 ## matmul_mat3_vec3_ex
 
 ```lua
-function linalg_module.matmul_mat3_vec3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, v: avm.seq_number|{ [integer]: number }, v_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat3_vec3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, v: avm.seq_number|{ [integer]: number }, v_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> number, number, number
 ```
 
@@ -11015,7 +10900,7 @@ Multiply a 3x3 matrix in a slice and a 3d vector in an array or slice into a 3d 
 ## matmul_mat3x1_mat1x3
 
 ```lua
-function linalg_module.matmul_mat3x1_mat1x3(a: avm.number3, b: avm.number3)
+function linalg.matmul_mat3x1_mat1x3(a: avm.number3, b: avm.number3)
   -> number
 ```
 
@@ -11024,7 +10909,7 @@ Multiply a 3x1 matrix with a 1x3 matrix and return a 1x1 matrix
 ## matmul_mat3x1_mat1x3_ex
 
 ```lua
-function linalg_module.matmul_mat3x1_mat1x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat3x1_mat1x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number
 ```
 
@@ -11033,7 +10918,7 @@ Multiply a 3x1 matrix in an array or slice with a 1x3 matrix in an array or slic
 ## matmul_mat3x1_mat1x3_ex
 
 ```lua
-function linalg_module.matmul_mat3x1_mat1x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat3x1_mat1x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -11044,7 +10929,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat3x1_mat2x3
 
 ```lua
-function linalg_module.matmul_mat3x1_mat2x3(a: avm.number3, b: avm.number6)
+function linalg.matmul_mat3x1_mat2x3(a: avm.number3, b: avm.number6)
   -> number, number
 ```
 
@@ -11053,7 +10938,7 @@ Multiply a 3x1 matrix with a 2x3 matrix and return a 2x1 matrix
 ## matmul_mat3x1_mat2x3_ex
 
 ```lua
-function linalg_module.matmul_mat3x1_mat2x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat3x1_mat2x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number, number
 ```
 
@@ -11062,7 +10947,7 @@ Multiply a 3x1 matrix in an array or slice with a 2x3 matrix in an array or slic
 ## matmul_mat3x1_mat2x3_ex
 
 ```lua
-function linalg_module.matmul_mat3x1_mat2x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat3x1_mat2x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -11073,7 +10958,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat3x1_mat3x3
 
 ```lua
-function linalg_module.matmul_mat3x1_mat3x3(a: avm.number3, b: avm.number9)
+function linalg.matmul_mat3x1_mat3x3(a: avm.number3, b: avm.number9)
   -> number, number, number
 ```
 
@@ -11082,7 +10967,7 @@ Multiply a 3x1 matrix with a 3x3 matrix and return a 3x1 matrix
 ## matmul_mat3x1_mat3x3_ex
 
 ```lua
-function linalg_module.matmul_mat3x1_mat3x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat3x1_mat3x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number, number, number
 ```
 
@@ -11091,7 +10976,7 @@ Multiply a 3x1 matrix in an array or slice with a 3x3 matrix in an array or slic
 ## matmul_mat3x1_mat3x3_ex
 
 ```lua
-function linalg_module.matmul_mat3x1_mat3x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat3x1_mat3x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -11102,7 +10987,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat3x1_mat4x3
 
 ```lua
-function linalg_module.matmul_mat3x1_mat4x3(a: avm.number3, b: avm.number12)
+function linalg.matmul_mat3x1_mat4x3(a: avm.number3, b: avm.number12)
   -> number * 4
 ```
 
@@ -11111,7 +10996,7 @@ Multiply a 3x1 matrix with a 4x3 matrix and return a 4x1 matrix
 ## matmul_mat3x1_mat4x3_ex
 
 ```lua
-function linalg_module.matmul_mat3x1_mat4x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat3x1_mat4x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -11122,7 +11007,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat3x1_mat4x3_ex
 
 ```lua
-function linalg_module.matmul_mat3x1_mat4x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat3x1_mat4x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number * 4
 ```
 
@@ -11131,7 +11016,7 @@ Multiply a 3x1 matrix in an array or slice with a 4x3 matrix in an array or slic
 ## matmul_mat3x2_mat1x3
 
 ```lua
-function linalg_module.matmul_mat3x2_mat1x3(a: avm.number6, b: avm.number3)
+function linalg.matmul_mat3x2_mat1x3(a: avm.number6, b: avm.number3)
   -> number, number
 ```
 
@@ -11140,7 +11025,7 @@ Multiply a 3x2 matrix with a 1x3 matrix and return a 1x2 matrix
 ## matmul_mat3x2_mat1x3_ex
 
 ```lua
-function linalg_module.matmul_mat3x2_mat1x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat3x2_mat1x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number, number
 ```
 
@@ -11149,7 +11034,7 @@ Multiply a 3x2 matrix in an array or slice with a 1x3 matrix in an array or slic
 ## matmul_mat3x2_mat1x3_ex
 
 ```lua
-function linalg_module.matmul_mat3x2_mat1x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat3x2_mat1x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -11160,7 +11045,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat3x2_mat2x3
 
 ```lua
-function linalg_module.matmul_mat3x2_mat2x3(a: avm.number6, b: avm.number6)
+function linalg.matmul_mat3x2_mat2x3(a: avm.number6, b: avm.number6)
   -> number * 4
 ```
 
@@ -11169,7 +11054,7 @@ Multiply a 3x2 matrix with a 2x3 matrix and return a 2x2 matrix
 ## matmul_mat3x2_mat2x3_ex
 
 ```lua
-function linalg_module.matmul_mat3x2_mat2x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat3x2_mat2x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number * 4
 ```
 
@@ -11178,7 +11063,7 @@ Multiply a 3x2 matrix in an array or slice with a 2x3 matrix in an array or slic
 ## matmul_mat3x2_mat2x3_ex
 
 ```lua
-function linalg_module.matmul_mat3x2_mat2x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat3x2_mat2x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -11189,7 +11074,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat3x2_mat3x3
 
 ```lua
-function linalg_module.matmul_mat3x2_mat3x3(a: avm.number6, b: avm.number9)
+function linalg.matmul_mat3x2_mat3x3(a: avm.number6, b: avm.number9)
   -> number * 6
 ```
 
@@ -11198,7 +11083,7 @@ Multiply a 3x2 matrix with a 3x3 matrix and return a 3x2 matrix
 ## matmul_mat3x2_mat3x3_ex
 
 ```lua
-function linalg_module.matmul_mat3x2_mat3x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat3x2_mat3x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -11209,7 +11094,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat3x2_mat3x3_ex
 
 ```lua
-function linalg_module.matmul_mat3x2_mat3x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat3x2_mat3x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number * 6
 ```
 
@@ -11218,7 +11103,7 @@ Multiply a 3x2 matrix in an array or slice with a 3x3 matrix in an array or slic
 ## matmul_mat3x2_mat4x3
 
 ```lua
-function linalg_module.matmul_mat3x2_mat4x3(a: avm.number6, b: avm.number12)
+function linalg.matmul_mat3x2_mat4x3(a: avm.number6, b: avm.number12)
   -> number * 8
 ```
 
@@ -11227,7 +11112,7 @@ Multiply a 3x2 matrix with a 4x3 matrix and return a 4x2 matrix
 ## matmul_mat3x2_mat4x3_ex
 
 ```lua
-function linalg_module.matmul_mat3x2_mat4x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat3x2_mat4x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number * 8
 ```
 
@@ -11236,7 +11121,7 @@ Multiply a 3x2 matrix in an array or slice with a 4x3 matrix in an array or slic
 ## matmul_mat3x2_mat4x3_ex
 
 ```lua
-function linalg_module.matmul_mat3x2_mat4x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat3x2_mat4x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -11247,7 +11132,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat3x3_mat1x3
 
 ```lua
-function linalg_module.matmul_mat3x3_mat1x3(a: avm.number9, b: avm.number3)
+function linalg.matmul_mat3x3_mat1x3(a: avm.number9, b: avm.number3)
   -> number, number, number
 ```
 
@@ -11256,7 +11141,7 @@ Multiply a 3x3 matrix with a 1x3 matrix and return a 1x3 matrix
 ## matmul_mat3x3_mat1x3_ex
 
 ```lua
-function linalg_module.matmul_mat3x3_mat1x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat3x3_mat1x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number, number, number
 ```
 
@@ -11265,7 +11150,7 @@ Multiply a 3x3 matrix in an array or slice with a 1x3 matrix in an array or slic
 ## matmul_mat3x3_mat1x3_ex
 
 ```lua
-function linalg_module.matmul_mat3x3_mat1x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat3x3_mat1x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -11276,7 +11161,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat3x3_mat2x3
 
 ```lua
-function linalg_module.matmul_mat3x3_mat2x3(a: avm.number9, b: avm.number6)
+function linalg.matmul_mat3x3_mat2x3(a: avm.number9, b: avm.number6)
   -> number * 6
 ```
 
@@ -11285,7 +11170,7 @@ Multiply a 3x3 matrix with a 2x3 matrix and return a 2x3 matrix
 ## matmul_mat3x3_mat2x3_ex
 
 ```lua
-function linalg_module.matmul_mat3x3_mat2x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat3x3_mat2x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number * 6
 ```
 
@@ -11294,7 +11179,7 @@ Multiply a 3x3 matrix in an array or slice with a 2x3 matrix in an array or slic
 ## matmul_mat3x3_mat2x3_ex
 
 ```lua
-function linalg_module.matmul_mat3x3_mat2x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat3x3_mat2x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -11305,7 +11190,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat3x3_mat3x3
 
 ```lua
-function linalg_module.matmul_mat3x3_mat3x3(a: avm.number9, b: avm.number9)
+function linalg.matmul_mat3x3_mat3x3(a: avm.number9, b: avm.number9)
   -> number * 9
 ```
 
@@ -11314,7 +11199,7 @@ Multiply a 3x3 matrix with a 3x3 matrix and return a 3x3 matrix
 ## matmul_mat3x3_mat3x3_ex
 
 ```lua
-function linalg_module.matmul_mat3x3_mat3x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat3x3_mat3x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -11325,7 +11210,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat3x3_mat3x3_ex
 
 ```lua
-function linalg_module.matmul_mat3x3_mat3x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat3x3_mat3x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number * 9
 ```
 
@@ -11334,7 +11219,7 @@ Multiply a 3x3 matrix in an array or slice with a 3x3 matrix in an array or slic
 ## matmul_mat3x3_mat4x3
 
 ```lua
-function linalg_module.matmul_mat3x3_mat4x3(a: avm.number9, b: avm.number12)
+function linalg.matmul_mat3x3_mat4x3(a: avm.number9, b: avm.number12)
   -> number * 12
 ```
 
@@ -11343,7 +11228,7 @@ Multiply a 3x3 matrix with a 4x3 matrix and return a 4x3 matrix
 ## matmul_mat3x3_mat4x3_ex
 
 ```lua
-function linalg_module.matmul_mat3x3_mat4x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat3x3_mat4x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number * 12
 ```
 
@@ -11352,7 +11237,7 @@ Multiply a 3x3 matrix in an array or slice with a 4x3 matrix in an array or slic
 ## matmul_mat3x3_mat4x3_ex
 
 ```lua
-function linalg_module.matmul_mat3x3_mat4x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat3x3_mat4x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -11363,7 +11248,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat3x4_mat1x3
 
 ```lua
-function linalg_module.matmul_mat3x4_mat1x3(a: avm.number12, b: avm.number3)
+function linalg.matmul_mat3x4_mat1x3(a: avm.number12, b: avm.number3)
   -> number * 4
 ```
 
@@ -11372,7 +11257,7 @@ Multiply a 3x4 matrix with a 1x3 matrix and return a 1x4 matrix
 ## matmul_mat3x4_mat1x3_ex
 
 ```lua
-function linalg_module.matmul_mat3x4_mat1x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat3x4_mat1x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number * 4
 ```
 
@@ -11381,7 +11266,7 @@ Multiply a 3x4 matrix in an array or slice with a 1x3 matrix in an array or slic
 ## matmul_mat3x4_mat1x3_ex
 
 ```lua
-function linalg_module.matmul_mat3x4_mat1x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat3x4_mat1x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -11392,7 +11277,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat3x4_mat2x3
 
 ```lua
-function linalg_module.matmul_mat3x4_mat2x3(a: avm.number12, b: avm.number6)
+function linalg.matmul_mat3x4_mat2x3(a: avm.number12, b: avm.number6)
   -> number * 8
 ```
 
@@ -11401,7 +11286,7 @@ Multiply a 3x4 matrix with a 2x3 matrix and return a 2x4 matrix
 ## matmul_mat3x4_mat2x3_ex
 
 ```lua
-function linalg_module.matmul_mat3x4_mat2x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat3x4_mat2x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number * 8
 ```
 
@@ -11410,7 +11295,7 @@ Multiply a 3x4 matrix in an array or slice with a 2x3 matrix in an array or slic
 ## matmul_mat3x4_mat2x3_ex
 
 ```lua
-function linalg_module.matmul_mat3x4_mat2x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat3x4_mat2x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -11421,7 +11306,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat3x4_mat3x3
 
 ```lua
-function linalg_module.matmul_mat3x4_mat3x3(a: avm.number12, b: avm.number9)
+function linalg.matmul_mat3x4_mat3x3(a: avm.number12, b: avm.number9)
   -> number * 12
 ```
 
@@ -11430,7 +11315,7 @@ Multiply a 3x4 matrix with a 3x3 matrix and return a 3x4 matrix
 ## matmul_mat3x4_mat3x3_ex
 
 ```lua
-function linalg_module.matmul_mat3x4_mat3x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat3x4_mat3x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number * 12
 ```
 
@@ -11439,7 +11324,7 @@ Multiply a 3x4 matrix in an array or slice with a 3x3 matrix in an array or slic
 ## matmul_mat3x4_mat3x3_ex
 
 ```lua
-function linalg_module.matmul_mat3x4_mat3x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat3x4_mat3x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -11450,7 +11335,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat3x4_mat4x3
 
 ```lua
-function linalg_module.matmul_mat3x4_mat4x3(a: avm.number12, b: avm.number12)
+function linalg.matmul_mat3x4_mat4x3(a: avm.number12, b: avm.number12)
   -> number * 16
 ```
 
@@ -11459,7 +11344,7 @@ Multiply a 3x4 matrix with a 4x3 matrix and return a 4x4 matrix
 ## matmul_mat3x4_mat4x3_ex
 
 ```lua
-function linalg_module.matmul_mat3x4_mat4x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat3x4_mat4x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number * 16
 ```
 
@@ -11468,7 +11353,7 @@ Multiply a 3x4 matrix in an array or slice with a 4x3 matrix in an array or slic
 ## matmul_mat3x4_mat4x3_ex
 
 ```lua
-function linalg_module.matmul_mat3x4_mat4x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat3x4_mat4x3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -11479,7 +11364,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat4_mat4
 
 ```lua
-function linalg_module.matmul_mat4_mat4(a: avm.number16, b: avm.number16)
+function linalg.matmul_mat4_mat4(a: avm.number16, b: avm.number16)
   -> number * 16
 ```
 
@@ -11488,7 +11373,7 @@ Multiply a 4x4 matrix with a 4x4 matrix and return a 4x4 matrix
 ## matmul_mat4_mat4_ex
 
 ```lua
-function linalg_module.matmul_mat4_mat4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat4_mat4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number * 16
 ```
 
@@ -11497,7 +11382,7 @@ Multiply a 4x4 matrix in an array or slice with a 4x4 matrix in an array or slic
 ## matmul_mat4_mat4_ex
 
 ```lua
-function linalg_module.matmul_mat4_mat4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat4_mat4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -11508,7 +11393,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat4_vec2
 
 ```lua
-function linalg_module.matmul_mat4_vec2(a: avm.number16, v: avm.number2)
+function linalg.matmul_mat4_vec2(a: avm.number16, v: avm.number2)
   -> number, number
 ```
 
@@ -11519,7 +11404,7 @@ Note: Vector is assumed to be in homogeneous coordinates with unspecified elemen
 ## matmul_mat4_vec2_ex
 
 ```lua
-function linalg_module.matmul_mat4_vec2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, v: avm.seq_number|{ [integer]: number }, v_index: integer)
+function linalg.matmul_mat4_vec2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, v: avm.seq_number|{ [integer]: number }, v_index: integer)
   -> number, number
 ```
 
@@ -11530,7 +11415,7 @@ Note: Vector is assumed to be in homogeneous coordinates with unspecified elemen
 ## matmul_mat4_vec2_ex
 
 ```lua
-function linalg_module.matmul_mat4_vec2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, v: avm.seq_number|{ [integer]: number }, v_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat4_vec2_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, v: avm.seq_number|{ [integer]: number }, v_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> number, number
 ```
 
@@ -11541,7 +11426,7 @@ Note: Vector is assumed to be in homogeneous coordinates with unspecified elemen
 ## matmul_mat4_vec3
 
 ```lua
-function linalg_module.matmul_mat4_vec3(a: avm.number16, v: avm.number3)
+function linalg.matmul_mat4_vec3(a: avm.number16, v: avm.number3)
   -> number, number, number
 ```
 
@@ -11552,7 +11437,7 @@ Note: Vector is assumed to be in homogeneous coordinates with unspecified elemen
 ## matmul_mat4_vec3_ex
 
 ```lua
-function linalg_module.matmul_mat4_vec3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, v: avm.seq_number|{ [integer]: number }, v_index: integer)
+function linalg.matmul_mat4_vec3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, v: avm.seq_number|{ [integer]: number }, v_index: integer)
   -> number, number, number
 ```
 
@@ -11563,7 +11448,7 @@ Note: Vector is assumed to be in homogeneous coordinates with unspecified elemen
 ## matmul_mat4_vec3_ex
 
 ```lua
-function linalg_module.matmul_mat4_vec3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, v: avm.seq_number|{ [integer]: number }, v_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat4_vec3_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, v: avm.seq_number|{ [integer]: number }, v_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> number, number, number
 ```
 
@@ -11574,7 +11459,7 @@ Note: Vector is assumed to be in homogeneous coordinates with unspecified elemen
 ## matmul_mat4_vec4
 
 ```lua
-function linalg_module.matmul_mat4_vec4(a: avm.number16, v: avm.number4)
+function linalg.matmul_mat4_vec4(a: avm.number16, v: avm.number4)
   -> number * 4
 ```
 
@@ -11583,7 +11468,7 @@ Multiply a 4x4 matrix and a 4d vector and return a 4d vector
 ## matmul_mat4_vec4_ex
 
 ```lua
-function linalg_module.matmul_mat4_vec4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, v: avm.seq_number|{ [integer]: number }, v_index: integer)
+function linalg.matmul_mat4_vec4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, v: avm.seq_number|{ [integer]: number }, v_index: integer)
   -> number * 4
 ```
 
@@ -11592,7 +11477,7 @@ Multiply a 4x4 matrix in a slice and a 4d vector in a slice and return a 4d vect
 ## matmul_mat4_vec4_ex
 
 ```lua
-function linalg_module.matmul_mat4_vec4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, v: avm.seq_number|{ [integer]: number }, v_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat4_vec4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, v: avm.seq_number|{ [integer]: number }, v_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> number * 4
 ```
 
@@ -11601,7 +11486,7 @@ Multiply a 4x4 matrix in a slice and a 4d vector in an array or slice into a 4d 
 ## matmul_mat4x1_mat1x4
 
 ```lua
-function linalg_module.matmul_mat4x1_mat1x4(a: avm.number4, b: avm.number4)
+function linalg.matmul_mat4x1_mat1x4(a: avm.number4, b: avm.number4)
   -> number
 ```
 
@@ -11610,7 +11495,7 @@ Multiply a 4x1 matrix with a 1x4 matrix and return a 1x1 matrix
 ## matmul_mat4x1_mat1x4_ex
 
 ```lua
-function linalg_module.matmul_mat4x1_mat1x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat4x1_mat1x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -11621,7 +11506,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat4x1_mat1x4_ex
 
 ```lua
-function linalg_module.matmul_mat4x1_mat1x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat4x1_mat1x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number
 ```
 
@@ -11630,7 +11515,7 @@ Multiply a 4x1 matrix in an array or slice with a 1x4 matrix in an array or slic
 ## matmul_mat4x1_mat2x4
 
 ```lua
-function linalg_module.matmul_mat4x1_mat2x4(a: avm.number4, b: avm.number8)
+function linalg.matmul_mat4x1_mat2x4(a: avm.number4, b: avm.number8)
   -> number, number
 ```
 
@@ -11639,7 +11524,7 @@ Multiply a 4x1 matrix with a 2x4 matrix and return a 2x1 matrix
 ## matmul_mat4x1_mat2x4_ex
 
 ```lua
-function linalg_module.matmul_mat4x1_mat2x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat4x1_mat2x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number, number
 ```
 
@@ -11648,7 +11533,7 @@ Multiply a 4x1 matrix in an array or slice with a 2x4 matrix in an array or slic
 ## matmul_mat4x1_mat2x4_ex
 
 ```lua
-function linalg_module.matmul_mat4x1_mat2x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat4x1_mat2x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -11659,7 +11544,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat4x1_mat3x4
 
 ```lua
-function linalg_module.matmul_mat4x1_mat3x4(a: avm.number4, b: avm.number12)
+function linalg.matmul_mat4x1_mat3x4(a: avm.number4, b: avm.number12)
   -> number, number, number
 ```
 
@@ -11668,7 +11553,7 @@ Multiply a 4x1 matrix with a 3x4 matrix and return a 3x1 matrix
 ## matmul_mat4x1_mat3x4_ex
 
 ```lua
-function linalg_module.matmul_mat4x1_mat3x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat4x1_mat3x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number, number, number
 ```
 
@@ -11677,7 +11562,7 @@ Multiply a 4x1 matrix in an array or slice with a 3x4 matrix in an array or slic
 ## matmul_mat4x1_mat3x4_ex
 
 ```lua
-function linalg_module.matmul_mat4x1_mat3x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat4x1_mat3x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -11688,7 +11573,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat4x1_mat4x4
 
 ```lua
-function linalg_module.matmul_mat4x1_mat4x4(a: avm.number4, b: avm.number16)
+function linalg.matmul_mat4x1_mat4x4(a: avm.number4, b: avm.number16)
   -> number * 4
 ```
 
@@ -11697,7 +11582,7 @@ Multiply a 4x1 matrix with a 4x4 matrix and return a 4x1 matrix
 ## matmul_mat4x1_mat4x4_ex
 
 ```lua
-function linalg_module.matmul_mat4x1_mat4x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat4x1_mat4x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -11708,7 +11593,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat4x1_mat4x4_ex
 
 ```lua
-function linalg_module.matmul_mat4x1_mat4x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat4x1_mat4x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number * 4
 ```
 
@@ -11717,7 +11602,7 @@ Multiply a 4x1 matrix in an array or slice with a 4x4 matrix in an array or slic
 ## matmul_mat4x2_mat1x4
 
 ```lua
-function linalg_module.matmul_mat4x2_mat1x4(a: avm.number8, b: avm.number4)
+function linalg.matmul_mat4x2_mat1x4(a: avm.number8, b: avm.number4)
   -> number, number
 ```
 
@@ -11726,7 +11611,7 @@ Multiply a 4x2 matrix with a 1x4 matrix and return a 1x2 matrix
 ## matmul_mat4x2_mat1x4_ex
 
 ```lua
-function linalg_module.matmul_mat4x2_mat1x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat4x2_mat1x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number, number
 ```
 
@@ -11735,7 +11620,7 @@ Multiply a 4x2 matrix in an array or slice with a 1x4 matrix in an array or slic
 ## matmul_mat4x2_mat1x4_ex
 
 ```lua
-function linalg_module.matmul_mat4x2_mat1x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat4x2_mat1x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -11746,7 +11631,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat4x2_mat2x4
 
 ```lua
-function linalg_module.matmul_mat4x2_mat2x4(a: avm.number8, b: avm.number8)
+function linalg.matmul_mat4x2_mat2x4(a: avm.number8, b: avm.number8)
   -> number * 4
 ```
 
@@ -11755,7 +11640,7 @@ Multiply a 4x2 matrix with a 2x4 matrix and return a 2x2 matrix
 ## matmul_mat4x2_mat2x4_ex
 
 ```lua
-function linalg_module.matmul_mat4x2_mat2x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat4x2_mat2x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number * 4
 ```
 
@@ -11764,7 +11649,7 @@ Multiply a 4x2 matrix in an array or slice with a 2x4 matrix in an array or slic
 ## matmul_mat4x2_mat2x4_ex
 
 ```lua
-function linalg_module.matmul_mat4x2_mat2x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat4x2_mat2x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -11775,7 +11660,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat4x2_mat3x4
 
 ```lua
-function linalg_module.matmul_mat4x2_mat3x4(a: avm.number8, b: avm.number12)
+function linalg.matmul_mat4x2_mat3x4(a: avm.number8, b: avm.number12)
   -> number * 6
 ```
 
@@ -11784,7 +11669,7 @@ Multiply a 4x2 matrix with a 3x4 matrix and return a 3x2 matrix
 ## matmul_mat4x2_mat3x4_ex
 
 ```lua
-function linalg_module.matmul_mat4x2_mat3x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat4x2_mat3x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number * 6
 ```
 
@@ -11793,7 +11678,7 @@ Multiply a 4x2 matrix in an array or slice with a 3x4 matrix in an array or slic
 ## matmul_mat4x2_mat3x4_ex
 
 ```lua
-function linalg_module.matmul_mat4x2_mat3x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat4x2_mat3x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -11804,7 +11689,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat4x2_mat4x4
 
 ```lua
-function linalg_module.matmul_mat4x2_mat4x4(a: avm.number8, b: avm.number16)
+function linalg.matmul_mat4x2_mat4x4(a: avm.number8, b: avm.number16)
   -> number * 8
 ```
 
@@ -11813,7 +11698,7 @@ Multiply a 4x2 matrix with a 4x4 matrix and return a 4x2 matrix
 ## matmul_mat4x2_mat4x4_ex
 
 ```lua
-function linalg_module.matmul_mat4x2_mat4x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat4x2_mat4x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -11824,7 +11709,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat4x2_mat4x4_ex
 
 ```lua
-function linalg_module.matmul_mat4x2_mat4x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat4x2_mat4x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number * 8
 ```
 
@@ -11833,7 +11718,7 @@ Multiply a 4x2 matrix in an array or slice with a 4x4 matrix in an array or slic
 ## matmul_mat4x3_mat1x4
 
 ```lua
-function linalg_module.matmul_mat4x3_mat1x4(a: avm.number12, b: avm.number4)
+function linalg.matmul_mat4x3_mat1x4(a: avm.number12, b: avm.number4)
   -> number, number, number
 ```
 
@@ -11842,7 +11727,7 @@ Multiply a 4x3 matrix with a 1x4 matrix and return a 1x3 matrix
 ## matmul_mat4x3_mat1x4_ex
 
 ```lua
-function linalg_module.matmul_mat4x3_mat1x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat4x3_mat1x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number, number, number
 ```
 
@@ -11851,7 +11736,7 @@ Multiply a 4x3 matrix in an array or slice with a 1x4 matrix in an array or slic
 ## matmul_mat4x3_mat1x4_ex
 
 ```lua
-function linalg_module.matmul_mat4x3_mat1x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat4x3_mat1x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -11862,7 +11747,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat4x3_mat2x4
 
 ```lua
-function linalg_module.matmul_mat4x3_mat2x4(a: avm.number12, b: avm.number8)
+function linalg.matmul_mat4x3_mat2x4(a: avm.number12, b: avm.number8)
   -> number * 6
 ```
 
@@ -11871,7 +11756,7 @@ Multiply a 4x3 matrix with a 2x4 matrix and return a 2x3 matrix
 ## matmul_mat4x3_mat2x4_ex
 
 ```lua
-function linalg_module.matmul_mat4x3_mat2x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat4x3_mat2x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number * 6
 ```
 
@@ -11880,7 +11765,7 @@ Multiply a 4x3 matrix in an array or slice with a 2x4 matrix in an array or slic
 ## matmul_mat4x3_mat2x4_ex
 
 ```lua
-function linalg_module.matmul_mat4x3_mat2x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat4x3_mat2x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -11891,7 +11776,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat4x3_mat3x4
 
 ```lua
-function linalg_module.matmul_mat4x3_mat3x4(a: avm.number12, b: avm.number12)
+function linalg.matmul_mat4x3_mat3x4(a: avm.number12, b: avm.number12)
   -> number * 9
 ```
 
@@ -11900,7 +11785,7 @@ Multiply a 4x3 matrix with a 3x4 matrix and return a 3x3 matrix
 ## matmul_mat4x3_mat3x4_ex
 
 ```lua
-function linalg_module.matmul_mat4x3_mat3x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat4x3_mat3x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number * 9
 ```
 
@@ -11909,7 +11794,7 @@ Multiply a 4x3 matrix in an array or slice with a 3x4 matrix in an array or slic
 ## matmul_mat4x3_mat3x4_ex
 
 ```lua
-function linalg_module.matmul_mat4x3_mat3x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat4x3_mat3x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -11920,7 +11805,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat4x3_mat4x4
 
 ```lua
-function linalg_module.matmul_mat4x3_mat4x4(a: avm.number12, b: avm.number16)
+function linalg.matmul_mat4x3_mat4x4(a: avm.number12, b: avm.number16)
   -> number * 12
 ```
 
@@ -11929,7 +11814,7 @@ Multiply a 4x3 matrix with a 4x4 matrix and return a 4x3 matrix
 ## matmul_mat4x3_mat4x4_ex
 
 ```lua
-function linalg_module.matmul_mat4x3_mat4x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat4x3_mat4x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number * 12
 ```
 
@@ -11938,7 +11823,7 @@ Multiply a 4x3 matrix in an array or slice with a 4x4 matrix in an array or slic
 ## matmul_mat4x3_mat4x4_ex
 
 ```lua
-function linalg_module.matmul_mat4x3_mat4x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat4x3_mat4x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -11949,7 +11834,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat4x4_mat1x4
 
 ```lua
-function linalg_module.matmul_mat4x4_mat1x4(a: avm.number16, b: avm.number4)
+function linalg.matmul_mat4x4_mat1x4(a: avm.number16, b: avm.number4)
   -> number * 4
 ```
 
@@ -11958,7 +11843,7 @@ Multiply a 4x4 matrix with a 1x4 matrix and return a 1x4 matrix
 ## matmul_mat4x4_mat1x4_ex
 
 ```lua
-function linalg_module.matmul_mat4x4_mat1x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat4x4_mat1x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number * 4
 ```
 
@@ -11967,7 +11852,7 @@ Multiply a 4x4 matrix in an array or slice with a 1x4 matrix in an array or slic
 ## matmul_mat4x4_mat1x4_ex
 
 ```lua
-function linalg_module.matmul_mat4x4_mat1x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat4x4_mat1x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -11978,7 +11863,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat4x4_mat2x4
 
 ```lua
-function linalg_module.matmul_mat4x4_mat2x4(a: avm.number16, b: avm.number8)
+function linalg.matmul_mat4x4_mat2x4(a: avm.number16, b: avm.number8)
   -> number * 8
 ```
 
@@ -11987,7 +11872,7 @@ Multiply a 4x4 matrix with a 2x4 matrix and return a 2x4 matrix
 ## matmul_mat4x4_mat2x4_ex
 
 ```lua
-function linalg_module.matmul_mat4x4_mat2x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat4x4_mat2x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number * 8
 ```
 
@@ -11996,7 +11881,7 @@ Multiply a 4x4 matrix in an array or slice with a 2x4 matrix in an array or slic
 ## matmul_mat4x4_mat2x4_ex
 
 ```lua
-function linalg_module.matmul_mat4x4_mat2x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat4x4_mat2x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -12007,7 +11892,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat4x4_mat3x4
 
 ```lua
-function linalg_module.matmul_mat4x4_mat3x4(a: avm.number16, b: avm.number12)
+function linalg.matmul_mat4x4_mat3x4(a: avm.number16, b: avm.number12)
   -> number * 12
 ```
 
@@ -12016,7 +11901,7 @@ Multiply a 4x4 matrix with a 3x4 matrix and return a 3x4 matrix
 ## matmul_mat4x4_mat3x4_ex
 
 ```lua
-function linalg_module.matmul_mat4x4_mat3x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat4x4_mat3x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -12027,7 +11912,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## matmul_mat4x4_mat3x4_ex
 
 ```lua
-function linalg_module.matmul_mat4x4_mat3x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat4x4_mat3x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number * 12
 ```
 
@@ -12036,7 +11921,7 @@ Multiply a 4x4 matrix in an array or slice with a 3x4 matrix in an array or slic
 ## matmul_mat4x4_mat4x4
 
 ```lua
-function linalg_module.matmul_mat4x4_mat4x4(a: avm.number16, b: avm.number16)
+function linalg.matmul_mat4x4_mat4x4(a: avm.number16, b: avm.number16)
   -> number * 16
 ```
 
@@ -12045,7 +11930,7 @@ Multiply a 4x4 matrix with a 4x4 matrix and return a 4x4 matrix
 ## matmul_mat4x4_mat4x4_ex
 
 ```lua
-function linalg_module.matmul_mat4x4_mat4x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
+function linalg.matmul_mat4x4_mat4x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer)
   -> number * 16
 ```
 
@@ -12054,7 +11939,7 @@ Multiply a 4x4 matrix in an array or slice with a 4x4 matrix in an array or slic
 ## matmul_mat4x4_mat4x4_ex
 
 ```lua
-function linalg_module.matmul_mat4x4_mat4x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
+function linalg.matmul_mat4x4_mat4x4_ex(a: avm.seq_number|{ [integer]: number }, a_index: integer, b: avm.seq_number|{ [integer]: number }, b_index: integer, dest: avm.seq_number|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -12065,7 +11950,7 @@ NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ## mul_2
 
 ```lua
-function linalg_module.mul_2(a1: number, a2: number, b1: number, b2: number)
+function linalg.mul_2(a1: number, a2: number, b1: number, b2: number)
   -> number, number
 ```
 
@@ -12074,7 +11959,7 @@ Apply the multiplication operator to two 2-tuples
 ## mul_3
 
 ```lua
-function linalg_module.mul_3(a1: number, a2: number, a3: number, b1: number, b2: number, b3: number)
+function linalg.mul_3(a1: number, a2: number, a3: number, b1: number, b2: number, b3: number)
   -> number, number, number
 ```
 
@@ -12083,7 +11968,7 @@ Apply the multiplication operator to two 3-tuples
 ## mul_4
 
 ```lua
-function linalg_module.mul_4(a1: number, a2: number, a3: number, a4: number, b1: number, b2: number, b3: number, b4: number)
+function linalg.mul_4(a1: number, a2: number, a3: number, a4: number, b1: number, b2: number, b3: number, b4: number)
   -> number * 4
 ```
 
@@ -12092,19 +11977,18 @@ Apply the multiplication operator to two 4-tuples
 ## mul_mat2
 
 ```lua
-function linalg_module.mul_mat2(a: avm.number4, b: avm.number4)
+function linalg.mul_mat2(a: avm.number4, b: avm.number4)
   -> number * 4
 ```
 
 Apply the multiplication operator to each element in two 2x2 matrices
 
-Note: This is element-wise multiplication, for standard matrix multiplication see `linalg_module.matmul`
-See: [linalg_module.matmul_mat2_mat2](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/linalg.lua#5578#9)
+Note: This is element-wise multiplication, for standard matrix multiplication see `linalg.matmul`
 
 ## mul_mat2_constant
 
 ```lua
-function linalg_module.mul_mat2_constant(a: avm.number4, c: number)
+function linalg.mul_mat2_constant(a: avm.number4, c: number)
   -> number * 4
 ```
 
@@ -12113,7 +11997,7 @@ Apply the multiplication operator to each element in a 2x2 matrix and a constant
 ## mul_mat2_constant_ex
 
 ```lua
-function linalg_module.mul_mat2_constant_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, c: number)
+function linalg.mul_mat2_constant_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, c: number)
   -> number * 4
 ```
 
@@ -12122,7 +12006,7 @@ Apply the multiplication operator to each element in a 2x2 matrix in a slice and
 ## mul_mat2_constant_ex
 
 ```lua
-function linalg_module.mul_mat2_constant_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
+function linalg.mul_mat2_constant_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -12131,43 +12015,40 @@ Apply the multiplication operator to each element in a 2x2 matrix in a slice and
 ## mul_mat2_ex
 
 ```lua
-function linalg_module.mul_mat2_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, b: avm.seq_number2|{ [integer]: number }, b_index: integer)
+function linalg.mul_mat2_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, b: avm.seq_number2|{ [integer]: number }, b_index: integer)
   -> number * 4
 ```
 
 Apply the multiplication operator to each element in two 2x2 matrices in a slice
 
-Note: This is element-wise multiplication, for standard matrix multiplication see `linalg_module.matmul`
-See: [linalg_module.matmul_mat2_mat2](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/linalg.lua#5578#9)
+Note: This is element-wise multiplication, for standard matrix multiplication see `linalg.matmul`
 
 ## mul_mat2_ex
 
 ```lua
-function linalg_module.mul_mat2_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, b: avm.seq_number4|{ [integer]: number }, b_index: integer, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
+function linalg.mul_mat2_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, b: avm.seq_number4|{ [integer]: number }, b_index: integer, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
 Apply the multiplication operator to each element in two 2d-vectors in a slice and store the result in a destination
 
-Note: This is element-wise multiplication, for standard matrix multiplication see `linalg_module.matmul`
-See: [linalg_module.matmul_mat2_mat2](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/linalg.lua#5578#9)
+Note: This is element-wise multiplication, for standard matrix multiplication see `linalg.matmul`
 
 ## mul_mat3
 
 ```lua
-function linalg_module.mul_mat3(a: avm.number9, b: avm.number9)
+function linalg.mul_mat3(a: avm.number9, b: avm.number9)
   -> number * 9
 ```
 
 Apply the multiplication operator to each element in two 3x3 matrices
 
-Note: This is element-wise multiplication, for standard matrix multiplication see `linalg_module.matmul`
-See: [linalg_module.matmul_mat3_mat3](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/linalg.lua#6811#9)
+Note: This is element-wise multiplication, for standard matrix multiplication see `linalg.matmul`
 
 ## mul_mat3_constant
 
 ```lua
-function linalg_module.mul_mat3_constant(a: avm.number9, c: number)
+function linalg.mul_mat3_constant(a: avm.number9, c: number)
   -> number * 9
 ```
 
@@ -12176,7 +12057,7 @@ Apply the multiplication operator to each element in a 3x3 matrix and a constant
 ## mul_mat3_constant_ex
 
 ```lua
-function linalg_module.mul_mat3_constant_ex(a: avm.seq_number9|{ [integer]: number }, a_index: integer, c: number)
+function linalg.mul_mat3_constant_ex(a: avm.seq_number9|{ [integer]: number }, a_index: integer, c: number)
   -> number * 9
 ```
 
@@ -12185,7 +12066,7 @@ Apply the multiplication operator to each element in a 3x3 matrix in a slice and
 ## mul_mat3_constant_ex
 
 ```lua
-function linalg_module.mul_mat3_constant_ex(a: avm.seq_number9|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number9|{ [integer]: number }, dest_index?: integer)
+function linalg.mul_mat3_constant_ex(a: avm.seq_number9|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number9|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -12194,43 +12075,40 @@ Apply the multiplication operator to each element in a 3x3 matrix in a slice and
 ## mul_mat3_ex
 
 ```lua
-function linalg_module.mul_mat3_ex(a: avm.seq_number9|{ [integer]: number }, a_index: integer, b: avm.seq_number3|{ [integer]: number }, b_index: integer)
+function linalg.mul_mat3_ex(a: avm.seq_number9|{ [integer]: number }, a_index: integer, b: avm.seq_number3|{ [integer]: number }, b_index: integer)
   -> number * 9
 ```
 
 Apply the multiplication operator to each element in two 3x3 matrices in a slice
 
-Note: This is element-wise multiplication, for standard matrix multiplication see `linalg_module.matmul`
-See: [linalg_module.matmul_mat3_mat3](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/linalg.lua#6811#9)
+Note: This is element-wise multiplication, for standard matrix multiplication see `linalg.matmul`
 
 ## mul_mat3_ex
 
 ```lua
-function linalg_module.mul_mat3_ex(a: avm.seq_number9|{ [integer]: number }, a_index: integer, b: avm.seq_number9|{ [integer]: number }, b_index: integer, dest: avm.seq_number9|{ [integer]: number }, dest_index?: integer)
+function linalg.mul_mat3_ex(a: avm.seq_number9|{ [integer]: number }, a_index: integer, b: avm.seq_number9|{ [integer]: number }, b_index: integer, dest: avm.seq_number9|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
 Apply the multiplication operator to each element in two 3d-vectors in a slice and store the result in a destination
 
-Note: This is element-wise multiplication, for standard matrix multiplication see `linalg_module.matmul`
-See: [linalg_module.matmul_mat3_mat3](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/linalg.lua#6811#9)
+Note: This is element-wise multiplication, for standard matrix multiplication see `linalg.matmul`
 
 ## mul_mat4
 
 ```lua
-function linalg_module.mul_mat4(a: avm.number16, b: avm.number16)
+function linalg.mul_mat4(a: avm.number16, b: avm.number16)
   -> number * 16
 ```
 
 Apply the multiplication operator to each element in two 4x4 matrices
 
-Note: This is element-wise multiplication, for standard matrix multiplication see `linalg_module.matmul`
-See: [linalg_module.matmul_mat4_mat4](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/linalg.lua#8248#9)
+Note: This is element-wise multiplication, for standard matrix multiplication see `linalg.matmul`
 
 ## mul_mat4_constant
 
 ```lua
-function linalg_module.mul_mat4_constant(a: avm.number16, c: number)
+function linalg.mul_mat4_constant(a: avm.number16, c: number)
   -> number * 16
 ```
 
@@ -12239,7 +12117,7 @@ Apply the multiplication operator to each element in a 4x4 matrix and a constant
 ## mul_mat4_constant_ex
 
 ```lua
-function linalg_module.mul_mat4_constant_ex(a: avm.seq_number16|{ [integer]: number }, a_index: integer, c: number)
+function linalg.mul_mat4_constant_ex(a: avm.seq_number16|{ [integer]: number }, a_index: integer, c: number)
   -> number * 16
 ```
 
@@ -12248,7 +12126,7 @@ Apply the multiplication operator to each element in a 4x4 matrix in a slice and
 ## mul_mat4_constant_ex
 
 ```lua
-function linalg_module.mul_mat4_constant_ex(a: avm.seq_number16|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number16|{ [integer]: number }, dest_index?: integer)
+function linalg.mul_mat4_constant_ex(a: avm.seq_number16|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number16|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -12257,31 +12135,29 @@ Apply the multiplication operator to each element in a 4x4 matrix in a slice and
 ## mul_mat4_ex
 
 ```lua
-function linalg_module.mul_mat4_ex(a: avm.seq_number16|{ [integer]: number }, a_index: integer, b: avm.seq_number4|{ [integer]: number }, b_index: integer)
+function linalg.mul_mat4_ex(a: avm.seq_number16|{ [integer]: number }, a_index: integer, b: avm.seq_number4|{ [integer]: number }, b_index: integer)
   -> number * 16
 ```
 
 Apply the multiplication operator to each element in two 4x4 matrices in a slice
 
-Note: This is element-wise multiplication, for standard matrix multiplication see `linalg_module.matmul`
-See: [linalg_module.matmul_mat4_mat4](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/linalg.lua#8248#9)
+Note: This is element-wise multiplication, for standard matrix multiplication see `linalg.matmul`
 
 ## mul_mat4_ex
 
 ```lua
-function linalg_module.mul_mat4_ex(a: avm.seq_number16|{ [integer]: number }, a_index: integer, b: avm.seq_number16|{ [integer]: number }, b_index: integer, dest: avm.seq_number16|{ [integer]: number }, dest_index?: integer)
+function linalg.mul_mat4_ex(a: avm.seq_number16|{ [integer]: number }, a_index: integer, b: avm.seq_number16|{ [integer]: number }, b_index: integer, dest: avm.seq_number16|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
 Apply the multiplication operator to each element in two 4d-vectors in a slice and store the result in a destination
 
-Note: This is element-wise multiplication, for standard matrix multiplication see `linalg_module.matmul`
-See: [linalg_module.matmul_mat4_mat4](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/linalg.lua#8248#9)
+Note: This is element-wise multiplication, for standard matrix multiplication see `linalg.matmul`
 
 ## mul_vec2
 
 ```lua
-function linalg_module.mul_vec2(a: avm.number2, b: avm.number2)
+function linalg.mul_vec2(a: avm.number2, b: avm.number2)
   -> number, number
 ```
 
@@ -12290,7 +12166,7 @@ Apply the multiplication operator to two 2d-vectors
 ## mul_vec2_constant
 
 ```lua
-function linalg_module.mul_vec2_constant(a: avm.number2, c: number)
+function linalg.mul_vec2_constant(a: avm.number2, c: number)
   -> number, number
 ```
 
@@ -12299,7 +12175,7 @@ Apply the multiplication operator to a 2d-vector and a constant
 ## mul_vec2_constant_ex
 
 ```lua
-function linalg_module.mul_vec2_constant_ex(a: avm.seq_number2|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number2|{ [integer]: number }, dest_index?: integer)
+function linalg.mul_vec2_constant_ex(a: avm.seq_number2|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number2|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -12308,7 +12184,7 @@ Apply the multiplication operator to a 2d-vector in a slice and a constant and s
 ## mul_vec2_constant_ex
 
 ```lua
-function linalg_module.mul_vec2_constant_ex(a: avm.seq_number2|{ [integer]: number }, a_index: integer, c: number)
+function linalg.mul_vec2_constant_ex(a: avm.seq_number2|{ [integer]: number }, a_index: integer, c: number)
   -> number, number
 ```
 
@@ -12317,7 +12193,7 @@ Apply the multiplication operator to a 2d-vector in a slice and a constant
 ## mul_vec2_ex
 
 ```lua
-function linalg_module.mul_vec2_ex(a: avm.seq_number2|{ [integer]: number }, a_index: integer, b: avm.seq_number2|{ [integer]: number }, b_index: integer, dest: avm.seq_number2|{ [integer]: number }, dest_index?: integer)
+function linalg.mul_vec2_ex(a: avm.seq_number2|{ [integer]: number }, a_index: integer, b: avm.seq_number2|{ [integer]: number }, b_index: integer, dest: avm.seq_number2|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -12326,7 +12202,7 @@ Apply the multiplication operator to two 2d-vectors in a slice and store the res
 ## mul_vec2_ex
 
 ```lua
-function linalg_module.mul_vec2_ex(a: avm.seq_number2|{ [integer]: number }, a_index: integer, b: avm.seq_number2|{ [integer]: number }, b_index: integer)
+function linalg.mul_vec2_ex(a: avm.seq_number2|{ [integer]: number }, a_index: integer, b: avm.seq_number2|{ [integer]: number }, b_index: integer)
   -> number, number
 ```
 
@@ -12335,7 +12211,7 @@ Apply the multiplication operator to two 2d-vectors in a slice
 ## mul_vec3
 
 ```lua
-function linalg_module.mul_vec3(a: avm.number3, b: avm.number3)
+function linalg.mul_vec3(a: avm.number3, b: avm.number3)
   -> number, number, number
 ```
 
@@ -12344,7 +12220,7 @@ Apply the multiplication operator to two 3d-vectors
 ## mul_vec3_constant
 
 ```lua
-function linalg_module.mul_vec3_constant(a: avm.number3, c: number)
+function linalg.mul_vec3_constant(a: avm.number3, c: number)
   -> number, number, number
 ```
 
@@ -12353,7 +12229,7 @@ Apply the multiplication operator to a 3d-vector and a constant
 ## mul_vec3_constant_ex
 
 ```lua
-function linalg_module.mul_vec3_constant_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number3|{ [integer]: number }, dest_index?: integer)
+function linalg.mul_vec3_constant_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number3|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -12362,7 +12238,7 @@ Apply the multiplication operator to a 3d-vector in a slice and a constant and s
 ## mul_vec3_constant_ex
 
 ```lua
-function linalg_module.mul_vec3_constant_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, c: number)
+function linalg.mul_vec3_constant_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, c: number)
   -> number, number, number
 ```
 
@@ -12371,7 +12247,7 @@ Apply the multiplication operator to a 3d-vector in a slice and a constant
 ## mul_vec3_ex
 
 ```lua
-function linalg_module.mul_vec3_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, b: avm.seq_number3|{ [integer]: number }, b_index: integer)
+function linalg.mul_vec3_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, b: avm.seq_number3|{ [integer]: number }, b_index: integer)
   -> number, number, number
 ```
 
@@ -12380,7 +12256,7 @@ Apply the multiplication operator to two 3d-vectors in a slice
 ## mul_vec3_ex
 
 ```lua
-function linalg_module.mul_vec3_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, b: avm.seq_number3|{ [integer]: number }, b_index: integer, dest: avm.seq_number3|{ [integer]: number }, dest_index?: integer)
+function linalg.mul_vec3_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, b: avm.seq_number3|{ [integer]: number }, b_index: integer, dest: avm.seq_number3|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -12389,7 +12265,7 @@ Apply the multiplication operator to two 3d-vectors in a slice and store the res
 ## mul_vec4
 
 ```lua
-function linalg_module.mul_vec4(a: avm.number4, b: avm.number4)
+function linalg.mul_vec4(a: avm.number4, b: avm.number4)
   -> number * 4
 ```
 
@@ -12398,7 +12274,7 @@ Apply the multiplication operator to two 4d-vectors
 ## mul_vec4_constant
 
 ```lua
-function linalg_module.mul_vec4_constant(a: avm.number4, c: number)
+function linalg.mul_vec4_constant(a: avm.number4, c: number)
   -> number * 4
 ```
 
@@ -12407,7 +12283,7 @@ Apply the multiplication operator to a 4d-vector and a constant
 ## mul_vec4_constant_ex
 
 ```lua
-function linalg_module.mul_vec4_constant_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, c: number)
+function linalg.mul_vec4_constant_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, c: number)
   -> number * 4
 ```
 
@@ -12416,7 +12292,7 @@ Apply the multiplication operator to a 4d-vector in a slice and a constant
 ## mul_vec4_constant_ex
 
 ```lua
-function linalg_module.mul_vec4_constant_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
+function linalg.mul_vec4_constant_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -12425,7 +12301,7 @@ Apply the multiplication operator to a 4d-vector in a slice and a constant and s
 ## mul_vec4_ex
 
 ```lua
-function linalg_module.mul_vec4_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, b: avm.seq_number4|{ [integer]: number }, b_index: integer)
+function linalg.mul_vec4_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, b: avm.seq_number4|{ [integer]: number }, b_index: integer)
   -> number * 4
 ```
 
@@ -12434,7 +12310,7 @@ Apply the multiplication operator to two 4d-vectors in a slice
 ## mul_vec4_ex
 
 ```lua
-function linalg_module.mul_vec4_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, b: avm.seq_number4|{ [integer]: number }, b_index: integer, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
+function linalg.mul_vec4_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, b: avm.seq_number4|{ [integer]: number }, b_index: integer, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -12443,7 +12319,7 @@ Apply the multiplication operator to two 4d-vectors in a slice and store the res
 ## negate_mat2
 
 ```lua
-function linalg_module.negate_mat2(a: avm.number4)
+function linalg.negate_mat2(a: avm.number4)
   -> number * 4
 ```
 
@@ -12452,7 +12328,7 @@ Negate a 2x2 matrix
 ## negate_mat2_ex
 
 ```lua
-function linalg_module.negate_mat2_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer)
+function linalg.negate_mat2_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer)
   -> number * 4
 ```
 
@@ -12461,7 +12337,7 @@ Negate a 2x2 matrix in a slice
 ## negate_mat2_ex
 
 ```lua
-function linalg_module.negate_mat2_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
+function linalg.negate_mat2_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -12470,7 +12346,7 @@ Negate a 2x2 matrix in a slice and store the result in a destination
 ## negate_mat3
 
 ```lua
-function linalg_module.negate_mat3(a: avm.number9)
+function linalg.negate_mat3(a: avm.number9)
   -> number * 9
 ```
 
@@ -12479,7 +12355,7 @@ Negate a 3x3 matrix
 ## negate_mat3_ex
 
 ```lua
-function linalg_module.negate_mat3_ex(a: avm.seq_number9|{ [integer]: number }, a_index: integer)
+function linalg.negate_mat3_ex(a: avm.seq_number9|{ [integer]: number }, a_index: integer)
   -> number * 9
 ```
 
@@ -12488,7 +12364,7 @@ Negate a 3x3 matrix in a slice
 ## negate_mat3_ex
 
 ```lua
-function linalg_module.negate_mat3_ex(a: avm.seq_number9|{ [integer]: number }, a_index: integer, dest: avm.seq_number9|{ [integer]: number }, dest_index?: integer)
+function linalg.negate_mat3_ex(a: avm.seq_number9|{ [integer]: number }, a_index: integer, dest: avm.seq_number9|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -12497,7 +12373,7 @@ Negate a 3x3 matrix in a slice and store the result in a destination
 ## negate_mat4
 
 ```lua
-function linalg_module.negate_mat4(a: avm.number16)
+function linalg.negate_mat4(a: avm.number16)
   -> number * 16
 ```
 
@@ -12506,7 +12382,7 @@ Negate a 4x4 matrix
 ## negate_mat4_ex
 
 ```lua
-function linalg_module.negate_mat4_ex(a: avm.seq_number16|{ [integer]: number }, a_index: integer)
+function linalg.negate_mat4_ex(a: avm.seq_number16|{ [integer]: number }, a_index: integer)
   -> number * 16
 ```
 
@@ -12515,7 +12391,7 @@ Negate a 4x4 matrix in a slice
 ## negate_mat4_ex
 
 ```lua
-function linalg_module.negate_mat4_ex(a: avm.seq_number16|{ [integer]: number }, a_index: integer, dest: avm.seq_number16|{ [integer]: number }, dest_index?: integer)
+function linalg.negate_mat4_ex(a: avm.seq_number16|{ [integer]: number }, a_index: integer, dest: avm.seq_number16|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -12524,7 +12400,7 @@ Negate a 4x4 matrix in a slice and store the result in a destination
 ## negate_vec2
 
 ```lua
-function linalg_module.negate_vec2(a: avm.number2)
+function linalg.negate_vec2(a: avm.number2)
   -> number, number
 ```
 
@@ -12533,7 +12409,7 @@ Negate a 2d-vector
 ## negate_vec2_ex
 
 ```lua
-function linalg_module.negate_vec2_ex(a: avm.seq_number2|{ [integer]: number }, a_index: integer)
+function linalg.negate_vec2_ex(a: avm.seq_number2|{ [integer]: number }, a_index: integer)
   -> number, number
 ```
 
@@ -12542,7 +12418,7 @@ Negate a 2d-vector in a slice
 ## negate_vec2_ex
 
 ```lua
-function linalg_module.negate_vec2_ex(a: avm.seq_number2|{ [integer]: number }, a_index: integer, dest: avm.seq_number2|{ [integer]: number }, dest_index?: integer)
+function linalg.negate_vec2_ex(a: avm.seq_number2|{ [integer]: number }, a_index: integer, dest: avm.seq_number2|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -12551,7 +12427,7 @@ Negate a 2d-vector in a slice and store the result in a destination
 ## negate_vec3
 
 ```lua
-function linalg_module.negate_vec3(a: avm.number3)
+function linalg.negate_vec3(a: avm.number3)
   -> number, number, number
 ```
 
@@ -12560,7 +12436,7 @@ Negate a 3d-vector
 ## negate_vec3_ex
 
 ```lua
-function linalg_module.negate_vec3_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer)
+function linalg.negate_vec3_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer)
   -> number, number, number
 ```
 
@@ -12569,7 +12445,7 @@ Negate a 3d-vector in a slice
 ## negate_vec3_ex
 
 ```lua
-function linalg_module.negate_vec3_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, dest: avm.seq_number3|{ [integer]: number }, dest_index?: integer)
+function linalg.negate_vec3_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, dest: avm.seq_number3|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -12578,7 +12454,7 @@ Negate a 3d-vector in a slice and store the result in a destination
 ## negate_vec4
 
 ```lua
-function linalg_module.negate_vec4(a: avm.number4)
+function linalg.negate_vec4(a: avm.number4)
   -> number * 4
 ```
 
@@ -12587,7 +12463,7 @@ Negate a 4d-vector
 ## negate_vec4_ex
 
 ```lua
-function linalg_module.negate_vec4_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer)
+function linalg.negate_vec4_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer)
   -> number * 4
 ```
 
@@ -12596,7 +12472,7 @@ Negate a 4d-vector in a slice
 ## negate_vec4_ex
 
 ```lua
-function linalg_module.negate_vec4_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
+function linalg.negate_vec4_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -12605,7 +12481,7 @@ Negate a 4d-vector in a slice and store the result in a destination
 ## normalise_2
 
 ```lua
-function linalg_module.normalise_2(v1: number, v2: number)
+function linalg.normalise_2(v1: number, v2: number)
   -> number, number
 ```
 
@@ -12614,7 +12490,7 @@ Normalise 2d vector
 ## normalise_3
 
 ```lua
-function linalg_module.normalise_3(v1: number, v2: number, v3: number)
+function linalg.normalise_3(v1: number, v2: number, v3: number)
   -> number, number, number
 ```
 
@@ -12623,7 +12499,7 @@ Normalise 3d vector
 ## normalise_4
 
 ```lua
-function linalg_module.normalise_4(v1: number, v2: number, v3: number, v4: number)
+function linalg.normalise_4(v1: number, v2: number, v3: number, v4: number)
   -> number * 4
 ```
 
@@ -12632,7 +12508,7 @@ Normalise 4d vector
 ## normalise_vec2
 
 ```lua
-function linalg_module.normalise_vec2(v: avm.number2)
+function linalg.normalise_vec2(v: avm.number2)
   -> number, number
 ```
 
@@ -12641,7 +12517,7 @@ Normalise 2d vector
 ## normalise_vec2_ex
 
 ```lua
-function linalg_module.normalise_vec2_ex(v: avm.seq_number2|{ [integer]: number }, v_index: integer)
+function linalg.normalise_vec2_ex(v: avm.seq_number2|{ [integer]: number }, v_index: integer)
   -> number, number
 ```
 
@@ -12650,7 +12526,7 @@ Normalise 2d vector in a slice
 ## normalise_vec2_ex
 
 ```lua
-function linalg_module.normalise_vec2_ex(v: avm.seq_number2|{ [integer]: number }, v_index: integer, dest: avm.seq_number2|{ [integer]: number }, dest_index?: integer)
+function linalg.normalise_vec2_ex(v: avm.seq_number2|{ [integer]: number }, v_index: integer, dest: avm.seq_number2|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -12659,7 +12535,7 @@ Normalise 2d vector in a slice into a destination
 ## normalise_vec3
 
 ```lua
-function linalg_module.normalise_vec3(v: avm.number3)
+function linalg.normalise_vec3(v: avm.number3)
   -> number, number, number
 ```
 
@@ -12668,7 +12544,7 @@ Normalise 3d vector
 ## normalise_vec3_ex
 
 ```lua
-function linalg_module.normalise_vec3_ex(v: avm.seq_number3|{ [integer]: number }, v_index: integer, dest: avm.seq_number3|{ [integer]: number }, dest_index?: integer)
+function linalg.normalise_vec3_ex(v: avm.seq_number3|{ [integer]: number }, v_index: integer, dest: avm.seq_number3|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -12677,7 +12553,7 @@ Normalise 3d vector in a slice into a destination
 ## normalise_vec3_ex
 
 ```lua
-function linalg_module.normalise_vec3_ex(v: avm.seq_number3|{ [integer]: number }, v_index: integer)
+function linalg.normalise_vec3_ex(v: avm.seq_number3|{ [integer]: number }, v_index: integer)
   -> number, number, number
 ```
 
@@ -12686,7 +12562,7 @@ Normalise 3d vector in a slice
 ## normalise_vec4
 
 ```lua
-function linalg_module.normalise_vec4(v: avm.number4)
+function linalg.normalise_vec4(v: avm.number4)
   -> number * 4
 ```
 
@@ -12695,7 +12571,7 @@ Normalise 4d vector
 ## normalise_vec4_ex
 
 ```lua
-function linalg_module.normalise_vec4_ex(v: avm.seq_number4|{ [integer]: number }, v_index: integer)
+function linalg.normalise_vec4_ex(v: avm.seq_number4|{ [integer]: number }, v_index: integer)
   -> number * 4
 ```
 
@@ -12704,7 +12580,7 @@ Normalise 4d vector in a slice
 ## normalise_vec4_ex
 
 ```lua
-function linalg_module.normalise_vec4_ex(v: avm.seq_number4|{ [integer]: number }, v_index: integer, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
+function linalg.normalise_vec4_ex(v: avm.seq_number4|{ [integer]: number }, v_index: integer, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -12713,7 +12589,7 @@ Normalise 4d vector in a slice into a destination
 ## pow_2
 
 ```lua
-function linalg_module.pow_2(a1: number, a2: number, b1: number, b2: number)
+function linalg.pow_2(a1: number, a2: number, b1: number, b2: number)
   -> number, number
 ```
 
@@ -12722,7 +12598,7 @@ Apply the exponentiation operator to two 2-tuples
 ## pow_3
 
 ```lua
-function linalg_module.pow_3(a1: number, a2: number, a3: number, b1: number, b2: number, b3: number)
+function linalg.pow_3(a1: number, a2: number, a3: number, b1: number, b2: number, b3: number)
   -> number, number, number
 ```
 
@@ -12731,7 +12607,7 @@ Apply the exponentiation operator to two 3-tuples
 ## pow_4
 
 ```lua
-function linalg_module.pow_4(a1: number, a2: number, a3: number, a4: number, b1: number, b2: number, b3: number, b4: number)
+function linalg.pow_4(a1: number, a2: number, a3: number, a4: number, b1: number, b2: number, b3: number, b4: number)
   -> number * 4
 ```
 
@@ -12740,7 +12616,7 @@ Apply the exponentiation operator to two 4-tuples
 ## pow_mat2
 
 ```lua
-function linalg_module.pow_mat2(a: avm.number4, b: avm.number4)
+function linalg.pow_mat2(a: avm.number4, b: avm.number4)
   -> number * 4
 ```
 
@@ -12749,7 +12625,7 @@ Apply the exponentiation operator to each element in two 2x2 matrices
 ## pow_mat2_constant
 
 ```lua
-function linalg_module.pow_mat2_constant(a: avm.number4, c: number)
+function linalg.pow_mat2_constant(a: avm.number4, c: number)
   -> number * 4
 ```
 
@@ -12758,7 +12634,7 @@ Apply the exponentiation operator to each element in a 2x2 matrix and a constant
 ## pow_mat2_constant_ex
 
 ```lua
-function linalg_module.pow_mat2_constant_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, c: number)
+function linalg.pow_mat2_constant_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, c: number)
   -> number * 4
 ```
 
@@ -12767,7 +12643,7 @@ Apply the exponentiation operator to each element in a 2x2 matrix in a slice and
 ## pow_mat2_constant_ex
 
 ```lua
-function linalg_module.pow_mat2_constant_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
+function linalg.pow_mat2_constant_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -12776,7 +12652,7 @@ Apply the exponentiation operator to each element in a 2x2 matrix in a slice and
 ## pow_mat2_ex
 
 ```lua
-function linalg_module.pow_mat2_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, b: avm.seq_number2|{ [integer]: number }, b_index: integer)
+function linalg.pow_mat2_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, b: avm.seq_number2|{ [integer]: number }, b_index: integer)
   -> number * 4
 ```
 
@@ -12785,7 +12661,7 @@ Apply the exponentiation operator to each element in two 2x2 matrices in a slice
 ## pow_mat2_ex
 
 ```lua
-function linalg_module.pow_mat2_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, b: avm.seq_number4|{ [integer]: number }, b_index: integer, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
+function linalg.pow_mat2_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, b: avm.seq_number4|{ [integer]: number }, b_index: integer, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -12794,7 +12670,7 @@ Apply the exponentiation operator to each element in two 2d-vectors in a slice a
 ## pow_mat3
 
 ```lua
-function linalg_module.pow_mat3(a: avm.number9, b: avm.number9)
+function linalg.pow_mat3(a: avm.number9, b: avm.number9)
   -> number * 9
 ```
 
@@ -12803,7 +12679,7 @@ Apply the exponentiation operator to each element in two 3x3 matrices
 ## pow_mat3_constant
 
 ```lua
-function linalg_module.pow_mat3_constant(a: avm.number9, c: number)
+function linalg.pow_mat3_constant(a: avm.number9, c: number)
   -> number * 9
 ```
 
@@ -12812,7 +12688,7 @@ Apply the exponentiation operator to each element in a 3x3 matrix and a constant
 ## pow_mat3_constant_ex
 
 ```lua
-function linalg_module.pow_mat3_constant_ex(a: avm.seq_number9|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number9|{ [integer]: number }, dest_index?: integer)
+function linalg.pow_mat3_constant_ex(a: avm.seq_number9|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number9|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -12821,7 +12697,7 @@ Apply the exponentiation operator to each element in a 3x3 matrix in a slice and
 ## pow_mat3_constant_ex
 
 ```lua
-function linalg_module.pow_mat3_constant_ex(a: avm.seq_number9|{ [integer]: number }, a_index: integer, c: number)
+function linalg.pow_mat3_constant_ex(a: avm.seq_number9|{ [integer]: number }, a_index: integer, c: number)
   -> number * 9
 ```
 
@@ -12830,7 +12706,7 @@ Apply the exponentiation operator to each element in a 3x3 matrix in a slice and
 ## pow_mat3_ex
 
 ```lua
-function linalg_module.pow_mat3_ex(a: avm.seq_number9|{ [integer]: number }, a_index: integer, b: avm.seq_number9|{ [integer]: number }, b_index: integer, dest: avm.seq_number9|{ [integer]: number }, dest_index?: integer)
+function linalg.pow_mat3_ex(a: avm.seq_number9|{ [integer]: number }, a_index: integer, b: avm.seq_number9|{ [integer]: number }, b_index: integer, dest: avm.seq_number9|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -12839,7 +12715,7 @@ Apply the exponentiation operator to each element in two 3d-vectors in a slice a
 ## pow_mat3_ex
 
 ```lua
-function linalg_module.pow_mat3_ex(a: avm.seq_number9|{ [integer]: number }, a_index: integer, b: avm.seq_number3|{ [integer]: number }, b_index: integer)
+function linalg.pow_mat3_ex(a: avm.seq_number9|{ [integer]: number }, a_index: integer, b: avm.seq_number3|{ [integer]: number }, b_index: integer)
   -> number * 9
 ```
 
@@ -12848,7 +12724,7 @@ Apply the exponentiation operator to each element in two 3x3 matrices in a slice
 ## pow_mat4
 
 ```lua
-function linalg_module.pow_mat4(a: avm.number16, b: avm.number16)
+function linalg.pow_mat4(a: avm.number16, b: avm.number16)
   -> number * 16
 ```
 
@@ -12857,7 +12733,7 @@ Apply the exponentiation operator to each element in two 4x4 matrices
 ## pow_mat4_constant
 
 ```lua
-function linalg_module.pow_mat4_constant(a: avm.number16, c: number)
+function linalg.pow_mat4_constant(a: avm.number16, c: number)
   -> number * 16
 ```
 
@@ -12866,7 +12742,7 @@ Apply the exponentiation operator to each element in a 4x4 matrix and a constant
 ## pow_mat4_constant_ex
 
 ```lua
-function linalg_module.pow_mat4_constant_ex(a: avm.seq_number16|{ [integer]: number }, a_index: integer, c: number)
+function linalg.pow_mat4_constant_ex(a: avm.seq_number16|{ [integer]: number }, a_index: integer, c: number)
   -> number * 16
 ```
 
@@ -12875,7 +12751,7 @@ Apply the exponentiation operator to each element in a 4x4 matrix in a slice and
 ## pow_mat4_constant_ex
 
 ```lua
-function linalg_module.pow_mat4_constant_ex(a: avm.seq_number16|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number16|{ [integer]: number }, dest_index?: integer)
+function linalg.pow_mat4_constant_ex(a: avm.seq_number16|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number16|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -12884,7 +12760,7 @@ Apply the exponentiation operator to each element in a 4x4 matrix in a slice and
 ## pow_mat4_ex
 
 ```lua
-function linalg_module.pow_mat4_ex(a: avm.seq_number16|{ [integer]: number }, a_index: integer, b: avm.seq_number4|{ [integer]: number }, b_index: integer)
+function linalg.pow_mat4_ex(a: avm.seq_number16|{ [integer]: number }, a_index: integer, b: avm.seq_number4|{ [integer]: number }, b_index: integer)
   -> number * 16
 ```
 
@@ -12893,7 +12769,7 @@ Apply the exponentiation operator to each element in two 4x4 matrices in a slice
 ## pow_mat4_ex
 
 ```lua
-function linalg_module.pow_mat4_ex(a: avm.seq_number16|{ [integer]: number }, a_index: integer, b: avm.seq_number16|{ [integer]: number }, b_index: integer, dest: avm.seq_number16|{ [integer]: number }, dest_index?: integer)
+function linalg.pow_mat4_ex(a: avm.seq_number16|{ [integer]: number }, a_index: integer, b: avm.seq_number16|{ [integer]: number }, b_index: integer, dest: avm.seq_number16|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -12902,7 +12778,7 @@ Apply the exponentiation operator to each element in two 4d-vectors in a slice a
 ## pow_vec2
 
 ```lua
-function linalg_module.pow_vec2(a: avm.number2, b: avm.number2)
+function linalg.pow_vec2(a: avm.number2, b: avm.number2)
   -> number, number
 ```
 
@@ -12911,7 +12787,7 @@ Apply the exponentiation operator to two 2d-vectors
 ## pow_vec2_constant
 
 ```lua
-function linalg_module.pow_vec2_constant(a: avm.number2, c: number)
+function linalg.pow_vec2_constant(a: avm.number2, c: number)
   -> number, number
 ```
 
@@ -12920,7 +12796,7 @@ Apply the exponentiation operator to a 2d-vector and a constant
 ## pow_vec2_constant_ex
 
 ```lua
-function linalg_module.pow_vec2_constant_ex(a: avm.seq_number2|{ [integer]: number }, a_index: integer, c: number)
+function linalg.pow_vec2_constant_ex(a: avm.seq_number2|{ [integer]: number }, a_index: integer, c: number)
   -> number, number
 ```
 
@@ -12929,7 +12805,7 @@ Apply the exponentiation operator to a 2d-vector in a slice and a constant
 ## pow_vec2_constant_ex
 
 ```lua
-function linalg_module.pow_vec2_constant_ex(a: avm.seq_number2|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number2|{ [integer]: number }, dest_index?: integer)
+function linalg.pow_vec2_constant_ex(a: avm.seq_number2|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number2|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -12938,7 +12814,7 @@ Apply the exponentiation operator to a 2d-vector in a slice and a constant and s
 ## pow_vec2_ex
 
 ```lua
-function linalg_module.pow_vec2_ex(a: avm.seq_number2|{ [integer]: number }, a_index: integer, b: avm.seq_number2|{ [integer]: number }, b_index: integer)
+function linalg.pow_vec2_ex(a: avm.seq_number2|{ [integer]: number }, a_index: integer, b: avm.seq_number2|{ [integer]: number }, b_index: integer)
   -> number, number
 ```
 
@@ -12947,7 +12823,7 @@ Apply the exponentiation operator to two 2d-vectors in a slice
 ## pow_vec2_ex
 
 ```lua
-function linalg_module.pow_vec2_ex(a: avm.seq_number2|{ [integer]: number }, a_index: integer, b: avm.seq_number2|{ [integer]: number }, b_index: integer, dest: avm.seq_number2|{ [integer]: number }, dest_index?: integer)
+function linalg.pow_vec2_ex(a: avm.seq_number2|{ [integer]: number }, a_index: integer, b: avm.seq_number2|{ [integer]: number }, b_index: integer, dest: avm.seq_number2|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -12956,7 +12832,7 @@ Apply the exponentiation operator to two 2d-vectors in a slice and store the res
 ## pow_vec3
 
 ```lua
-function linalg_module.pow_vec3(a: avm.number3, b: avm.number3)
+function linalg.pow_vec3(a: avm.number3, b: avm.number3)
   -> number, number, number
 ```
 
@@ -12965,7 +12841,7 @@ Apply the exponentiation operator to two 3d-vectors
 ## pow_vec3_constant
 
 ```lua
-function linalg_module.pow_vec3_constant(a: avm.number3, c: number)
+function linalg.pow_vec3_constant(a: avm.number3, c: number)
   -> number, number, number
 ```
 
@@ -12974,7 +12850,7 @@ Apply the exponentiation operator to a 3d-vector and a constant
 ## pow_vec3_constant_ex
 
 ```lua
-function linalg_module.pow_vec3_constant_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, c: number)
+function linalg.pow_vec3_constant_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, c: number)
   -> number, number, number
 ```
 
@@ -12983,7 +12859,7 @@ Apply the exponentiation operator to a 3d-vector in a slice and a constant
 ## pow_vec3_constant_ex
 
 ```lua
-function linalg_module.pow_vec3_constant_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number3|{ [integer]: number }, dest_index?: integer)
+function linalg.pow_vec3_constant_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number3|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -12992,7 +12868,7 @@ Apply the exponentiation operator to a 3d-vector in a slice and a constant and s
 ## pow_vec3_ex
 
 ```lua
-function linalg_module.pow_vec3_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, b: avm.seq_number3|{ [integer]: number }, b_index: integer)
+function linalg.pow_vec3_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, b: avm.seq_number3|{ [integer]: number }, b_index: integer)
   -> number, number, number
 ```
 
@@ -13001,7 +12877,7 @@ Apply the exponentiation operator to two 3d-vectors in a slice
 ## pow_vec3_ex
 
 ```lua
-function linalg_module.pow_vec3_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, b: avm.seq_number3|{ [integer]: number }, b_index: integer, dest: avm.seq_number3|{ [integer]: number }, dest_index?: integer)
+function linalg.pow_vec3_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, b: avm.seq_number3|{ [integer]: number }, b_index: integer, dest: avm.seq_number3|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -13010,7 +12886,7 @@ Apply the exponentiation operator to two 3d-vectors in a slice and store the res
 ## pow_vec4
 
 ```lua
-function linalg_module.pow_vec4(a: avm.number4, b: avm.number4)
+function linalg.pow_vec4(a: avm.number4, b: avm.number4)
   -> number * 4
 ```
 
@@ -13019,7 +12895,7 @@ Apply the exponentiation operator to two 4d-vectors
 ## pow_vec4_constant
 
 ```lua
-function linalg_module.pow_vec4_constant(a: avm.number4, c: number)
+function linalg.pow_vec4_constant(a: avm.number4, c: number)
   -> number * 4
 ```
 
@@ -13028,7 +12904,7 @@ Apply the exponentiation operator to a 4d-vector and a constant
 ## pow_vec4_constant_ex
 
 ```lua
-function linalg_module.pow_vec4_constant_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, c: number)
+function linalg.pow_vec4_constant_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, c: number)
   -> number * 4
 ```
 
@@ -13037,7 +12913,7 @@ Apply the exponentiation operator to a 4d-vector in a slice and a constant
 ## pow_vec4_constant_ex
 
 ```lua
-function linalg_module.pow_vec4_constant_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
+function linalg.pow_vec4_constant_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -13046,7 +12922,7 @@ Apply the exponentiation operator to a 4d-vector in a slice and a constant and s
 ## pow_vec4_ex
 
 ```lua
-function linalg_module.pow_vec4_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, b: avm.seq_number4|{ [integer]: number }, b_index: integer)
+function linalg.pow_vec4_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, b: avm.seq_number4|{ [integer]: number }, b_index: integer)
   -> number * 4
 ```
 
@@ -13055,7 +12931,7 @@ Apply the exponentiation operator to two 4d-vectors in a slice
 ## pow_vec4_ex
 
 ```lua
-function linalg_module.pow_vec4_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, b: avm.seq_number4|{ [integer]: number }, b_index: integer, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
+function linalg.pow_vec4_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, b: avm.seq_number4|{ [integer]: number }, b_index: integer, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -13064,7 +12940,7 @@ Apply the exponentiation operator to two 4d-vectors in a slice and store the res
 ## sub_2
 
 ```lua
-function linalg_module.sub_2(a1: number, a2: number, b1: number, b2: number)
+function linalg.sub_2(a1: number, a2: number, b1: number, b2: number)
   -> number, number
 ```
 
@@ -13073,7 +12949,7 @@ Apply the subtraction operator to two 2-tuples
 ## sub_3
 
 ```lua
-function linalg_module.sub_3(a1: number, a2: number, a3: number, b1: number, b2: number, b3: number)
+function linalg.sub_3(a1: number, a2: number, a3: number, b1: number, b2: number, b3: number)
   -> number, number, number
 ```
 
@@ -13082,7 +12958,7 @@ Apply the subtraction operator to two 3-tuples
 ## sub_4
 
 ```lua
-function linalg_module.sub_4(a1: number, a2: number, a3: number, a4: number, b1: number, b2: number, b3: number, b4: number)
+function linalg.sub_4(a1: number, a2: number, a3: number, a4: number, b1: number, b2: number, b3: number, b4: number)
   -> number * 4
 ```
 
@@ -13091,7 +12967,7 @@ Apply the subtraction operator to two 4-tuples
 ## sub_mat2
 
 ```lua
-function linalg_module.sub_mat2(a: avm.number4, b: avm.number4)
+function linalg.sub_mat2(a: avm.number4, b: avm.number4)
   -> number * 4
 ```
 
@@ -13100,7 +12976,7 @@ Apply the subtraction operator to each element in two 2x2 matrices
 ## sub_mat2_constant
 
 ```lua
-function linalg_module.sub_mat2_constant(a: avm.number4, c: number)
+function linalg.sub_mat2_constant(a: avm.number4, c: number)
   -> number * 4
 ```
 
@@ -13109,7 +12985,7 @@ Apply the subtraction operator to each element in a 2x2 matrix and a constant
 ## sub_mat2_constant_ex
 
 ```lua
-function linalg_module.sub_mat2_constant_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, c: number)
+function linalg.sub_mat2_constant_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, c: number)
   -> number * 4
 ```
 
@@ -13118,7 +12994,7 @@ Apply the subtraction operator to each element in a 2x2 matrix in a slice and a 
 ## sub_mat2_constant_ex
 
 ```lua
-function linalg_module.sub_mat2_constant_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
+function linalg.sub_mat2_constant_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -13127,7 +13003,7 @@ Apply the subtraction operator to each element in a 2x2 matrix in a slice and a 
 ## sub_mat2_ex
 
 ```lua
-function linalg_module.sub_mat2_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, b: avm.seq_number2|{ [integer]: number }, b_index: integer)
+function linalg.sub_mat2_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, b: avm.seq_number2|{ [integer]: number }, b_index: integer)
   -> number * 4
 ```
 
@@ -13136,7 +13012,7 @@ Apply the subtraction operator to each element in two 2x2 matrices in a slice
 ## sub_mat2_ex
 
 ```lua
-function linalg_module.sub_mat2_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, b: avm.seq_number4|{ [integer]: number }, b_index: integer, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
+function linalg.sub_mat2_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, b: avm.seq_number4|{ [integer]: number }, b_index: integer, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -13145,7 +13021,7 @@ Apply the subtraction operator to each element in two 2d-vectors in a slice and 
 ## sub_mat3
 
 ```lua
-function linalg_module.sub_mat3(a: avm.number9, b: avm.number9)
+function linalg.sub_mat3(a: avm.number9, b: avm.number9)
   -> number * 9
 ```
 
@@ -13154,7 +13030,7 @@ Apply the subtraction operator to each element in two 3x3 matrices
 ## sub_mat3_constant
 
 ```lua
-function linalg_module.sub_mat3_constant(a: avm.number9, c: number)
+function linalg.sub_mat3_constant(a: avm.number9, c: number)
   -> number * 9
 ```
 
@@ -13163,7 +13039,7 @@ Apply the subtraction operator to each element in a 3x3 matrix and a constant
 ## sub_mat3_constant_ex
 
 ```lua
-function linalg_module.sub_mat3_constant_ex(a: avm.seq_number9|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number9|{ [integer]: number }, dest_index?: integer)
+function linalg.sub_mat3_constant_ex(a: avm.seq_number9|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number9|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -13172,7 +13048,7 @@ Apply the subtraction operator to each element in a 3x3 matrix in a slice and a 
 ## sub_mat3_constant_ex
 
 ```lua
-function linalg_module.sub_mat3_constant_ex(a: avm.seq_number9|{ [integer]: number }, a_index: integer, c: number)
+function linalg.sub_mat3_constant_ex(a: avm.seq_number9|{ [integer]: number }, a_index: integer, c: number)
   -> number * 9
 ```
 
@@ -13181,7 +13057,7 @@ Apply the subtraction operator to each element in a 3x3 matrix in a slice and a 
 ## sub_mat3_ex
 
 ```lua
-function linalg_module.sub_mat3_ex(a: avm.seq_number9|{ [integer]: number }, a_index: integer, b: avm.seq_number9|{ [integer]: number }, b_index: integer, dest: avm.seq_number9|{ [integer]: number }, dest_index?: integer)
+function linalg.sub_mat3_ex(a: avm.seq_number9|{ [integer]: number }, a_index: integer, b: avm.seq_number9|{ [integer]: number }, b_index: integer, dest: avm.seq_number9|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -13190,7 +13066,7 @@ Apply the subtraction operator to each element in two 3d-vectors in a slice and 
 ## sub_mat3_ex
 
 ```lua
-function linalg_module.sub_mat3_ex(a: avm.seq_number9|{ [integer]: number }, a_index: integer, b: avm.seq_number3|{ [integer]: number }, b_index: integer)
+function linalg.sub_mat3_ex(a: avm.seq_number9|{ [integer]: number }, a_index: integer, b: avm.seq_number3|{ [integer]: number }, b_index: integer)
   -> number * 9
 ```
 
@@ -13199,7 +13075,7 @@ Apply the subtraction operator to each element in two 3x3 matrices in a slice
 ## sub_mat4
 
 ```lua
-function linalg_module.sub_mat4(a: avm.number16, b: avm.number16)
+function linalg.sub_mat4(a: avm.number16, b: avm.number16)
   -> number * 16
 ```
 
@@ -13208,7 +13084,7 @@ Apply the subtraction operator to each element in two 4x4 matrices
 ## sub_mat4_constant
 
 ```lua
-function linalg_module.sub_mat4_constant(a: avm.number16, c: number)
+function linalg.sub_mat4_constant(a: avm.number16, c: number)
   -> number * 16
 ```
 
@@ -13217,7 +13093,7 @@ Apply the subtraction operator to each element in a 4x4 matrix and a constant
 ## sub_mat4_constant_ex
 
 ```lua
-function linalg_module.sub_mat4_constant_ex(a: avm.seq_number16|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number16|{ [integer]: number }, dest_index?: integer)
+function linalg.sub_mat4_constant_ex(a: avm.seq_number16|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number16|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -13226,7 +13102,7 @@ Apply the subtraction operator to each element in a 4x4 matrix in a slice and a 
 ## sub_mat4_constant_ex
 
 ```lua
-function linalg_module.sub_mat4_constant_ex(a: avm.seq_number16|{ [integer]: number }, a_index: integer, c: number)
+function linalg.sub_mat4_constant_ex(a: avm.seq_number16|{ [integer]: number }, a_index: integer, c: number)
   -> number * 16
 ```
 
@@ -13235,7 +13111,7 @@ Apply the subtraction operator to each element in a 4x4 matrix in a slice and a 
 ## sub_mat4_ex
 
 ```lua
-function linalg_module.sub_mat4_ex(a: avm.seq_number16|{ [integer]: number }, a_index: integer, b: avm.seq_number4|{ [integer]: number }, b_index: integer)
+function linalg.sub_mat4_ex(a: avm.seq_number16|{ [integer]: number }, a_index: integer, b: avm.seq_number4|{ [integer]: number }, b_index: integer)
   -> number * 16
 ```
 
@@ -13244,7 +13120,7 @@ Apply the subtraction operator to each element in two 4x4 matrices in a slice
 ## sub_mat4_ex
 
 ```lua
-function linalg_module.sub_mat4_ex(a: avm.seq_number16|{ [integer]: number }, a_index: integer, b: avm.seq_number16|{ [integer]: number }, b_index: integer, dest: avm.seq_number16|{ [integer]: number }, dest_index?: integer)
+function linalg.sub_mat4_ex(a: avm.seq_number16|{ [integer]: number }, a_index: integer, b: avm.seq_number16|{ [integer]: number }, b_index: integer, dest: avm.seq_number16|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -13253,7 +13129,7 @@ Apply the subtraction operator to each element in two 4d-vectors in a slice and 
 ## sub_vec2
 
 ```lua
-function linalg_module.sub_vec2(a: avm.number2, b: avm.number2)
+function linalg.sub_vec2(a: avm.number2, b: avm.number2)
   -> number, number
 ```
 
@@ -13262,7 +13138,7 @@ Apply the subtraction operator to two 2d-vectors
 ## sub_vec2_constant
 
 ```lua
-function linalg_module.sub_vec2_constant(a: avm.number2, c: number)
+function linalg.sub_vec2_constant(a: avm.number2, c: number)
   -> number, number
 ```
 
@@ -13271,7 +13147,7 @@ Apply the subtraction operator to a 2d-vector and a constant
 ## sub_vec2_constant_ex
 
 ```lua
-function linalg_module.sub_vec2_constant_ex(a: avm.seq_number2|{ [integer]: number }, a_index: integer, c: number)
+function linalg.sub_vec2_constant_ex(a: avm.seq_number2|{ [integer]: number }, a_index: integer, c: number)
   -> number, number
 ```
 
@@ -13280,7 +13156,7 @@ Apply the subtraction operator to a 2d-vector in a slice and a constant
 ## sub_vec2_constant_ex
 
 ```lua
-function linalg_module.sub_vec2_constant_ex(a: avm.seq_number2|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number2|{ [integer]: number }, dest_index?: integer)
+function linalg.sub_vec2_constant_ex(a: avm.seq_number2|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number2|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -13289,7 +13165,7 @@ Apply the subtraction operator to a 2d-vector in a slice and a constant and stor
 ## sub_vec2_ex
 
 ```lua
-function linalg_module.sub_vec2_ex(a: avm.seq_number2|{ [integer]: number }, a_index: integer, b: avm.seq_number2|{ [integer]: number }, b_index: integer)
+function linalg.sub_vec2_ex(a: avm.seq_number2|{ [integer]: number }, a_index: integer, b: avm.seq_number2|{ [integer]: number }, b_index: integer)
   -> number, number
 ```
 
@@ -13298,7 +13174,7 @@ Apply the subtraction operator to two 2d-vectors in a slice
 ## sub_vec2_ex
 
 ```lua
-function linalg_module.sub_vec2_ex(a: avm.seq_number2|{ [integer]: number }, a_index: integer, b: avm.seq_number2|{ [integer]: number }, b_index: integer, dest: avm.seq_number2|{ [integer]: number }, dest_index?: integer)
+function linalg.sub_vec2_ex(a: avm.seq_number2|{ [integer]: number }, a_index: integer, b: avm.seq_number2|{ [integer]: number }, b_index: integer, dest: avm.seq_number2|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -13307,7 +13183,7 @@ Apply the subtraction operator to two 2d-vectors in a slice and store the result
 ## sub_vec3
 
 ```lua
-function linalg_module.sub_vec3(a: avm.number3, b: avm.number3)
+function linalg.sub_vec3(a: avm.number3, b: avm.number3)
   -> number, number, number
 ```
 
@@ -13316,7 +13192,7 @@ Apply the subtraction operator to two 3d-vectors
 ## sub_vec3_constant
 
 ```lua
-function linalg_module.sub_vec3_constant(a: avm.number3, c: number)
+function linalg.sub_vec3_constant(a: avm.number3, c: number)
   -> number, number, number
 ```
 
@@ -13325,7 +13201,7 @@ Apply the subtraction operator to a 3d-vector and a constant
 ## sub_vec3_constant_ex
 
 ```lua
-function linalg_module.sub_vec3_constant_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number3|{ [integer]: number }, dest_index?: integer)
+function linalg.sub_vec3_constant_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number3|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -13334,7 +13210,7 @@ Apply the subtraction operator to a 3d-vector in a slice and a constant and stor
 ## sub_vec3_constant_ex
 
 ```lua
-function linalg_module.sub_vec3_constant_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, c: number)
+function linalg.sub_vec3_constant_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, c: number)
   -> number, number, number
 ```
 
@@ -13343,7 +13219,7 @@ Apply the subtraction operator to a 3d-vector in a slice and a constant
 ## sub_vec3_ex
 
 ```lua
-function linalg_module.sub_vec3_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, b: avm.seq_number3|{ [integer]: number }, b_index: integer, dest: avm.seq_number3|{ [integer]: number }, dest_index?: integer)
+function linalg.sub_vec3_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, b: avm.seq_number3|{ [integer]: number }, b_index: integer, dest: avm.seq_number3|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -13352,7 +13228,7 @@ Apply the subtraction operator to two 3d-vectors in a slice and store the result
 ## sub_vec3_ex
 
 ```lua
-function linalg_module.sub_vec3_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, b: avm.seq_number3|{ [integer]: number }, b_index: integer)
+function linalg.sub_vec3_ex(a: avm.seq_number3|{ [integer]: number }, a_index: integer, b: avm.seq_number3|{ [integer]: number }, b_index: integer)
   -> number, number, number
 ```
 
@@ -13361,7 +13237,7 @@ Apply the subtraction operator to two 3d-vectors in a slice
 ## sub_vec4
 
 ```lua
-function linalg_module.sub_vec4(a: avm.number4, b: avm.number4)
+function linalg.sub_vec4(a: avm.number4, b: avm.number4)
   -> number * 4
 ```
 
@@ -13370,7 +13246,7 @@ Apply the subtraction operator to two 4d-vectors
 ## sub_vec4_constant
 
 ```lua
-function linalg_module.sub_vec4_constant(a: avm.number4, c: number)
+function linalg.sub_vec4_constant(a: avm.number4, c: number)
   -> number * 4
 ```
 
@@ -13379,7 +13255,7 @@ Apply the subtraction operator to a 4d-vector and a constant
 ## sub_vec4_constant_ex
 
 ```lua
-function linalg_module.sub_vec4_constant_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
+function linalg.sub_vec4_constant_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, c: number, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -13388,7 +13264,7 @@ Apply the subtraction operator to a 4d-vector in a slice and a constant and stor
 ## sub_vec4_constant_ex
 
 ```lua
-function linalg_module.sub_vec4_constant_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, c: number)
+function linalg.sub_vec4_constant_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, c: number)
   -> number * 4
 ```
 
@@ -13397,7 +13273,7 @@ Apply the subtraction operator to a 4d-vector in a slice and a constant
 ## sub_vec4_ex
 
 ```lua
-function linalg_module.sub_vec4_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, b: avm.seq_number4|{ [integer]: number }, b_index: integer)
+function linalg.sub_vec4_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, b: avm.seq_number4|{ [integer]: number }, b_index: integer)
   -> number * 4
 ```
 
@@ -13406,7 +13282,7 @@ Apply the subtraction operator to two 4d-vectors in a slice
 ## sub_vec4_ex
 
 ```lua
-function linalg_module.sub_vec4_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, b: avm.seq_number4|{ [integer]: number }, b_index: integer, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
+function linalg.sub_vec4_ex(a: avm.seq_number4|{ [integer]: number }, a_index: integer, b: avm.seq_number4|{ [integer]: number }, b_index: integer, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -13415,7 +13291,7 @@ Apply the subtraction operator to two 4d-vectors in a slice and store the result
 ## transpose_mat1
 
 ```lua
-function linalg_module.transpose_mat1(src: avm.number1)
+function linalg.transpose_mat1(src: avm.number1)
   -> number
 ```
 
@@ -13426,7 +13302,7 @@ Transpose a 1x1 matrix and return a 1x1 matrix
 ## transpose_mat1x1
 
 ```lua
-function linalg_module.transpose_mat1x1(src: avm.number1)
+function linalg.transpose_mat1x1(src: avm.number1)
   -> number
 ```
 
@@ -13437,7 +13313,7 @@ Transpose a 1x1 matrix and return a 1x1 matrix
 ## transpose_mat1x2
 
 ```lua
-function linalg_module.transpose_mat1x2(src: avm.number2)
+function linalg.transpose_mat1x2(src: avm.number2)
   -> number, number
 ```
 
@@ -13448,7 +13324,7 @@ Transpose a 1x2 matrix and return a 2x1 matrix
 ## transpose_mat1x3
 
 ```lua
-function linalg_module.transpose_mat1x3(src: avm.number3)
+function linalg.transpose_mat1x3(src: avm.number3)
   -> number, number, number
 ```
 
@@ -13459,7 +13335,7 @@ Transpose a 1x3 matrix and return a 3x1 matrix
 ## transpose_mat1x4
 
 ```lua
-function linalg_module.transpose_mat1x4(src: avm.number4)
+function linalg.transpose_mat1x4(src: avm.number4)
   -> number * 4
 ```
 
@@ -13470,7 +13346,7 @@ Transpose a 1x4 matrix and return a 4x1 matrix
 ## transpose_mat2
 
 ```lua
-function linalg_module.transpose_mat2(src: avm.number4)
+function linalg.transpose_mat2(src: avm.number4)
   -> number * 4
 ```
 
@@ -13481,7 +13357,7 @@ Transpose a 2x2 matrix and return a 2x2 matrix
 ## transpose_mat2_ex
 
 ```lua
-function linalg_module.transpose_mat2_ex(src: avm.seq_number4|{ [integer]: number }, src_index: integer)
+function linalg.transpose_mat2_ex(src: avm.seq_number4|{ [integer]: number }, src_index: integer)
   -> number * 4
 ```
 
@@ -13492,7 +13368,7 @@ Transpose a 2x2 matrix and return a 2x2 matrix
 ## transpose_mat2_ex
 
 ```lua
-function linalg_module.transpose_mat2_ex(src: avm.seq_number4|{ [integer]: number }, src_index: integer, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
+function linalg.transpose_mat2_ex(src: avm.seq_number4|{ [integer]: number }, src_index: integer, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -13501,7 +13377,7 @@ Transpose a 2x2 matrix into a 2x2 matrix in a destination
 ## transpose_mat2x1
 
 ```lua
-function linalg_module.transpose_mat2x1(src: avm.number2)
+function linalg.transpose_mat2x1(src: avm.number2)
   -> number, number
 ```
 
@@ -13512,7 +13388,7 @@ Transpose a 2x1 matrix and return a 1x2 matrix
 ## transpose_mat2x2
 
 ```lua
-function linalg_module.transpose_mat2x2(src: avm.number4)
+function linalg.transpose_mat2x2(src: avm.number4)
   -> number * 4
 ```
 
@@ -13523,7 +13399,7 @@ Transpose a 2x2 matrix and return a 2x2 matrix
 ## transpose_mat2x2_ex
 
 ```lua
-function linalg_module.transpose_mat2x2_ex(src: avm.seq_number4|{ [integer]: number }, src_index: integer)
+function linalg.transpose_mat2x2_ex(src: avm.seq_number4|{ [integer]: number }, src_index: integer)
   -> number * 4
 ```
 
@@ -13534,7 +13410,7 @@ Transpose a 2x2 matrix and return a 2x2 matrix
 ## transpose_mat2x2_ex
 
 ```lua
-function linalg_module.transpose_mat2x2_ex(src: avm.seq_number4|{ [integer]: number }, src_index: integer, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
+function linalg.transpose_mat2x2_ex(src: avm.seq_number4|{ [integer]: number }, src_index: integer, dest: avm.seq_number4|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -13543,7 +13419,7 @@ Transpose a 2x2 matrix into a 2x2 matrix in a destination
 ## transpose_mat2x3
 
 ```lua
-function linalg_module.transpose_mat2x3(src: avm.number6)
+function linalg.transpose_mat2x3(src: avm.number6)
   -> number * 6
 ```
 
@@ -13554,7 +13430,7 @@ Transpose a 2x3 matrix and return a 3x2 matrix
 ## transpose_mat2x3_ex
 
 ```lua
-function linalg_module.transpose_mat2x3_ex(src: avm.seq_number6|{ [integer]: number }, src_index: integer, dest: avm.seq_number6|{ [integer]: number }, dest_index?: integer)
+function linalg.transpose_mat2x3_ex(src: avm.seq_number6|{ [integer]: number }, src_index: integer, dest: avm.seq_number6|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -13563,7 +13439,7 @@ Transpose a 2x3 matrix into a 3x2 matrix in a destination
 ## transpose_mat2x3_ex
 
 ```lua
-function linalg_module.transpose_mat2x3_ex(src: avm.seq_number6|{ [integer]: number }, src_index: integer)
+function linalg.transpose_mat2x3_ex(src: avm.seq_number6|{ [integer]: number }, src_index: integer)
   -> number * 6
 ```
 
@@ -13574,7 +13450,7 @@ Transpose a 2x3 matrix and return a 3x2 matrix
 ## transpose_mat2x4
 
 ```lua
-function linalg_module.transpose_mat2x4(src: avm.number8)
+function linalg.transpose_mat2x4(src: avm.number8)
   -> number * 8
 ```
 
@@ -13585,7 +13461,7 @@ Transpose a 2x4 matrix and return a 4x2 matrix
 ## transpose_mat2x4_ex
 
 ```lua
-function linalg_module.transpose_mat2x4_ex(src: avm.seq_number8|{ [integer]: number }, src_index: integer)
+function linalg.transpose_mat2x4_ex(src: avm.seq_number8|{ [integer]: number }, src_index: integer)
   -> number * 8
 ```
 
@@ -13596,7 +13472,7 @@ Transpose a 2x4 matrix and return a 4x2 matrix
 ## transpose_mat2x4_ex
 
 ```lua
-function linalg_module.transpose_mat2x4_ex(src: avm.seq_number8|{ [integer]: number }, src_index: integer, dest: avm.seq_number8|{ [integer]: number }, dest_index?: integer)
+function linalg.transpose_mat2x4_ex(src: avm.seq_number8|{ [integer]: number }, src_index: integer, dest: avm.seq_number8|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -13605,7 +13481,7 @@ Transpose a 2x4 matrix into a 4x2 matrix in a destination
 ## transpose_mat3
 
 ```lua
-function linalg_module.transpose_mat3(src: avm.number9)
+function linalg.transpose_mat3(src: avm.number9)
   -> number * 9
 ```
 
@@ -13616,7 +13492,7 @@ Transpose a 3x3 matrix and return a 3x3 matrix
 ## transpose_mat3_ex
 
 ```lua
-function linalg_module.transpose_mat3_ex(src: avm.seq_number9|{ [integer]: number }, src_index: integer)
+function linalg.transpose_mat3_ex(src: avm.seq_number9|{ [integer]: number }, src_index: integer)
   -> number * 9
 ```
 
@@ -13627,7 +13503,7 @@ Transpose a 3x3 matrix and return a 3x3 matrix
 ## transpose_mat3_ex
 
 ```lua
-function linalg_module.transpose_mat3_ex(src: avm.seq_number9|{ [integer]: number }, src_index: integer, dest: avm.seq_number9|{ [integer]: number }, dest_index?: integer)
+function linalg.transpose_mat3_ex(src: avm.seq_number9|{ [integer]: number }, src_index: integer, dest: avm.seq_number9|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -13636,7 +13512,7 @@ Transpose a 3x3 matrix into a 3x3 matrix in a destination
 ## transpose_mat3x1
 
 ```lua
-function linalg_module.transpose_mat3x1(src: avm.number3)
+function linalg.transpose_mat3x1(src: avm.number3)
   -> number, number, number
 ```
 
@@ -13647,7 +13523,7 @@ Transpose a 3x1 matrix and return a 1x3 matrix
 ## transpose_mat3x2
 
 ```lua
-function linalg_module.transpose_mat3x2(src: avm.number6)
+function linalg.transpose_mat3x2(src: avm.number6)
   -> number * 6
 ```
 
@@ -13658,7 +13534,7 @@ Transpose a 3x2 matrix and return a 2x3 matrix
 ## transpose_mat3x2_ex
 
 ```lua
-function linalg_module.transpose_mat3x2_ex(src: avm.seq_number6|{ [integer]: number }, src_index: integer)
+function linalg.transpose_mat3x2_ex(src: avm.seq_number6|{ [integer]: number }, src_index: integer)
   -> number * 6
 ```
 
@@ -13669,7 +13545,7 @@ Transpose a 3x2 matrix and return a 2x3 matrix
 ## transpose_mat3x2_ex
 
 ```lua
-function linalg_module.transpose_mat3x2_ex(src: avm.seq_number6|{ [integer]: number }, src_index: integer, dest: avm.seq_number6|{ [integer]: number }, dest_index?: integer)
+function linalg.transpose_mat3x2_ex(src: avm.seq_number6|{ [integer]: number }, src_index: integer, dest: avm.seq_number6|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -13678,7 +13554,7 @@ Transpose a 3x2 matrix into a 2x3 matrix in a destination
 ## transpose_mat3x3
 
 ```lua
-function linalg_module.transpose_mat3x3(src: avm.number9)
+function linalg.transpose_mat3x3(src: avm.number9)
   -> number * 9
 ```
 
@@ -13689,7 +13565,7 @@ Transpose a 3x3 matrix and return a 3x3 matrix
 ## transpose_mat3x3_ex
 
 ```lua
-function linalg_module.transpose_mat3x3_ex(src: avm.seq_number9|{ [integer]: number }, src_index: integer, dest: avm.seq_number9|{ [integer]: number }, dest_index?: integer)
+function linalg.transpose_mat3x3_ex(src: avm.seq_number9|{ [integer]: number }, src_index: integer, dest: avm.seq_number9|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -13698,7 +13574,7 @@ Transpose a 3x3 matrix into a 3x3 matrix in a destination
 ## transpose_mat3x3_ex
 
 ```lua
-function linalg_module.transpose_mat3x3_ex(src: avm.seq_number9|{ [integer]: number }, src_index: integer)
+function linalg.transpose_mat3x3_ex(src: avm.seq_number9|{ [integer]: number }, src_index: integer)
   -> number * 9
 ```
 
@@ -13709,7 +13585,7 @@ Transpose a 3x3 matrix and return a 3x3 matrix
 ## transpose_mat3x4
 
 ```lua
-function linalg_module.transpose_mat3x4(src: avm.number12)
+function linalg.transpose_mat3x4(src: avm.number12)
   -> number * 12
 ```
 
@@ -13720,7 +13596,7 @@ Transpose a 3x4 matrix and return a 4x3 matrix
 ## transpose_mat3x4_ex
 
 ```lua
-function linalg_module.transpose_mat3x4_ex(src: avm.seq_number12|{ [integer]: number }, src_index: integer)
+function linalg.transpose_mat3x4_ex(src: avm.seq_number12|{ [integer]: number }, src_index: integer)
   -> number * 12
 ```
 
@@ -13731,7 +13607,7 @@ Transpose a 3x4 matrix and return a 4x3 matrix
 ## transpose_mat3x4_ex
 
 ```lua
-function linalg_module.transpose_mat3x4_ex(src: avm.seq_number12|{ [integer]: number }, src_index: integer, dest: avm.seq_number12|{ [integer]: number }, dest_index?: integer)
+function linalg.transpose_mat3x4_ex(src: avm.seq_number12|{ [integer]: number }, src_index: integer, dest: avm.seq_number12|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -13740,7 +13616,7 @@ Transpose a 3x4 matrix into a 4x3 matrix in a destination
 ## transpose_mat4
 
 ```lua
-function linalg_module.transpose_mat4(src: avm.number16)
+function linalg.transpose_mat4(src: avm.number16)
   -> number * 16
 ```
 
@@ -13751,7 +13627,7 @@ Transpose a 4x4 matrix and return a 4x4 matrix
 ## transpose_mat4_ex
 
 ```lua
-function linalg_module.transpose_mat4_ex(src: avm.seq_number16|{ [integer]: number }, src_index: integer)
+function linalg.transpose_mat4_ex(src: avm.seq_number16|{ [integer]: number }, src_index: integer)
   -> number * 16
 ```
 
@@ -13762,7 +13638,7 @@ Transpose a 4x4 matrix and return a 4x4 matrix
 ## transpose_mat4_ex
 
 ```lua
-function linalg_module.transpose_mat4_ex(src: avm.seq_number16|{ [integer]: number }, src_index: integer, dest: avm.seq_number16|{ [integer]: number }, dest_index?: integer)
+function linalg.transpose_mat4_ex(src: avm.seq_number16|{ [integer]: number }, src_index: integer, dest: avm.seq_number16|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -13771,7 +13647,7 @@ Transpose a 4x4 matrix into a 4x4 matrix in a destination
 ## transpose_mat4x1
 
 ```lua
-function linalg_module.transpose_mat4x1(src: avm.number4)
+function linalg.transpose_mat4x1(src: avm.number4)
   -> number * 4
 ```
 
@@ -13782,7 +13658,7 @@ Transpose a 4x1 matrix and return a 1x4 matrix
 ## transpose_mat4x2
 
 ```lua
-function linalg_module.transpose_mat4x2(src: avm.number8)
+function linalg.transpose_mat4x2(src: avm.number8)
   -> number * 8
 ```
 
@@ -13793,7 +13669,7 @@ Transpose a 4x2 matrix and return a 2x4 matrix
 ## transpose_mat4x2_ex
 
 ```lua
-function linalg_module.transpose_mat4x2_ex(src: avm.seq_number8|{ [integer]: number }, src_index: integer)
+function linalg.transpose_mat4x2_ex(src: avm.seq_number8|{ [integer]: number }, src_index: integer)
   -> number * 8
 ```
 
@@ -13804,7 +13680,7 @@ Transpose a 4x2 matrix and return a 2x4 matrix
 ## transpose_mat4x2_ex
 
 ```lua
-function linalg_module.transpose_mat4x2_ex(src: avm.seq_number8|{ [integer]: number }, src_index: integer, dest: avm.seq_number8|{ [integer]: number }, dest_index?: integer)
+function linalg.transpose_mat4x2_ex(src: avm.seq_number8|{ [integer]: number }, src_index: integer, dest: avm.seq_number8|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -13813,7 +13689,7 @@ Transpose a 4x2 matrix into a 2x4 matrix in a destination
 ## transpose_mat4x3
 
 ```lua
-function linalg_module.transpose_mat4x3(src: avm.number12)
+function linalg.transpose_mat4x3(src: avm.number12)
   -> number * 12
 ```
 
@@ -13824,7 +13700,7 @@ Transpose a 4x3 matrix and return a 3x4 matrix
 ## transpose_mat4x3_ex
 
 ```lua
-function linalg_module.transpose_mat4x3_ex(src: avm.seq_number12|{ [integer]: number }, src_index: integer)
+function linalg.transpose_mat4x3_ex(src: avm.seq_number12|{ [integer]: number }, src_index: integer)
   -> number * 12
 ```
 
@@ -13835,7 +13711,7 @@ Transpose a 4x3 matrix and return a 3x4 matrix
 ## transpose_mat4x3_ex
 
 ```lua
-function linalg_module.transpose_mat4x3_ex(src: avm.seq_number12|{ [integer]: number }, src_index: integer, dest: avm.seq_number12|{ [integer]: number }, dest_index?: integer)
+function linalg.transpose_mat4x3_ex(src: avm.seq_number12|{ [integer]: number }, src_index: integer, dest: avm.seq_number12|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -13844,7 +13720,7 @@ Transpose a 4x3 matrix into a 3x4 matrix in a destination
 ## transpose_mat4x4
 
 ```lua
-function linalg_module.transpose_mat4x4(src: avm.number16)
+function linalg.transpose_mat4x4(src: avm.number16)
   -> number * 16
 ```
 
@@ -13855,7 +13731,7 @@ Transpose a 4x4 matrix and return a 4x4 matrix
 ## transpose_mat4x4_ex
 
 ```lua
-function linalg_module.transpose_mat4x4_ex(src: avm.seq_number16|{ [integer]: number }, src_index: integer, dest: avm.seq_number16|{ [integer]: number }, dest_index?: integer)
+function linalg.transpose_mat4x4_ex(src: avm.seq_number16|{ [integer]: number }, src_index: integer, dest: avm.seq_number16|{ [integer]: number }, dest_index?: integer)
   -> nil
 ```
 
@@ -13864,7 +13740,7 @@ Transpose a 4x4 matrix into a 4x4 matrix in a destination
 ## transpose_mat4x4_ex
 
 ```lua
-function linalg_module.transpose_mat4x4_ex(src: avm.seq_number16|{ [integer]: number }, src_index: integer)
+function linalg.transpose_mat4x4_ex(src: avm.seq_number16|{ [integer]: number }, src_index: integer)
   -> number * 16
 ```
 
@@ -13875,7 +13751,7 @@ Transpose a 4x4 matrix and return a 4x4 matrix
 ## vec2_zero
 
 ```lua
-function linalg_module.vec2_zero()
+function linalg.vec2_zero()
   -> number, number
 ```
 
@@ -13884,7 +13760,7 @@ function linalg_module.vec2_zero()
 ## vec3_zero
 
 ```lua
-function linalg_module.vec3_zero()
+function linalg.vec3_zero()
   -> number, number, number
 ```
 
@@ -13893,7 +13769,7 @@ function linalg_module.vec3_zero()
 ## vec4_zero
 
 ```lua
-function linalg_module.vec4_zero()
+function linalg.vec4_zero()
   -> number * 4
 ```
 
@@ -13902,17 +13778,16 @@ function linalg_module.vec4_zero()
 
 ---
 
-# matrix_2_module
+# matrix_2
 Matrix operations and types  
 
 Classes and functions for working with matrices  
 
 
-
 ## new
 
 ```lua
-function matrix_2_module.new(e_11: number, e_12: number, e_21: number, e_22: number)
+function matrix_2.new(e_11: number, e_12: number, e_21: number, e_22: number)
   -> avm.matrix_2
 ```
 
@@ -13922,17 +13797,16 @@ Parameter `e_ij` determines the value of `i'th` column `j'th` row
 
 ---
 
-# matrix_3_module
+# matrix_3
 Matrix operations and types  
 
 Classes and functions for working with matrices  
 
 
-
 ## new
 
 ```lua
-function matrix_3_module.new(e_11: number, e_12: number, e_13: number, e_21: number, e_22: number, e_23: number, e_31: number, e_32: number, e_33: number)
+function matrix_3.new(e_11: number, e_12: number, e_13: number, e_21: number, e_22: number, e_23: number, e_31: number, e_32: number, e_33: number)
   -> avm.matrix_3
 ```
 
@@ -13942,17 +13816,16 @@ Parameter `e_ij` determines the value of `i'th` column `j'th` row
 
 ---
 
-# matrix_4_module
+# matrix_4
 Matrix operations and types  
 
 Classes and functions for working with matrices  
 
 
-
 ## new
 
 ```lua
-function matrix_4_module.new(e_11: number, e_12: number, e_13: number, e_14: number, e_21: number, e_22: number, e_23: number, e_24: number, e_31: number, e_32: number, e_33: number, e_34: number, e_41: number, e_42: number, e_43: number, e_44: number)
+function matrix_4.new(e_11: number, e_12: number, e_13: number, e_14: number, e_21: number, e_22: number, e_23: number, e_24: number, e_31: number, e_32: number, e_33: number, e_34: number, e_41: number, e_42: number, e_43: number, e_44: number)
   -> avm.matrix_4
 ```
 
@@ -13962,7 +13835,7 @@ Parameter `e_ij` determines the value of `i'th` column `j'th` row
 
 ---
 
-# vector_2_module
+# vector_2
 Vector operations and types  
 
 Classes and functions for working with 2-d vectors  
@@ -14003,7 +13876,7 @@ Usage:
 ## new
 
 ```lua
-function vector_2_module.new(v1: number, v2: number)
+function vector_2.new(v1: number, v2: number)
   -> avm.vector_2
 ```
 
@@ -14012,17 +13885,16 @@ Create a new vector_2 with given values
 
 ---
 
-# vector_3_module
+# vector_3
 Vector operations and types  
 
 Classes and functions for working with 3-d vectors  
 
 
-
 ## new
 
 ```lua
-function vector_3_module.new(v1: number, v2: number, v3: number)
+function vector_3.new(v1: number, v2: number, v3: number)
   -> avm.vector_3
 ```
 
@@ -14031,17 +13903,16 @@ Create a new vector_3 with given values
 
 ---
 
-# vector_4_module
+# vector_4
 Vector operations and types  
 
 Classes and functions for working with 4-d vectors  
 
 
-
 ## new
 
 ```lua
-function vector_4_module.new(v1: number, v2: number, v3: number, v4: number)
+function vector_4.new(v1: number, v2: number, v3: number, v4: number)
   -> avm.vector_4
 ```
 
@@ -14050,7 +13921,7 @@ Create a new vector_4 with given values
 
 ---
 
-# view_module
+# view
 Views  
 
 A view is a special array or sequence that maps into a subset of another array or sequence.  
@@ -14063,7 +13934,7 @@ The views in this module can be used to:
 ## interleave
 
 ```lua
-function view_module.interleave(src: avm.seq<T>, index: integer, group_size: integer, stride: integer, count: integer)
+function view.interleave(src: avm.seq<T>, index: integer, group_size: integer, stride: integer, count: integer)
   -> avm.fixed_array<T>
 ```
 
@@ -14079,7 +13950,7 @@ print(b[1], b[2], b[3], b[4], b[5], b[6]) --> 1 2 5 6 9 10
 ## reverse
 
 ```lua
-function view_module.reverse(src: avm.array<T>|avm.seq<T>, index?: integer, count?: integer)
+function view.reverse(src: avm.array<T>|avm.seq<T>, index?: integer, count?: integer)
   -> avm.fixed_array<T>
 ```
 
@@ -14096,7 +13967,7 @@ print(b[1], b[2], b[3]) --> 10 9 8
 ## slice
 
 ```lua
-function view_module.slice(src: avm.seq<T>, index: integer, count: integer)
+function view.slice(src: avm.seq<T>, index: integer, count: integer)
   -> avm.fixed_array<T>
 ```
 
@@ -14109,12 +13980,12 @@ local b = view.slice(a, 2, 3)
 print(b[1], b[2], b[3]) --> 2 3 4
 ```
 
-Note: Most array functions already have `_slice` forms so this object is rarely needed
+Note: Most array functions have `_ex` forms so this object is a convenience only
 
 ## slice_1
 
 ```lua
-function view_module.slice_1(src: avm.seq<T>, index: integer)
+function view.slice_1(src: avm.seq<T>, index: integer)
   -> avm.fixed_array1<T>
 ```
 
@@ -14123,7 +13994,7 @@ Create a view of size `1` that maps into `src` starting from `index`
 ## slice_2
 
 ```lua
-function view_module.slice_2(src: avm.seq<T>, index: integer)
+function view.slice_2(src: avm.seq<T>, index: integer)
   -> avm.fixed_array2<T>
 ```
 
@@ -14132,7 +14003,7 @@ Create a view of size `2` that maps into `src` starting from `index`
 ## slice_3
 
 ```lua
-function view_module.slice_3(src: avm.seq<T>, index: integer)
+function view.slice_3(src: avm.seq<T>, index: integer)
   -> avm.fixed_array3<T>
 ```
 
@@ -14141,7 +14012,7 @@ Create a view of size `3` that maps into `src` starting from `index`
 ## slice_4
 
 ```lua
-function view_module.slice_4(src: avm.seq<T>, index: integer)
+function view.slice_4(src: avm.seq<T>, index: integer)
   -> avm.fixed_array4<T>
 ```
 
@@ -14150,7 +14021,7 @@ Create a view of size `4` that maps into `src` starting from `index`
 ## slice_5
 
 ```lua
-function view_module.slice_5(src: avm.seq<T>, index: integer)
+function view.slice_5(src: avm.seq<T>, index: integer)
   -> avm.fixed_array5<T>
 ```
 
@@ -14159,7 +14030,7 @@ Create a view of size `5` that maps into `src` starting from `index`
 ## slice_6
 
 ```lua
-function view_module.slice_6(src: avm.seq<T>, index: integer)
+function view.slice_6(src: avm.seq<T>, index: integer)
   -> avm.fixed_array6<T>
 ```
 
@@ -14168,7 +14039,7 @@ Create a view of size `6` that maps into `src` starting from `index`
 ## slice_7
 
 ```lua
-function view_module.slice_7(src: avm.seq<T>, index: integer)
+function view.slice_7(src: avm.seq<T>, index: integer)
   -> avm.fixed_array7<T>
 ```
 
@@ -14177,7 +14048,7 @@ Create a view of size `7` that maps into `src` starting from `index`
 ## slice_8
 
 ```lua
-function view_module.slice_8(src: avm.seq<T>, index: integer)
+function view.slice_8(src: avm.seq<T>, index: integer)
   -> avm.fixed_array8<T>
 ```
 
@@ -14186,7 +14057,7 @@ Create a view of size `8` that maps into `src` starting from `index`
 ## slice_9
 
 ```lua
-function view_module.slice_9(src: avm.seq<T>, index: integer)
+function view.slice_9(src: avm.seq<T>, index: integer)
   -> avm.fixed_array9<T>
 ```
 
@@ -14195,7 +14066,7 @@ Create a view of size `9` that maps into `src` starting from `index`
 ## slice_10
 
 ```lua
-function view_module.slice_10(src: avm.seq<T>, index: integer)
+function view.slice_10(src: avm.seq<T>, index: integer)
   -> avm.fixed_array10<T>
 ```
 
@@ -14204,7 +14075,7 @@ Create a view of size `10` that maps into `src` starting from `index`
 ## slice_11
 
 ```lua
-function view_module.slice_11(src: avm.seq<T>, index: integer)
+function view.slice_11(src: avm.seq<T>, index: integer)
   -> avm.fixed_array11<T>
 ```
 
@@ -14213,7 +14084,7 @@ Create a view of size `11` that maps into `src` starting from `index`
 ## slice_12
 
 ```lua
-function view_module.slice_12(src: avm.seq<T>, index: integer)
+function view.slice_12(src: avm.seq<T>, index: integer)
   -> avm.fixed_array12<T>
 ```
 
@@ -14222,7 +14093,7 @@ Create a view of size `12` that maps into `src` starting from `index`
 ## slice_13
 
 ```lua
-function view_module.slice_13(src: avm.seq<T>, index: integer)
+function view.slice_13(src: avm.seq<T>, index: integer)
   -> avm.fixed_array13<T>
 ```
 
@@ -14231,7 +14102,7 @@ Create a view of size `13` that maps into `src` starting from `index`
 ## slice_14
 
 ```lua
-function view_module.slice_14(src: avm.seq<T>, index: integer)
+function view.slice_14(src: avm.seq<T>, index: integer)
   -> avm.fixed_array14<T>
 ```
 
@@ -14240,7 +14111,7 @@ Create a view of size `14` that maps into `src` starting from `index`
 ## slice_15
 
 ```lua
-function view_module.slice_15(src: avm.seq<T>, index: integer)
+function view.slice_15(src: avm.seq<T>, index: integer)
   -> avm.fixed_array15<T>
 ```
 
@@ -14249,7 +14120,7 @@ Create a view of size `15` that maps into `src` starting from `index`
 ## slice_16
 
 ```lua
-function view_module.slice_16(src: avm.seq<T>, index: integer)
+function view.slice_16(src: avm.seq<T>, index: integer)
   -> avm.fixed_array16<T>
 ```
 
@@ -14258,7 +14129,7 @@ Create a view of size `16` that maps into `src` starting from `index`
 ## stride
 
 ```lua
-function view_module.stride(src: avm.seq<T>, index: integer, stride: integer, count: integer)
+function view.stride(src: avm.seq<T>, index: integer, stride: integer, count: integer)
   -> avm.fixed_array<T>
 ```
 
