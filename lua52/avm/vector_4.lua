@@ -4,7 +4,6 @@ Vector operations and types
 
 Classes and functions for working with 4-d vectors  
 
-
 ]]
 ---@class vector_4_module
 local M = {}
@@ -17,10 +16,11 @@ local avm_path = (...):match("(.-)[^%.]+$")
 
 ---@module 'avm.array'
 local array = require(avm_path .. "array")
+---@module 'avm.format'
+local format = require(avm_path .. "format")
 
 ---Disable warnings for _ex type overloaded functions
 ---@diagnostic disable: redundant-return-value, duplicate-set-field
-
 
 ---4D vector constructed from a tuple
 ---
@@ -31,7 +31,6 @@ local array = require(avm_path .. "array")
 ---@operator div(avm.number4|number): avm.vector_4
 ---@operator unm():avm.vector_4
 local vector_4 = {}
-
 
 -----------------------------------------------------------
 -- Vector creation
@@ -69,7 +68,7 @@ vector_4.__len = function()
 end
 
 function vector_4:__tostring()
-	return string.format("%f, %f, %f, %f", self:get())
+	return format.array("${format_string}", self)
 end
 
 function vector_4:copy()
@@ -2829,7 +2828,6 @@ function vector_4:set_wzyx(v1, v2, v3, v4)
 	self[4], self[3], self[2], self[1] = v1, v2, v3, v4
 end
 
-
 --[[
 function vector_4_slice:__index(key)
 	if type(key) == 'number' and key >= 1 and key <= 4 then
@@ -2853,7 +2851,7 @@ function vector_4_slice:__len()
 end
 
 function vector_4_slice:__tostring()
-	return string.format("%f, %f, %f, %f", self:get())
+	return format.array("${format_string}", self)
 end
 
 function vector_4_slice:copy()

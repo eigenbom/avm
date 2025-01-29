@@ -4,7 +4,6 @@ Matrix operations and types
 
 Classes and functions for working with matrices  
 
-
 ]]
 ---@class matrix_4_module
 local M = {}
@@ -19,10 +18,11 @@ local avm_path = (...):match("(.-)[^%.]+$")
 local array = require(avm_path .. "array")
 ---@module 'avm.linalg'
 local linalg = require(avm_path .. "linalg")
+---@module 'avm.format'
+local format = require(avm_path .. "format")
 
 ---Disable warnings for _ex type overloaded functions
 ---@diagnostic disable: redundant-return-value, duplicate-set-field
-
 
 ---4x4 matrix in column-major order constructed from a tuple
 ---
@@ -45,7 +45,6 @@ local matrix_4 = {}
 ---@field private _src avm.seq_number16
 ---@field private _o integer
 local matrix_4_slice = {}
-
 
 -----------------------------------------------------------
 -- Matrix creation
@@ -96,7 +95,7 @@ matrix_4.__len = function()
 end
 
 function matrix_4:__tostring()
-	return string.format("%f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f", self:get())
+	return format.array(self)
 end
 
 function matrix_4:copy()
@@ -328,7 +327,5 @@ function matrix_4:matmul_into(m, dest, dest_index)
 	assert(dest, "bad argument 'dest' (expected array or sequence, got nil)")
 	array.set_16(dest, dest_index or 1, linalg.matmul_mat4_mat4(self, m))
 end
-
-
 
 return M

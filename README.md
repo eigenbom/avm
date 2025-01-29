@@ -4,13 +4,11 @@ AVM is a pure Lua library for working with arrays, vectors and matrices. It oper
 
 This README covers installation and basic examples. To dive deeper you can read the full API documentation at [doc/api.md](doc/api.md) and read about the design principles at [doc/design.md](doc/design.md).
 
-
-
 ## Installation
 
-The library is available in different "distributions" provided in this repository (e.g, for [lua 5.1](lua51)). Each of these has a `debug` variant that will perform additional parameter validation.
+The library is available in different "distributions" provided in this repository (e.g, for [lua 5.1](lua51)). Each of these has a `debug` variant that will perform additional parameter validation at some additional cpu expense.
 
-Choose a distribution and copy into your local project directory. You can then require each [module](#modules) as needed. For example:
+To install this library first choose a distribution and copy into your local project directory. You can then require each [module](#modules) as needed. For example:
 
 ```lua
 local array = require 'avm.array'
@@ -26,6 +24,15 @@ local c = array.add(a, b)
 
 -- Check every element of c is equal to 11
 assert(array.all_equals_constant(c, 11))
+```
+
+Some distributions like [picotron](picotron) come as a single `avm.lua` file that wraps all functions in an `avm` global. This file can be placed into your project and included as normal:
+
+```lua
+include 'avm.lua'
+local array = avm.array
+
+local a = array.range(1, 10)
 ```
 
 ## Modules
@@ -206,12 +213,11 @@ for i, a, b in iterator.group_2(arr) do
 end
 ```
 
-Iterate over two arrays at once with `zip`:
+Iterate over two arrays with `zip`:
 
 ```lua
 local as = { 1,-2, 3,-4}
 local bs = {-1, 2,-3, 4}
--- Check the array as is the negative of bs
 for i, a, b in iterator.zip_1(as, bs) do
 	assert(a == -b)
 end
@@ -219,18 +225,33 @@ end
 
 ### View
 
-Create a view into existing data:
+Create a view of an array:
 
 ```lua
 local data = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
 local odds_view = view.stride(data, 1 --[[start index]], 2 --[[stride]], 5 --[[count]])
 assert(#odds_view == 5)
-
--- Modifying an element of the view will modify the source data
 odds_view[1] = 42
 assert(data[1] == 42)
+local copy = array.copy(odds_view)
+-- copy = {42, 3, 5, 7, 9}
+```
 
--- Copy the view to create an independent array
-local odds_copy = array.copy(odds_view)
--- odds_copy = {42, 3, 5, 7, 9}
+### Userdata
+
+(Picotron) Generate 100 random numbers and store in a userdata:
+
+```lua
+local N = 100
+local ud = userdata("f64", N)
+local random = function() return rnd() end
+array.generate_into(N, random, ud, 0)
+```
+
+(LuaJIT) Create a cdata array with values 1 to 100:
+
+```lua
+local N = 100
+local cdata = ffi.new("int[?]", N)
+array.range_into(1, N, 1, cdata, 0)
 ```

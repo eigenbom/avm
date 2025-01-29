@@ -48,10 +48,11 @@ local avm_path = (...):match("(.-)[^%.]+$")
 
 ---@module 'avm.array'
 local array = require(avm_path .. "array")
+---@module 'avm.format'
+local format = require(avm_path .. "format")
 
 ---Disable warnings for _ex type overloaded functions
 ---@diagnostic disable: redundant-return-value, duplicate-set-field
-
 
 ---2D vector constructed from a tuple
 ---
@@ -62,7 +63,6 @@ local array = require(avm_path .. "array")
 ---@operator div(avm.number2|number): avm.vector_2
 ---@operator unm():avm.vector_2
 local vector_2 = {}
-
 
 -----------------------------------------------------------
 -- Vector creation
@@ -96,7 +96,7 @@ vector_2.__len = function()
 end
 
 function vector_2:__tostring()
-	return string.format("%f, %f", self:get())
+	return format.array("${format_string}", self)
 end
 
 function vector_2:copy()
@@ -358,7 +358,6 @@ function vector_2:set_yx(v1, v2)
 	self[2], self[1] = v1, v2
 end
 
-
 --[[
 function vector_2_slice:__index(key)
 	if type(key) == 'number' and key >= 1 and key <= 2 then
@@ -382,7 +381,7 @@ function vector_2_slice:__len()
 end
 
 function vector_2_slice:__tostring()
-	return string.format("%f, %f", self:get())
+	return format.array("${format_string}", self)
 end
 
 function vector_2_slice:copy()

@@ -3,21 +3,16 @@ Linear algebra routines
 
 Functions for operating on numerical vectors and matrices up to 4 dimensions  
 ]]
----@class linalg_module
 local M = {}
 
 ------------------------------------------------------------------------
 -- AVM Dependencies
 ------------------------------------------------------------------------
----@diagnostic disable-next-line: unused-local
 local avm_path = (...):match("(.-)[^%.]+$")
 
----@module 'avm.array'
 local array = require(avm_path .. "array")
 
 ---Disable warnings for _ex type overloaded functions
----@diagnostic disable: redundant-return-value, duplicate-set-field
-
 
 -----------------------------------------------------------
 -- Dependencies
@@ -25,63 +20,56 @@ local array = require(avm_path .. "array")
 
 -- Math library dependencies
 -- Override these to use a different math library or set as nil to remove the dependency
-local math = require 'math'
-local math_sqrt = math.sqrt
+local math = require("math")
+local math_sqrt = assert(math.sqrt)
+local math_sin = assert(math.sin)
+local math_cos = assert(math.cos)
 
 -----------------------------------------------------------
 -- Basic constructors
 -----------------------------------------------------------
 
 ---2d-vector of zeros
----@return number,number
 function M.vec2_zero()
 	return 0,0
 end
 
 ---3d-vector of zeros
----@return number,number,number
 function M.vec3_zero()
 	return 0,0,0
 end
 
 ---4d-vector of zeros
----@return number,number,number,number
 function M.vec4_zero()
 	return 0,0,0,0
 end
 
 ---2x2 matrix of zeros
----@return number,number,number,number
 function M.mat2_zero()
 	return 0,0,0,0
 end
 
 ---3x3 matrix of zeros
----@return number,number,number,number,number,number,number,number,number
 function M.mat3_zero()
 	return 0,0,0, 0,0,0, 0,0,0
 end
 
 ---4x4 matrix of zeros
----@return number,number,number,number,number,number,number,number,number,number,number,number,number,number,number,number
 function M.mat4_zero()
 	return 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0
 end
 
 ---2x2 identity matrix
----@return number,number,number,number
 function M.mat2_identity()
 	return 1,0,0,1
 end
 
 ---3x3 identity matrix
----@return number,number,number,number,number,number,number,number,number
 function M.mat3_identity()
 	return 1,0,0, 0,1,0, 0,0,1
 end
 
 ---4x4 identity matrix
----@return number,number,number,number,number,number,number,number,number,number,number,number,number,number,number,number
 function M.mat4_identity()
 	return 1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1
 end
@@ -91,9 +79,6 @@ end
 -----------------------------------------------------------
 
 ---3x3 translation matrix
----@param x number
----@param y number
----@return number,number,number,number,number,number,number,number,number
 function M.mat3_translate(x,y)
 	assert(x, "bad argument 'x' (expected number, got nil)")
 	assert(y, "bad argument 'y' (expected number, got nil)")
@@ -102,10 +87,6 @@ function M.mat3_translate(x,y)
 end
 
 ---3x3 scaling matrix
----@param x number
----@param y number
----@param z number
----@return number,number,number,number,number,number,number,number,number
 function M.mat3_scale(x,y,z)
 	assert(x, "bad argument 'x' (expected number, got nil)")
 	assert(y, "bad argument 'y' (expected number, got nil)")
@@ -114,17 +95,12 @@ function M.mat3_scale(x,y,z)
 end
 
 ---3x3 rotation matrix
----@param radians number
----@param axis_x number
----@param axis_y number
----@param axis_z number
----@return number,number,number,number,number,number,number,number,number
 function M.mat3_rotate_around_axis(radians, axis_x, axis_y, axis_z)
 	assert(radians, "bad argument 'radians' (expected number, got nil)")
 	assert(axis_x, "bad argument 'axis_x' (expected number, got nil)")
 	assert(axis_y, "bad argument 'axis_y' (expected number, got nil)")
 	assert(axis_z, "bad argument 'axis_z' (expected number, got nil)")
-	local s, c = math.sin(radians), math.cos(radians)
+	local s, c = math_sin(radians), math_cos(radians)
 	local x, y, z = axis_x, axis_y, axis_z
 	local oc = 1-c
 	return x*x*oc+c, x*y*oc+z*s, x*z*oc-y*s,
@@ -133,20 +109,12 @@ function M.mat3_rotate_around_axis(radians, axis_x, axis_y, axis_z)
 end
 
 ---4x4 translation matrix
----@param x number
----@param y number
----@param z number
----@return number,number,number,number,number,number,number,number,number,number,number,number,number,number,number,number
 function M.mat4_translate(x,y,z)
 	assert(x, "bad argument 'x' (expected number, got nil)")
 	return 1,0,0,0, 0,1,0,0, 0,0,1,0, x,y,z,1
 end
 
 ---4x4 scaling matrix
----@param x number
----@param y number
----@param z number
----@return number,number,number,number,number,number,number,number,number,number,number,number,number,number,number,number
 function M.mat4_scale(x,y,z)
 	assert(x, "bad argument 'x' (expected number, got nil)")
 	assert(y, "bad argument 'y' (expected number, got nil)")
@@ -155,17 +123,12 @@ function M.mat4_scale(x,y,z)
 end
 
 ---4x4 rotation matrix
----@param radians number
----@param axis_x number
----@param axis_y number
----@param axis_z number
----@return number,number,number,number,number,number,number,number,number,number,number,number,number,number,number,number
 function M.mat4_rotate_around_axis(radians, axis_x, axis_y, axis_z)
 	assert(radians, "bad argument 'radians' (expected number, got nil)")
 	assert(axis_x, "bad argument 'axis_x' (expected number, got nil)")
 	assert(axis_y, "bad argument 'axis_y' (expected number, got nil)")
 	assert(axis_z, "bad argument 'axis_z' (expected number, got nil)")
-	local s, c = math.sin(radians), math.cos(radians)
+	local s, c = math_sin(radians), math_cos(radians)
 	local oc = 1-c
 	local x, y, z = axis_x, axis_y, axis_z
 	return x*x*oc+c, x*y*oc+z*s, x*z*oc-y*s, 0,
@@ -179,11 +142,6 @@ end
 -----------------------------------------------------------
 
 ---Apply the addition operator to two 2-tuples
----@param a1 number
----@param a2 number
----@param b1 number
----@param b2 number
----@return number,number
 function M.add_2(a1, a2, b1, b2)
 	assert(a1, "bad argument 'a1' (expected number, got nil)")
 	assert(a2, "bad argument 'a2' (expected number, got nil)")
@@ -193,9 +151,6 @@ function M.add_2(a1, a2, b1, b2)
 end
 
 ---Apply the addition operator to two 2d-vectors
----@param a avm.vec2
----@param b avm.vec2
----@return number,number
 function M.add_vec2(a, b)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -203,22 +158,9 @@ function M.add_vec2(a, b)
 end
 
 ---Apply the addition operator to two 2d-vectors in a slice
----@param a avm.seq_number2
----@param a_index integer
----@param b avm.seq_number2
----@param b_index integer
----@return number,number
----@diagnostic disable-next-line: missing-return
 function M.add_vec2_ex(a, a_index, b, b_index) end
 	
 ---Apply the addition operator to two 2d-vectors in a slice and store the result in a destination
----@param a avm.seq_number2
----@param a_index integer
----@param b avm.seq_number2
----@param b_index integer
----@param dest avm.seq_number2
----@param dest_index? integer
----@return nil
 function M.add_vec2_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -235,9 +177,6 @@ function M.add_vec2_ex(a, a_index, b, b_index, dest, dest_index)
 end
 
 ---Apply the addition operator to a 2d-vector and a constant
----@param a avm.vec2
----@param c number
----@return number,number
 function M.add_vec2_constant(a, c)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -245,20 +184,9 @@ function M.add_vec2_constant(a, c)
 end
 
 ---Apply the addition operator to a 2d-vector in a slice and a constant
----@param a avm.seq_number2
----@param a_index integer
----@param c number
----@return number,number
----@diagnostic disable-next-line: missing-return
 function M.add_vec2_constant_ex(a, a_index, c) end
 
 ---Apply the addition operator to a 2d-vector in a slice and a constant and store in a destination
----@param a avm.seq_number2
----@param a_index integer
----@param c number
----@param dest avm.seq_number2
----@param dest_index? integer
----@return nil
 function M.add_vec2_constant_ex(a, a_index, c, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -274,13 +202,6 @@ function M.add_vec2_constant_ex(a, a_index, c, dest, dest_index)
 end
 
 ---Apply the addition operator to two 3-tuples
----@param a1 number
----@param a2 number
----@param a3 number
----@param b1 number
----@param b2 number
----@param b3 number
----@return number,number,number
 function M.add_3(a1, a2, a3, b1, b2, b3)
 	assert(a1, "bad argument 'a1' (expected number, got nil)")
 	assert(a2, "bad argument 'a2' (expected number, got nil)")
@@ -292,9 +213,6 @@ function M.add_3(a1, a2, a3, b1, b2, b3)
 end
 
 ---Apply the addition operator to two 3d-vectors
----@param a avm.vec3
----@param b avm.vec3
----@return number,number,number
 function M.add_vec3(a, b)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -302,22 +220,9 @@ function M.add_vec3(a, b)
 end
 
 ---Apply the addition operator to two 3d-vectors in a slice
----@param a avm.seq_number3
----@param a_index integer
----@param b avm.seq_number3
----@param b_index integer
----@return number,number,number
----@diagnostic disable-next-line: missing-return
 function M.add_vec3_ex(a, a_index, b, b_index) end
 	
 ---Apply the addition operator to two 3d-vectors in a slice and store the result in a destination
----@param a avm.seq_number3
----@param a_index integer
----@param b avm.seq_number3
----@param b_index integer
----@param dest avm.seq_number3
----@param dest_index? integer
----@return nil
 function M.add_vec3_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -335,9 +240,6 @@ function M.add_vec3_ex(a, a_index, b, b_index, dest, dest_index)
 end
 
 ---Apply the addition operator to a 3d-vector and a constant
----@param a avm.vec3
----@param c number
----@return number,number,number
 function M.add_vec3_constant(a, c)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -345,20 +247,9 @@ function M.add_vec3_constant(a, c)
 end
 
 ---Apply the addition operator to a 3d-vector in a slice and a constant
----@param a avm.seq_number3
----@param a_index integer
----@param c number
----@return number,number,number
----@diagnostic disable-next-line: missing-return
 function M.add_vec3_constant_ex(a, a_index, c) end
 
 ---Apply the addition operator to a 3d-vector in a slice and a constant and store in a destination
----@param a avm.seq_number3
----@param a_index integer
----@param c number
----@param dest avm.seq_number3
----@param dest_index? integer
----@return nil
 function M.add_vec3_constant_ex(a, a_index, c, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -375,15 +266,6 @@ function M.add_vec3_constant_ex(a, a_index, c, dest, dest_index)
 end
 
 ---Apply the addition operator to two 4-tuples
----@param a1 number
----@param a2 number
----@param a3 number
----@param a4 number
----@param b1 number
----@param b2 number
----@param b3 number
----@param b4 number
----@return number,number,number,number
 function M.add_4(a1, a2, a3, a4, b1, b2, b3, b4)
 	assert(a1, "bad argument 'a1' (expected number, got nil)")
 	assert(a2, "bad argument 'a2' (expected number, got nil)")
@@ -397,9 +279,6 @@ function M.add_4(a1, a2, a3, a4, b1, b2, b3, b4)
 end
 
 ---Apply the addition operator to two 4d-vectors
----@param a avm.vec4
----@param b avm.vec4
----@return number,number,number,number
 function M.add_vec4(a, b)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -407,22 +286,9 @@ function M.add_vec4(a, b)
 end
 
 ---Apply the addition operator to two 4d-vectors in a slice
----@param a avm.seq_number4
----@param a_index integer
----@param b avm.seq_number4
----@param b_index integer
----@return number,number,number,number
----@diagnostic disable-next-line: missing-return
 function M.add_vec4_ex(a, a_index, b, b_index) end
 	
 ---Apply the addition operator to two 4d-vectors in a slice and store the result in a destination
----@param a avm.seq_number4
----@param a_index integer
----@param b avm.seq_number4
----@param b_index integer
----@param dest avm.seq_number4
----@param dest_index? integer
----@return nil
 function M.add_vec4_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -441,9 +307,6 @@ function M.add_vec4_ex(a, a_index, b, b_index, dest, dest_index)
 end
 
 ---Apply the addition operator to a 4d-vector and a constant
----@param a avm.vec4
----@param c number
----@return number,number,number,number
 function M.add_vec4_constant(a, c)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -451,20 +314,9 @@ function M.add_vec4_constant(a, c)
 end
 
 ---Apply the addition operator to a 4d-vector in a slice and a constant
----@param a avm.seq_number4
----@param a_index integer
----@param c number
----@return number,number,number,number
----@diagnostic disable-next-line: missing-return
 function M.add_vec4_constant_ex(a, a_index, c) end
 
 ---Apply the addition operator to a 4d-vector in a slice and a constant and store in a destination
----@param a avm.seq_number4
----@param a_index integer
----@param c number
----@param dest avm.seq_number4
----@param dest_index? integer
----@return nil
 function M.add_vec4_constant_ex(a, a_index, c, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -482,11 +334,6 @@ function M.add_vec4_constant_ex(a, a_index, c, dest, dest_index)
 end
 
 ---Apply the subtraction operator to two 2-tuples
----@param a1 number
----@param a2 number
----@param b1 number
----@param b2 number
----@return number,number
 function M.sub_2(a1, a2, b1, b2)
 	assert(a1, "bad argument 'a1' (expected number, got nil)")
 	assert(a2, "bad argument 'a2' (expected number, got nil)")
@@ -496,9 +343,6 @@ function M.sub_2(a1, a2, b1, b2)
 end
 
 ---Apply the subtraction operator to two 2d-vectors
----@param a avm.vec2
----@param b avm.vec2
----@return number,number
 function M.sub_vec2(a, b)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -506,22 +350,9 @@ function M.sub_vec2(a, b)
 end
 
 ---Apply the subtraction operator to two 2d-vectors in a slice
----@param a avm.seq_number2
----@param a_index integer
----@param b avm.seq_number2
----@param b_index integer
----@return number,number
----@diagnostic disable-next-line: missing-return
 function M.sub_vec2_ex(a, a_index, b, b_index) end
 	
 ---Apply the subtraction operator to two 2d-vectors in a slice and store the result in a destination
----@param a avm.seq_number2
----@param a_index integer
----@param b avm.seq_number2
----@param b_index integer
----@param dest avm.seq_number2
----@param dest_index? integer
----@return nil
 function M.sub_vec2_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -538,9 +369,6 @@ function M.sub_vec2_ex(a, a_index, b, b_index, dest, dest_index)
 end
 
 ---Apply the subtraction operator to a 2d-vector and a constant
----@param a avm.vec2
----@param c number
----@return number,number
 function M.sub_vec2_constant(a, c)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -548,20 +376,9 @@ function M.sub_vec2_constant(a, c)
 end
 
 ---Apply the subtraction operator to a 2d-vector in a slice and a constant
----@param a avm.seq_number2
----@param a_index integer
----@param c number
----@return number,number
----@diagnostic disable-next-line: missing-return
 function M.sub_vec2_constant_ex(a, a_index, c) end
 
 ---Apply the subtraction operator to a 2d-vector in a slice and a constant and store in a destination
----@param a avm.seq_number2
----@param a_index integer
----@param c number
----@param dest avm.seq_number2
----@param dest_index? integer
----@return nil
 function M.sub_vec2_constant_ex(a, a_index, c, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -577,13 +394,6 @@ function M.sub_vec2_constant_ex(a, a_index, c, dest, dest_index)
 end
 
 ---Apply the subtraction operator to two 3-tuples
----@param a1 number
----@param a2 number
----@param a3 number
----@param b1 number
----@param b2 number
----@param b3 number
----@return number,number,number
 function M.sub_3(a1, a2, a3, b1, b2, b3)
 	assert(a1, "bad argument 'a1' (expected number, got nil)")
 	assert(a2, "bad argument 'a2' (expected number, got nil)")
@@ -595,9 +405,6 @@ function M.sub_3(a1, a2, a3, b1, b2, b3)
 end
 
 ---Apply the subtraction operator to two 3d-vectors
----@param a avm.vec3
----@param b avm.vec3
----@return number,number,number
 function M.sub_vec3(a, b)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -605,22 +412,9 @@ function M.sub_vec3(a, b)
 end
 
 ---Apply the subtraction operator to two 3d-vectors in a slice
----@param a avm.seq_number3
----@param a_index integer
----@param b avm.seq_number3
----@param b_index integer
----@return number,number,number
----@diagnostic disable-next-line: missing-return
 function M.sub_vec3_ex(a, a_index, b, b_index) end
 	
 ---Apply the subtraction operator to two 3d-vectors in a slice and store the result in a destination
----@param a avm.seq_number3
----@param a_index integer
----@param b avm.seq_number3
----@param b_index integer
----@param dest avm.seq_number3
----@param dest_index? integer
----@return nil
 function M.sub_vec3_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -638,9 +432,6 @@ function M.sub_vec3_ex(a, a_index, b, b_index, dest, dest_index)
 end
 
 ---Apply the subtraction operator to a 3d-vector and a constant
----@param a avm.vec3
----@param c number
----@return number,number,number
 function M.sub_vec3_constant(a, c)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -648,20 +439,9 @@ function M.sub_vec3_constant(a, c)
 end
 
 ---Apply the subtraction operator to a 3d-vector in a slice and a constant
----@param a avm.seq_number3
----@param a_index integer
----@param c number
----@return number,number,number
----@diagnostic disable-next-line: missing-return
 function M.sub_vec3_constant_ex(a, a_index, c) end
 
 ---Apply the subtraction operator to a 3d-vector in a slice and a constant and store in a destination
----@param a avm.seq_number3
----@param a_index integer
----@param c number
----@param dest avm.seq_number3
----@param dest_index? integer
----@return nil
 function M.sub_vec3_constant_ex(a, a_index, c, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -678,15 +458,6 @@ function M.sub_vec3_constant_ex(a, a_index, c, dest, dest_index)
 end
 
 ---Apply the subtraction operator to two 4-tuples
----@param a1 number
----@param a2 number
----@param a3 number
----@param a4 number
----@param b1 number
----@param b2 number
----@param b3 number
----@param b4 number
----@return number,number,number,number
 function M.sub_4(a1, a2, a3, a4, b1, b2, b3, b4)
 	assert(a1, "bad argument 'a1' (expected number, got nil)")
 	assert(a2, "bad argument 'a2' (expected number, got nil)")
@@ -700,9 +471,6 @@ function M.sub_4(a1, a2, a3, a4, b1, b2, b3, b4)
 end
 
 ---Apply the subtraction operator to two 4d-vectors
----@param a avm.vec4
----@param b avm.vec4
----@return number,number,number,number
 function M.sub_vec4(a, b)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -710,22 +478,9 @@ function M.sub_vec4(a, b)
 end
 
 ---Apply the subtraction operator to two 4d-vectors in a slice
----@param a avm.seq_number4
----@param a_index integer
----@param b avm.seq_number4
----@param b_index integer
----@return number,number,number,number
----@diagnostic disable-next-line: missing-return
 function M.sub_vec4_ex(a, a_index, b, b_index) end
 	
 ---Apply the subtraction operator to two 4d-vectors in a slice and store the result in a destination
----@param a avm.seq_number4
----@param a_index integer
----@param b avm.seq_number4
----@param b_index integer
----@param dest avm.seq_number4
----@param dest_index? integer
----@return nil
 function M.sub_vec4_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -744,9 +499,6 @@ function M.sub_vec4_ex(a, a_index, b, b_index, dest, dest_index)
 end
 
 ---Apply the subtraction operator to a 4d-vector and a constant
----@param a avm.vec4
----@param c number
----@return number,number,number,number
 function M.sub_vec4_constant(a, c)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -754,20 +506,9 @@ function M.sub_vec4_constant(a, c)
 end
 
 ---Apply the subtraction operator to a 4d-vector in a slice and a constant
----@param a avm.seq_number4
----@param a_index integer
----@param c number
----@return number,number,number,number
----@diagnostic disable-next-line: missing-return
 function M.sub_vec4_constant_ex(a, a_index, c) end
 
 ---Apply the subtraction operator to a 4d-vector in a slice and a constant and store in a destination
----@param a avm.seq_number4
----@param a_index integer
----@param c number
----@param dest avm.seq_number4
----@param dest_index? integer
----@return nil
 function M.sub_vec4_constant_ex(a, a_index, c, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -785,11 +526,6 @@ function M.sub_vec4_constant_ex(a, a_index, c, dest, dest_index)
 end
 
 ---Apply the multiplication operator to two 2-tuples
----@param a1 number
----@param a2 number
----@param b1 number
----@param b2 number
----@return number,number
 function M.mul_2(a1, a2, b1, b2)
 	assert(a1, "bad argument 'a1' (expected number, got nil)")
 	assert(a2, "bad argument 'a2' (expected number, got nil)")
@@ -799,9 +535,6 @@ function M.mul_2(a1, a2, b1, b2)
 end
 
 ---Apply the multiplication operator to two 2d-vectors
----@param a avm.vec2
----@param b avm.vec2
----@return number,number
 function M.mul_vec2(a, b)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -809,22 +542,9 @@ function M.mul_vec2(a, b)
 end
 
 ---Apply the multiplication operator to two 2d-vectors in a slice
----@param a avm.seq_number2
----@param a_index integer
----@param b avm.seq_number2
----@param b_index integer
----@return number,number
----@diagnostic disable-next-line: missing-return
 function M.mul_vec2_ex(a, a_index, b, b_index) end
 	
 ---Apply the multiplication operator to two 2d-vectors in a slice and store the result in a destination
----@param a avm.seq_number2
----@param a_index integer
----@param b avm.seq_number2
----@param b_index integer
----@param dest avm.seq_number2
----@param dest_index? integer
----@return nil
 function M.mul_vec2_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -841,9 +561,6 @@ function M.mul_vec2_ex(a, a_index, b, b_index, dest, dest_index)
 end
 
 ---Apply the multiplication operator to a 2d-vector and a constant
----@param a avm.vec2
----@param c number
----@return number,number
 function M.mul_vec2_constant(a, c)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -851,20 +568,9 @@ function M.mul_vec2_constant(a, c)
 end
 
 ---Apply the multiplication operator to a 2d-vector in a slice and a constant
----@param a avm.seq_number2
----@param a_index integer
----@param c number
----@return number,number
----@diagnostic disable-next-line: missing-return
 function M.mul_vec2_constant_ex(a, a_index, c) end
 
 ---Apply the multiplication operator to a 2d-vector in a slice and a constant and store in a destination
----@param a avm.seq_number2
----@param a_index integer
----@param c number
----@param dest avm.seq_number2
----@param dest_index? integer
----@return nil
 function M.mul_vec2_constant_ex(a, a_index, c, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -880,13 +586,6 @@ function M.mul_vec2_constant_ex(a, a_index, c, dest, dest_index)
 end
 
 ---Apply the multiplication operator to two 3-tuples
----@param a1 number
----@param a2 number
----@param a3 number
----@param b1 number
----@param b2 number
----@param b3 number
----@return number,number,number
 function M.mul_3(a1, a2, a3, b1, b2, b3)
 	assert(a1, "bad argument 'a1' (expected number, got nil)")
 	assert(a2, "bad argument 'a2' (expected number, got nil)")
@@ -898,9 +597,6 @@ function M.mul_3(a1, a2, a3, b1, b2, b3)
 end
 
 ---Apply the multiplication operator to two 3d-vectors
----@param a avm.vec3
----@param b avm.vec3
----@return number,number,number
 function M.mul_vec3(a, b)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -908,22 +604,9 @@ function M.mul_vec3(a, b)
 end
 
 ---Apply the multiplication operator to two 3d-vectors in a slice
----@param a avm.seq_number3
----@param a_index integer
----@param b avm.seq_number3
----@param b_index integer
----@return number,number,number
----@diagnostic disable-next-line: missing-return
 function M.mul_vec3_ex(a, a_index, b, b_index) end
 	
 ---Apply the multiplication operator to two 3d-vectors in a slice and store the result in a destination
----@param a avm.seq_number3
----@param a_index integer
----@param b avm.seq_number3
----@param b_index integer
----@param dest avm.seq_number3
----@param dest_index? integer
----@return nil
 function M.mul_vec3_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -941,9 +624,6 @@ function M.mul_vec3_ex(a, a_index, b, b_index, dest, dest_index)
 end
 
 ---Apply the multiplication operator to a 3d-vector and a constant
----@param a avm.vec3
----@param c number
----@return number,number,number
 function M.mul_vec3_constant(a, c)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -951,20 +631,9 @@ function M.mul_vec3_constant(a, c)
 end
 
 ---Apply the multiplication operator to a 3d-vector in a slice and a constant
----@param a avm.seq_number3
----@param a_index integer
----@param c number
----@return number,number,number
----@diagnostic disable-next-line: missing-return
 function M.mul_vec3_constant_ex(a, a_index, c) end
 
 ---Apply the multiplication operator to a 3d-vector in a slice and a constant and store in a destination
----@param a avm.seq_number3
----@param a_index integer
----@param c number
----@param dest avm.seq_number3
----@param dest_index? integer
----@return nil
 function M.mul_vec3_constant_ex(a, a_index, c, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -981,15 +650,6 @@ function M.mul_vec3_constant_ex(a, a_index, c, dest, dest_index)
 end
 
 ---Apply the multiplication operator to two 4-tuples
----@param a1 number
----@param a2 number
----@param a3 number
----@param a4 number
----@param b1 number
----@param b2 number
----@param b3 number
----@param b4 number
----@return number,number,number,number
 function M.mul_4(a1, a2, a3, a4, b1, b2, b3, b4)
 	assert(a1, "bad argument 'a1' (expected number, got nil)")
 	assert(a2, "bad argument 'a2' (expected number, got nil)")
@@ -1003,9 +663,6 @@ function M.mul_4(a1, a2, a3, a4, b1, b2, b3, b4)
 end
 
 ---Apply the multiplication operator to two 4d-vectors
----@param a avm.vec4
----@param b avm.vec4
----@return number,number,number,number
 function M.mul_vec4(a, b)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -1013,22 +670,9 @@ function M.mul_vec4(a, b)
 end
 
 ---Apply the multiplication operator to two 4d-vectors in a slice
----@param a avm.seq_number4
----@param a_index integer
----@param b avm.seq_number4
----@param b_index integer
----@return number,number,number,number
----@diagnostic disable-next-line: missing-return
 function M.mul_vec4_ex(a, a_index, b, b_index) end
 	
 ---Apply the multiplication operator to two 4d-vectors in a slice and store the result in a destination
----@param a avm.seq_number4
----@param a_index integer
----@param b avm.seq_number4
----@param b_index integer
----@param dest avm.seq_number4
----@param dest_index? integer
----@return nil
 function M.mul_vec4_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -1047,9 +691,6 @@ function M.mul_vec4_ex(a, a_index, b, b_index, dest, dest_index)
 end
 
 ---Apply the multiplication operator to a 4d-vector and a constant
----@param a avm.vec4
----@param c number
----@return number,number,number,number
 function M.mul_vec4_constant(a, c)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -1057,20 +698,9 @@ function M.mul_vec4_constant(a, c)
 end
 
 ---Apply the multiplication operator to a 4d-vector in a slice and a constant
----@param a avm.seq_number4
----@param a_index integer
----@param c number
----@return number,number,number,number
----@diagnostic disable-next-line: missing-return
 function M.mul_vec4_constant_ex(a, a_index, c) end
 
 ---Apply the multiplication operator to a 4d-vector in a slice and a constant and store in a destination
----@param a avm.seq_number4
----@param a_index integer
----@param c number
----@param dest avm.seq_number4
----@param dest_index? integer
----@return nil
 function M.mul_vec4_constant_ex(a, a_index, c, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -1088,11 +718,6 @@ function M.mul_vec4_constant_ex(a, a_index, c, dest, dest_index)
 end
 
 ---Apply the division operator to two 2-tuples
----@param a1 number
----@param a2 number
----@param b1 number
----@param b2 number
----@return number,number
 function M.div_2(a1, a2, b1, b2)
 	assert(a1, "bad argument 'a1' (expected number, got nil)")
 	assert(a2, "bad argument 'a2' (expected number, got nil)")
@@ -1102,9 +727,6 @@ function M.div_2(a1, a2, b1, b2)
 end
 
 ---Apply the division operator to two 2d-vectors
----@param a avm.vec2
----@param b avm.vec2
----@return number,number
 function M.div_vec2(a, b)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -1112,22 +734,9 @@ function M.div_vec2(a, b)
 end
 
 ---Apply the division operator to two 2d-vectors in a slice
----@param a avm.seq_number2
----@param a_index integer
----@param b avm.seq_number2
----@param b_index integer
----@return number,number
----@diagnostic disable-next-line: missing-return
 function M.div_vec2_ex(a, a_index, b, b_index) end
 	
 ---Apply the division operator to two 2d-vectors in a slice and store the result in a destination
----@param a avm.seq_number2
----@param a_index integer
----@param b avm.seq_number2
----@param b_index integer
----@param dest avm.seq_number2
----@param dest_index? integer
----@return nil
 function M.div_vec2_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -1144,9 +753,6 @@ function M.div_vec2_ex(a, a_index, b, b_index, dest, dest_index)
 end
 
 ---Apply the division operator to a 2d-vector and a constant
----@param a avm.vec2
----@param c number
----@return number,number
 function M.div_vec2_constant(a, c)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -1154,20 +760,9 @@ function M.div_vec2_constant(a, c)
 end
 
 ---Apply the division operator to a 2d-vector in a slice and a constant
----@param a avm.seq_number2
----@param a_index integer
----@param c number
----@return number,number
----@diagnostic disable-next-line: missing-return
 function M.div_vec2_constant_ex(a, a_index, c) end
 
 ---Apply the division operator to a 2d-vector in a slice and a constant and store in a destination
----@param a avm.seq_number2
----@param a_index integer
----@param c number
----@param dest avm.seq_number2
----@param dest_index? integer
----@return nil
 function M.div_vec2_constant_ex(a, a_index, c, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -1183,13 +778,6 @@ function M.div_vec2_constant_ex(a, a_index, c, dest, dest_index)
 end
 
 ---Apply the division operator to two 3-tuples
----@param a1 number
----@param a2 number
----@param a3 number
----@param b1 number
----@param b2 number
----@param b3 number
----@return number,number,number
 function M.div_3(a1, a2, a3, b1, b2, b3)
 	assert(a1, "bad argument 'a1' (expected number, got nil)")
 	assert(a2, "bad argument 'a2' (expected number, got nil)")
@@ -1201,9 +789,6 @@ function M.div_3(a1, a2, a3, b1, b2, b3)
 end
 
 ---Apply the division operator to two 3d-vectors
----@param a avm.vec3
----@param b avm.vec3
----@return number,number,number
 function M.div_vec3(a, b)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -1211,22 +796,9 @@ function M.div_vec3(a, b)
 end
 
 ---Apply the division operator to two 3d-vectors in a slice
----@param a avm.seq_number3
----@param a_index integer
----@param b avm.seq_number3
----@param b_index integer
----@return number,number,number
----@diagnostic disable-next-line: missing-return
 function M.div_vec3_ex(a, a_index, b, b_index) end
 	
 ---Apply the division operator to two 3d-vectors in a slice and store the result in a destination
----@param a avm.seq_number3
----@param a_index integer
----@param b avm.seq_number3
----@param b_index integer
----@param dest avm.seq_number3
----@param dest_index? integer
----@return nil
 function M.div_vec3_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -1244,9 +816,6 @@ function M.div_vec3_ex(a, a_index, b, b_index, dest, dest_index)
 end
 
 ---Apply the division operator to a 3d-vector and a constant
----@param a avm.vec3
----@param c number
----@return number,number,number
 function M.div_vec3_constant(a, c)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -1254,20 +823,9 @@ function M.div_vec3_constant(a, c)
 end
 
 ---Apply the division operator to a 3d-vector in a slice and a constant
----@param a avm.seq_number3
----@param a_index integer
----@param c number
----@return number,number,number
----@diagnostic disable-next-line: missing-return
 function M.div_vec3_constant_ex(a, a_index, c) end
 
 ---Apply the division operator to a 3d-vector in a slice and a constant and store in a destination
----@param a avm.seq_number3
----@param a_index integer
----@param c number
----@param dest avm.seq_number3
----@param dest_index? integer
----@return nil
 function M.div_vec3_constant_ex(a, a_index, c, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -1284,15 +842,6 @@ function M.div_vec3_constant_ex(a, a_index, c, dest, dest_index)
 end
 
 ---Apply the division operator to two 4-tuples
----@param a1 number
----@param a2 number
----@param a3 number
----@param a4 number
----@param b1 number
----@param b2 number
----@param b3 number
----@param b4 number
----@return number,number,number,number
 function M.div_4(a1, a2, a3, a4, b1, b2, b3, b4)
 	assert(a1, "bad argument 'a1' (expected number, got nil)")
 	assert(a2, "bad argument 'a2' (expected number, got nil)")
@@ -1306,9 +855,6 @@ function M.div_4(a1, a2, a3, a4, b1, b2, b3, b4)
 end
 
 ---Apply the division operator to two 4d-vectors
----@param a avm.vec4
----@param b avm.vec4
----@return number,number,number,number
 function M.div_vec4(a, b)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -1316,22 +862,9 @@ function M.div_vec4(a, b)
 end
 
 ---Apply the division operator to two 4d-vectors in a slice
----@param a avm.seq_number4
----@param a_index integer
----@param b avm.seq_number4
----@param b_index integer
----@return number,number,number,number
----@diagnostic disable-next-line: missing-return
 function M.div_vec4_ex(a, a_index, b, b_index) end
 	
 ---Apply the division operator to two 4d-vectors in a slice and store the result in a destination
----@param a avm.seq_number4
----@param a_index integer
----@param b avm.seq_number4
----@param b_index integer
----@param dest avm.seq_number4
----@param dest_index? integer
----@return nil
 function M.div_vec4_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -1350,9 +883,6 @@ function M.div_vec4_ex(a, a_index, b, b_index, dest, dest_index)
 end
 
 ---Apply the division operator to a 4d-vector and a constant
----@param a avm.vec4
----@param c number
----@return number,number,number,number
 function M.div_vec4_constant(a, c)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -1360,20 +890,9 @@ function M.div_vec4_constant(a, c)
 end
 
 ---Apply the division operator to a 4d-vector in a slice and a constant
----@param a avm.seq_number4
----@param a_index integer
----@param c number
----@return number,number,number,number
----@diagnostic disable-next-line: missing-return
 function M.div_vec4_constant_ex(a, a_index, c) end
 
 ---Apply the division operator to a 4d-vector in a slice and a constant and store in a destination
----@param a avm.seq_number4
----@param a_index integer
----@param c number
----@param dest avm.seq_number4
----@param dest_index? integer
----@return nil
 function M.div_vec4_constant_ex(a, a_index, c, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -1391,11 +910,6 @@ function M.div_vec4_constant_ex(a, a_index, c, dest, dest_index)
 end
 
 ---Apply the exponentiation operator to two 2-tuples
----@param a1 number
----@param a2 number
----@param b1 number
----@param b2 number
----@return number,number
 function M.pow_2(a1, a2, b1, b2)
 	assert(a1, "bad argument 'a1' (expected number, got nil)")
 	assert(a2, "bad argument 'a2' (expected number, got nil)")
@@ -1405,9 +919,6 @@ function M.pow_2(a1, a2, b1, b2)
 end
 
 ---Apply the exponentiation operator to two 2d-vectors
----@param a avm.vec2
----@param b avm.vec2
----@return number,number
 function M.pow_vec2(a, b)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -1415,22 +926,9 @@ function M.pow_vec2(a, b)
 end
 
 ---Apply the exponentiation operator to two 2d-vectors in a slice
----@param a avm.seq_number2
----@param a_index integer
----@param b avm.seq_number2
----@param b_index integer
----@return number,number
----@diagnostic disable-next-line: missing-return
 function M.pow_vec2_ex(a, a_index, b, b_index) end
 	
 ---Apply the exponentiation operator to two 2d-vectors in a slice and store the result in a destination
----@param a avm.seq_number2
----@param a_index integer
----@param b avm.seq_number2
----@param b_index integer
----@param dest avm.seq_number2
----@param dest_index? integer
----@return nil
 function M.pow_vec2_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -1447,9 +945,6 @@ function M.pow_vec2_ex(a, a_index, b, b_index, dest, dest_index)
 end
 
 ---Apply the exponentiation operator to a 2d-vector and a constant
----@param a avm.vec2
----@param c number
----@return number,number
 function M.pow_vec2_constant(a, c)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -1457,20 +952,9 @@ function M.pow_vec2_constant(a, c)
 end
 
 ---Apply the exponentiation operator to a 2d-vector in a slice and a constant
----@param a avm.seq_number2
----@param a_index integer
----@param c number
----@return number,number
----@diagnostic disable-next-line: missing-return
 function M.pow_vec2_constant_ex(a, a_index, c) end
 
 ---Apply the exponentiation operator to a 2d-vector in a slice and a constant and store in a destination
----@param a avm.seq_number2
----@param a_index integer
----@param c number
----@param dest avm.seq_number2
----@param dest_index? integer
----@return nil
 function M.pow_vec2_constant_ex(a, a_index, c, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -1486,13 +970,6 @@ function M.pow_vec2_constant_ex(a, a_index, c, dest, dest_index)
 end
 
 ---Apply the exponentiation operator to two 3-tuples
----@param a1 number
----@param a2 number
----@param a3 number
----@param b1 number
----@param b2 number
----@param b3 number
----@return number,number,number
 function M.pow_3(a1, a2, a3, b1, b2, b3)
 	assert(a1, "bad argument 'a1' (expected number, got nil)")
 	assert(a2, "bad argument 'a2' (expected number, got nil)")
@@ -1504,9 +981,6 @@ function M.pow_3(a1, a2, a3, b1, b2, b3)
 end
 
 ---Apply the exponentiation operator to two 3d-vectors
----@param a avm.vec3
----@param b avm.vec3
----@return number,number,number
 function M.pow_vec3(a, b)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -1514,22 +988,9 @@ function M.pow_vec3(a, b)
 end
 
 ---Apply the exponentiation operator to two 3d-vectors in a slice
----@param a avm.seq_number3
----@param a_index integer
----@param b avm.seq_number3
----@param b_index integer
----@return number,number,number
----@diagnostic disable-next-line: missing-return
 function M.pow_vec3_ex(a, a_index, b, b_index) end
 	
 ---Apply the exponentiation operator to two 3d-vectors in a slice and store the result in a destination
----@param a avm.seq_number3
----@param a_index integer
----@param b avm.seq_number3
----@param b_index integer
----@param dest avm.seq_number3
----@param dest_index? integer
----@return nil
 function M.pow_vec3_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -1547,9 +1008,6 @@ function M.pow_vec3_ex(a, a_index, b, b_index, dest, dest_index)
 end
 
 ---Apply the exponentiation operator to a 3d-vector and a constant
----@param a avm.vec3
----@param c number
----@return number,number,number
 function M.pow_vec3_constant(a, c)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -1557,20 +1015,9 @@ function M.pow_vec3_constant(a, c)
 end
 
 ---Apply the exponentiation operator to a 3d-vector in a slice and a constant
----@param a avm.seq_number3
----@param a_index integer
----@param c number
----@return number,number,number
----@diagnostic disable-next-line: missing-return
 function M.pow_vec3_constant_ex(a, a_index, c) end
 
 ---Apply the exponentiation operator to a 3d-vector in a slice and a constant and store in a destination
----@param a avm.seq_number3
----@param a_index integer
----@param c number
----@param dest avm.seq_number3
----@param dest_index? integer
----@return nil
 function M.pow_vec3_constant_ex(a, a_index, c, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -1587,15 +1034,6 @@ function M.pow_vec3_constant_ex(a, a_index, c, dest, dest_index)
 end
 
 ---Apply the exponentiation operator to two 4-tuples
----@param a1 number
----@param a2 number
----@param a3 number
----@param a4 number
----@param b1 number
----@param b2 number
----@param b3 number
----@param b4 number
----@return number,number,number,number
 function M.pow_4(a1, a2, a3, a4, b1, b2, b3, b4)
 	assert(a1, "bad argument 'a1' (expected number, got nil)")
 	assert(a2, "bad argument 'a2' (expected number, got nil)")
@@ -1609,9 +1047,6 @@ function M.pow_4(a1, a2, a3, a4, b1, b2, b3, b4)
 end
 
 ---Apply the exponentiation operator to two 4d-vectors
----@param a avm.vec4
----@param b avm.vec4
----@return number,number,number,number
 function M.pow_vec4(a, b)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -1619,22 +1054,9 @@ function M.pow_vec4(a, b)
 end
 
 ---Apply the exponentiation operator to two 4d-vectors in a slice
----@param a avm.seq_number4
----@param a_index integer
----@param b avm.seq_number4
----@param b_index integer
----@return number,number,number,number
----@diagnostic disable-next-line: missing-return
 function M.pow_vec4_ex(a, a_index, b, b_index) end
 	
 ---Apply the exponentiation operator to two 4d-vectors in a slice and store the result in a destination
----@param a avm.seq_number4
----@param a_index integer
----@param b avm.seq_number4
----@param b_index integer
----@param dest avm.seq_number4
----@param dest_index? integer
----@return nil
 function M.pow_vec4_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -1653,9 +1075,6 @@ function M.pow_vec4_ex(a, a_index, b, b_index, dest, dest_index)
 end
 
 ---Apply the exponentiation operator to a 4d-vector and a constant
----@param a avm.vec4
----@param c number
----@return number,number,number,number
 function M.pow_vec4_constant(a, c)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -1663,20 +1082,9 @@ function M.pow_vec4_constant(a, c)
 end
 
 ---Apply the exponentiation operator to a 4d-vector in a slice and a constant
----@param a avm.seq_number4
----@param a_index integer
----@param c number
----@return number,number,number,number
----@diagnostic disable-next-line: missing-return
 function M.pow_vec4_constant_ex(a, a_index, c) end
 
 ---Apply the exponentiation operator to a 4d-vector in a slice and a constant and store in a destination
----@param a avm.seq_number4
----@param a_index integer
----@param c number
----@param dest avm.seq_number4
----@param dest_index? integer
----@return nil
 function M.pow_vec4_constant_ex(a, a_index, c, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -1694,26 +1102,15 @@ function M.pow_vec4_constant_ex(a, a_index, c, dest, dest_index)
 end
 
 ---Negate a 2d-vector
----@param a avm.vec2
----@return number,number
 function M.negate_vec2(a)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	return -a[1],-a[2]
 end
 
 ---Negate a 2d-vector in a slice
----@param a avm.seq_number2
----@param a_index integer
----@return number,number
----@diagnostic disable-next-line: missing-return
 function M.negate_vec2_ex(a, a_index) end
 
 ---Negate a 2d-vector in a slice and store the result in a destination
----@param a avm.seq_number2
----@param a_index integer
----@param dest avm.seq_number2
----@param dest_index? integer
----@return nil
 function M.negate_vec2_ex(a, a_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	local ao = a_index
@@ -1726,26 +1123,15 @@ function M.negate_vec2_ex(a, a_index, dest, dest_index)
 end
 
 ---Negate a 3d-vector
----@param a avm.vec3
----@return number,number,number
 function M.negate_vec3(a)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	return -a[1],-a[2],-a[3]
 end
 
 ---Negate a 3d-vector in a slice
----@param a avm.seq_number3
----@param a_index integer
----@return number,number,number
----@diagnostic disable-next-line: missing-return
 function M.negate_vec3_ex(a, a_index) end
 
 ---Negate a 3d-vector in a slice and store the result in a destination
----@param a avm.seq_number3
----@param a_index integer
----@param dest avm.seq_number3
----@param dest_index? integer
----@return nil
 function M.negate_vec3_ex(a, a_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	local ao = a_index
@@ -1758,26 +1144,15 @@ function M.negate_vec3_ex(a, a_index, dest, dest_index)
 end
 
 ---Negate a 4d-vector
----@param a avm.vec4
----@return number,number,number,number
 function M.negate_vec4(a)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	return -a[1],-a[2],-a[3],-a[4]
 end
 
 ---Negate a 4d-vector in a slice
----@param a avm.seq_number4
----@param a_index integer
----@return number,number,number,number
----@diagnostic disable-next-line: missing-return
 function M.negate_vec4_ex(a, a_index) end
 
 ---Negate a 4d-vector in a slice and store the result in a destination
----@param a avm.seq_number4
----@param a_index integer
----@param dest avm.seq_number4
----@param dest_index? integer
----@return nil
 function M.negate_vec4_ex(a, a_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	local ao = a_index
@@ -1790,9 +1165,6 @@ function M.negate_vec4_ex(a, a_index, dest, dest_index)
 end
 
 ---true if the vectors are equal (differ by epsilon or less)
----@param a avm.vec2
----@param b avm.vec2
----@param epsilon? number
 function M.equals_vec2(a, b, epsilon)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -1800,11 +1172,6 @@ function M.equals_vec2(a, b, epsilon)
 end
  
 ---true if the vectors in a slice are equal (differ by epsilon or less)
----@param a avm.seq_number2
----@param a_index integer
----@param b avm.seq_number2
----@param b_index integer
----@param epsilon? number
 function M.equals_vec2_ex(a, a_index, b, b_index, epsilon)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -1812,9 +1179,6 @@ function M.equals_vec2_ex(a, a_index, b, b_index, epsilon)
 end
 
 ---true if the vectors are equal (differ by epsilon or less)
----@param a avm.vec3
----@param b avm.vec3
----@param epsilon? number
 function M.equals_vec3(a, b, epsilon)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -1822,11 +1186,6 @@ function M.equals_vec3(a, b, epsilon)
 end
  
 ---true if the vectors in a slice are equal (differ by epsilon or less)
----@param a avm.seq_number3
----@param a_index integer
----@param b avm.seq_number3
----@param b_index integer
----@param epsilon? number
 function M.equals_vec3_ex(a, a_index, b, b_index, epsilon)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -1834,9 +1193,6 @@ function M.equals_vec3_ex(a, a_index, b, b_index, epsilon)
 end
 
 ---true if the vectors are equal (differ by epsilon or less)
----@param a avm.vec4
----@param b avm.vec4
----@param epsilon? number
 function M.equals_vec4(a, b, epsilon)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -1844,23 +1200,14 @@ function M.equals_vec4(a, b, epsilon)
 end
  
 ---true if the vectors in a slice are equal (differ by epsilon or less)
----@param a avm.seq_number4
----@param a_index integer
----@param b avm.seq_number4
----@param b_index integer
----@param epsilon? number
 function M.equals_vec4_ex(a, a_index, b, b_index, epsilon)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
 	return array.all_almost_equals_ex(a, a_index, 4, b, b_index, epsilon)
 end
 
-
 ---Apply the addition operator to each element in two 2x2 matrices
 ---
----@param a avm.mat2
----@param b avm.mat2
----@return number,number,number,number
 function M.add_mat2(a, b)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -1869,23 +1216,10 @@ end
 
 ---Apply the addition operator to each element in two 2x2 matrices in a slice
 ---
----@param a avm.seq_number4
----@param a_index integer
----@param b avm.seq_number2
----@param b_index integer
----@return number,number,number,number
----@diagnostic disable-next-line: missing-return
 function M.add_mat2_ex(a, a_index, b, b_index) end
 	
 ---Apply the addition operator to each element in two 2d-vectors in a slice and store the result in a destination
 ---
----@param a avm.seq_number4
----@param a_index integer
----@param b avm.seq_number4
----@param b_index integer
----@param dest avm.seq_number4
----@param dest_index? integer
----@return nil
 function M.add_mat2_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -1904,9 +1238,6 @@ function M.add_mat2_ex(a, a_index, b, b_index, dest, dest_index)
 end
 
 ---Apply the addition operator to each element in a 2x2 matrix and a constant
----@param a avm.mat2
----@param c number
----@return number,number,number,number
 function M.add_mat2_constant(a, c)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -1914,20 +1245,9 @@ function M.add_mat2_constant(a, c)
 end
 
 ---Apply the addition operator to each element in a 2x2 matrix in a slice and a constant
----@param a avm.seq_number4
----@param a_index integer
----@param c number
----@return number,number,number,number
----@diagnostic disable-next-line: missing-return
 function M.add_mat2_constant_ex(a, a_index, c) end
 
 ---Apply the addition operator to each element in a 2x2 matrix in a slice and a constant and store in a destination
----@param a avm.seq_number4
----@param a_index integer
----@param c number
----@param dest avm.seq_number4
----@param dest_index? integer
----@return nil
 function M.add_mat2_constant_ex(a, a_index, c, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -1946,9 +1266,6 @@ end
 
 ---Apply the addition operator to each element in two 3x3 matrices
 ---
----@param a avm.mat3
----@param b avm.mat3
----@return number,number,number,number,number,number,number,number,number
 function M.add_mat3(a, b)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -1957,23 +1274,10 @@ end
 
 ---Apply the addition operator to each element in two 3x3 matrices in a slice
 ---
----@param a avm.seq_number9
----@param a_index integer
----@param b avm.seq_number3
----@param b_index integer
----@return number,number,number,number,number,number,number,number,number
----@diagnostic disable-next-line: missing-return
 function M.add_mat3_ex(a, a_index, b, b_index) end
 	
 ---Apply the addition operator to each element in two 3d-vectors in a slice and store the result in a destination
 ---
----@param a avm.seq_number9
----@param a_index integer
----@param b avm.seq_number9
----@param b_index integer
----@param dest avm.seq_number9
----@param dest_index? integer
----@return nil
 function M.add_mat3_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -1997,9 +1301,6 @@ function M.add_mat3_ex(a, a_index, b, b_index, dest, dest_index)
 end
 
 ---Apply the addition operator to each element in a 3x3 matrix and a constant
----@param a avm.mat3
----@param c number
----@return number,number,number,number,number,number,number,number,number
 function M.add_mat3_constant(a, c)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -2007,20 +1308,9 @@ function M.add_mat3_constant(a, c)
 end
 
 ---Apply the addition operator to each element in a 3x3 matrix in a slice and a constant
----@param a avm.seq_number9
----@param a_index integer
----@param c number
----@return number,number,number,number,number,number,number,number,number
----@diagnostic disable-next-line: missing-return
 function M.add_mat3_constant_ex(a, a_index, c) end
 
 ---Apply the addition operator to each element in a 3x3 matrix in a slice and a constant and store in a destination
----@param a avm.seq_number9
----@param a_index integer
----@param c number
----@param dest avm.seq_number9
----@param dest_index? integer
----@return nil
 function M.add_mat3_constant_ex(a, a_index, c, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -2044,9 +1334,6 @@ end
 
 ---Apply the addition operator to each element in two 4x4 matrices
 ---
----@param a avm.mat4
----@param b avm.mat4
----@return number,number,number,number,number,number,number,number,number,number,number,number,number,number,number,number
 function M.add_mat4(a, b)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -2055,23 +1342,10 @@ end
 
 ---Apply the addition operator to each element in two 4x4 matrices in a slice
 ---
----@param a avm.seq_number16
----@param a_index integer
----@param b avm.seq_number4
----@param b_index integer
----@return number,number,number,number,number,number,number,number,number,number,number,number,number,number,number,number
----@diagnostic disable-next-line: missing-return
 function M.add_mat4_ex(a, a_index, b, b_index) end
 	
 ---Apply the addition operator to each element in two 4d-vectors in a slice and store the result in a destination
 ---
----@param a avm.seq_number16
----@param a_index integer
----@param b avm.seq_number16
----@param b_index integer
----@param dest avm.seq_number16
----@param dest_index? integer
----@return nil
 function M.add_mat4_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -2102,9 +1376,6 @@ function M.add_mat4_ex(a, a_index, b, b_index, dest, dest_index)
 end
 
 ---Apply the addition operator to each element in a 4x4 matrix and a constant
----@param a avm.mat4
----@param c number
----@return number,number,number,number,number,number,number,number,number,number,number,number,number,number,number,number
 function M.add_mat4_constant(a, c)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -2112,20 +1383,9 @@ function M.add_mat4_constant(a, c)
 end
 
 ---Apply the addition operator to each element in a 4x4 matrix in a slice and a constant
----@param a avm.seq_number16
----@param a_index integer
----@param c number
----@return number,number,number,number,number,number,number,number,number,number,number,number,number,number,number,number
----@diagnostic disable-next-line: missing-return
 function M.add_mat4_constant_ex(a, a_index, c) end
 
 ---Apply the addition operator to each element in a 4x4 matrix in a slice and a constant and store in a destination
----@param a avm.seq_number16
----@param a_index integer
----@param c number
----@param dest avm.seq_number16
----@param dest_index? integer
----@return nil
 function M.add_mat4_constant_ex(a, a_index, c, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -2156,9 +1416,6 @@ end
 
 ---Apply the subtraction operator to each element in two 2x2 matrices
 ---
----@param a avm.mat2
----@param b avm.mat2
----@return number,number,number,number
 function M.sub_mat2(a, b)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -2167,23 +1424,10 @@ end
 
 ---Apply the subtraction operator to each element in two 2x2 matrices in a slice
 ---
----@param a avm.seq_number4
----@param a_index integer
----@param b avm.seq_number2
----@param b_index integer
----@return number,number,number,number
----@diagnostic disable-next-line: missing-return
 function M.sub_mat2_ex(a, a_index, b, b_index) end
 	
 ---Apply the subtraction operator to each element in two 2d-vectors in a slice and store the result in a destination
 ---
----@param a avm.seq_number4
----@param a_index integer
----@param b avm.seq_number4
----@param b_index integer
----@param dest avm.seq_number4
----@param dest_index? integer
----@return nil
 function M.sub_mat2_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -2202,9 +1446,6 @@ function M.sub_mat2_ex(a, a_index, b, b_index, dest, dest_index)
 end
 
 ---Apply the subtraction operator to each element in a 2x2 matrix and a constant
----@param a avm.mat2
----@param c number
----@return number,number,number,number
 function M.sub_mat2_constant(a, c)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -2212,20 +1453,9 @@ function M.sub_mat2_constant(a, c)
 end
 
 ---Apply the subtraction operator to each element in a 2x2 matrix in a slice and a constant
----@param a avm.seq_number4
----@param a_index integer
----@param c number
----@return number,number,number,number
----@diagnostic disable-next-line: missing-return
 function M.sub_mat2_constant_ex(a, a_index, c) end
 
 ---Apply the subtraction operator to each element in a 2x2 matrix in a slice and a constant and store in a destination
----@param a avm.seq_number4
----@param a_index integer
----@param c number
----@param dest avm.seq_number4
----@param dest_index? integer
----@return nil
 function M.sub_mat2_constant_ex(a, a_index, c, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -2244,9 +1474,6 @@ end
 
 ---Apply the subtraction operator to each element in two 3x3 matrices
 ---
----@param a avm.mat3
----@param b avm.mat3
----@return number,number,number,number,number,number,number,number,number
 function M.sub_mat3(a, b)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -2255,23 +1482,10 @@ end
 
 ---Apply the subtraction operator to each element in two 3x3 matrices in a slice
 ---
----@param a avm.seq_number9
----@param a_index integer
----@param b avm.seq_number3
----@param b_index integer
----@return number,number,number,number,number,number,number,number,number
----@diagnostic disable-next-line: missing-return
 function M.sub_mat3_ex(a, a_index, b, b_index) end
 	
 ---Apply the subtraction operator to each element in two 3d-vectors in a slice and store the result in a destination
 ---
----@param a avm.seq_number9
----@param a_index integer
----@param b avm.seq_number9
----@param b_index integer
----@param dest avm.seq_number9
----@param dest_index? integer
----@return nil
 function M.sub_mat3_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -2295,9 +1509,6 @@ function M.sub_mat3_ex(a, a_index, b, b_index, dest, dest_index)
 end
 
 ---Apply the subtraction operator to each element in a 3x3 matrix and a constant
----@param a avm.mat3
----@param c number
----@return number,number,number,number,number,number,number,number,number
 function M.sub_mat3_constant(a, c)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -2305,20 +1516,9 @@ function M.sub_mat3_constant(a, c)
 end
 
 ---Apply the subtraction operator to each element in a 3x3 matrix in a slice and a constant
----@param a avm.seq_number9
----@param a_index integer
----@param c number
----@return number,number,number,number,number,number,number,number,number
----@diagnostic disable-next-line: missing-return
 function M.sub_mat3_constant_ex(a, a_index, c) end
 
 ---Apply the subtraction operator to each element in a 3x3 matrix in a slice and a constant and store in a destination
----@param a avm.seq_number9
----@param a_index integer
----@param c number
----@param dest avm.seq_number9
----@param dest_index? integer
----@return nil
 function M.sub_mat3_constant_ex(a, a_index, c, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -2342,9 +1542,6 @@ end
 
 ---Apply the subtraction operator to each element in two 4x4 matrices
 ---
----@param a avm.mat4
----@param b avm.mat4
----@return number,number,number,number,number,number,number,number,number,number,number,number,number,number,number,number
 function M.sub_mat4(a, b)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -2353,23 +1550,10 @@ end
 
 ---Apply the subtraction operator to each element in two 4x4 matrices in a slice
 ---
----@param a avm.seq_number16
----@param a_index integer
----@param b avm.seq_number4
----@param b_index integer
----@return number,number,number,number,number,number,number,number,number,number,number,number,number,number,number,number
----@diagnostic disable-next-line: missing-return
 function M.sub_mat4_ex(a, a_index, b, b_index) end
 	
 ---Apply the subtraction operator to each element in two 4d-vectors in a slice and store the result in a destination
 ---
----@param a avm.seq_number16
----@param a_index integer
----@param b avm.seq_number16
----@param b_index integer
----@param dest avm.seq_number16
----@param dest_index? integer
----@return nil
 function M.sub_mat4_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -2400,9 +1584,6 @@ function M.sub_mat4_ex(a, a_index, b, b_index, dest, dest_index)
 end
 
 ---Apply the subtraction operator to each element in a 4x4 matrix and a constant
----@param a avm.mat4
----@param c number
----@return number,number,number,number,number,number,number,number,number,number,number,number,number,number,number,number
 function M.sub_mat4_constant(a, c)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -2410,20 +1591,9 @@ function M.sub_mat4_constant(a, c)
 end
 
 ---Apply the subtraction operator to each element in a 4x4 matrix in a slice and a constant
----@param a avm.seq_number16
----@param a_index integer
----@param c number
----@return number,number,number,number,number,number,number,number,number,number,number,number,number,number,number,number
----@diagnostic disable-next-line: missing-return
 function M.sub_mat4_constant_ex(a, a_index, c) end
 
 ---Apply the subtraction operator to each element in a 4x4 matrix in a slice and a constant and store in a destination
----@param a avm.seq_number16
----@param a_index integer
----@param c number
----@param dest avm.seq_number16
----@param dest_index? integer
----@return nil
 function M.sub_mat4_constant_ex(a, a_index, c, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -2456,10 +1626,6 @@ end
 ---
 ---Note: This is element-wise multiplication, for standard matrix multiplication see `linalg_module.matmul`
 ---
----@see linalg_module.matmul_mat2_mat2
----@param a avm.mat2
----@param b avm.mat2
----@return number,number,number,number
 function M.mul_mat2(a, b)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -2470,27 +1636,12 @@ end
 ---
 ---Note: This is element-wise multiplication, for standard matrix multiplication see `linalg_module.matmul`
 ---
----@see linalg_module.matmul_mat2_mat2
----@param a avm.seq_number4
----@param a_index integer
----@param b avm.seq_number2
----@param b_index integer
----@return number,number,number,number
----@diagnostic disable-next-line: missing-return
 function M.mul_mat2_ex(a, a_index, b, b_index) end
 	
 ---Apply the multiplication operator to each element in two 2d-vectors in a slice and store the result in a destination
 ---
 ---Note: This is element-wise multiplication, for standard matrix multiplication see `linalg_module.matmul`
 ---
----@see linalg_module.matmul_mat2_mat2
----@param a avm.seq_number4
----@param a_index integer
----@param b avm.seq_number4
----@param b_index integer
----@param dest avm.seq_number4
----@param dest_index? integer
----@return nil
 function M.mul_mat2_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -2509,9 +1660,6 @@ function M.mul_mat2_ex(a, a_index, b, b_index, dest, dest_index)
 end
 
 ---Apply the multiplication operator to each element in a 2x2 matrix and a constant
----@param a avm.mat2
----@param c number
----@return number,number,number,number
 function M.mul_mat2_constant(a, c)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -2519,20 +1667,9 @@ function M.mul_mat2_constant(a, c)
 end
 
 ---Apply the multiplication operator to each element in a 2x2 matrix in a slice and a constant
----@param a avm.seq_number4
----@param a_index integer
----@param c number
----@return number,number,number,number
----@diagnostic disable-next-line: missing-return
 function M.mul_mat2_constant_ex(a, a_index, c) end
 
 ---Apply the multiplication operator to each element in a 2x2 matrix in a slice and a constant and store in a destination
----@param a avm.seq_number4
----@param a_index integer
----@param c number
----@param dest avm.seq_number4
----@param dest_index? integer
----@return nil
 function M.mul_mat2_constant_ex(a, a_index, c, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -2553,10 +1690,6 @@ end
 ---
 ---Note: This is element-wise multiplication, for standard matrix multiplication see `linalg_module.matmul`
 ---
----@see linalg_module.matmul_mat3_mat3
----@param a avm.mat3
----@param b avm.mat3
----@return number,number,number,number,number,number,number,number,number
 function M.mul_mat3(a, b)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -2567,27 +1700,12 @@ end
 ---
 ---Note: This is element-wise multiplication, for standard matrix multiplication see `linalg_module.matmul`
 ---
----@see linalg_module.matmul_mat3_mat3
----@param a avm.seq_number9
----@param a_index integer
----@param b avm.seq_number3
----@param b_index integer
----@return number,number,number,number,number,number,number,number,number
----@diagnostic disable-next-line: missing-return
 function M.mul_mat3_ex(a, a_index, b, b_index) end
 	
 ---Apply the multiplication operator to each element in two 3d-vectors in a slice and store the result in a destination
 ---
 ---Note: This is element-wise multiplication, for standard matrix multiplication see `linalg_module.matmul`
 ---
----@see linalg_module.matmul_mat3_mat3
----@param a avm.seq_number9
----@param a_index integer
----@param b avm.seq_number9
----@param b_index integer
----@param dest avm.seq_number9
----@param dest_index? integer
----@return nil
 function M.mul_mat3_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -2611,9 +1729,6 @@ function M.mul_mat3_ex(a, a_index, b, b_index, dest, dest_index)
 end
 
 ---Apply the multiplication operator to each element in a 3x3 matrix and a constant
----@param a avm.mat3
----@param c number
----@return number,number,number,number,number,number,number,number,number
 function M.mul_mat3_constant(a, c)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -2621,20 +1736,9 @@ function M.mul_mat3_constant(a, c)
 end
 
 ---Apply the multiplication operator to each element in a 3x3 matrix in a slice and a constant
----@param a avm.seq_number9
----@param a_index integer
----@param c number
----@return number,number,number,number,number,number,number,number,number
----@diagnostic disable-next-line: missing-return
 function M.mul_mat3_constant_ex(a, a_index, c) end
 
 ---Apply the multiplication operator to each element in a 3x3 matrix in a slice and a constant and store in a destination
----@param a avm.seq_number9
----@param a_index integer
----@param c number
----@param dest avm.seq_number9
----@param dest_index? integer
----@return nil
 function M.mul_mat3_constant_ex(a, a_index, c, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -2660,10 +1764,6 @@ end
 ---
 ---Note: This is element-wise multiplication, for standard matrix multiplication see `linalg_module.matmul`
 ---
----@see linalg_module.matmul_mat4_mat4
----@param a avm.mat4
----@param b avm.mat4
----@return number,number,number,number,number,number,number,number,number,number,number,number,number,number,number,number
 function M.mul_mat4(a, b)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -2674,27 +1774,12 @@ end
 ---
 ---Note: This is element-wise multiplication, for standard matrix multiplication see `linalg_module.matmul`
 ---
----@see linalg_module.matmul_mat4_mat4
----@param a avm.seq_number16
----@param a_index integer
----@param b avm.seq_number4
----@param b_index integer
----@return number,number,number,number,number,number,number,number,number,number,number,number,number,number,number,number
----@diagnostic disable-next-line: missing-return
 function M.mul_mat4_ex(a, a_index, b, b_index) end
 	
 ---Apply the multiplication operator to each element in two 4d-vectors in a slice and store the result in a destination
 ---
 ---Note: This is element-wise multiplication, for standard matrix multiplication see `linalg_module.matmul`
 ---
----@see linalg_module.matmul_mat4_mat4
----@param a avm.seq_number16
----@param a_index integer
----@param b avm.seq_number16
----@param b_index integer
----@param dest avm.seq_number16
----@param dest_index? integer
----@return nil
 function M.mul_mat4_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -2725,9 +1810,6 @@ function M.mul_mat4_ex(a, a_index, b, b_index, dest, dest_index)
 end
 
 ---Apply the multiplication operator to each element in a 4x4 matrix and a constant
----@param a avm.mat4
----@param c number
----@return number,number,number,number,number,number,number,number,number,number,number,number,number,number,number,number
 function M.mul_mat4_constant(a, c)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -2735,20 +1817,9 @@ function M.mul_mat4_constant(a, c)
 end
 
 ---Apply the multiplication operator to each element in a 4x4 matrix in a slice and a constant
----@param a avm.seq_number16
----@param a_index integer
----@param c number
----@return number,number,number,number,number,number,number,number,number,number,number,number,number,number,number,number
----@diagnostic disable-next-line: missing-return
 function M.mul_mat4_constant_ex(a, a_index, c) end
 
 ---Apply the multiplication operator to each element in a 4x4 matrix in a slice and a constant and store in a destination
----@param a avm.seq_number16
----@param a_index integer
----@param c number
----@param dest avm.seq_number16
----@param dest_index? integer
----@return nil
 function M.mul_mat4_constant_ex(a, a_index, c, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -2779,9 +1850,6 @@ end
 
 ---Apply the division operator to each element in two 2x2 matrices
 ---
----@param a avm.mat2
----@param b avm.mat2
----@return number,number,number,number
 function M.div_mat2(a, b)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -2790,23 +1858,10 @@ end
 
 ---Apply the division operator to each element in two 2x2 matrices in a slice
 ---
----@param a avm.seq_number4
----@param a_index integer
----@param b avm.seq_number2
----@param b_index integer
----@return number,number,number,number
----@diagnostic disable-next-line: missing-return
 function M.div_mat2_ex(a, a_index, b, b_index) end
 	
 ---Apply the division operator to each element in two 2d-vectors in a slice and store the result in a destination
 ---
----@param a avm.seq_number4
----@param a_index integer
----@param b avm.seq_number4
----@param b_index integer
----@param dest avm.seq_number4
----@param dest_index? integer
----@return nil
 function M.div_mat2_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -2825,9 +1880,6 @@ function M.div_mat2_ex(a, a_index, b, b_index, dest, dest_index)
 end
 
 ---Apply the division operator to each element in a 2x2 matrix and a constant
----@param a avm.mat2
----@param c number
----@return number,number,number,number
 function M.div_mat2_constant(a, c)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -2835,20 +1887,9 @@ function M.div_mat2_constant(a, c)
 end
 
 ---Apply the division operator to each element in a 2x2 matrix in a slice and a constant
----@param a avm.seq_number4
----@param a_index integer
----@param c number
----@return number,number,number,number
----@diagnostic disable-next-line: missing-return
 function M.div_mat2_constant_ex(a, a_index, c) end
 
 ---Apply the division operator to each element in a 2x2 matrix in a slice and a constant and store in a destination
----@param a avm.seq_number4
----@param a_index integer
----@param c number
----@param dest avm.seq_number4
----@param dest_index? integer
----@return nil
 function M.div_mat2_constant_ex(a, a_index, c, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -2867,9 +1908,6 @@ end
 
 ---Apply the division operator to each element in two 3x3 matrices
 ---
----@param a avm.mat3
----@param b avm.mat3
----@return number,number,number,number,number,number,number,number,number
 function M.div_mat3(a, b)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -2878,23 +1916,10 @@ end
 
 ---Apply the division operator to each element in two 3x3 matrices in a slice
 ---
----@param a avm.seq_number9
----@param a_index integer
----@param b avm.seq_number3
----@param b_index integer
----@return number,number,number,number,number,number,number,number,number
----@diagnostic disable-next-line: missing-return
 function M.div_mat3_ex(a, a_index, b, b_index) end
 	
 ---Apply the division operator to each element in two 3d-vectors in a slice and store the result in a destination
 ---
----@param a avm.seq_number9
----@param a_index integer
----@param b avm.seq_number9
----@param b_index integer
----@param dest avm.seq_number9
----@param dest_index? integer
----@return nil
 function M.div_mat3_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -2918,9 +1943,6 @@ function M.div_mat3_ex(a, a_index, b, b_index, dest, dest_index)
 end
 
 ---Apply the division operator to each element in a 3x3 matrix and a constant
----@param a avm.mat3
----@param c number
----@return number,number,number,number,number,number,number,number,number
 function M.div_mat3_constant(a, c)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -2928,20 +1950,9 @@ function M.div_mat3_constant(a, c)
 end
 
 ---Apply the division operator to each element in a 3x3 matrix in a slice and a constant
----@param a avm.seq_number9
----@param a_index integer
----@param c number
----@return number,number,number,number,number,number,number,number,number
----@diagnostic disable-next-line: missing-return
 function M.div_mat3_constant_ex(a, a_index, c) end
 
 ---Apply the division operator to each element in a 3x3 matrix in a slice and a constant and store in a destination
----@param a avm.seq_number9
----@param a_index integer
----@param c number
----@param dest avm.seq_number9
----@param dest_index? integer
----@return nil
 function M.div_mat3_constant_ex(a, a_index, c, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -2965,9 +1976,6 @@ end
 
 ---Apply the division operator to each element in two 4x4 matrices
 ---
----@param a avm.mat4
----@param b avm.mat4
----@return number,number,number,number,number,number,number,number,number,number,number,number,number,number,number,number
 function M.div_mat4(a, b)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -2976,23 +1984,10 @@ end
 
 ---Apply the division operator to each element in two 4x4 matrices in a slice
 ---
----@param a avm.seq_number16
----@param a_index integer
----@param b avm.seq_number4
----@param b_index integer
----@return number,number,number,number,number,number,number,number,number,number,number,number,number,number,number,number
----@diagnostic disable-next-line: missing-return
 function M.div_mat4_ex(a, a_index, b, b_index) end
 	
 ---Apply the division operator to each element in two 4d-vectors in a slice and store the result in a destination
 ---
----@param a avm.seq_number16
----@param a_index integer
----@param b avm.seq_number16
----@param b_index integer
----@param dest avm.seq_number16
----@param dest_index? integer
----@return nil
 function M.div_mat4_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -3023,9 +2018,6 @@ function M.div_mat4_ex(a, a_index, b, b_index, dest, dest_index)
 end
 
 ---Apply the division operator to each element in a 4x4 matrix and a constant
----@param a avm.mat4
----@param c number
----@return number,number,number,number,number,number,number,number,number,number,number,number,number,number,number,number
 function M.div_mat4_constant(a, c)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -3033,20 +2025,9 @@ function M.div_mat4_constant(a, c)
 end
 
 ---Apply the division operator to each element in a 4x4 matrix in a slice and a constant
----@param a avm.seq_number16
----@param a_index integer
----@param c number
----@return number,number,number,number,number,number,number,number,number,number,number,number,number,number,number,number
----@diagnostic disable-next-line: missing-return
 function M.div_mat4_constant_ex(a, a_index, c) end
 
 ---Apply the division operator to each element in a 4x4 matrix in a slice and a constant and store in a destination
----@param a avm.seq_number16
----@param a_index integer
----@param c number
----@param dest avm.seq_number16
----@param dest_index? integer
----@return nil
 function M.div_mat4_constant_ex(a, a_index, c, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -3077,9 +2058,6 @@ end
 
 ---Apply the exponentiation operator to each element in two 2x2 matrices
 ---
----@param a avm.mat2
----@param b avm.mat2
----@return number,number,number,number
 function M.pow_mat2(a, b)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -3088,23 +2066,10 @@ end
 
 ---Apply the exponentiation operator to each element in two 2x2 matrices in a slice
 ---
----@param a avm.seq_number4
----@param a_index integer
----@param b avm.seq_number2
----@param b_index integer
----@return number,number,number,number
----@diagnostic disable-next-line: missing-return
 function M.pow_mat2_ex(a, a_index, b, b_index) end
 	
 ---Apply the exponentiation operator to each element in two 2d-vectors in a slice and store the result in a destination
 ---
----@param a avm.seq_number4
----@param a_index integer
----@param b avm.seq_number4
----@param b_index integer
----@param dest avm.seq_number4
----@param dest_index? integer
----@return nil
 function M.pow_mat2_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -3123,9 +2088,6 @@ function M.pow_mat2_ex(a, a_index, b, b_index, dest, dest_index)
 end
 
 ---Apply the exponentiation operator to each element in a 2x2 matrix and a constant
----@param a avm.mat2
----@param c number
----@return number,number,number,number
 function M.pow_mat2_constant(a, c)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -3133,20 +2095,9 @@ function M.pow_mat2_constant(a, c)
 end
 
 ---Apply the exponentiation operator to each element in a 2x2 matrix in a slice and a constant
----@param a avm.seq_number4
----@param a_index integer
----@param c number
----@return number,number,number,number
----@diagnostic disable-next-line: missing-return
 function M.pow_mat2_constant_ex(a, a_index, c) end
 
 ---Apply the exponentiation operator to each element in a 2x2 matrix in a slice and a constant and store in a destination
----@param a avm.seq_number4
----@param a_index integer
----@param c number
----@param dest avm.seq_number4
----@param dest_index? integer
----@return nil
 function M.pow_mat2_constant_ex(a, a_index, c, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -3165,9 +2116,6 @@ end
 
 ---Apply the exponentiation operator to each element in two 3x3 matrices
 ---
----@param a avm.mat3
----@param b avm.mat3
----@return number,number,number,number,number,number,number,number,number
 function M.pow_mat3(a, b)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -3176,23 +2124,10 @@ end
 
 ---Apply the exponentiation operator to each element in two 3x3 matrices in a slice
 ---
----@param a avm.seq_number9
----@param a_index integer
----@param b avm.seq_number3
----@param b_index integer
----@return number,number,number,number,number,number,number,number,number
----@diagnostic disable-next-line: missing-return
 function M.pow_mat3_ex(a, a_index, b, b_index) end
 	
 ---Apply the exponentiation operator to each element in two 3d-vectors in a slice and store the result in a destination
 ---
----@param a avm.seq_number9
----@param a_index integer
----@param b avm.seq_number9
----@param b_index integer
----@param dest avm.seq_number9
----@param dest_index? integer
----@return nil
 function M.pow_mat3_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -3216,9 +2151,6 @@ function M.pow_mat3_ex(a, a_index, b, b_index, dest, dest_index)
 end
 
 ---Apply the exponentiation operator to each element in a 3x3 matrix and a constant
----@param a avm.mat3
----@param c number
----@return number,number,number,number,number,number,number,number,number
 function M.pow_mat3_constant(a, c)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -3226,20 +2158,9 @@ function M.pow_mat3_constant(a, c)
 end
 
 ---Apply the exponentiation operator to each element in a 3x3 matrix in a slice and a constant
----@param a avm.seq_number9
----@param a_index integer
----@param c number
----@return number,number,number,number,number,number,number,number,number
----@diagnostic disable-next-line: missing-return
 function M.pow_mat3_constant_ex(a, a_index, c) end
 
 ---Apply the exponentiation operator to each element in a 3x3 matrix in a slice and a constant and store in a destination
----@param a avm.seq_number9
----@param a_index integer
----@param c number
----@param dest avm.seq_number9
----@param dest_index? integer
----@return nil
 function M.pow_mat3_constant_ex(a, a_index, c, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -3263,9 +2184,6 @@ end
 
 ---Apply the exponentiation operator to each element in two 4x4 matrices
 ---
----@param a avm.mat4
----@param b avm.mat4
----@return number,number,number,number,number,number,number,number,number,number,number,number,number,number,number,number
 function M.pow_mat4(a, b)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -3274,23 +2192,10 @@ end
 
 ---Apply the exponentiation operator to each element in two 4x4 matrices in a slice
 ---
----@param a avm.seq_number16
----@param a_index integer
----@param b avm.seq_number4
----@param b_index integer
----@return number,number,number,number,number,number,number,number,number,number,number,number,number,number,number,number
----@diagnostic disable-next-line: missing-return
 function M.pow_mat4_ex(a, a_index, b, b_index) end
 	
 ---Apply the exponentiation operator to each element in two 4d-vectors in a slice and store the result in a destination
 ---
----@param a avm.seq_number16
----@param a_index integer
----@param b avm.seq_number16
----@param b_index integer
----@param dest avm.seq_number16
----@param dest_index? integer
----@return nil
 function M.pow_mat4_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -3321,9 +2226,6 @@ function M.pow_mat4_ex(a, a_index, b, b_index, dest, dest_index)
 end
 
 ---Apply the exponentiation operator to each element in a 4x4 matrix and a constant
----@param a avm.mat4
----@param c number
----@return number,number,number,number,number,number,number,number,number,number,number,number,number,number,number,number
 function M.pow_mat4_constant(a, c)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -3331,20 +2233,9 @@ function M.pow_mat4_constant(a, c)
 end
 
 ---Apply the exponentiation operator to each element in a 4x4 matrix in a slice and a constant
----@param a avm.seq_number16
----@param a_index integer
----@param c number
----@return number,number,number,number,number,number,number,number,number,number,number,number,number,number,number,number
----@diagnostic disable-next-line: missing-return
 function M.pow_mat4_constant_ex(a, a_index, c) end
 
 ---Apply the exponentiation operator to each element in a 4x4 matrix in a slice and a constant and store in a destination
----@param a avm.seq_number16
----@param a_index integer
----@param c number
----@param dest avm.seq_number16
----@param dest_index? integer
----@return nil
 function M.pow_mat4_constant_ex(a, a_index, c, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(c, "bad argument 'c' (expected number, got nil)")
@@ -3374,26 +2265,15 @@ function M.pow_mat4_constant_ex(a, a_index, c, dest, dest_index)
 end
 
 ---Negate a 2x2 matrix
----@param a avm.mat2
----@return number,number,number,number
 function M.negate_mat2(a)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	return -a[1],-a[2],-a[3],-a[4]
 end
 
 ---Negate a 2x2 matrix in a slice
----@param a avm.seq_number4
----@param a_index integer
----@return number,number,number,number
----@diagnostic disable-next-line: missing-return
 function M.negate_mat2_ex(a, a_index) end
 
 ---Negate a 2x2 matrix in a slice and store the result in a destination
----@param a avm.seq_number4
----@param a_index integer
----@param dest avm.seq_number4
----@param dest_index? integer
----@return nil
 function M.negate_mat2_ex(a, a_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	local ao = a_index
@@ -3406,26 +2286,15 @@ function M.negate_mat2_ex(a, a_index, dest, dest_index)
 end
 
 ---Negate a 3x3 matrix
----@param a avm.mat3
----@return number,number,number,number,number,number,number,number,number
 function M.negate_mat3(a)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	return -a[1],-a[2],-a[3],-a[4],-a[5],-a[6],-a[7],-a[8],-a[9]
 end
 
 ---Negate a 3x3 matrix in a slice
----@param a avm.seq_number9
----@param a_index integer
----@return number,number,number,number,number,number,number,number,number
----@diagnostic disable-next-line: missing-return
 function M.negate_mat3_ex(a, a_index) end
 
 ---Negate a 3x3 matrix in a slice and store the result in a destination
----@param a avm.seq_number9
----@param a_index integer
----@param dest avm.seq_number9
----@param dest_index? integer
----@return nil
 function M.negate_mat3_ex(a, a_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	local ao = a_index
@@ -3438,26 +2307,15 @@ function M.negate_mat3_ex(a, a_index, dest, dest_index)
 end
 
 ---Negate a 4x4 matrix
----@param a avm.mat4
----@return number,number,number,number,number,number,number,number,number,number,number,number,number,number,number,number
 function M.negate_mat4(a)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	return -a[1],-a[2],-a[3],-a[4],-a[5],-a[6],-a[7],-a[8],-a[9],-a[10],-a[11],-a[12],-a[13],-a[14],-a[15],-a[16]
 end
 
 ---Negate a 4x4 matrix in a slice
----@param a avm.seq_number16
----@param a_index integer
----@return number,number,number,number,number,number,number,number,number,number,number,number,number,number,number,number
----@diagnostic disable-next-line: missing-return
 function M.negate_mat4_ex(a, a_index) end
 
 ---Negate a 4x4 matrix in a slice and store the result in a destination
----@param a avm.seq_number16
----@param a_index integer
----@param dest avm.seq_number16
----@param dest_index? integer
----@return nil
 function M.negate_mat4_ex(a, a_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	local ao = a_index
@@ -3470,9 +2328,6 @@ function M.negate_mat4_ex(a, a_index, dest, dest_index)
 end
 
 ---true if the matrices are equal (differ by epsilon or less)
----@param a avm.mat2
----@param b avm.mat2
----@param epsilon? number
 function M.equals_mat2(a, b, epsilon)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -3480,11 +2335,6 @@ function M.equals_mat2(a, b, epsilon)
 end
  
 ---true if the matrices in a slice are equal (differ by epsilon or less)
----@param a avm.seq_number2
----@param a_index integer
----@param b avm.seq_number2
----@param b_index integer
----@param epsilon? number
 function M.equals_mat2_ex(a, a_index, b, b_index, epsilon)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -3492,9 +2342,6 @@ function M.equals_mat2_ex(a, a_index, b, b_index, epsilon)
 end
 
 ---true if the matrices are equal (differ by epsilon or less)
----@param a avm.mat3
----@param b avm.mat3
----@param epsilon? number
 function M.equals_mat3(a, b, epsilon)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -3502,11 +2349,6 @@ function M.equals_mat3(a, b, epsilon)
 end
  
 ---true if the matrices in a slice are equal (differ by epsilon or less)
----@param a avm.seq_number3
----@param a_index integer
----@param b avm.seq_number3
----@param b_index integer
----@param epsilon? number
 function M.equals_mat3_ex(a, a_index, b, b_index, epsilon)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -3514,9 +2356,6 @@ function M.equals_mat3_ex(a, a_index, b, b_index, epsilon)
 end
 
 ---true if the matrices are equal (differ by epsilon or less)
----@param a avm.mat4
----@param b avm.mat4
----@param epsilon? number
 function M.equals_mat4(a, b, epsilon)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -3524,67 +2363,45 @@ function M.equals_mat4(a, b, epsilon)
 end
  
 ---true if the matrices in a slice are equal (differ by epsilon or less)
----@param a avm.seq_number4
----@param a_index integer
----@param b avm.seq_number4
----@param b_index integer
----@param epsilon? number
 function M.equals_mat4_ex(a, a_index, b, b_index, epsilon)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
 	return array.all_almost_equals_ex(a, a_index, 16, b, b_index, epsilon)
 end
 
-
 -----------------------------------------------------------
 -- Vector length, normalisation, inner product and cross product
 -----------------------------------------------------------
 
 ---2d vector length (magnitude)
----@param a1 number
----@param a2 number
----@return number
 function M.length_2(a1, a2)
 	return math_sqrt(M.length_squared_2(a1, a2))
 end
 
 ---2d vector length (magnitude)
----@param v avm.vec2
----@return number
 function M.length_vec2(v)
 	assert(v, "bad argument 'v' (expected array, got nil)")
 	return math_sqrt(M.length_squared_vec2(v))
 end
 
 ---2d vector length (magnitude) in a slice
----@param v avm.seq_number2
----@param v_index integer
----@return number
 function M.length_vec2_slice(v, v_index)
 	assert(v, "bad argument 'v' (expected array or sequence, got nil)")
 	return math_sqrt(M.length_squared_vec2_slice(v, v_index))
 end
 
 ---2d vector length (magnitude) squared
----@param a1 number
----@param a2 number
----@return number
 function M.length_squared_2(a1, a2)
 	return a1*a1 + a2*a2
 end
 
 ---2d vector length (magnitude) squared
----@param v avm.vec2
----@return number
 function M.length_squared_vec2(v)
 	assert(v, "bad argument 'v' (expected array or sequence, got nil)")
 	return v[1]*v[1] + v[2]*v[2]
 end
 
 ---2d vector length (magnitude) squared in a slice
----@param v avm.seq_number2
----@param v_index integer
----@return number
 function M.length_squared_vec2_slice(v, v_index)
 	assert(v, "bad argument 'v' (expected array or sequence, got nil)")
 	local o = v_index - 1
@@ -3592,52 +2409,34 @@ function M.length_squared_vec2_slice(v, v_index)
 end
 
 ---3d vector length (magnitude)
----@param a1 number
----@param a2 number
----@param a3 number
----@return number
 function M.length_3(a1, a2, a3)
 	return math_sqrt(M.length_squared_3(a1, a2, a3))
 end
 
 ---3d vector length (magnitude)
----@param v avm.vec3
----@return number
 function M.length_vec3(v)
 	assert(v, "bad argument 'v' (expected array, got nil)")
 	return math_sqrt(M.length_squared_vec3(v))
 end
 
 ---3d vector length (magnitude) in a slice
----@param v avm.seq_number3
----@param v_index integer
----@return number
 function M.length_vec3_slice(v, v_index)
 	assert(v, "bad argument 'v' (expected array or sequence, got nil)")
 	return math_sqrt(M.length_squared_vec3_slice(v, v_index))
 end
 
 ---3d vector length (magnitude) squared
----@param a1 number
----@param a2 number
----@param a3 number
----@return number
 function M.length_squared_3(a1, a2, a3)
 	return a1*a1 + a2*a2 + a3*a3
 end
 
 ---3d vector length (magnitude) squared
----@param v avm.vec3
----@return number
 function M.length_squared_vec3(v)
 	assert(v, "bad argument 'v' (expected array or sequence, got nil)")
 	return v[1]*v[1] + v[2]*v[2] + v[3]*v[3]
 end
 
 ---3d vector length (magnitude) squared in a slice
----@param v avm.seq_number3
----@param v_index integer
----@return number
 function M.length_squared_vec3_slice(v, v_index)
 	assert(v, "bad argument 'v' (expected array or sequence, got nil)")
 	local o = v_index - 1
@@ -3645,54 +2444,34 @@ function M.length_squared_vec3_slice(v, v_index)
 end
 
 ---4d vector length (magnitude)
----@param a1 number
----@param a2 number
----@param a3 number
----@param a4 number
----@return number
 function M.length_4(a1, a2, a3, a4)
 	return math_sqrt(M.length_squared_4(a1, a2, a3, a4))
 end
 
 ---4d vector length (magnitude)
----@param v avm.vec4
----@return number
 function M.length_vec4(v)
 	assert(v, "bad argument 'v' (expected array, got nil)")
 	return math_sqrt(M.length_squared_vec4(v))
 end
 
 ---4d vector length (magnitude) in a slice
----@param v avm.seq_number4
----@param v_index integer
----@return number
 function M.length_vec4_slice(v, v_index)
 	assert(v, "bad argument 'v' (expected array or sequence, got nil)")
 	return math_sqrt(M.length_squared_vec4_slice(v, v_index))
 end
 
 ---4d vector length (magnitude) squared
----@param a1 number
----@param a2 number
----@param a3 number
----@param a4 number
----@return number
 function M.length_squared_4(a1, a2, a3, a4)
 	return a1*a1 + a2*a2 + a3*a3 + a4*a4
 end
 
 ---4d vector length (magnitude) squared
----@param v avm.vec4
----@return number
 function M.length_squared_vec4(v)
 	assert(v, "bad argument 'v' (expected array or sequence, got nil)")
 	return v[1]*v[1] + v[2]*v[2] + v[3]*v[3] + v[4]*v[4]
 end
 
 ---4d vector length (magnitude) squared in a slice
----@param v avm.seq_number4
----@param v_index integer
----@return number
 function M.length_squared_vec4_slice(v, v_index)
 	assert(v, "bad argument 'v' (expected array or sequence, got nil)")
 	local o = v_index - 1
@@ -3700,9 +2479,6 @@ function M.length_squared_vec4_slice(v, v_index)
 end
 
 ---Normalise 2d vector
----@param v1 number
----@param v2 number
----@return number,number
 function M.normalise_2(v1, v2)
 	assert(v1, "bad argument 'v1' (expected number, got nil)")
 	assert(v2, "bad argument 'v2' (expected number, got nil)")
@@ -3711,8 +2487,6 @@ function M.normalise_2(v1, v2)
 end
 
 ---Normalise 2d vector
----@param v avm.vec2
----@return number,number
 function M.normalise_vec2(v)
 	assert(v, "bad argument 'v' (expected array or sequence, got nil)")
 	local len = M.length_vec2(v)
@@ -3720,18 +2494,9 @@ function M.normalise_vec2(v)
 end
 
 ---Normalise 2d vector in a slice
----@param v avm.seq_number2
----@param v_index integer
----@return number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.normalise_vec2_ex(v, v_index) end
 
 ---Normalise 2d vector in a slice into a destination
----@param v avm.seq_number2
----@param v_index integer
----@param dest avm.seq_number2
----@param dest_index? integer
----@return nil
 function M.normalise_vec2_ex(v, v_index, dest, dest_index)
 	assert(v, "bad argument 'v' (expected array or sequence, got nil)")
 	local len = M.length_vec2_slice(v, v_index)
@@ -3745,10 +2510,6 @@ function M.normalise_vec2_ex(v, v_index, dest, dest_index)
 end
 
 ---Normalise 3d vector
----@param v1 number
----@param v2 number
----@param v3 number
----@return number,number,number
 function M.normalise_3(v1, v2, v3)
 	assert(v1, "bad argument 'v1' (expected number, got nil)")
 	assert(v2, "bad argument 'v2' (expected number, got nil)")
@@ -3758,8 +2519,6 @@ function M.normalise_3(v1, v2, v3)
 end
 
 ---Normalise 3d vector
----@param v avm.vec3
----@return number,number,number
 function M.normalise_vec3(v)
 	assert(v, "bad argument 'v' (expected array or sequence, got nil)")
 	local len = M.length_vec3(v)
@@ -3767,18 +2526,9 @@ function M.normalise_vec3(v)
 end
 
 ---Normalise 3d vector in a slice
----@param v avm.seq_number3
----@param v_index integer
----@return number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.normalise_vec3_ex(v, v_index) end
 
 ---Normalise 3d vector in a slice into a destination
----@param v avm.seq_number3
----@param v_index integer
----@param dest avm.seq_number3
----@param dest_index? integer
----@return nil
 function M.normalise_vec3_ex(v, v_index, dest, dest_index)
 	assert(v, "bad argument 'v' (expected array or sequence, got nil)")
 	local len = M.length_vec3_slice(v, v_index)
@@ -3792,11 +2542,6 @@ function M.normalise_vec3_ex(v, v_index, dest, dest_index)
 end
 
 ---Normalise 4d vector
----@param v1 number
----@param v2 number
----@param v3 number
----@param v4 number
----@return number,number,number,number
 function M.normalise_4(v1, v2, v3, v4)
 	assert(v1, "bad argument 'v1' (expected number, got nil)")
 	assert(v2, "bad argument 'v2' (expected number, got nil)")
@@ -3807,8 +2552,6 @@ function M.normalise_4(v1, v2, v3, v4)
 end
 
 ---Normalise 4d vector
----@param v avm.vec4
----@return number,number,number,number
 function M.normalise_vec4(v)
 	assert(v, "bad argument 'v' (expected array or sequence, got nil)")
 	local len = M.length_vec4(v)
@@ -3816,18 +2559,9 @@ function M.normalise_vec4(v)
 end
 
 ---Normalise 4d vector in a slice
----@param v avm.seq_number4
----@param v_index integer
----@return number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.normalise_vec4_ex(v, v_index) end
 
 ---Normalise 4d vector in a slice into a destination
----@param v avm.seq_number4
----@param v_index integer
----@param dest avm.seq_number4
----@param dest_index? integer
----@return nil
 function M.normalise_vec4_ex(v, v_index, dest, dest_index)
 	assert(v, "bad argument 'v' (expected array or sequence, got nil)")
 	local len = M.length_vec4_slice(v, v_index)
@@ -3841,31 +2575,16 @@ function M.normalise_vec4_ex(v, v_index, dest, dest_index)
 end
 
 ---Inner product of 2d vectors
----@param a1 number
----@param a2 number
----@param b1 number
----@param b2 number
----@return number
 function M.inner_product_2(a1, a2, b1, b2)
 	return a1*b1 + a2*b2
 end
 
 ---Inner product of 3d vectors
----@param a1 number
----@param a2 number
----@param a3 number
----@param b1 number
----@param b2 number
----@param b3 number
----@return number
 function M.inner_product_3(a1, a2, a3, b1, b2, b3)
 	return a1*b1 + a2*b2 + a3*b3
 end
 
 ---Inner product of 2d vector
----@param a avm.vec2
----@param b avm.vec2
----@return number
 function M.inner_product_vec2(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -3873,11 +2592,6 @@ function M.inner_product_vec2(a, b)
 end
 
 ---Inner product of 2d vector in a slice
----@param a avm.seq_number2
----@param a_index integer
----@param b avm.seq_number2
----@param b_index integer
----@return number
 function M.inner_product_vec2_slice(a, a_index, b, b_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -3887,9 +2601,6 @@ function M.inner_product_vec2_slice(a, a_index, b, b_index)
 end
 
 ---Inner product of 3d vector
----@param a avm.vec3
----@param b avm.vec3
----@return number
 function M.inner_product_vec3(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -3897,11 +2608,6 @@ function M.inner_product_vec3(a, b)
 end
 
 ---Inner product of 3d vector in a slice
----@param a avm.seq_number3
----@param a_index integer
----@param b avm.seq_number3
----@param b_index integer
----@return number
 function M.inner_product_vec3_slice(a, a_index, b, b_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -3911,9 +2617,6 @@ function M.inner_product_vec3_slice(a, a_index, b, b_index)
 end
 
 ---Inner product of 4d vector
----@param a avm.vec4
----@param b avm.vec4
----@return number
 function M.inner_product_vec4(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -3921,11 +2624,6 @@ function M.inner_product_vec4(a, b)
 end
 
 ---Inner product of 4d vector in a slice
----@param a avm.seq_number4
----@param a_index integer
----@param b avm.seq_number4
----@param b_index integer
----@return number
 function M.inner_product_vec4_slice(a, a_index, b, b_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -3935,21 +2633,11 @@ function M.inner_product_vec4_slice(a, a_index, b, b_index)
 end
 
 ---Cross product of 3d vector
----@param ax number
----@param ay number
----@param az number
----@param bx number
----@param by number
----@param bz number
----@return number, number, number
 function M.cross_product_tuple3(ax, ay, az, bx, by, bz)
 	return ay*bz - az*by, az*bx - ax*bz, ax*by - ay*bx
 end
 
 ---Cross product of 3d vector
----@param a avm.vec3
----@param b avm.vec3
----@return number,number,number
 function M.cross_product_vec3(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -3959,22 +2647,9 @@ function M.cross_product_vec3(a, b)
 end
 
 ---Cross product of 3d vector in a slice
----@param a avm.seq_number3
----@param a_index integer
----@param b avm.seq_number3
----@param b_index integer
----@return number, number, number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.cross_product_vec3_ex(a, a_index, b, b_index) end
 
 ---Cross product of 3d vector in a slice into a destination
----@param a avm.seq_number3
----@param a_index integer
----@param b avm.seq_number3
----@param b_index integer
----@param dest avm.seq_number3
----@param dest_index? integer
----@return nil
 function M.cross_product_vec3_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -3996,178 +2671,129 @@ end
 --------------------------------------------------------------------------------
 
 ---Transpose a 1x1 matrix and return a 1x1 matrix
----@param src avm.mat1
----@return number -- (mat1)
 function M.transpose_mat1(src)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
 	return src[1]
 end
 
 ---Transpose a 1x1 matrix and return a 1x1 matrix
----@param src avm.mat1x1
----@return number -- (mat1x1)
 function M.transpose_mat1x1(src)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
 	return src[1]
 end
 
 ---Transpose a 2x1 matrix and return a 1x2 matrix
----@param src avm.mat2x1
----@return number,number -- (mat1x2)
 function M.transpose_mat2x1(src)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
 	return src[1], src[2]
 end
 
 ---Transpose a 3x1 matrix and return a 1x3 matrix
----@param src avm.mat3x1
----@return number,number,number -- (mat1x3)
 function M.transpose_mat3x1(src)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
 	return src[1], src[2], src[3]
 end
 
 ---Transpose a 4x1 matrix and return a 1x4 matrix
----@param src avm.mat4x1
----@return number,number,number,number -- (mat1x4)
 function M.transpose_mat4x1(src)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
 	return src[1], src[2], src[3], src[4]
 end
 
 ---Transpose a 1x2 matrix and return a 2x1 matrix
----@param src avm.mat1x2
----@return number,number -- (mat2x1)
 function M.transpose_mat1x2(src)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
 	return src[1], src[2]
 end
 
 ---Transpose a 2x2 matrix and return a 2x2 matrix
----@param src avm.mat2
----@return number,number,number,number -- (mat2)
 function M.transpose_mat2(src)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
 	return src[1], src[3], src[2], src[4]
 end
 
 ---Transpose a 2x2 matrix and return a 2x2 matrix
----@param src avm.mat2x2
----@return number,number,number,number -- (mat2x2)
 function M.transpose_mat2x2(src)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
 	return src[1], src[3], src[2], src[4]
 end
 
 ---Transpose a 3x2 matrix and return a 2x3 matrix
----@param src avm.mat3x2
----@return number,number,number,number,number,number -- (mat2x3)
 function M.transpose_mat3x2(src)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
 	return src[1], src[3], src[5], src[2], src[4], src[6]
 end
 
 ---Transpose a 4x2 matrix and return a 2x4 matrix
----@param src avm.mat4x2
----@return number,number,number,number,number,number,number,number -- (mat2x4)
 function M.transpose_mat4x2(src)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
 	return src[1], src[3], src[5], src[7], src[2], src[4], src[6], src[8]
 end
 
 ---Transpose a 1x3 matrix and return a 3x1 matrix
----@param src avm.mat1x3
----@return number,number,number -- (mat3x1)
 function M.transpose_mat1x3(src)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
 	return src[1], src[2], src[3]
 end
 
 ---Transpose a 2x3 matrix and return a 3x2 matrix
----@param src avm.mat2x3
----@return number,number,number,number,number,number -- (mat3x2)
 function M.transpose_mat2x3(src)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
 	return src[1], src[4], src[2], src[5], src[3], src[6]
 end
 
 ---Transpose a 3x3 matrix and return a 3x3 matrix
----@param src avm.mat3
----@return number,number,number,number,number,number,number,number,number -- (mat3)
 function M.transpose_mat3(src)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
 	return src[1], src[4], src[7], src[2], src[5], src[8], src[3], src[6], src[9]
 end
 
 ---Transpose a 3x3 matrix and return a 3x3 matrix
----@param src avm.mat3x3
----@return number,number,number,number,number,number,number,number,number -- (mat3x3)
 function M.transpose_mat3x3(src)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
 	return src[1], src[4], src[7], src[2], src[5], src[8], src[3], src[6], src[9]
 end
 
 ---Transpose a 4x3 matrix and return a 3x4 matrix
----@param src avm.mat4x3
----@return number,number,number,number,number,number,number,number,number,number,number,number -- (mat3x4)
 function M.transpose_mat4x3(src)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
 	return src[1], src[4], src[7], src[10], src[2], src[5], src[8], src[11], src[3], src[6], src[9], src[12]
 end
 
 ---Transpose a 1x4 matrix and return a 4x1 matrix
----@param src avm.mat1x4
----@return number,number,number,number -- (mat4x1)
 function M.transpose_mat1x4(src)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
 	return src[1], src[2], src[3], src[4]
 end
 
 ---Transpose a 2x4 matrix and return a 4x2 matrix
----@param src avm.mat2x4
----@return number,number,number,number,number,number,number,number -- (mat4x2)
 function M.transpose_mat2x4(src)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
 	return src[1], src[5], src[2], src[6], src[3], src[7], src[4], src[8]
 end
 
 ---Transpose a 3x4 matrix and return a 4x3 matrix
----@param src avm.mat3x4
----@return number,number,number,number,number,number,number,number,number,number,number,number -- (mat4x3)
 function M.transpose_mat3x4(src)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
 	return src[1], src[5], src[9], src[2], src[6], src[10], src[3], src[7], src[11], src[4], src[8], src[12]
 end
 
 ---Transpose a 4x4 matrix and return a 4x4 matrix
----@param src avm.mat4
----@return number,number,number,number,number,number,number,number,number,number,number,number,number,number,number,number -- (mat4)
 function M.transpose_mat4(src)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
 	return src[1], src[5], src[9], src[13], src[2], src[6], src[10], src[14], src[3], src[7], src[11], src[15], src[4], src[8], src[12], src[16]
 end
 
 ---Transpose a 4x4 matrix and return a 4x4 matrix
----@param src avm.mat4x4
----@return number,number,number,number,number,number,number,number,number,number,number,number,number,number,number,number -- (mat4x4)
 function M.transpose_mat4x4(src)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
 	return src[1], src[5], src[9], src[13], src[2], src[6], src[10], src[14], src[3], src[7], src[11], src[15], src[4], src[8], src[12], src[16]
 end
 
 ---Transpose a 2x2 matrix and return a 2x2 matrix
----@param src avm.seq_number4
----@param src_index integer
----@return number,number,number,number -- (mat2)
----@diagnostic disable-next-line: missing-return
 function M.transpose_mat2_ex(src, src_index) end
 
 ---Transpose a 2x2 matrix into a 2x2 matrix in a destination
----@param src avm.seq_number4
----@param src_index integer
----@param dest avm.seq_number4
----@param dest_index? integer
----@return nil
 function M.transpose_mat2_ex(src, src_index, dest, dest_index)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
 	local so = src_index - 1
@@ -4180,18 +2806,9 @@ function M.transpose_mat2_ex(src, src_index, dest, dest_index)
 end
 
 ---Transpose a 2x2 matrix and return a 2x2 matrix
----@param src avm.seq_number4
----@param src_index integer
----@return number,number,number,number -- (mat2x2)
----@diagnostic disable-next-line: missing-return
 function M.transpose_mat2x2_ex(src, src_index) end
 
 ---Transpose a 2x2 matrix into a 2x2 matrix in a destination
----@param src avm.seq_number4
----@param src_index integer
----@param dest avm.seq_number4
----@param dest_index? integer
----@return nil
 function M.transpose_mat2x2_ex(src, src_index, dest, dest_index)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
 	local so = src_index - 1
@@ -4204,18 +2821,9 @@ function M.transpose_mat2x2_ex(src, src_index, dest, dest_index)
 end
 
 ---Transpose a 3x2 matrix and return a 2x3 matrix
----@param src avm.seq_number6
----@param src_index integer
----@return number,number,number,number,number,number -- (mat2x3)
----@diagnostic disable-next-line: missing-return
 function M.transpose_mat3x2_ex(src, src_index) end
 
 ---Transpose a 3x2 matrix into a 2x3 matrix in a destination
----@param src avm.seq_number6
----@param src_index integer
----@param dest avm.seq_number6
----@param dest_index? integer
----@return nil
 function M.transpose_mat3x2_ex(src, src_index, dest, dest_index)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
 	local so = src_index - 1
@@ -4228,18 +2836,9 @@ function M.transpose_mat3x2_ex(src, src_index, dest, dest_index)
 end
 
 ---Transpose a 4x2 matrix and return a 2x4 matrix
----@param src avm.seq_number8
----@param src_index integer
----@return number,number,number,number,number,number,number,number -- (mat2x4)
----@diagnostic disable-next-line: missing-return
 function M.transpose_mat4x2_ex(src, src_index) end
 
 ---Transpose a 4x2 matrix into a 2x4 matrix in a destination
----@param src avm.seq_number8
----@param src_index integer
----@param dest avm.seq_number8
----@param dest_index? integer
----@return nil
 function M.transpose_mat4x2_ex(src, src_index, dest, dest_index)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
 	local so = src_index - 1
@@ -4252,18 +2851,9 @@ function M.transpose_mat4x2_ex(src, src_index, dest, dest_index)
 end
 
 ---Transpose a 2x3 matrix and return a 3x2 matrix
----@param src avm.seq_number6
----@param src_index integer
----@return number,number,number,number,number,number -- (mat3x2)
----@diagnostic disable-next-line: missing-return
 function M.transpose_mat2x3_ex(src, src_index) end
 
 ---Transpose a 2x3 matrix into a 3x2 matrix in a destination
----@param src avm.seq_number6
----@param src_index integer
----@param dest avm.seq_number6
----@param dest_index? integer
----@return nil
 function M.transpose_mat2x3_ex(src, src_index, dest, dest_index)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
 	local so = src_index - 1
@@ -4276,18 +2866,9 @@ function M.transpose_mat2x3_ex(src, src_index, dest, dest_index)
 end
 
 ---Transpose a 3x3 matrix and return a 3x3 matrix
----@param src avm.seq_number9
----@param src_index integer
----@return number,number,number,number,number,number,number,number,number -- (mat3)
----@diagnostic disable-next-line: missing-return
 function M.transpose_mat3_ex(src, src_index) end
 
 ---Transpose a 3x3 matrix into a 3x3 matrix in a destination
----@param src avm.seq_number9
----@param src_index integer
----@param dest avm.seq_number9
----@param dest_index? integer
----@return nil
 function M.transpose_mat3_ex(src, src_index, dest, dest_index)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
 	local so = src_index - 1
@@ -4300,18 +2881,9 @@ function M.transpose_mat3_ex(src, src_index, dest, dest_index)
 end
 
 ---Transpose a 3x3 matrix and return a 3x3 matrix
----@param src avm.seq_number9
----@param src_index integer
----@return number,number,number,number,number,number,number,number,number -- (mat3x3)
----@diagnostic disable-next-line: missing-return
 function M.transpose_mat3x3_ex(src, src_index) end
 
 ---Transpose a 3x3 matrix into a 3x3 matrix in a destination
----@param src avm.seq_number9
----@param src_index integer
----@param dest avm.seq_number9
----@param dest_index? integer
----@return nil
 function M.transpose_mat3x3_ex(src, src_index, dest, dest_index)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
 	local so = src_index - 1
@@ -4324,18 +2896,9 @@ function M.transpose_mat3x3_ex(src, src_index, dest, dest_index)
 end
 
 ---Transpose a 4x3 matrix and return a 3x4 matrix
----@param src avm.seq_number12
----@param src_index integer
----@return number,number,number,number,number,number,number,number,number,number,number,number -- (mat3x4)
----@diagnostic disable-next-line: missing-return
 function M.transpose_mat4x3_ex(src, src_index) end
 
 ---Transpose a 4x3 matrix into a 3x4 matrix in a destination
----@param src avm.seq_number12
----@param src_index integer
----@param dest avm.seq_number12
----@param dest_index? integer
----@return nil
 function M.transpose_mat4x3_ex(src, src_index, dest, dest_index)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
 	local so = src_index - 1
@@ -4348,18 +2911,9 @@ function M.transpose_mat4x3_ex(src, src_index, dest, dest_index)
 end
 
 ---Transpose a 2x4 matrix and return a 4x2 matrix
----@param src avm.seq_number8
----@param src_index integer
----@return number,number,number,number,number,number,number,number -- (mat4x2)
----@diagnostic disable-next-line: missing-return
 function M.transpose_mat2x4_ex(src, src_index) end
 
 ---Transpose a 2x4 matrix into a 4x2 matrix in a destination
----@param src avm.seq_number8
----@param src_index integer
----@param dest avm.seq_number8
----@param dest_index? integer
----@return nil
 function M.transpose_mat2x4_ex(src, src_index, dest, dest_index)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
 	local so = src_index - 1
@@ -4372,18 +2926,9 @@ function M.transpose_mat2x4_ex(src, src_index, dest, dest_index)
 end
 
 ---Transpose a 3x4 matrix and return a 4x3 matrix
----@param src avm.seq_number12
----@param src_index integer
----@return number,number,number,number,number,number,number,number,number,number,number,number -- (mat4x3)
----@diagnostic disable-next-line: missing-return
 function M.transpose_mat3x4_ex(src, src_index) end
 
 ---Transpose a 3x4 matrix into a 4x3 matrix in a destination
----@param src avm.seq_number12
----@param src_index integer
----@param dest avm.seq_number12
----@param dest_index? integer
----@return nil
 function M.transpose_mat3x4_ex(src, src_index, dest, dest_index)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
 	local so = src_index - 1
@@ -4396,18 +2941,9 @@ function M.transpose_mat3x4_ex(src, src_index, dest, dest_index)
 end
 
 ---Transpose a 4x4 matrix and return a 4x4 matrix
----@param src avm.seq_number16
----@param src_index integer
----@return number,number,number,number,number,number,number,number,number,number,number,number,number,number,number,number -- (mat4)
----@diagnostic disable-next-line: missing-return
 function M.transpose_mat4_ex(src, src_index) end
 
 ---Transpose a 4x4 matrix into a 4x4 matrix in a destination
----@param src avm.seq_number16
----@param src_index integer
----@param dest avm.seq_number16
----@param dest_index? integer
----@return nil
 function M.transpose_mat4_ex(src, src_index, dest, dest_index)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
 	local so = src_index - 1
@@ -4420,18 +2956,9 @@ function M.transpose_mat4_ex(src, src_index, dest, dest_index)
 end
 
 ---Transpose a 4x4 matrix and return a 4x4 matrix
----@param src avm.seq_number16
----@param src_index integer
----@return number,number,number,number,number,number,number,number,number,number,number,number,number,number,number,number -- (mat4x4)
----@diagnostic disable-next-line: missing-return
 function M.transpose_mat4x4_ex(src, src_index) end
 
 ---Transpose a 4x4 matrix into a 4x4 matrix in a destination
----@param src avm.seq_number16
----@param src_index integer
----@param dest avm.seq_number16
----@param dest_index? integer
----@return nil
 function M.transpose_mat4x4_ex(src, src_index, dest, dest_index)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
 	local so = src_index - 1
@@ -4443,12 +2970,8 @@ function M.transpose_mat4x4_ex(src, src_index, dest, dest_index)
 	end
 end
 
-
 ---Multiply a 1x1 matrix with a 1x1 matrix and return a 1x1 matrix
 ---
----@param a avm.mat1x1
----@param b avm.mat1x1
----@return number
 function M.matmul_mat1x1_mat1x1(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -4457,25 +2980,12 @@ end
 
 ---Multiply a 1x1 matrix in an array or slice with a 1x1 matrix in an array or slice into a 1x1 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat1x1_mat1x1_ex(a, a_index, b, b_index) end
 
 ---Multiply a 1x1 matrix in an array or slice with a 1x1 matrix in an array or slice into a 1x1 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat1x1_mat1x1_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -4492,9 +3002,6 @@ end
 
 ---Multiply a 1x1 matrix with a 1x1 matrix and return a 1x1 matrix
 ---
----@param a avm.mat1
----@param b avm.mat1
----@return number
 function M.matmul_mat1_mat1(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -4503,25 +3010,12 @@ end
 
 ---Multiply a 1x1 matrix in an array or slice with a 1x1 matrix in an array or slice into a 1x1 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat1_mat1_ex(a, a_index, b, b_index) end
 
 ---Multiply a 1x1 matrix in an array or slice with a 1x1 matrix in an array or slice into a 1x1 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat1_mat1_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -4538,9 +3032,6 @@ end
 
 ---Multiply a 1x1 matrix with a 2x1 matrix and return a 2x1 matrix
 ---
----@param a avm.mat1x1
----@param b avm.mat2x1
----@return number,number
 function M.matmul_mat1x1_mat2x1(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -4549,25 +3040,12 @@ end
 
 ---Multiply a 1x1 matrix in an array or slice with a 2x1 matrix in an array or slice into a 2x1 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat1x1_mat2x1_ex(a, a_index, b, b_index) end
 
 ---Multiply a 1x1 matrix in an array or slice with a 2x1 matrix in an array or slice into a 2x1 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat1x1_mat2x1_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -4585,9 +3063,6 @@ end
 
 ---Multiply a 1x1 matrix with a 3x1 matrix and return a 3x1 matrix
 ---
----@param a avm.mat1x1
----@param b avm.mat3x1
----@return number,number,number
 function M.matmul_mat1x1_mat3x1(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -4596,25 +3071,12 @@ end
 
 ---Multiply a 1x1 matrix in an array or slice with a 3x1 matrix in an array or slice into a 3x1 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat1x1_mat3x1_ex(a, a_index, b, b_index) end
 
 ---Multiply a 1x1 matrix in an array or slice with a 3x1 matrix in an array or slice into a 3x1 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat1x1_mat3x1_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -4633,9 +3095,6 @@ end
 
 ---Multiply a 1x1 matrix with a 4x1 matrix and return a 4x1 matrix
 ---
----@param a avm.mat1x1
----@param b avm.mat4x1
----@return number,number,number,number
 function M.matmul_mat1x1_mat4x1(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -4644,25 +3103,12 @@ end
 
 ---Multiply a 1x1 matrix in an array or slice with a 4x1 matrix in an array or slice into a 4x1 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat1x1_mat4x1_ex(a, a_index, b, b_index) end
 
 ---Multiply a 1x1 matrix in an array or slice with a 4x1 matrix in an array or slice into a 4x1 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat1x1_mat4x1_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -4682,9 +3128,6 @@ end
 
 ---Multiply a 2x1 matrix with a 1x2 matrix and return a 1x1 matrix
 ---
----@param a avm.mat2x1
----@param b avm.mat1x2
----@return number
 function M.matmul_mat2x1_mat1x2(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -4693,25 +3136,12 @@ end
 
 ---Multiply a 2x1 matrix in an array or slice with a 1x2 matrix in an array or slice into a 1x1 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat2x1_mat1x2_ex(a, a_index, b, b_index) end
 
 ---Multiply a 2x1 matrix in an array or slice with a 1x2 matrix in an array or slice into a 1x1 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat2x1_mat1x2_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -4728,9 +3158,6 @@ end
 
 ---Multiply a 2x1 matrix with a 2x2 matrix and return a 2x1 matrix
 ---
----@param a avm.mat2x1
----@param b avm.mat2x2
----@return number,number
 function M.matmul_mat2x1_mat2x2(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -4739,25 +3166,12 @@ end
 
 ---Multiply a 2x1 matrix in an array or slice with a 2x2 matrix in an array or slice into a 2x1 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat2x1_mat2x2_ex(a, a_index, b, b_index) end
 
 ---Multiply a 2x1 matrix in an array or slice with a 2x2 matrix in an array or slice into a 2x1 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat2x1_mat2x2_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -4775,9 +3189,6 @@ end
 
 ---Multiply a 2x1 matrix with a 3x2 matrix and return a 3x1 matrix
 ---
----@param a avm.mat2x1
----@param b avm.mat3x2
----@return number,number,number
 function M.matmul_mat2x1_mat3x2(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -4786,25 +3197,12 @@ end
 
 ---Multiply a 2x1 matrix in an array or slice with a 3x2 matrix in an array or slice into a 3x1 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat2x1_mat3x2_ex(a, a_index, b, b_index) end
 
 ---Multiply a 2x1 matrix in an array or slice with a 3x2 matrix in an array or slice into a 3x1 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat2x1_mat3x2_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -4824,9 +3222,6 @@ end
 
 ---Multiply a 2x1 matrix with a 4x2 matrix and return a 4x1 matrix
 ---
----@param a avm.mat2x1
----@param b avm.mat4x2
----@return number,number,number,number
 function M.matmul_mat2x1_mat4x2(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -4835,25 +3230,12 @@ end
 
 ---Multiply a 2x1 matrix in an array or slice with a 4x2 matrix in an array or slice into a 4x1 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat2x1_mat4x2_ex(a, a_index, b, b_index) end
 
 ---Multiply a 2x1 matrix in an array or slice with a 4x2 matrix in an array or slice into a 4x1 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat2x1_mat4x2_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -4874,9 +3256,6 @@ end
 
 ---Multiply a 3x1 matrix with a 1x3 matrix and return a 1x1 matrix
 ---
----@param a avm.mat3x1
----@param b avm.mat1x3
----@return number
 function M.matmul_mat3x1_mat1x3(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -4885,25 +3264,12 @@ end
 
 ---Multiply a 3x1 matrix in an array or slice with a 1x3 matrix in an array or slice into a 1x1 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat3x1_mat1x3_ex(a, a_index, b, b_index) end
 
 ---Multiply a 3x1 matrix in an array or slice with a 1x3 matrix in an array or slice into a 1x1 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat3x1_mat1x3_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -4920,9 +3286,6 @@ end
 
 ---Multiply a 3x1 matrix with a 2x3 matrix and return a 2x1 matrix
 ---
----@param a avm.mat3x1
----@param b avm.mat2x3
----@return number,number
 function M.matmul_mat3x1_mat2x3(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -4931,25 +3294,12 @@ end
 
 ---Multiply a 3x1 matrix in an array or slice with a 2x3 matrix in an array or slice into a 2x1 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat3x1_mat2x3_ex(a, a_index, b, b_index) end
 
 ---Multiply a 3x1 matrix in an array or slice with a 2x3 matrix in an array or slice into a 2x1 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat3x1_mat2x3_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -4968,9 +3318,6 @@ end
 
 ---Multiply a 3x1 matrix with a 3x3 matrix and return a 3x1 matrix
 ---
----@param a avm.mat3x1
----@param b avm.mat3x3
----@return number,number,number
 function M.matmul_mat3x1_mat3x3(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -4980,25 +3327,12 @@ end
 
 ---Multiply a 3x1 matrix in an array or slice with a 3x3 matrix in an array or slice into a 3x1 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat3x1_mat3x3_ex(a, a_index, b, b_index) end
 
 ---Multiply a 3x1 matrix in an array or slice with a 3x3 matrix in an array or slice into a 3x1 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat3x1_mat3x3_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -5019,9 +3353,6 @@ end
 
 ---Multiply a 3x1 matrix with a 4x3 matrix and return a 4x1 matrix
 ---
----@param a avm.mat3x1
----@param b avm.mat4x3
----@return number,number,number,number
 function M.matmul_mat3x1_mat4x3(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -5031,25 +3362,12 @@ end
 
 ---Multiply a 3x1 matrix in an array or slice with a 4x3 matrix in an array or slice into a 4x1 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat3x1_mat4x3_ex(a, a_index, b, b_index) end
 
 ---Multiply a 3x1 matrix in an array or slice with a 4x3 matrix in an array or slice into a 4x1 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat3x1_mat4x3_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -5072,9 +3390,6 @@ end
 
 ---Multiply a 4x1 matrix with a 1x4 matrix and return a 1x1 matrix
 ---
----@param a avm.mat4x1
----@param b avm.mat1x4
----@return number
 function M.matmul_mat4x1_mat1x4(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -5083,25 +3398,12 @@ end
 
 ---Multiply a 4x1 matrix in an array or slice with a 1x4 matrix in an array or slice into a 1x1 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat4x1_mat1x4_ex(a, a_index, b, b_index) end
 
 ---Multiply a 4x1 matrix in an array or slice with a 1x4 matrix in an array or slice into a 1x1 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat4x1_mat1x4_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -5118,9 +3420,6 @@ end
 
 ---Multiply a 4x1 matrix with a 2x4 matrix and return a 2x1 matrix
 ---
----@param a avm.mat4x1
----@param b avm.mat2x4
----@return number,number
 function M.matmul_mat4x1_mat2x4(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -5130,25 +3429,12 @@ end
 
 ---Multiply a 4x1 matrix in an array or slice with a 2x4 matrix in an array or slice into a 2x1 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat4x1_mat2x4_ex(a, a_index, b, b_index) end
 
 ---Multiply a 4x1 matrix in an array or slice with a 2x4 matrix in an array or slice into a 2x1 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat4x1_mat2x4_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -5167,9 +3453,6 @@ end
 
 ---Multiply a 4x1 matrix with a 3x4 matrix and return a 3x1 matrix
 ---
----@param a avm.mat4x1
----@param b avm.mat3x4
----@return number,number,number
 function M.matmul_mat4x1_mat3x4(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -5180,25 +3463,12 @@ end
 
 ---Multiply a 4x1 matrix in an array or slice with a 3x4 matrix in an array or slice into a 3x1 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat4x1_mat3x4_ex(a, a_index, b, b_index) end
 
 ---Multiply a 4x1 matrix in an array or slice with a 3x4 matrix in an array or slice into a 3x1 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat4x1_mat3x4_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -5219,9 +3489,6 @@ end
 
 ---Multiply a 4x1 matrix with a 4x4 matrix and return a 4x1 matrix
 ---
----@param a avm.mat4x1
----@param b avm.mat4x4
----@return number,number,number,number
 function M.matmul_mat4x1_mat4x4(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -5233,25 +3500,12 @@ end
 
 ---Multiply a 4x1 matrix in an array or slice with a 4x4 matrix in an array or slice into a 4x1 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat4x1_mat4x4_ex(a, a_index, b, b_index) end
 
 ---Multiply a 4x1 matrix in an array or slice with a 4x4 matrix in an array or slice into a 4x1 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat4x1_mat4x4_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -5274,9 +3528,6 @@ end
 
 ---Multiply a 1x2 matrix with a 1x1 matrix and return a 1x2 matrix
 ---
----@param a avm.mat1x2
----@param b avm.mat1x1
----@return number,number
 function M.matmul_mat1x2_mat1x1(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -5285,25 +3536,12 @@ end
 
 ---Multiply a 1x2 matrix in an array or slice with a 1x1 matrix in an array or slice into a 1x2 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat1x2_mat1x1_ex(a, a_index, b, b_index) end
 
 ---Multiply a 1x2 matrix in an array or slice with a 1x1 matrix in an array or slice into a 1x2 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat1x2_mat1x1_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -5321,9 +3559,6 @@ end
 
 ---Multiply a 1x2 matrix with a 2x1 matrix and return a 2x2 matrix
 ---
----@param a avm.mat1x2
----@param b avm.mat2x1
----@return number,number,number,number
 function M.matmul_mat1x2_mat2x1(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -5332,25 +3567,12 @@ end
 
 ---Multiply a 1x2 matrix in an array or slice with a 2x1 matrix in an array or slice into a 2x2 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat1x2_mat2x1_ex(a, a_index, b, b_index) end
 
 ---Multiply a 1x2 matrix in an array or slice with a 2x1 matrix in an array or slice into a 2x2 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat1x2_mat2x1_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -5370,9 +3592,6 @@ end
 
 ---Multiply a 1x2 matrix with a 3x1 matrix and return a 3x2 matrix
 ---
----@param a avm.mat1x2
----@param b avm.mat3x1
----@return number,number,number,number,number,number
 function M.matmul_mat1x2_mat3x1(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -5381,25 +3600,12 @@ end
 
 ---Multiply a 1x2 matrix in an array or slice with a 3x1 matrix in an array or slice into a 3x2 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat1x2_mat3x1_ex(a, a_index, b, b_index) end
 
 ---Multiply a 1x2 matrix in an array or slice with a 3x1 matrix in an array or slice into a 3x2 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat1x2_mat3x1_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -5421,9 +3627,6 @@ end
 
 ---Multiply a 1x2 matrix with a 4x1 matrix and return a 4x2 matrix
 ---
----@param a avm.mat1x2
----@param b avm.mat4x1
----@return number,number,number,number,number,number,number,number
 function M.matmul_mat1x2_mat4x1(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -5432,25 +3635,12 @@ end
 
 ---Multiply a 1x2 matrix in an array or slice with a 4x1 matrix in an array or slice into a 4x2 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number,number,number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat1x2_mat4x1_ex(a, a_index, b, b_index) end
 
 ---Multiply a 1x2 matrix in an array or slice with a 4x1 matrix in an array or slice into a 4x2 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat1x2_mat4x1_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -5475,9 +3665,6 @@ end
 
 ---Multiply a 2x2 matrix with a 1x2 matrix and return a 1x2 matrix
 ---
----@param a avm.mat2x2
----@param b avm.mat1x2
----@return number,number
 function M.matmul_mat2x2_mat1x2(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -5486,25 +3673,12 @@ end
 
 ---Multiply a 2x2 matrix in an array or slice with a 1x2 matrix in an array or slice into a 1x2 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat2x2_mat1x2_ex(a, a_index, b, b_index) end
 
 ---Multiply a 2x2 matrix in an array or slice with a 1x2 matrix in an array or slice into a 1x2 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat2x2_mat1x2_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -5522,9 +3696,6 @@ end
 
 ---Multiply a 2x2 matrix with a 2x2 matrix and return a 2x2 matrix
 ---
----@param a avm.mat2x2
----@param b avm.mat2x2
----@return number,number,number,number
 function M.matmul_mat2x2_mat2x2(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -5533,25 +3704,12 @@ end
 
 ---Multiply a 2x2 matrix in an array or slice with a 2x2 matrix in an array or slice into a 2x2 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat2x2_mat2x2_ex(a, a_index, b, b_index) end
 
 ---Multiply a 2x2 matrix in an array or slice with a 2x2 matrix in an array or slice into a 2x2 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat2x2_mat2x2_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -5572,9 +3730,6 @@ end
 
 ---Multiply a 2x2 matrix with a 2x2 matrix and return a 2x2 matrix
 ---
----@param a avm.mat2
----@param b avm.mat2
----@return number,number,number,number
 function M.matmul_mat2_mat2(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -5583,25 +3738,12 @@ end
 
 ---Multiply a 2x2 matrix in an array or slice with a 2x2 matrix in an array or slice into a 2x2 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat2_mat2_ex(a, a_index, b, b_index) end
 
 ---Multiply a 2x2 matrix in an array or slice with a 2x2 matrix in an array or slice into a 2x2 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat2_mat2_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -5622,9 +3764,6 @@ end
 
 ---Multiply a 2x2 matrix with a 3x2 matrix and return a 3x2 matrix
 ---
----@param a avm.mat2x2
----@param b avm.mat3x2
----@return number,number,number,number,number,number
 function M.matmul_mat2x2_mat3x2(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -5634,25 +3773,12 @@ end
 
 ---Multiply a 2x2 matrix in an array or slice with a 3x2 matrix in an array or slice into a 3x2 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat2x2_mat3x2_ex(a, a_index, b, b_index) end
 
 ---Multiply a 2x2 matrix in an array or slice with a 3x2 matrix in an array or slice into a 3x2 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat2x2_mat3x2_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -5676,9 +3802,6 @@ end
 
 ---Multiply a 2x2 matrix with a 4x2 matrix and return a 4x2 matrix
 ---
----@param a avm.mat2x2
----@param b avm.mat4x2
----@return number,number,number,number,number,number,number,number
 function M.matmul_mat2x2_mat4x2(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -5689,25 +3812,12 @@ end
 
 ---Multiply a 2x2 matrix in an array or slice with a 4x2 matrix in an array or slice into a 4x2 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number,number,number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat2x2_mat4x2_ex(a, a_index, b, b_index) end
 
 ---Multiply a 2x2 matrix in an array or slice with a 4x2 matrix in an array or slice into a 4x2 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat2x2_mat4x2_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -5734,9 +3844,6 @@ end
 
 ---Multiply a 3x2 matrix with a 1x3 matrix and return a 1x2 matrix
 ---
----@param a avm.mat3x2
----@param b avm.mat1x3
----@return number,number
 function M.matmul_mat3x2_mat1x3(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -5745,25 +3852,12 @@ end
 
 ---Multiply a 3x2 matrix in an array or slice with a 1x3 matrix in an array or slice into a 1x2 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat3x2_mat1x3_ex(a, a_index, b, b_index) end
 
 ---Multiply a 3x2 matrix in an array or slice with a 1x3 matrix in an array or slice into a 1x2 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat3x2_mat1x3_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -5782,9 +3876,6 @@ end
 
 ---Multiply a 3x2 matrix with a 2x3 matrix and return a 2x2 matrix
 ---
----@param a avm.mat3x2
----@param b avm.mat2x3
----@return number,number,number,number
 function M.matmul_mat3x2_mat2x3(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -5794,25 +3885,12 @@ end
 
 ---Multiply a 3x2 matrix in an array or slice with a 2x3 matrix in an array or slice into a 2x2 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat3x2_mat2x3_ex(a, a_index, b, b_index) end
 
 ---Multiply a 3x2 matrix in an array or slice with a 2x3 matrix in an array or slice into a 2x2 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat3x2_mat2x3_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -5835,9 +3913,6 @@ end
 
 ---Multiply a 3x2 matrix with a 3x3 matrix and return a 3x2 matrix
 ---
----@param a avm.mat3x2
----@param b avm.mat3x3
----@return number,number,number,number,number,number
 function M.matmul_mat3x2_mat3x3(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -5848,25 +3923,12 @@ end
 
 ---Multiply a 3x2 matrix in an array or slice with a 3x3 matrix in an array or slice into a 3x2 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat3x2_mat3x3_ex(a, a_index, b, b_index) end
 
 ---Multiply a 3x2 matrix in an array or slice with a 3x3 matrix in an array or slice into a 3x2 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat3x2_mat3x3_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -5893,9 +3955,6 @@ end
 
 ---Multiply a 3x2 matrix with a 4x3 matrix and return a 4x2 matrix
 ---
----@param a avm.mat3x2
----@param b avm.mat4x3
----@return number,number,number,number,number,number,number,number
 function M.matmul_mat3x2_mat4x3(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -5907,25 +3966,12 @@ end
 
 ---Multiply a 3x2 matrix in an array or slice with a 4x3 matrix in an array or slice into a 4x2 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number,number,number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat3x2_mat4x3_ex(a, a_index, b, b_index) end
 
 ---Multiply a 3x2 matrix in an array or slice with a 4x3 matrix in an array or slice into a 4x2 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat3x2_mat4x3_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -5956,9 +4002,6 @@ end
 
 ---Multiply a 4x2 matrix with a 1x4 matrix and return a 1x2 matrix
 ---
----@param a avm.mat4x2
----@param b avm.mat1x4
----@return number,number
 function M.matmul_mat4x2_mat1x4(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -5968,25 +4011,12 @@ end
 
 ---Multiply a 4x2 matrix in an array or slice with a 1x4 matrix in an array or slice into a 1x2 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat4x2_mat1x4_ex(a, a_index, b, b_index) end
 
 ---Multiply a 4x2 matrix in an array or slice with a 1x4 matrix in an array or slice into a 1x2 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat4x2_mat1x4_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -6005,9 +4035,6 @@ end
 
 ---Multiply a 4x2 matrix with a 2x4 matrix and return a 2x2 matrix
 ---
----@param a avm.mat4x2
----@param b avm.mat2x4
----@return number,number,number,number
 function M.matmul_mat4x2_mat2x4(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -6019,25 +4046,12 @@ end
 
 ---Multiply a 4x2 matrix in an array or slice with a 2x4 matrix in an array or slice into a 2x2 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat4x2_mat2x4_ex(a, a_index, b, b_index) end
 
 ---Multiply a 4x2 matrix in an array or slice with a 2x4 matrix in an array or slice into a 2x2 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat4x2_mat2x4_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -6060,9 +4074,6 @@ end
 
 ---Multiply a 4x2 matrix with a 3x4 matrix and return a 3x2 matrix
 ---
----@param a avm.mat4x2
----@param b avm.mat3x4
----@return number,number,number,number,number,number
 function M.matmul_mat4x2_mat3x4(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -6076,25 +4087,12 @@ end
 
 ---Multiply a 4x2 matrix in an array or slice with a 3x4 matrix in an array or slice into a 3x2 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat4x2_mat3x4_ex(a, a_index, b, b_index) end
 
 ---Multiply a 4x2 matrix in an array or slice with a 3x4 matrix in an array or slice into a 3x2 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat4x2_mat3x4_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -6121,9 +4119,6 @@ end
 
 ---Multiply a 4x2 matrix with a 4x4 matrix and return a 4x2 matrix
 ---
----@param a avm.mat4x2
----@param b avm.mat4x4
----@return number,number,number,number,number,number,number,number
 function M.matmul_mat4x2_mat4x4(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -6139,25 +4134,12 @@ end
 
 ---Multiply a 4x2 matrix in an array or slice with a 4x4 matrix in an array or slice into a 4x2 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number,number,number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat4x2_mat4x4_ex(a, a_index, b, b_index) end
 
 ---Multiply a 4x2 matrix in an array or slice with a 4x4 matrix in an array or slice into a 4x2 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat4x2_mat4x4_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -6188,9 +4170,6 @@ end
 
 ---Multiply a 1x3 matrix with a 1x1 matrix and return a 1x3 matrix
 ---
----@param a avm.mat1x3
----@param b avm.mat1x1
----@return number,number,number
 function M.matmul_mat1x3_mat1x1(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -6199,25 +4178,12 @@ end
 
 ---Multiply a 1x3 matrix in an array or slice with a 1x1 matrix in an array or slice into a 1x3 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat1x3_mat1x1_ex(a, a_index, b, b_index) end
 
 ---Multiply a 1x3 matrix in an array or slice with a 1x1 matrix in an array or slice into a 1x3 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat1x3_mat1x1_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -6236,9 +4202,6 @@ end
 
 ---Multiply a 1x3 matrix with a 2x1 matrix and return a 2x3 matrix
 ---
----@param a avm.mat1x3
----@param b avm.mat2x1
----@return number,number,number,number,number,number
 function M.matmul_mat1x3_mat2x1(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -6247,25 +4210,12 @@ end
 
 ---Multiply a 1x3 matrix in an array or slice with a 2x1 matrix in an array or slice into a 2x3 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat1x3_mat2x1_ex(a, a_index, b, b_index) end
 
 ---Multiply a 1x3 matrix in an array or slice with a 2x1 matrix in an array or slice into a 2x3 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat1x3_mat2x1_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -6287,9 +4237,6 @@ end
 
 ---Multiply a 1x3 matrix with a 3x1 matrix and return a 3x3 matrix
 ---
----@param a avm.mat1x3
----@param b avm.mat3x1
----@return number,number,number,number,number,number,number,number,number
 function M.matmul_mat1x3_mat3x1(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -6298,25 +4245,12 @@ end
 
 ---Multiply a 1x3 matrix in an array or slice with a 3x1 matrix in an array or slice into a 3x3 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number,number,number,number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat1x3_mat3x1_ex(a, a_index, b, b_index) end
 
 ---Multiply a 1x3 matrix in an array or slice with a 3x1 matrix in an array or slice into a 3x3 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat1x3_mat3x1_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -6342,9 +4276,6 @@ end
 
 ---Multiply a 1x3 matrix with a 4x1 matrix and return a 4x3 matrix
 ---
----@param a avm.mat1x3
----@param b avm.mat4x1
----@return number,number,number,number,number,number,number,number,number,number,number,number
 function M.matmul_mat1x3_mat4x1(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -6354,25 +4285,12 @@ end
 
 ---Multiply a 1x3 matrix in an array or slice with a 4x1 matrix in an array or slice into a 4x3 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number,number,number,number,number,number,number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat1x3_mat4x1_ex(a, a_index, b, b_index) end
 
 ---Multiply a 1x3 matrix in an array or slice with a 4x1 matrix in an array or slice into a 4x3 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat1x3_mat4x1_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -6402,9 +4320,6 @@ end
 
 ---Multiply a 2x3 matrix with a 1x2 matrix and return a 1x3 matrix
 ---
----@param a avm.mat2x3
----@param b avm.mat1x2
----@return number,number,number
 function M.matmul_mat2x3_mat1x2(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -6413,25 +4328,12 @@ end
 
 ---Multiply a 2x3 matrix in an array or slice with a 1x2 matrix in an array or slice into a 1x3 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat2x3_mat1x2_ex(a, a_index, b, b_index) end
 
 ---Multiply a 2x3 matrix in an array or slice with a 1x2 matrix in an array or slice into a 1x3 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat2x3_mat1x2_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -6451,9 +4353,6 @@ end
 
 ---Multiply a 2x3 matrix with a 2x2 matrix and return a 2x3 matrix
 ---
----@param a avm.mat2x3
----@param b avm.mat2x2
----@return number,number,number,number,number,number
 function M.matmul_mat2x3_mat2x2(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -6463,25 +4362,12 @@ end
 
 ---Multiply a 2x3 matrix in an array or slice with a 2x2 matrix in an array or slice into a 2x3 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat2x3_mat2x2_ex(a, a_index, b, b_index) end
 
 ---Multiply a 2x3 matrix in an array or slice with a 2x2 matrix in an array or slice into a 2x3 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat2x3_mat2x2_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -6505,9 +4391,6 @@ end
 
 ---Multiply a 2x3 matrix with a 3x2 matrix and return a 3x3 matrix
 ---
----@param a avm.mat2x3
----@param b avm.mat3x2
----@return number,number,number,number,number,number,number,number,number
 function M.matmul_mat2x3_mat3x2(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -6518,25 +4401,12 @@ end
 
 ---Multiply a 2x3 matrix in an array or slice with a 3x2 matrix in an array or slice into a 3x3 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number,number,number,number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat2x3_mat3x2_ex(a, a_index, b, b_index) end
 
 ---Multiply a 2x3 matrix in an array or slice with a 3x2 matrix in an array or slice into a 3x3 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat2x3_mat3x2_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -6565,9 +4435,6 @@ end
 
 ---Multiply a 2x3 matrix with a 4x2 matrix and return a 4x3 matrix
 ---
----@param a avm.mat2x3
----@param b avm.mat4x2
----@return number,number,number,number,number,number,number,number,number,number,number,number
 function M.matmul_mat2x3_mat4x2(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -6579,25 +4446,12 @@ end
 
 ---Multiply a 2x3 matrix in an array or slice with a 4x2 matrix in an array or slice into a 4x3 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number,number,number,number,number,number,number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat2x3_mat4x2_ex(a, a_index, b, b_index) end
 
 ---Multiply a 2x3 matrix in an array or slice with a 4x2 matrix in an array or slice into a 4x3 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat2x3_mat4x2_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -6630,9 +4484,6 @@ end
 
 ---Multiply a 3x3 matrix with a 1x3 matrix and return a 1x3 matrix
 ---
----@param a avm.mat3x3
----@param b avm.mat1x3
----@return number,number,number
 function M.matmul_mat3x3_mat1x3(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -6642,25 +4493,12 @@ end
 
 ---Multiply a 3x3 matrix in an array or slice with a 1x3 matrix in an array or slice into a 1x3 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat3x3_mat1x3_ex(a, a_index, b, b_index) end
 
 ---Multiply a 3x3 matrix in an array or slice with a 1x3 matrix in an array or slice into a 1x3 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat3x3_mat1x3_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -6681,9 +4519,6 @@ end
 
 ---Multiply a 3x3 matrix with a 2x3 matrix and return a 2x3 matrix
 ---
----@param a avm.mat3x3
----@param b avm.mat2x3
----@return number,number,number,number,number,number
 function M.matmul_mat3x3_mat2x3(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -6694,25 +4529,12 @@ end
 
 ---Multiply a 3x3 matrix in an array or slice with a 2x3 matrix in an array or slice into a 2x3 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat3x3_mat2x3_ex(a, a_index, b, b_index) end
 
 ---Multiply a 3x3 matrix in an array or slice with a 2x3 matrix in an array or slice into a 2x3 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat3x3_mat2x3_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -6739,9 +4561,6 @@ end
 
 ---Multiply a 3x3 matrix with a 3x3 matrix and return a 3x3 matrix
 ---
----@param a avm.mat3x3
----@param b avm.mat3x3
----@return number,number,number,number,number,number,number,number,number
 function M.matmul_mat3x3_mat3x3(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -6754,25 +4573,12 @@ end
 
 ---Multiply a 3x3 matrix in an array or slice with a 3x3 matrix in an array or slice into a 3x3 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number,number,number,number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat3x3_mat3x3_ex(a, a_index, b, b_index) end
 
 ---Multiply a 3x3 matrix in an array or slice with a 3x3 matrix in an array or slice into a 3x3 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat3x3_mat3x3_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -6805,9 +4611,6 @@ end
 
 ---Multiply a 3x3 matrix with a 3x3 matrix and return a 3x3 matrix
 ---
----@param a avm.mat3
----@param b avm.mat3
----@return number,number,number,number,number,number,number,number,number
 function M.matmul_mat3_mat3(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -6820,25 +4623,12 @@ end
 
 ---Multiply a 3x3 matrix in an array or slice with a 3x3 matrix in an array or slice into a 3x3 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number,number,number,number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat3_mat3_ex(a, a_index, b, b_index) end
 
 ---Multiply a 3x3 matrix in an array or slice with a 3x3 matrix in an array or slice into a 3x3 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat3_mat3_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -6871,9 +4661,6 @@ end
 
 ---Multiply a 3x3 matrix with a 4x3 matrix and return a 4x3 matrix
 ---
----@param a avm.mat3x3
----@param b avm.mat4x3
----@return number,number,number,number,number,number,number,number,number,number,number,number
 function M.matmul_mat3x3_mat4x3(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -6887,25 +4674,12 @@ end
 
 ---Multiply a 3x3 matrix in an array or slice with a 4x3 matrix in an array or slice into a 4x3 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number,number,number,number,number,number,number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat3x3_mat4x3_ex(a, a_index, b, b_index) end
 
 ---Multiply a 3x3 matrix in an array or slice with a 4x3 matrix in an array or slice into a 4x3 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat3x3_mat4x3_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -6944,9 +4718,6 @@ end
 
 ---Multiply a 4x3 matrix with a 1x4 matrix and return a 1x3 matrix
 ---
----@param a avm.mat4x3
----@param b avm.mat1x4
----@return number,number,number
 function M.matmul_mat4x3_mat1x4(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -6957,25 +4728,12 @@ end
 
 ---Multiply a 4x3 matrix in an array or slice with a 1x4 matrix in an array or slice into a 1x3 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat4x3_mat1x4_ex(a, a_index, b, b_index) end
 
 ---Multiply a 4x3 matrix in an array or slice with a 1x4 matrix in an array or slice into a 1x3 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat4x3_mat1x4_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -6996,9 +4754,6 @@ end
 
 ---Multiply a 4x3 matrix with a 2x4 matrix and return a 2x3 matrix
 ---
----@param a avm.mat4x3
----@param b avm.mat2x4
----@return number,number,number,number,number,number
 function M.matmul_mat4x3_mat2x4(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -7012,25 +4767,12 @@ end
 
 ---Multiply a 4x3 matrix in an array or slice with a 2x4 matrix in an array or slice into a 2x3 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat4x3_mat2x4_ex(a, a_index, b, b_index) end
 
 ---Multiply a 4x3 matrix in an array or slice with a 2x4 matrix in an array or slice into a 2x3 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat4x3_mat2x4_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -7057,9 +4799,6 @@ end
 
 ---Multiply a 4x3 matrix with a 3x4 matrix and return a 3x3 matrix
 ---
----@param a avm.mat4x3
----@param b avm.mat3x4
----@return number,number,number,number,number,number,number,number,number
 function M.matmul_mat4x3_mat3x4(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -7076,25 +4815,12 @@ end
 
 ---Multiply a 4x3 matrix in an array or slice with a 3x4 matrix in an array or slice into a 3x3 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number,number,number,number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat4x3_mat3x4_ex(a, a_index, b, b_index) end
 
 ---Multiply a 4x3 matrix in an array or slice with a 3x4 matrix in an array or slice into a 3x3 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat4x3_mat3x4_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -7127,9 +4853,6 @@ end
 
 ---Multiply a 4x3 matrix with a 4x4 matrix and return a 4x3 matrix
 ---
----@param a avm.mat4x3
----@param b avm.mat4x4
----@return number,number,number,number,number,number,number,number,number,number,number,number
 function M.matmul_mat4x3_mat4x4(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -7149,25 +4872,12 @@ end
 
 ---Multiply a 4x3 matrix in an array or slice with a 4x4 matrix in an array or slice into a 4x3 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number,number,number,number,number,number,number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat4x3_mat4x4_ex(a, a_index, b, b_index) end
 
 ---Multiply a 4x3 matrix in an array or slice with a 4x4 matrix in an array or slice into a 4x3 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat4x3_mat4x4_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -7206,9 +4916,6 @@ end
 
 ---Multiply a 1x4 matrix with a 1x1 matrix and return a 1x4 matrix
 ---
----@param a avm.mat1x4
----@param b avm.mat1x1
----@return number,number,number,number
 function M.matmul_mat1x4_mat1x1(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -7217,25 +4924,12 @@ end
 
 ---Multiply a 1x4 matrix in an array or slice with a 1x1 matrix in an array or slice into a 1x4 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat1x4_mat1x1_ex(a, a_index, b, b_index) end
 
 ---Multiply a 1x4 matrix in an array or slice with a 1x1 matrix in an array or slice into a 1x4 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat1x4_mat1x1_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -7255,9 +4949,6 @@ end
 
 ---Multiply a 1x4 matrix with a 2x1 matrix and return a 2x4 matrix
 ---
----@param a avm.mat1x4
----@param b avm.mat2x1
----@return number,number,number,number,number,number,number,number
 function M.matmul_mat1x4_mat2x1(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -7266,25 +4957,12 @@ end
 
 ---Multiply a 1x4 matrix in an array or slice with a 2x1 matrix in an array or slice into a 2x4 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number,number,number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat1x4_mat2x1_ex(a, a_index, b, b_index) end
 
 ---Multiply a 1x4 matrix in an array or slice with a 2x1 matrix in an array or slice into a 2x4 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat1x4_mat2x1_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -7309,9 +4987,6 @@ end
 
 ---Multiply a 1x4 matrix with a 3x1 matrix and return a 3x4 matrix
 ---
----@param a avm.mat1x4
----@param b avm.mat3x1
----@return number,number,number,number,number,number,number,number,number,number,number,number
 function M.matmul_mat1x4_mat3x1(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -7321,25 +4996,12 @@ end
 
 ---Multiply a 1x4 matrix in an array or slice with a 3x1 matrix in an array or slice into a 3x4 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number,number,number,number,number,number,number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat1x4_mat3x1_ex(a, a_index, b, b_index) end
 
 ---Multiply a 1x4 matrix in an array or slice with a 3x1 matrix in an array or slice into a 3x4 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat1x4_mat3x1_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -7369,9 +5031,6 @@ end
 
 ---Multiply a 1x4 matrix with a 4x1 matrix and return a 4x4 matrix
 ---
----@param a avm.mat1x4
----@param b avm.mat4x1
----@return number,number,number,number,number,number,number,number,number,number,number,number,number,number,number,number
 function M.matmul_mat1x4_mat4x1(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -7381,25 +5040,12 @@ end
 
 ---Multiply a 1x4 matrix in an array or slice with a 4x1 matrix in an array or slice into a 4x4 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number,number,number,number,number,number,number,number,number,number,number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat1x4_mat4x1_ex(a, a_index, b, b_index) end
 
 ---Multiply a 1x4 matrix in an array or slice with a 4x1 matrix in an array or slice into a 4x4 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat1x4_mat4x1_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -7433,9 +5079,6 @@ end
 
 ---Multiply a 2x4 matrix with a 1x2 matrix and return a 1x4 matrix
 ---
----@param a avm.mat2x4
----@param b avm.mat1x2
----@return number,number,number,number
 function M.matmul_mat2x4_mat1x2(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -7444,25 +5087,12 @@ end
 
 ---Multiply a 2x4 matrix in an array or slice with a 1x2 matrix in an array or slice into a 1x4 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat2x4_mat1x2_ex(a, a_index, b, b_index) end
 
 ---Multiply a 2x4 matrix in an array or slice with a 1x2 matrix in an array or slice into a 1x4 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat2x4_mat1x2_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -7483,9 +5113,6 @@ end
 
 ---Multiply a 2x4 matrix with a 2x2 matrix and return a 2x4 matrix
 ---
----@param a avm.mat2x4
----@param b avm.mat2x2
----@return number,number,number,number,number,number,number,number
 function M.matmul_mat2x4_mat2x2(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -7496,25 +5123,12 @@ end
 
 ---Multiply a 2x4 matrix in an array or slice with a 2x2 matrix in an array or slice into a 2x4 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number,number,number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat2x4_mat2x2_ex(a, a_index, b, b_index) end
 
 ---Multiply a 2x4 matrix in an array or slice with a 2x2 matrix in an array or slice into a 2x4 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat2x4_mat2x2_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -7541,9 +5155,6 @@ end
 
 ---Multiply a 2x4 matrix with a 3x2 matrix and return a 3x4 matrix
 ---
----@param a avm.mat2x4
----@param b avm.mat3x2
----@return number,number,number,number,number,number,number,number,number,number,number,number
 function M.matmul_mat2x4_mat3x2(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -7555,25 +5166,12 @@ end
 
 ---Multiply a 2x4 matrix in an array or slice with a 3x2 matrix in an array or slice into a 3x4 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number,number,number,number,number,number,number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat2x4_mat3x2_ex(a, a_index, b, b_index) end
 
 ---Multiply a 2x4 matrix in an array or slice with a 3x2 matrix in an array or slice into a 3x4 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat2x4_mat3x2_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -7606,9 +5204,6 @@ end
 
 ---Multiply a 2x4 matrix with a 4x2 matrix and return a 4x4 matrix
 ---
----@param a avm.mat2x4
----@param b avm.mat4x2
----@return number,number,number,number,number,number,number,number,number,number,number,number,number,number,number,number
 function M.matmul_mat2x4_mat4x2(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -7621,25 +5216,12 @@ end
 
 ---Multiply a 2x4 matrix in an array or slice with a 4x2 matrix in an array or slice into a 4x4 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number,number,number,number,number,number,number,number,number,number,number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat2x4_mat4x2_ex(a, a_index, b, b_index) end
 
 ---Multiply a 2x4 matrix in an array or slice with a 4x2 matrix in an array or slice into a 4x4 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat2x4_mat4x2_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -7678,9 +5260,6 @@ end
 
 ---Multiply a 3x4 matrix with a 1x3 matrix and return a 1x4 matrix
 ---
----@param a avm.mat3x4
----@param b avm.mat1x3
----@return number,number,number,number
 function M.matmul_mat3x4_mat1x3(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -7690,25 +5269,12 @@ end
 
 ---Multiply a 3x4 matrix in an array or slice with a 1x3 matrix in an array or slice into a 1x4 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat3x4_mat1x3_ex(a, a_index, b, b_index) end
 
 ---Multiply a 3x4 matrix in an array or slice with a 1x3 matrix in an array or slice into a 1x4 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat3x4_mat1x3_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -7731,9 +5297,6 @@ end
 
 ---Multiply a 3x4 matrix with a 2x3 matrix and return a 2x4 matrix
 ---
----@param a avm.mat3x4
----@param b avm.mat2x3
----@return number,number,number,number,number,number,number,number
 function M.matmul_mat3x4_mat2x3(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -7745,25 +5308,12 @@ end
 
 ---Multiply a 3x4 matrix in an array or slice with a 2x3 matrix in an array or slice into a 2x4 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number,number,number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat3x4_mat2x3_ex(a, a_index, b, b_index) end
 
 ---Multiply a 3x4 matrix in an array or slice with a 2x3 matrix in an array or slice into a 2x4 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat3x4_mat2x3_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -7794,9 +5344,6 @@ end
 
 ---Multiply a 3x4 matrix with a 3x3 matrix and return a 3x4 matrix
 ---
----@param a avm.mat3x4
----@param b avm.mat3x3
----@return number,number,number,number,number,number,number,number,number,number,number,number
 function M.matmul_mat3x4_mat3x3(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -7810,25 +5357,12 @@ end
 
 ---Multiply a 3x4 matrix in an array or slice with a 3x3 matrix in an array or slice into a 3x4 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number,number,number,number,number,number,number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat3x4_mat3x3_ex(a, a_index, b, b_index) end
 
 ---Multiply a 3x4 matrix in an array or slice with a 3x3 matrix in an array or slice into a 3x4 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat3x4_mat3x3_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -7867,9 +5401,6 @@ end
 
 ---Multiply a 3x4 matrix with a 4x3 matrix and return a 4x4 matrix
 ---
----@param a avm.mat3x4
----@param b avm.mat4x3
----@return number,number,number,number,number,number,number,number,number,number,number,number,number,number,number,number
 function M.matmul_mat3x4_mat4x3(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -7885,25 +5416,12 @@ end
 
 ---Multiply a 3x4 matrix in an array or slice with a 4x3 matrix in an array or slice into a 4x4 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number,number,number,number,number,number,number,number,number,number,number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat3x4_mat4x3_ex(a, a_index, b, b_index) end
 
 ---Multiply a 3x4 matrix in an array or slice with a 4x3 matrix in an array or slice into a 4x4 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat3x4_mat4x3_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -7950,9 +5468,6 @@ end
 
 ---Multiply a 4x4 matrix with a 1x4 matrix and return a 1x4 matrix
 ---
----@param a avm.mat4x4
----@param b avm.mat1x4
----@return number,number,number,number
 function M.matmul_mat4x4_mat1x4(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -7964,25 +5479,12 @@ end
 
 ---Multiply a 4x4 matrix in an array or slice with a 1x4 matrix in an array or slice into a 1x4 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat4x4_mat1x4_ex(a, a_index, b, b_index) end
 
 ---Multiply a 4x4 matrix in an array or slice with a 1x4 matrix in an array or slice into a 1x4 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat4x4_mat1x4_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -8005,9 +5507,6 @@ end
 
 ---Multiply a 4x4 matrix with a 2x4 matrix and return a 2x4 matrix
 ---
----@param a avm.mat4x4
----@param b avm.mat2x4
----@return number,number,number,number,number,number,number,number
 function M.matmul_mat4x4_mat2x4(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -8023,25 +5522,12 @@ end
 
 ---Multiply a 4x4 matrix in an array or slice with a 2x4 matrix in an array or slice into a 2x4 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number,number,number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat4x4_mat2x4_ex(a, a_index, b, b_index) end
 
 ---Multiply a 4x4 matrix in an array or slice with a 2x4 matrix in an array or slice into a 2x4 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat4x4_mat2x4_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -8072,9 +5558,6 @@ end
 
 ---Multiply a 4x4 matrix with a 3x4 matrix and return a 3x4 matrix
 ---
----@param a avm.mat4x4
----@param b avm.mat3x4
----@return number,number,number,number,number,number,number,number,number,number,number,number
 function M.matmul_mat4x4_mat3x4(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -8094,25 +5577,12 @@ end
 
 ---Multiply a 4x4 matrix in an array or slice with a 3x4 matrix in an array or slice into a 3x4 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number,number,number,number,number,number,number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat4x4_mat3x4_ex(a, a_index, b, b_index) end
 
 ---Multiply a 4x4 matrix in an array or slice with a 3x4 matrix in an array or slice into a 3x4 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat4x4_mat3x4_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -8151,9 +5621,6 @@ end
 
 ---Multiply a 4x4 matrix with a 4x4 matrix and return a 4x4 matrix
 ---
----@param a avm.mat4x4
----@param b avm.mat4x4
----@return number,number,number,number,number,number,number,number,number,number,number,number,number,number,number,number
 function M.matmul_mat4x4_mat4x4(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -8177,25 +5644,12 @@ end
 
 ---Multiply a 4x4 matrix in an array or slice with a 4x4 matrix in an array or slice into a 4x4 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number,number,number,number,number,number,number,number,number,number,number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat4x4_mat4x4_ex(a, a_index, b, b_index) end
 
 ---Multiply a 4x4 matrix in an array or slice with a 4x4 matrix in an array or slice into a 4x4 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat4x4_mat4x4_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -8242,9 +5696,6 @@ end
 
 ---Multiply a 4x4 matrix with a 4x4 matrix and return a 4x4 matrix
 ---
----@param a avm.mat4
----@param b avm.mat4
----@return number,number,number,number,number,number,number,number,number,number,number,number,number,number,number,number
 function M.matmul_mat4_mat4(a, b)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -8268,25 +5719,12 @@ end
 
 ---Multiply a 4x4 matrix in an array or slice with a 4x4 matrix in an array or slice into a 4x4 matrix
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@return number,number,number,number,number,number,number,number,number,number,number,number,number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat4_mat4_ex(a, a_index, b, b_index) end
 
 ---Multiply a 4x4 matrix in an array or slice with a 4x4 matrix in an array or slice into a 4x4 matrix in a destination
 ---
 ---NOTE: `dest` cannot overlap `a` or `b` or results will be undefined
 ---
----@param a avm.seq_number
----@param a_index integer
----@param b avm.seq_number
----@param b_index integer
----@param dest avm.seq_number
----@param dest_index? integer
----@return nil
 function M.matmul_mat4_mat4_ex(a, a_index, b, b_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -8331,12 +5769,8 @@ function M.matmul_mat4_mat4_ex(a, a_index, b, b_index, dest, dest_index)
 	end
 end
 
-
 ---Multiply a 2x2 matrix and a 2d vector and return a 2d vector
 ---
----@param a avm.mat2
----@param v avm.vec2
----@return number,number
 function M.matmul_mat2_vec2(a, v)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(v, "bad argument 'v' (expected array or sequence, got nil)")
@@ -8347,22 +5781,10 @@ end
 
 ---Multiply a 2x2 matrix in a slice and a 2d vector in a slice and return a 2d vector
 ---
----@param a avm.seq_number
----@param a_index integer
----@param v avm.seq_number
----@param v_index integer
----@return number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat2_vec2_ex(a, a_index, v, v_index) end
 
 ---Multiply a 2x2 matrix in a slice and a 2d vector in an array or slice into a 2d vector in a destination
 ---
----@param a avm.seq_number
----@param a_index integer
----@param v avm.seq_number
----@param v_index integer
----@param dest avm.seq_number
----@param dest_index? integer
 function M.matmul_mat2_vec2_ex(a, a_index, v, v_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(v, "bad argument 'v' (expected array or sequence, got nil)")
@@ -8383,9 +5805,6 @@ end
 ---Multiply a 3x3 matrix and a 2d vector and return a 2d vector
 ---
 ---Note: Vector is assumed to be in homogeneous coordinates with unspecified elements set to 1
----@param a avm.mat3
----@param v avm.vec2
----@return number,number
 function M.matmul_mat3_vec2(a, v)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(v, "bad argument 'v' (expected array or sequence, got nil)")
@@ -8397,23 +5816,11 @@ end
 ---Multiply a 3x3 matrix in a slice and a 2d vector in a slice and return a 2d vector
 ---
 ---Note: Vector is assumed to be in homogeneous coordinates with unspecified elements set to 1
----@param a avm.seq_number
----@param a_index integer
----@param v avm.seq_number
----@param v_index integer
----@return number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat3_vec2_ex(a, a_index, v, v_index) end
 
 ---Multiply a 3x3 matrix in a slice and a 2d vector in an array or slice into a 2d vector in a destination
 ---
 ---Note: Vector is assumed to be in homogeneous coordinates with unspecified elements set to 1
----@param a avm.seq_number
----@param a_index integer
----@param v avm.seq_number
----@param v_index integer
----@param dest avm.seq_number
----@param dest_index? integer
 function M.matmul_mat3_vec2_ex(a, a_index, v, v_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(v, "bad argument 'v' (expected array or sequence, got nil)")
@@ -8433,9 +5840,6 @@ end
 
 ---Multiply a 3x3 matrix and a 3d vector and return a 3d vector
 ---
----@param a avm.mat3
----@param v avm.vec3
----@return number,number,number
 function M.matmul_mat3_vec3(a, v)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(v, "bad argument 'v' (expected array or sequence, got nil)")
@@ -8447,22 +5851,10 @@ end
 
 ---Multiply a 3x3 matrix in a slice and a 3d vector in a slice and return a 3d vector
 ---
----@param a avm.seq_number
----@param a_index integer
----@param v avm.seq_number
----@param v_index integer
----@return number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat3_vec3_ex(a, a_index, v, v_index) end
 
 ---Multiply a 3x3 matrix in a slice and a 3d vector in an array or slice into a 3d vector in a destination
 ---
----@param a avm.seq_number
----@param a_index integer
----@param v avm.seq_number
----@param v_index integer
----@param dest avm.seq_number
----@param dest_index? integer
 function M.matmul_mat3_vec3_ex(a, a_index, v, v_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(v, "bad argument 'v' (expected array or sequence, got nil)")
@@ -8485,9 +5877,6 @@ end
 ---Multiply a 4x4 matrix and a 2d vector and return a 2d vector
 ---
 ---Note: Vector is assumed to be in homogeneous coordinates with unspecified elements set to 1
----@param a avm.mat4
----@param v avm.vec2
----@return number,number
 function M.matmul_mat4_vec2(a, v)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(v, "bad argument 'v' (expected array or sequence, got nil)")
@@ -8499,23 +5888,11 @@ end
 ---Multiply a 4x4 matrix in a slice and a 2d vector in a slice and return a 2d vector
 ---
 ---Note: Vector is assumed to be in homogeneous coordinates with unspecified elements set to 1
----@param a avm.seq_number
----@param a_index integer
----@param v avm.seq_number
----@param v_index integer
----@return number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat4_vec2_ex(a, a_index, v, v_index) end
 
 ---Multiply a 4x4 matrix in a slice and a 2d vector in an array or slice into a 2d vector in a destination
 ---
 ---Note: Vector is assumed to be in homogeneous coordinates with unspecified elements set to 1
----@param a avm.seq_number
----@param a_index integer
----@param v avm.seq_number
----@param v_index integer
----@param dest avm.seq_number
----@param dest_index? integer
 function M.matmul_mat4_vec2_ex(a, a_index, v, v_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(v, "bad argument 'v' (expected array or sequence, got nil)")
@@ -8536,9 +5913,6 @@ end
 ---Multiply a 4x4 matrix and a 3d vector and return a 3d vector
 ---
 ---Note: Vector is assumed to be in homogeneous coordinates with unspecified elements set to 1
----@param a avm.mat4
----@param v avm.vec3
----@return number,number,number
 function M.matmul_mat4_vec3(a, v)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(v, "bad argument 'v' (expected array or sequence, got nil)")
@@ -8551,23 +5925,11 @@ end
 ---Multiply a 4x4 matrix in a slice and a 3d vector in a slice and return a 3d vector
 ---
 ---Note: Vector is assumed to be in homogeneous coordinates with unspecified elements set to 1
----@param a avm.seq_number
----@param a_index integer
----@param v avm.seq_number
----@param v_index integer
----@return number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat4_vec3_ex(a, a_index, v, v_index) end
 
 ---Multiply a 4x4 matrix in a slice and a 3d vector in an array or slice into a 3d vector in a destination
 ---
 ---Note: Vector is assumed to be in homogeneous coordinates with unspecified elements set to 1
----@param a avm.seq_number
----@param a_index integer
----@param v avm.seq_number
----@param v_index integer
----@param dest avm.seq_number
----@param dest_index? integer
 function M.matmul_mat4_vec3_ex(a, a_index, v, v_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(v, "bad argument 'v' (expected array or sequence, got nil)")
@@ -8589,9 +5951,6 @@ end
 
 ---Multiply a 4x4 matrix and a 4d vector and return a 4d vector
 ---
----@param a avm.mat4
----@param v avm.vec4
----@return number,number,number,number
 function M.matmul_mat4_vec4(a, v)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(v, "bad argument 'v' (expected array or sequence, got nil)")
@@ -8604,22 +5963,10 @@ end
 
 ---Multiply a 4x4 matrix in a slice and a 4d vector in a slice and return a 4d vector
 ---
----@param a avm.seq_number
----@param a_index integer
----@param v avm.seq_number
----@param v_index integer
----@return number,number,number,number
----@diagnostic disable-next-line: unused-local, missing-return
 function M.matmul_mat4_vec4_ex(a, a_index, v, v_index) end
 
 ---Multiply a 4x4 matrix in a slice and a 4d vector in an array or slice into a 4d vector in a destination
 ---
----@param a avm.seq_number
----@param a_index integer
----@param v avm.seq_number
----@param v_index integer
----@param dest avm.seq_number
----@param dest_index? integer
 function M.matmul_mat4_vec4_ex(a, a_index, v, v_index, dest, dest_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(v, "bad argument 'v' (expected array or sequence, got nil)")
@@ -8640,7 +5987,5 @@ function M.matmul_mat4_vec4_ex(a, a_index, v, v_index, dest, dest_index)
 		return e1, e2, e3, e4
 	end
 end
-
-
 
 return M

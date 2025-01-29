@@ -164,7 +164,6 @@
 -- Vector and matrix type annotations
 -----------------------------------------------------------
 
-
 ---@alias avm.vec1 avm.number1 ---1d vector
 ---@alias avm.vec2 avm.number2 ---2d vector
 ---@alias avm.vec3 avm.number3 ---3d vector

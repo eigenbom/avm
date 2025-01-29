@@ -24,7 +24,6 @@ local M = {}
 ---@diagnostic disable-next-line: unused-local
 local avm_path = (...):match("(.-)[^%.]+$")
 
-
 ---Disable warnings for _ex type overloaded functions
 ---@diagnostic disable: redundant-return-value, duplicate-set-field
 
@@ -36,11 +35,11 @@ local avm_path = (...):match("(.-)[^%.]+$")
 local epsilon_default = 1e-9
 
 -- Math library
-local math = require 'math'
-local math_abs = math.abs
-local math_ceil = math.ceil
-local math_min = math.min
-local math_max = math.max
+local math = require("math")
+local math_abs = assert(math.abs)
+local math_ceil = assert(math.ceil)
+local math_min = assert(math.min)
+local math_max = assert(math.max)
 
 -----------------------------------------------------------
 -- Extension API
@@ -80,7 +79,6 @@ function M.new_array(type, length)
 	return dest
 end
 
----TODO: This function should only grow array if the array checks are on
 ---Grow an array or sequence to span the range [index, index + count - 1]
 ---
 ---Optionally redefine this to support custom platform and userdata
@@ -299,7 +297,6 @@ function M.reverse_ex(src, src_index, src_count, dest, dest_index)
 	return dest
 end
 
-
 local function check_valid_reshape_size(dest_size)
 	assert(type(dest_size) == "table", "bad argument 'dest_size' (table expected, got type " .. type(dest_size) .. ")")
 	assert(#dest_size > 0, "bad argument 'dest_size' (dest_size must have at least one element)")
@@ -343,7 +340,7 @@ function M.reshape_into(src, dest_size, dest, dest_index)
 	do
 		local tbl = src ---@type table
 		while type(tbl) == "table" do
-			table.insert(src_size, #tbl)
+			src_size[#src_size+1] = #tbl
 			tbl = tbl[1]
 		end
 	end
@@ -413,7 +410,7 @@ function M.flatten(src)
 	do
 		local tbl = src ---@type table
 		while type(tbl) == "table" do
-			table.insert(src_size, #tbl)
+			src_size[#src_size+1] = #tbl
 			tbl = tbl[1]
 		end
 	end
@@ -432,7 +429,6 @@ function M.flatten(src)
 	return dest
 end
 
-
 ---Flatten a table of data into a destination
 ---
 ---Example:
@@ -448,7 +444,7 @@ function M.flatten_into(src, dest, dest_index)
 	do
 		local tbl = src ---@type table
 		while type(tbl) == "table" do
-			table.insert(src_size, #tbl)
+			src_size[#src_size+1] = #tbl
 			tbl = tbl[1]
 		end
 	end
@@ -863,7 +859,6 @@ function M.set_16(dest, dest_index, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11
 	dest[dest_index], dest[dest_index+1], dest[dest_index+2], dest[dest_index+3], dest[dest_index+4], dest[dest_index+5], dest[dest_index+6], dest[dest_index+7], dest[dest_index+8], dest[dest_index+9], dest[dest_index+10], dest[dest_index+11], dest[dest_index+12], dest[dest_index+13], dest[dest_index+14], dest[dest_index+15] = v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16
 end
 
-
 ---Get 2 values from a slice
 ---@generic T
 ---@param src avm.seq<T>
@@ -1014,7 +1009,6 @@ function M.get_16(src, src_index)
 	return src[src_index], src[src_index+1], src[src_index+2], src[src_index+3], src[src_index+4], src[src_index+5], src[src_index+6], src[src_index+7], src[src_index+8], src[src_index+9], src[src_index+10], src[src_index+11], src[src_index+12], src[src_index+13], src[src_index+14], src[src_index+15]
 end
 
-
 ---Unpack 2 values from an array
 ---@generic T
 ---@param src avm.array<T> 
@@ -1149,7 +1143,6 @@ function M.unpack_16(src)
 	assert(src, "bad argument 'src' (expected array, got nil)")
 	return src[1], src[2], src[3], src[4], src[5], src[6], src[7], src[8], src[9], src[10], src[11], src[12], src[13], src[14], src[15], src[16]
 end
-
 
 ---Push values onto an array
 ---
@@ -1447,10 +1440,7 @@ function M.push_16(dest, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13,
 	M.set_16(dest, len+1, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16)
 end
 
-
 ---Pop a value off the end of an array and return it
----
----Equivalent to `table.remove(src)`
 ---
 ---@see array_module.pop_1
 ---@see array_module.pop_2
@@ -1472,7 +1462,7 @@ function M.pop_1(src)
 	assert(src, "bad argument 'src' (expected array, got nil)")
 	local index = M.length(src)-1+1
 	local v1 = src[index]
-	table.remove(src)
+	src[index] = nil
 	return v1
 end
 
@@ -1486,8 +1476,8 @@ function M.pop_2(src)
 	local index = M.length(src)-2+1
 	local v1 = src[index]
 	local v2 = src[index+1]
-	table.remove(src)
-	table.remove(src)
+	src[index+1] = nil
+	src[index] = nil
 	return v1, v2
 end
 
@@ -1502,9 +1492,9 @@ function M.pop_3(src)
 	local v1 = src[index]
 	local v2 = src[index+1]
 	local v3 = src[index+2]
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
+	src[index+2] = nil
+	src[index+1] = nil
+	src[index] = nil
 	return v1, v2, v3
 end
 
@@ -1520,10 +1510,10 @@ function M.pop_4(src)
 	local v2 = src[index+1]
 	local v3 = src[index+2]
 	local v4 = src[index+3]
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
+	src[index+3] = nil
+	src[index+2] = nil
+	src[index+1] = nil
+	src[index] = nil
 	return v1, v2, v3, v4
 end
 
@@ -1540,11 +1530,11 @@ function M.pop_5(src)
 	local v3 = src[index+2]
 	local v4 = src[index+3]
 	local v5 = src[index+4]
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
+	src[index+4] = nil
+	src[index+3] = nil
+	src[index+2] = nil
+	src[index+1] = nil
+	src[index] = nil
 	return v1, v2, v3, v4, v5
 end
 
@@ -1562,12 +1552,12 @@ function M.pop_6(src)
 	local v4 = src[index+3]
 	local v5 = src[index+4]
 	local v6 = src[index+5]
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
+	src[index+5] = nil
+	src[index+4] = nil
+	src[index+3] = nil
+	src[index+2] = nil
+	src[index+1] = nil
+	src[index] = nil
 	return v1, v2, v3, v4, v5, v6
 end
 
@@ -1586,13 +1576,13 @@ function M.pop_7(src)
 	local v5 = src[index+4]
 	local v6 = src[index+5]
 	local v7 = src[index+6]
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
+	src[index+6] = nil
+	src[index+5] = nil
+	src[index+4] = nil
+	src[index+3] = nil
+	src[index+2] = nil
+	src[index+1] = nil
+	src[index] = nil
 	return v1, v2, v3, v4, v5, v6, v7
 end
 
@@ -1612,14 +1602,14 @@ function M.pop_8(src)
 	local v6 = src[index+5]
 	local v7 = src[index+6]
 	local v8 = src[index+7]
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
+	src[index+7] = nil
+	src[index+6] = nil
+	src[index+5] = nil
+	src[index+4] = nil
+	src[index+3] = nil
+	src[index+2] = nil
+	src[index+1] = nil
+	src[index] = nil
 	return v1, v2, v3, v4, v5, v6, v7, v8
 end
 
@@ -1640,15 +1630,15 @@ function M.pop_9(src)
 	local v7 = src[index+6]
 	local v8 = src[index+7]
 	local v9 = src[index+8]
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
+	src[index+8] = nil
+	src[index+7] = nil
+	src[index+6] = nil
+	src[index+5] = nil
+	src[index+4] = nil
+	src[index+3] = nil
+	src[index+2] = nil
+	src[index+1] = nil
+	src[index] = nil
 	return v1, v2, v3, v4, v5, v6, v7, v8, v9
 end
 
@@ -1670,16 +1660,16 @@ function M.pop_10(src)
 	local v8 = src[index+7]
 	local v9 = src[index+8]
 	local v10 = src[index+9]
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
+	src[index+9] = nil
+	src[index+8] = nil
+	src[index+7] = nil
+	src[index+6] = nil
+	src[index+5] = nil
+	src[index+4] = nil
+	src[index+3] = nil
+	src[index+2] = nil
+	src[index+1] = nil
+	src[index] = nil
 	return v1, v2, v3, v4, v5, v6, v7, v8, v9, v10
 end
 
@@ -1702,17 +1692,17 @@ function M.pop_11(src)
 	local v9 = src[index+8]
 	local v10 = src[index+9]
 	local v11 = src[index+10]
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
+	src[index+10] = nil
+	src[index+9] = nil
+	src[index+8] = nil
+	src[index+7] = nil
+	src[index+6] = nil
+	src[index+5] = nil
+	src[index+4] = nil
+	src[index+3] = nil
+	src[index+2] = nil
+	src[index+1] = nil
+	src[index] = nil
 	return v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11
 end
 
@@ -1736,18 +1726,18 @@ function M.pop_12(src)
 	local v10 = src[index+9]
 	local v11 = src[index+10]
 	local v12 = src[index+11]
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
+	src[index+11] = nil
+	src[index+10] = nil
+	src[index+9] = nil
+	src[index+8] = nil
+	src[index+7] = nil
+	src[index+6] = nil
+	src[index+5] = nil
+	src[index+4] = nil
+	src[index+3] = nil
+	src[index+2] = nil
+	src[index+1] = nil
+	src[index] = nil
 	return v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12
 end
 
@@ -1772,19 +1762,19 @@ function M.pop_13(src)
 	local v11 = src[index+10]
 	local v12 = src[index+11]
 	local v13 = src[index+12]
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
+	src[index+12] = nil
+	src[index+11] = nil
+	src[index+10] = nil
+	src[index+9] = nil
+	src[index+8] = nil
+	src[index+7] = nil
+	src[index+6] = nil
+	src[index+5] = nil
+	src[index+4] = nil
+	src[index+3] = nil
+	src[index+2] = nil
+	src[index+1] = nil
+	src[index] = nil
 	return v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13
 end
 
@@ -1810,20 +1800,20 @@ function M.pop_14(src)
 	local v12 = src[index+11]
 	local v13 = src[index+12]
 	local v14 = src[index+13]
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
+	src[index+13] = nil
+	src[index+12] = nil
+	src[index+11] = nil
+	src[index+10] = nil
+	src[index+9] = nil
+	src[index+8] = nil
+	src[index+7] = nil
+	src[index+6] = nil
+	src[index+5] = nil
+	src[index+4] = nil
+	src[index+3] = nil
+	src[index+2] = nil
+	src[index+1] = nil
+	src[index] = nil
 	return v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14
 end
 
@@ -1850,21 +1840,21 @@ function M.pop_15(src)
 	local v13 = src[index+12]
 	local v14 = src[index+13]
 	local v15 = src[index+14]
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
+	src[index+14] = nil
+	src[index+13] = nil
+	src[index+12] = nil
+	src[index+11] = nil
+	src[index+10] = nil
+	src[index+9] = nil
+	src[index+8] = nil
+	src[index+7] = nil
+	src[index+6] = nil
+	src[index+5] = nil
+	src[index+4] = nil
+	src[index+3] = nil
+	src[index+2] = nil
+	src[index+1] = nil
+	src[index] = nil
 	return v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15
 end
 
@@ -1892,25 +1882,24 @@ function M.pop_16(src)
 	local v14 = src[index+13]
 	local v15 = src[index+14]
 	local v16 = src[index+15]
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
-	table.remove(src)
+	src[index+15] = nil
+	src[index+14] = nil
+	src[index+13] = nil
+	src[index+12] = nil
+	src[index+11] = nil
+	src[index+10] = nil
+	src[index+9] = nil
+	src[index+8] = nil
+	src[index+7] = nil
+	src[index+6] = nil
+	src[index+5] = nil
+	src[index+4] = nil
+	src[index+3] = nil
+	src[index+2] = nil
+	src[index+1] = nil
+	src[index] = nil
 	return v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16
 end
-
 
 -----------------------------------------------------------
 -- Append, join
@@ -2384,7 +2373,6 @@ function M.map_4_ex(f, a1, a1_index, a1_count, a2, a2_index, a3, a3_index, a4, a
 	end
 	return dest
 end
-
 
 -----------------------------------------------------------
 -- Element-wise binary operations
@@ -4308,8 +4296,6 @@ function M.almost_equal_with_nan_ex(a, a_index, a_count, b, b_index, dest, dest_
 	end
 	return dest
 end
-
-
 
 ---Perform the multiply-add operation on three arrays and return an array
 ---

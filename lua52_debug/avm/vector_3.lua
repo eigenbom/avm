@@ -4,7 +4,6 @@ Vector operations and types
 
 Classes and functions for working with 3-d vectors  
 
-
 ]]
 ---@class vector_3_module
 local M = {}
@@ -20,10 +19,11 @@ local _debug = require(avm_path .. "_debug")
 
 ---@module 'avm.array'
 local array = require(avm_path .. "array")
+---@module 'avm.format'
+local format = require(avm_path .. "format")
 
 ---Disable warnings for _ex type overloaded functions
 ---@diagnostic disable: redundant-return-value, duplicate-set-field
-
 
 ---3D vector constructed from a tuple
 ---
@@ -34,7 +34,6 @@ local array = require(avm_path .. "array")
 ---@operator div(avm.number3|number): avm.vector_3
 ---@operator unm():avm.vector_3
 local vector_3 = {}
-
 
 -----------------------------------------------------------
 -- Vector creation
@@ -70,7 +69,7 @@ vector_3.__len = function()
 end
 
 function vector_3:__tostring()
-	return string.format("%f, %f, %f", self:get())
+	return format.array("${format_string}", self)
 end
 
 function vector_3:copy()
@@ -614,7 +613,6 @@ function vector_3:set_zyx(v1, v2, v3)
 	self[3], self[2], self[1] = v1, v2, v3
 end
 
-
 --[[
 function vector_3_slice:__index(key)
 	if type(key) == 'number' and key >= 1 and key <= 3 then
@@ -638,7 +636,7 @@ function vector_3_slice:__len()
 end
 
 function vector_3_slice:__tostring()
-	return string.format("%f, %f, %f", self:get())
+	return format.array("${format_string}", self)
 end
 
 function vector_3_slice:copy()

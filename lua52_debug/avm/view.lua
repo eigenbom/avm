@@ -26,7 +26,14 @@ local array = require(avm_path .. "array")
 ---Disable warnings for _ex type overloaded functions
 ---@diagnostic disable: redundant-return-value, duplicate-set-field
 
+-----------------------------------------------------------
+-- Dependencies
+-----------------------------------------------------------
 
+-- Math library dependencies
+-- Override these to use a different math library or set as nil to remove the dependency
+local math = require("math")
+local math_ceil = assert(math.ceil)
 
 -----------------------------------------------------------
 -- Slice
@@ -59,7 +66,7 @@ local slice_mt = {
 ---print(b[1], b[2], b[3]) --> 2 3 4
 ---```
 ---
----Note: Most array functions already have `_slice` forms so this object is rarely needed
+---Note: Most array functions have `_ex` forms so this object is a convenience only
 ---@generic T
 ---@param src avm.seq<T>
 ---@param index integer
@@ -143,7 +150,7 @@ end
 local interleaved_mt = {
 	__index = function(self, index)
 		if type(index) == 'number' then
-			local group_adv = math.ceil(index / self._g)-1
+			local group_adv = math_ceil(index / self._g)-1
 			local subgroup_index = (index-1) % self._g
 			return self._src[self._i + group_adv*self._s + subgroup_index]
 		else
@@ -152,7 +159,7 @@ local interleaved_mt = {
 	end,
 	__newindex = function(self, index, value)
 		if type(index) == 'number' then
-			local group_adv = math.ceil(index / self._g)-1
+			local group_adv = math_ceil(index / self._g)-1
 			local subgroup_index = (index-1) % self._g
 			self._src[self._i + group_adv*self._s + subgroup_index] = value
 		else
@@ -634,6 +641,5 @@ end
 function M.slice_16(src, index)
 	return setmetatable({_src=src, _i=index}, slice16_mt)
 end
-
 
 return M

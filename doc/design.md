@@ -4,7 +4,7 @@ This document explains some of the ideas and concepts underlying the AVM library
 
 ## Why AVM?
 
-I designed AVM to simplify repetitive tasks, and because I wanted something like a "[numpy](https://numpy.org/) lite" for pure Lua.
+I designed AVM to simplify working with arrays of numerical data in Lua (a "[numpy](https://numpy.org/) lite").
 
 Lua has a concise syntax for operating on arrays, and so you should consider whether adding a new dependency is worth it. Take the summing of two arrays, for example:
 
@@ -76,6 +76,14 @@ Many AVM functions support specifying slices/ranges so you can operate on 0-base
 local data = ffi.new("int[?]", N)
 array.fill_into(3, N, data, 0) -- Fill data with 3's starting from index 0
 ```
+
+## Minimal Dependencies
+
+AVM requires the lua standard math, table and string modules. These dependencies are documented at the start of each module, and can be manually changed if necessary. Some distributions will adapt these dependencies to become compatible.
+
+## Flattened Arrays
+
+AVM works with flattened arrays only. Multi-dimensional data (e.g., a table of tables) will have to be flattened before using AVM functions. The array module provides some `reshape` helper functions to convert between these formats.
 
 ## Vectors And Matrix Objects
 

@@ -11,9 +11,9 @@ local M = {}
 -----------------------------------------------------------
 
 -- Math library
-local math = require 'math'
-local math_ceil = math.ceil
-local math_min = math.min
+local math = require("math")
+local math_ceil = assert(math.ceil)
+local math_min = assert(math.min)
 
 ------------------------------------------------------------------------
 -- AVM Dependencies
@@ -28,7 +28,6 @@ local view = require(avm_path .. "view")
 
 ---Disable warnings for _ex type overloaded functions
 ---@diagnostic disable: redundant-return-value, duplicate-set-field
-
 
 -----------------------------------------------------------
 -- Iteration
@@ -543,7 +542,6 @@ function M.group_16_ex(src, src_index, src_count)
 		end
 	end
 end
-
 
 ---Create an iterator over two arrays that returns
 ---```
@@ -1440,6 +1438,5 @@ function M.zip_16_ex(a, a_index, a_count, b, b_index)
 		end
 	end
 end
-
 
 return M

@@ -4,50 +4,27 @@ Matrix operations and types
 
 Classes and functions for working with matrices  
 
-
 ]]
----@class matrix_2_module
 local M = {}
 
 ------------------------------------------------------------------------
 -- AVM Dependencies
 ------------------------------------------------------------------------
----@diagnostic disable-next-line: unused-local
 local avm_path = (...):match("(.-)[^%.]+$")
 
----@module 'avm.array'
 local array = require(avm_path .. "array")
----@module 'avm.linalg'
 local linalg = require(avm_path .. "linalg")
+local format = require(avm_path .. "format")
 
 ---Disable warnings for _ex type overloaded functions
----@diagnostic disable: redundant-return-value, duplicate-set-field
-
 
 ---2x2 matrix in column-major order constructed from a tuple
 ---
----@class avm.matrix_2: avm.number4
----@operator add(avm.number4|number): avm.matrix_2
----@operator sub(avm.number4|number): avm.matrix_2
----@operator mul(avm.number4|number): avm.matrix_2
----@operator div(avm.number4|number): avm.matrix_2
----@operator unm():avm.matrix_2
----@field n 4
 local matrix_2 = {}
 
 ---A 2x2 matrix in column-major order that views into an array or slice
 ---
----@class avm.matrix_2_slice: avm.number4
----@operator add(avm.number4|number): avm.matrix_2
----@operator sub(avm.number4|number): avm.matrix_2
----@operator mul(avm.number4|number): avm.matrix_2
----@operator div(avm.number4|number): avm.matrix_2
----@operator unm():avm.matrix_2_slice
----@field n 4
----@field private _src avm.seq_number4
----@field private _o integer
 local matrix_2_slice = {}
-
 
 -----------------------------------------------------------
 -- Matrix creation
@@ -55,11 +32,6 @@ local matrix_2_slice = {}
 
 ---Create a new matrix_2
 ---Parameter `e_ij` determines the value of `i'th` column `j'th` row
----@param e_11 number
----@param e_12 number
----@param e_21 number
----@param e_22 number
----@return avm.matrix_2
 function M.new(e_11, e_12, e_21, e_22)
 	assert(e_11, "bad argument 'e_11' (expected number, got nil)")
 	assert(e_12, "bad argument 'e_12' (expected number, got nil)")
@@ -77,22 +49,19 @@ function matrix_2:__index(key)
 end
 
 function matrix_2:__tostring()
-	return string.format("%f, %f, %f, %f", self:get())
+	return format.array(self)
 end
 
 function matrix_2:copy()
 	return M.new(self:get())
 end
 
----@param dest avm.seq_number4
----@param dest_index? integer
 function matrix_2:copy_into(dest, dest_index)
 	assert(dest, "bad argument 'dest' (expected array or sequence, got nil)")
 	array.set_4(dest, dest_index or 1, self:get())
 end
 
 ---Get values as a tuple
----@return number,number,number,number
 function matrix_2:get()
 	return self[1], self[2], self[3], self[4]
 end
@@ -100,10 +69,6 @@ end
 ---Set values from a tuple
 ---
 ---Parameter `e_ij` determines the value of `i'th` column `j'th` row
----@param e_11 number
----@param e_12 number
----@param e_21 number
----@param e_22 number
 function matrix_2:set(e_11, e_12, e_21, e_22)
 	assert(e_11, "bad argument 'e_11' (expected number, got nil)")
 	assert(e_12, "bad argument 'e_12' (expected number, got nil)")
@@ -114,17 +79,13 @@ end
 ---Apply addition element-wise and return a new matrix_2
 ---
 ---Parameter `m` can be a number or array
----@param m avm.number4|number
----@return avm.matrix_2
 function matrix_2:add(m)
 	local is_number = type(m) == 'number'
 	if not is_number then
-		---@cast m avm.number4
-		assert(m, "bad argument 'm' (expected array or sequence, got nil)")
+			assert(m, "bad argument 'm' (expected array or sequence, got nil)")
 		return M.new(self[1]+m[1],self[2]+m[2],self[3]+m[3],self[4]+m[4])
 	else
-		---@cast m number
-		return M.new(self[1]+m,self[2]+m,self[3]+m,self[4]+m)
+			return M.new(self[1]+m,self[2]+m,self[3]+m,self[4]+m)
 	end
 	
 end
@@ -132,36 +93,27 @@ end
 ---Apply addition element-wise and store the result in a destination
 ---
 ---Parameter `m` can be a number or array
----@param m avm.number4|number
----@param dest avm.seq_number4
----@param dest_index? integer
 function matrix_2:add_into(m, dest, dest_index)
 	assert(dest, "bad argument 'dest' (expected array or sequence, got nil)")
 	local is_number = type(m) == 'number'
 	if not is_number then
-		---@cast m avm.number4
-		assert(m, "bad argument 'm' (expected array or sequence, got nil)")
+			assert(m, "bad argument 'm' (expected array or sequence, got nil)")
 		array.set_4(dest, dest_index or 1, self[1]+m[1],self[2]+m[2],self[3]+m[3],self[4]+m[4])
 	else
-		---@cast m number
-		array.set_4(dest, dest_index or 1, self[1]+m,self[2]+m,self[3]+m,self[4]+m)
+			array.set_4(dest, dest_index or 1, self[1]+m,self[2]+m,self[3]+m,self[4]+m)
 	end
 end
 
 ---Apply subtraction element-wise and return a new matrix_2
 ---
 ---Parameter `m` can be a number or array
----@param m avm.number4|number
----@return avm.matrix_2
 function matrix_2:sub(m)
 	local is_number = type(m) == 'number'
 	if not is_number then
-		---@cast m avm.number4
-		assert(m, "bad argument 'm' (expected array or sequence, got nil)")
+			assert(m, "bad argument 'm' (expected array or sequence, got nil)")
 		return M.new(self[1]-m[1],self[2]-m[2],self[3]-m[3],self[4]-m[4])
 	else
-		---@cast m number
-		return M.new(self[1]-m,self[2]-m,self[3]-m,self[4]-m)
+			return M.new(self[1]-m,self[2]-m,self[3]-m,self[4]-m)
 	end
 	
 end
@@ -169,36 +121,27 @@ end
 ---Apply subtraction element-wise and store the result in a destination
 ---
 ---Parameter `m` can be a number or array
----@param m avm.number4|number
----@param dest avm.seq_number4
----@param dest_index? integer
 function matrix_2:sub_into(m, dest, dest_index)
 	assert(dest, "bad argument 'dest' (expected array or sequence, got nil)")
 	local is_number = type(m) == 'number'
 	if not is_number then
-		---@cast m avm.number4
-		assert(m, "bad argument 'm' (expected array or sequence, got nil)")
+			assert(m, "bad argument 'm' (expected array or sequence, got nil)")
 		array.set_4(dest, dest_index or 1, self[1]-m[1],self[2]-m[2],self[3]-m[3],self[4]-m[4])
 	else
-		---@cast m number
-		array.set_4(dest, dest_index or 1, self[1]-m,self[2]-m,self[3]-m,self[4]-m)
+			array.set_4(dest, dest_index or 1, self[1]-m,self[2]-m,self[3]-m,self[4]-m)
 	end
 end
 
 ---Apply multiplication element-wise and return a new matrix_2
 ---
 ---Parameter `m` can be a number or array
----@param m avm.number4|number
----@return avm.matrix_2
 function matrix_2:mul(m)
 	local is_number = type(m) == 'number'
 	if not is_number then
-		---@cast m avm.number4
-		assert(m, "bad argument 'm' (expected array or sequence, got nil)")
+			assert(m, "bad argument 'm' (expected array or sequence, got nil)")
 		return M.new(self[1]*m[1],self[2]*m[2],self[3]*m[3],self[4]*m[4])
 	else
-		---@cast m number
-		return M.new(self[1]*m,self[2]*m,self[3]*m,self[4]*m)
+			return M.new(self[1]*m,self[2]*m,self[3]*m,self[4]*m)
 	end
 	
 end
@@ -206,36 +149,27 @@ end
 ---Apply multiplication element-wise and store the result in a destination
 ---
 ---Parameter `m` can be a number or array
----@param m avm.number4|number
----@param dest avm.seq_number4
----@param dest_index? integer
 function matrix_2:mul_into(m, dest, dest_index)
 	assert(dest, "bad argument 'dest' (expected array or sequence, got nil)")
 	local is_number = type(m) == 'number'
 	if not is_number then
-		---@cast m avm.number4
-		assert(m, "bad argument 'm' (expected array or sequence, got nil)")
+			assert(m, "bad argument 'm' (expected array or sequence, got nil)")
 		array.set_4(dest, dest_index or 1, self[1]*m[1],self[2]*m[2],self[3]*m[3],self[4]*m[4])
 	else
-		---@cast m number
-		array.set_4(dest, dest_index or 1, self[1]*m,self[2]*m,self[3]*m,self[4]*m)
+			array.set_4(dest, dest_index or 1, self[1]*m,self[2]*m,self[3]*m,self[4]*m)
 	end
 end
 
 ---Apply division element-wise and return a new matrix_2
 ---
 ---Parameter `m` can be a number or array
----@param m avm.number4|number
----@return avm.matrix_2
 function matrix_2:div(m)
 	local is_number = type(m) == 'number'
 	if not is_number then
-		---@cast m avm.number4
-		assert(m, "bad argument 'm' (expected array or sequence, got nil)")
+			assert(m, "bad argument 'm' (expected array or sequence, got nil)")
 		return M.new(self[1]/m[1],self[2]/m[2],self[3]/m[3],self[4]/m[4])
 	else
-		---@cast m number
-		return M.new(self[1]/m,self[2]/m,self[3]/m,self[4]/m)
+			return M.new(self[1]/m,self[2]/m,self[3]/m,self[4]/m)
 	end
 	
 end
@@ -243,19 +177,14 @@ end
 ---Apply division element-wise and store the result in a destination
 ---
 ---Parameter `m` can be a number or array
----@param m avm.number4|number
----@param dest avm.seq_number4
----@param dest_index? integer
 function matrix_2:div_into(m, dest, dest_index)
 	assert(dest, "bad argument 'dest' (expected array or sequence, got nil)")
 	local is_number = type(m) == 'number'
 	if not is_number then
-		---@cast m avm.number4
-		assert(m, "bad argument 'm' (expected array or sequence, got nil)")
+			assert(m, "bad argument 'm' (expected array or sequence, got nil)")
 		array.set_4(dest, dest_index or 1, self[1]/m[1],self[2]/m[2],self[3]/m[3],self[4]/m[4])
 	else
-		---@cast m number
-		array.set_4(dest, dest_index or 1, self[1]/m,self[2]/m,self[3]/m,self[4]/m)
+			array.set_4(dest, dest_index or 1, self[1]/m,self[2]/m,self[3]/m,self[4]/m)
 	end
 end
 
@@ -268,8 +197,6 @@ matrix_2.__unm = function(m) return m:mul(-1) end
 
 ---Multiply with a matrix and return the result
 ---
----@param m avm.number4
----@return avm.matrix_2
 function matrix_2:matmul(m)
 	assert(m, "bad argument 'm' (expected array or sequence, got nil)")
 	return M.new(linalg.matmul_mat2_mat2(self, m))
@@ -277,15 +204,10 @@ end
 
 ---Multiply with a matrix and store the result in a destination
 ---
----@param m avm.number4
----@param dest avm.seq_number4
----@param dest_index? integer
 function matrix_2:matmul_into(m, dest, dest_index)
 	assert(m, "bad argument 'm' (expected array or sequence, got nil)")
 	assert(dest, "bad argument 'dest' (expected array or sequence, got nil)")
 	array.set_4(dest, dest_index or 1, linalg.matmul_mat2_mat2(self, m))
 end
-
-
 
 return M

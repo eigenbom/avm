@@ -37,42 +37,27 @@ Usage:
 ```  
 
 ]]
----@class vector_2_module
 local M = {}
 
 ------------------------------------------------------------------------
 -- AVM Dependencies
 ------------------------------------------------------------------------
----@diagnostic disable-next-line: unused-local
 local avm_path = (...):match("(.-)[^%.]+$")
 
----@module 'avm.array'
 local array = require(avm_path .. "array")
+local format = require(avm_path .. "format")
 
 ---Disable warnings for _ex type overloaded functions
----@diagnostic disable: redundant-return-value, duplicate-set-field
-
 
 ---2D vector constructed from a tuple
 ---
----@class avm.vector_2: avm.number2
----@operator add(avm.number2|number): avm.vector_2
----@operator sub(avm.number2|number): avm.vector_2
----@operator mul(avm.number2|number): avm.vector_2
----@operator div(avm.number2|number): avm.vector_2
----@operator unm():avm.vector_2
----@field n 2
 local vector_2 = {}
-
 
 -----------------------------------------------------------
 -- Vector creation
 -----------------------------------------------------------
 
 ---Create a new vector_2 with given values
----@param v1 number
----@param v2 number
----@return avm.vector_2
 function M.new(v1, v2)
 	assert(v1, "bad argument 'v1' (expected number, got nil)")
 	assert(v2, "bad argument 'v2' (expected number, got nil)")
@@ -81,14 +66,10 @@ end
 
 --[=[
 ---Create a vector_2_slice class that views into an array or slice
----@param src avm.seq_number
----@param src_index? integer
----@return avm.vector_2_slice
 function M.slice(src, src_index)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
 	local index = src_index or 1
-	return setmetatable({_src = src, _o=index-1}, vector_2_slice) --[[@as avm.vector_2_slice]]
-end
+	return setmetatable({_src = src, _o=index-1}, vector_2_slice) --[[end
 --]=]
 
 function vector_2:__index(key)
@@ -100,29 +81,24 @@ function vector_2:__index(key)
 end
 
 function vector_2:__tostring()
-	return string.format("%f, %f", self:get())
+	return format.array("${format_string}", self)
 end
 
 function vector_2:copy()
 	return M.new(self:get())
 end
 
----@param dest avm.seq_number2
----@param dest_index? integer
 function vector_2:copy_into(dest, dest_index)
 	assert(dest, "bad argument 'dest' (expected array or sequence, got nil)")
 	array.set_2(dest, dest_index or 1, self:get())
 end
 
 ---Get values as a tuple
----@return number,number
 function vector_2:get()
 	return self[1], self[2]
 end
 
 ---Set values from a tuple
----@param v1 number
----@param v2 number
 function vector_2:set(v1, v2)
 	assert(v1, "bad argument 'v1' (expected number, got nil)")
 	assert(v2, "bad argument 'v2' (expected number, got nil)")
@@ -132,18 +108,13 @@ end
 ---Apply add element-wise and return a new vector_2
 ---
 ---Parameter `v` can be a number or array
----@param v avm.number2|number
----@return avm.vector_2
 function vector_2:add(v)
 	local is_number = type(v) == 'number'
-	local v1, v2 ---@type number,number
-	if not is_number then
-		---@cast v avm.number2
-		assert(v, "bad argument 'v' (expected array or sequence, got nil)")
+	local v1, v2 	if not is_number then
+			assert(v, "bad argument 'v' (expected array or sequence, got nil)")
 		v1, v2 = v[1],v[2]
 	else
-		---@cast v number
-		v1, v2 = v, v
+			v1, v2 = v, v
 	end
 	return M.new(self[1]+v1,self[2]+v2)
 end
@@ -151,19 +122,13 @@ end
 ---Apply add element-wise and store the result in dest
 ---
 ---Parameter `v` can be a number or array
----@param v avm.number2|number
----@param dest avm.seq_number2
----@param dest_index? integer
 function vector_2:add_into(v, dest, dest_index)
 	local is_number = type(v) == 'number'
-	local v1, v2 ---@type number,number
-	if not is_number then
-		---@cast v avm.number2
-		assert(v, "bad argument 'v' (expected array or sequence, got nil)")
+	local v1, v2 	if not is_number then
+			assert(v, "bad argument 'v' (expected array or sequence, got nil)")
 		v1, v2 = v[1],v[2]
 	else
-		---@cast v number
-		v1, v2 = v, v
+			v1, v2 = v, v
 	end
 	assert(dest, "bad argument 'dest' (expected array or sequence, got nil)")
 	array.set_2(dest, dest_index or 1, self[1]+v1,self[2]+v2)
@@ -172,18 +137,13 @@ end
 ---Apply sub element-wise and return a new vector_2
 ---
 ---Parameter `v` can be a number or array
----@param v avm.number2|number
----@return avm.vector_2
 function vector_2:sub(v)
 	local is_number = type(v) == 'number'
-	local v1, v2 ---@type number,number
-	if not is_number then
-		---@cast v avm.number2
-		assert(v, "bad argument 'v' (expected array or sequence, got nil)")
+	local v1, v2 	if not is_number then
+			assert(v, "bad argument 'v' (expected array or sequence, got nil)")
 		v1, v2 = v[1],v[2]
 	else
-		---@cast v number
-		v1, v2 = v, v
+			v1, v2 = v, v
 	end
 	return M.new(self[1]-v1,self[2]-v2)
 end
@@ -191,19 +151,13 @@ end
 ---Apply sub element-wise and store the result in dest
 ---
 ---Parameter `v` can be a number or array
----@param v avm.number2|number
----@param dest avm.seq_number2
----@param dest_index? integer
 function vector_2:sub_into(v, dest, dest_index)
 	local is_number = type(v) == 'number'
-	local v1, v2 ---@type number,number
-	if not is_number then
-		---@cast v avm.number2
-		assert(v, "bad argument 'v' (expected array or sequence, got nil)")
+	local v1, v2 	if not is_number then
+			assert(v, "bad argument 'v' (expected array or sequence, got nil)")
 		v1, v2 = v[1],v[2]
 	else
-		---@cast v number
-		v1, v2 = v, v
+			v1, v2 = v, v
 	end
 	assert(dest, "bad argument 'dest' (expected array or sequence, got nil)")
 	array.set_2(dest, dest_index or 1, self[1]-v1,self[2]-v2)
@@ -212,18 +166,13 @@ end
 ---Apply mul element-wise and return a new vector_2
 ---
 ---Parameter `v` can be a number or array
----@param v avm.number2|number
----@return avm.vector_2
 function vector_2:mul(v)
 	local is_number = type(v) == 'number'
-	local v1, v2 ---@type number,number
-	if not is_number then
-		---@cast v avm.number2
-		assert(v, "bad argument 'v' (expected array or sequence, got nil)")
+	local v1, v2 	if not is_number then
+			assert(v, "bad argument 'v' (expected array or sequence, got nil)")
 		v1, v2 = v[1],v[2]
 	else
-		---@cast v number
-		v1, v2 = v, v
+			v1, v2 = v, v
 	end
 	return M.new(self[1]*v1,self[2]*v2)
 end
@@ -231,19 +180,13 @@ end
 ---Apply mul element-wise and store the result in dest
 ---
 ---Parameter `v` can be a number or array
----@param v avm.number2|number
----@param dest avm.seq_number2
----@param dest_index? integer
 function vector_2:mul_into(v, dest, dest_index)
 	local is_number = type(v) == 'number'
-	local v1, v2 ---@type number,number
-	if not is_number then
-		---@cast v avm.number2
-		assert(v, "bad argument 'v' (expected array or sequence, got nil)")
+	local v1, v2 	if not is_number then
+			assert(v, "bad argument 'v' (expected array or sequence, got nil)")
 		v1, v2 = v[1],v[2]
 	else
-		---@cast v number
-		v1, v2 = v, v
+			v1, v2 = v, v
 	end
 	assert(dest, "bad argument 'dest' (expected array or sequence, got nil)")
 	array.set_2(dest, dest_index or 1, self[1]*v1,self[2]*v2)
@@ -252,18 +195,13 @@ end
 ---Apply div element-wise and return a new vector_2
 ---
 ---Parameter `v` can be a number or array
----@param v avm.number2|number
----@return avm.vector_2
 function vector_2:div(v)
 	local is_number = type(v) == 'number'
-	local v1, v2 ---@type number,number
-	if not is_number then
-		---@cast v avm.number2
-		assert(v, "bad argument 'v' (expected array or sequence, got nil)")
+	local v1, v2 	if not is_number then
+			assert(v, "bad argument 'v' (expected array or sequence, got nil)")
 		v1, v2 = v[1],v[2]
 	else
-		---@cast v number
-		v1, v2 = v, v
+			v1, v2 = v, v
 	end
 	return M.new(self[1]/v1,self[2]/v2)
 end
@@ -271,19 +209,13 @@ end
 ---Apply div element-wise and store the result in dest
 ---
 ---Parameter `v` can be a number or array
----@param v avm.number2|number
----@param dest avm.seq_number2
----@param dest_index? integer
 function vector_2:div_into(v, dest, dest_index)
 	local is_number = type(v) == 'number'
-	local v1, v2 ---@type number,number
-	if not is_number then
-		---@cast v avm.number2
-		assert(v, "bad argument 'v' (expected array or sequence, got nil)")
+	local v1, v2 	if not is_number then
+			assert(v, "bad argument 'v' (expected array or sequence, got nil)")
 		v1, v2 = v[1],v[2]
 	else
-		---@cast v number
-		v1, v2 = v, v
+			v1, v2 = v, v
 	end
 	assert(dest, "bad argument 'dest' (expected array or sequence, got nil)")
 	array.set_2(dest, dest_index or 1, self[1]/v1,self[2]/v2)
@@ -301,73 +233,59 @@ vector_2.__unm = function(v) return v:mul(-1) end
 -----------------------------------------------------------
 
 ---Get elements of the vector
----@return number
 function vector_2:x()
 	return self[1]
 end
 
 ---Get elements of the vector
----@return number
 function vector_2:y()
 	return self[2]
 end
 
 ---Get elements of the vector
----@return number,number
 function vector_2:xx()
 	return self[1], self[1]
 end
 
 ---Get elements of the vector
----@return number,number
 function vector_2:xy()
 	return self[1], self[2]
 end
 
 ---Get elements of the vector
----@return number,number
 function vector_2:yx()
 	return self[2], self[1]
 end
 
 ---Get elements of the vector
----@return number,number
 function vector_2:yy()
 	return self[2], self[2]
 end
 
 ---Set elements of the vector
----@param v1 number
 function vector_2:set_x(v1)
 	self[1] = v1
 end
 
 ---Set elements of the vector
----@param v1 number
 function vector_2:set_y(v1)
 	self[2] = v1
 end
 
 ---Set elements of the vector
----@param v1 number
----@param v2 number
 function vector_2:set_xy(v1, v2)
 	self[1], self[2] = v1, v2
 end
 
 ---Set elements of the vector
----@param v1 number
----@param v2 number
 function vector_2:set_yx(v1, v2)
 	self[2], self[1] = v1, v2
 end
 
-
 --[[
 function vector_2_slice:__index(key)
 	if type(key) == 'number' and key >= 1 and key <= 2 then
-		---@diagnostic disable-next-line: undefined-field
-		return self._src[self._o+key]
+			return self._src[self._o+key]
 	elseif key == 'n' then
 			return 2
 	else
@@ -376,8 +294,7 @@ function vector_2_slice:__index(key)
 end
 function vector_2_slice:__newindex(key, value)
 	if type(key) == 'number' and key >= 1 and key <= 2 then
-		---@diagnostic disable-next-line: undefined-field
-		self._src[self._o+key] = value
+			self._src[self._o+key] = value
 	elseif key == 'n' then
 			error("cannot set 'n' field in vector_2_slice")
 	else
@@ -386,29 +303,24 @@ function vector_2_slice:__newindex(key, value)
 end
 
 function vector_2_slice:__tostring()
-	return string.format("%f, %f", self:get())
+	return format.array("${format_string}", self)
 end
 
 function vector_2_slice:copy()
 	return M.new(self:get())
 end
 
----@param dest avm.seq_number2
----@param dest_index? integer
 function vector_2_slice:copy_into(dest, dest_index)
 	assert(dest, "bad argument 'dest' (expected array or sequence, got nil)")
 	array.set_2(dest, dest_index or 1, self:get())
 end
 
 ---Get values as a tuple
----@return number,number
 function vector_2_slice:get()
 	return self._src[self._o+1], self._src[self._o+2]
 end
 
 ---Set values from a tuple
----@param v1 number
----@param v2 number
 function vector_2_slice:set(v1, v2)
 	assert(v1, "bad argument 'v1' (expected number, got nil)")
 	assert(v2, "bad argument 'v2' (expected number, got nil)")
@@ -418,18 +330,13 @@ end
 ---Apply add element-wise and return a new vector_2
 ---
 ---Parameter `v` can be a number or array
----@param v avm.number2|number
----@return avm.vector_2
 function vector_2_slice:add(v)
 	local is_number = type(v) == 'number'
-	local v1, v2 ---@type number,number
-	if not is_number then
-		---@cast v avm.number2
-		assert(v, "bad argument 'v' (expected array or sequence, got nil)")
+	local v1, v2 	if not is_number then
+			assert(v, "bad argument 'v' (expected array or sequence, got nil)")
 		v1, v2 = v[1],v[2]
 	else
-		---@cast v number
-		v1, v2 = v, v
+			v1, v2 = v, v
 	end
 	return M.new(self._src[self._o+1]+v1,self._src[self._o+2]+v2)
 end
@@ -437,19 +344,13 @@ end
 ---Apply add element-wise and store the result in dest
 ---
 ---Parameter `v` can be a number or array
----@param v avm.number2|number
----@param dest avm.seq_number2
----@param dest_index? integer
 function vector_2_slice:add_into(v, dest, dest_index)
 	local is_number = type(v) == 'number'
-	local v1, v2 ---@type number,number
-	if not is_number then
-		---@cast v avm.number2
-		assert(v, "bad argument 'v' (expected array or sequence, got nil)")
+	local v1, v2 	if not is_number then
+			assert(v, "bad argument 'v' (expected array or sequence, got nil)")
 		v1, v2 = v[1],v[2]
 	else
-		---@cast v number
-		v1, v2 = v, v
+			v1, v2 = v, v
 	end
 	assert(dest, "bad argument 'dest' (expected array or sequence, got nil)")
 	array.set_2(dest, dest_index or 1, self._src[self._o+1]+v1,self._src[self._o+2]+v2)
@@ -458,18 +359,13 @@ end
 ---Apply sub element-wise and return a new vector_2
 ---
 ---Parameter `v` can be a number or array
----@param v avm.number2|number
----@return avm.vector_2
 function vector_2_slice:sub(v)
 	local is_number = type(v) == 'number'
-	local v1, v2 ---@type number,number
-	if not is_number then
-		---@cast v avm.number2
-		assert(v, "bad argument 'v' (expected array or sequence, got nil)")
+	local v1, v2 	if not is_number then
+			assert(v, "bad argument 'v' (expected array or sequence, got nil)")
 		v1, v2 = v[1],v[2]
 	else
-		---@cast v number
-		v1, v2 = v, v
+			v1, v2 = v, v
 	end
 	return M.new(self._src[self._o+1]-v1,self._src[self._o+2]-v2)
 end
@@ -477,19 +373,13 @@ end
 ---Apply sub element-wise and store the result in dest
 ---
 ---Parameter `v` can be a number or array
----@param v avm.number2|number
----@param dest avm.seq_number2
----@param dest_index? integer
 function vector_2_slice:sub_into(v, dest, dest_index)
 	local is_number = type(v) == 'number'
-	local v1, v2 ---@type number,number
-	if not is_number then
-		---@cast v avm.number2
-		assert(v, "bad argument 'v' (expected array or sequence, got nil)")
+	local v1, v2 	if not is_number then
+			assert(v, "bad argument 'v' (expected array or sequence, got nil)")
 		v1, v2 = v[1],v[2]
 	else
-		---@cast v number
-		v1, v2 = v, v
+			v1, v2 = v, v
 	end
 	assert(dest, "bad argument 'dest' (expected array or sequence, got nil)")
 	array.set_2(dest, dest_index or 1, self._src[self._o+1]-v1,self._src[self._o+2]-v2)
@@ -498,18 +388,13 @@ end
 ---Apply mul element-wise and return a new vector_2
 ---
 ---Parameter `v` can be a number or array
----@param v avm.number2|number
----@return avm.vector_2
 function vector_2_slice:mul(v)
 	local is_number = type(v) == 'number'
-	local v1, v2 ---@type number,number
-	if not is_number then
-		---@cast v avm.number2
-		assert(v, "bad argument 'v' (expected array or sequence, got nil)")
+	local v1, v2 	if not is_number then
+			assert(v, "bad argument 'v' (expected array or sequence, got nil)")
 		v1, v2 = v[1],v[2]
 	else
-		---@cast v number
-		v1, v2 = v, v
+			v1, v2 = v, v
 	end
 	return M.new(self._src[self._o+1]*v1,self._src[self._o+2]*v2)
 end
@@ -517,19 +402,13 @@ end
 ---Apply mul element-wise and store the result in dest
 ---
 ---Parameter `v` can be a number or array
----@param v avm.number2|number
----@param dest avm.seq_number2
----@param dest_index? integer
 function vector_2_slice:mul_into(v, dest, dest_index)
 	local is_number = type(v) == 'number'
-	local v1, v2 ---@type number,number
-	if not is_number then
-		---@cast v avm.number2
-		assert(v, "bad argument 'v' (expected array or sequence, got nil)")
+	local v1, v2 	if not is_number then
+			assert(v, "bad argument 'v' (expected array or sequence, got nil)")
 		v1, v2 = v[1],v[2]
 	else
-		---@cast v number
-		v1, v2 = v, v
+			v1, v2 = v, v
 	end
 	assert(dest, "bad argument 'dest' (expected array or sequence, got nil)")
 	array.set_2(dest, dest_index or 1, self._src[self._o+1]*v1,self._src[self._o+2]*v2)
@@ -538,18 +417,13 @@ end
 ---Apply div element-wise and return a new vector_2
 ---
 ---Parameter `v` can be a number or array
----@param v avm.number2|number
----@return avm.vector_2
 function vector_2_slice:div(v)
 	local is_number = type(v) == 'number'
-	local v1, v2 ---@type number,number
-	if not is_number then
-		---@cast v avm.number2
-		assert(v, "bad argument 'v' (expected array or sequence, got nil)")
+	local v1, v2 	if not is_number then
+			assert(v, "bad argument 'v' (expected array or sequence, got nil)")
 		v1, v2 = v[1],v[2]
 	else
-		---@cast v number
-		v1, v2 = v, v
+			v1, v2 = v, v
 	end
 	return M.new(self._src[self._o+1]/v1,self._src[self._o+2]/v2)
 end
@@ -557,19 +431,13 @@ end
 ---Apply div element-wise and store the result in dest
 ---
 ---Parameter `v` can be a number or array
----@param v avm.number2|number
----@param dest avm.seq_number2
----@param dest_index? integer
 function vector_2_slice:div_into(v, dest, dest_index)
 	local is_number = type(v) == 'number'
-	local v1, v2 ---@type number,number
-	if not is_number then
-		---@cast v avm.number2
-		assert(v, "bad argument 'v' (expected array or sequence, got nil)")
+	local v1, v2 	if not is_number then
+			assert(v, "bad argument 'v' (expected array or sequence, got nil)")
 		v1, v2 = v[1],v[2]
 	else
-		---@cast v number
-		v1, v2 = v, v
+			v1, v2 = v, v
 	end
 	assert(dest, "bad argument 'dest' (expected array or sequence, got nil)")
 	array.set_2(dest, dest_index or 1, self._src[self._o+1]/v1,self._src[self._o+2]/v2)
@@ -587,63 +455,51 @@ vector_2_slice.__unm = function(v) return v:mul(-1) end
 -----------------------------------------------------------
 
 ---Get elements of the vector
----@return number
 function vector_2_slice:x()
 	return self._src[self._o+1]
 end
 
 ---Get elements of the vector
----@return number
 function vector_2_slice:y()
 	return self._src[self._o+2]
 end
 
 ---Get elements of the vector
----@return number,number
 function vector_2_slice:xx()
 	return self._src[self._o+1], self._src[self._o+1]
 end
 
 ---Get elements of the vector
----@return number,number
 function vector_2_slice:xy()
 	return self._src[self._o+1], self._src[self._o+2]
 end
 
 ---Get elements of the vector
----@return number,number
 function vector_2_slice:yx()
 	return self._src[self._o+2], self._src[self._o+1]
 end
 
 ---Get elements of the vector
----@return number,number
 function vector_2_slice:yy()
 	return self._src[self._o+2], self._src[self._o+2]
 end
 
 ---Set elements of the vector
----@param v1 number
 function vector_2_slice:set_x(v1)
 	self._src[self._o+1] = v1
 end
 
 ---Set elements of the vector
----@param v1 number
 function vector_2_slice:set_y(v1)
 	self._src[self._o+2] = v1
 end
 
 ---Set elements of the vector
----@param v1 number
----@param v2 number
 function vector_2_slice:set_xy(v1, v2)
 	self._src[self._o+1], self._src[self._o+2] = v1, v2
 end
 
 ---Set elements of the vector
----@param v1 number
----@param v2 number
 function vector_2_slice:set_yx(v1, v2)
 	self._src[self._o+2], self._src[self._o+1] = v1, v2
 end

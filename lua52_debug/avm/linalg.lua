@@ -21,15 +21,16 @@ local array = require(avm_path .. "array")
 ---Disable warnings for _ex type overloaded functions
 ---@diagnostic disable: redundant-return-value, duplicate-set-field
 
-
 -----------------------------------------------------------
 -- Dependencies
 -----------------------------------------------------------
 
 -- Math library dependencies
 -- Override these to use a different math library or set as nil to remove the dependency
-local math = require 'math'
-local math_sqrt = math.sqrt
+local math = require("math")
+local math_sqrt = assert(math.sqrt)
+local math_sin = assert(math.sin)
+local math_cos = assert(math.cos)
 
 -----------------------------------------------------------
 -- Basic constructors
@@ -127,7 +128,7 @@ function M.mat3_rotate_around_axis(radians, axis_x, axis_y, axis_z)
 	_debug.check("axis_x", axis_x, 'number')
 	_debug.check("axis_y", axis_y, 'number')
 	_debug.check("axis_z", axis_z, 'number')
-	local s, c = math.sin(radians), math.cos(radians)
+	local s, c = math_sin(radians), math_cos(radians)
 	local x, y, z = axis_x, axis_y, axis_z
 	local oc = 1-c
 	return x*x*oc+c, x*y*oc+z*s, x*z*oc-y*s,
@@ -168,7 +169,7 @@ function M.mat4_rotate_around_axis(radians, axis_x, axis_y, axis_z)
 	_debug.check("axis_x", axis_x, 'number')
 	_debug.check("axis_y", axis_y, 'number')
 	_debug.check("axis_z", axis_z, 'number')
-	local s, c = math.sin(radians), math.cos(radians)
+	local s, c = math_sin(radians), math_cos(radians)
 	local oc = 1-c
 	local x, y, z = axis_x, axis_y, axis_z
 	return x*x*oc+c, x*y*oc+z*s, x*z*oc-y*s, 0,
@@ -1858,7 +1859,6 @@ function M.equals_vec4_ex(a, a_index, b, b_index, epsilon)
 	return array.all_almost_equals_ex(a, a_index, 4, b, b_index, epsilon)
 end
 
-
 ---Apply the addition operator to each element in two 2x2 matrices
 ---
 ---@param a avm.mat2
@@ -3538,7 +3538,6 @@ function M.equals_mat4_ex(a, a_index, b, b_index, epsilon)
 	return array.all_almost_equals_ex(a, a_index, 16, b, b_index, epsilon)
 end
 
-
 -----------------------------------------------------------
 -- Vector length, normalisation, inner product and cross product
 -----------------------------------------------------------
@@ -4445,7 +4444,6 @@ function M.transpose_mat4x4_ex(src, src_index, dest, dest_index)
 		return src[so+1], src[so+5], src[so+9], src[so+13], src[so+2], src[so+6], src[so+10], src[so+14], src[so+3], src[so+7], src[so+11], src[so+15], src[so+4], src[so+8], src[so+12], src[so+16]
 	end
 end
-
 
 ---Multiply a 1x1 matrix with a 1x1 matrix and return a 1x1 matrix
 ---
@@ -8334,7 +8332,6 @@ function M.matmul_mat4_mat4_ex(a, a_index, b, b_index, dest, dest_index)
 	end
 end
 
-
 ---Multiply a 2x2 matrix and a 2d vector and return a 2d vector
 ---
 ---@param a avm.mat2
@@ -8643,7 +8640,5 @@ function M.matmul_mat4_vec4_ex(a, a_index, v, v_index, dest, dest_index)
 		return e1, e2, e3, e4
 	end
 end
-
-
 
 return M

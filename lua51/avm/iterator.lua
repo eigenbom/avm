@@ -3,7 +3,6 @@ Iterator
 
 Special purpose iterators  
 ]]
----@class iterator_module
 local M = {}
 
 -----------------------------------------------------------
@@ -11,24 +10,19 @@ local M = {}
 -----------------------------------------------------------
 
 -- Math library
-local math = require 'math'
-local math_ceil = math.ceil
-local math_min = math.min
+local math = require("math")
+local math_ceil = assert(math.ceil)
+local math_min = assert(math.min)
 
 ------------------------------------------------------------------------
 -- AVM Dependencies
 ------------------------------------------------------------------------
----@diagnostic disable-next-line: unused-local
 local avm_path = (...):match("(.-)[^%.]+$")
 
----@module 'avm.array'
 local array = require(avm_path .. "array")
----@module 'avm.view'
 local view = require(avm_path .. "view")
 
 ---Disable warnings for _ex type overloaded functions
----@diagnostic disable: redundant-return-value, duplicate-set-field
-
 
 -----------------------------------------------------------
 -- Iteration
@@ -38,9 +32,6 @@ local view = require(avm_path .. "view")
 ---
 ---NOTE: the returned index is the index of *the group*
 ---
----@generic T
----@param src avm.array<T>
----@return fun():integer,T,T
 function M.group_2(src)
 	assert(src, "bad argument 'src' (expected array, got nil)")
 	return M.group_2_ex(src, 1, array.length(src))
@@ -50,11 +41,6 @@ end
 ---
 ---NOTE: the returned index is the index of *the group*
 ---
----@generic T
----@param src avm.seq<T>
----@param src_index integer
----@param src_count integer
----@return fun():integer,T,T
 function M.group_2_ex(src, src_index, src_count)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
 	local i = 0
@@ -72,9 +58,6 @@ end
 ---
 ---NOTE: the returned index is the index of *the group*
 ---
----@generic T
----@param src avm.array<T>
----@return fun():integer,T,T,T
 function M.group_3(src)
 	assert(src, "bad argument 'src' (expected array, got nil)")
 	return M.group_3_ex(src, 1, array.length(src))
@@ -84,11 +67,6 @@ end
 ---
 ---NOTE: the returned index is the index of *the group*
 ---
----@generic T
----@param src avm.seq<T>
----@param src_index integer
----@param src_count integer
----@return fun():integer,T,T,T
 function M.group_3_ex(src, src_index, src_count)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
 	local i = 0
@@ -106,9 +84,6 @@ end
 ---
 ---NOTE: the returned index is the index of *the group*
 ---
----@generic T
----@param src avm.array<T>
----@return fun():integer,T,T,T,T
 function M.group_4(src)
 	assert(src, "bad argument 'src' (expected array, got nil)")
 	return M.group_4_ex(src, 1, array.length(src))
@@ -118,11 +93,6 @@ end
 ---
 ---NOTE: the returned index is the index of *the group*
 ---
----@generic T
----@param src avm.seq<T>
----@param src_index integer
----@param src_count integer
----@return fun():integer,T,T,T,T
 function M.group_4_ex(src, src_index, src_count)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
 	local i = 0
@@ -140,9 +110,6 @@ end
 ---
 ---NOTE: the returned index is the index of *the group*
 ---
----@generic T
----@param src avm.array<T>
----@return fun():integer,T,T,T,T,T
 function M.group_5(src)
 	assert(src, "bad argument 'src' (expected array, got nil)")
 	return M.group_5_ex(src, 1, array.length(src))
@@ -152,11 +119,6 @@ end
 ---
 ---NOTE: the returned index is the index of *the group*
 ---
----@generic T
----@param src avm.seq<T>
----@param src_index integer
----@param src_count integer
----@return fun():integer,T,T,T,T,T
 function M.group_5_ex(src, src_index, src_count)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
 	local i = 0
@@ -174,9 +136,6 @@ end
 ---
 ---NOTE: the returned index is the index of *the group*
 ---
----@generic T
----@param src avm.array<T>
----@return fun():integer,T,T,T,T,T,T
 function M.group_6(src)
 	assert(src, "bad argument 'src' (expected array, got nil)")
 	return M.group_6_ex(src, 1, array.length(src))
@@ -186,11 +145,6 @@ end
 ---
 ---NOTE: the returned index is the index of *the group*
 ---
----@generic T
----@param src avm.seq<T>
----@param src_index integer
----@param src_count integer
----@return fun():integer,T,T,T,T,T,T
 function M.group_6_ex(src, src_index, src_count)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
 	local i = 0
@@ -208,9 +162,6 @@ end
 ---
 ---NOTE: the returned index is the index of *the group*
 ---
----@generic T
----@param src avm.array<T>
----@return fun():integer,T,T,T,T,T,T,T
 function M.group_7(src)
 	assert(src, "bad argument 'src' (expected array, got nil)")
 	return M.group_7_ex(src, 1, array.length(src))
@@ -220,11 +171,6 @@ end
 ---
 ---NOTE: the returned index is the index of *the group*
 ---
----@generic T
----@param src avm.seq<T>
----@param src_index integer
----@param src_count integer
----@return fun():integer,T,T,T,T,T,T,T
 function M.group_7_ex(src, src_index, src_count)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
 	local i = 0
@@ -242,9 +188,6 @@ end
 ---
 ---NOTE: the returned index is the index of *the group*
 ---
----@generic T
----@param src avm.array<T>
----@return fun():integer,T,T,T,T,T,T,T,T
 function M.group_8(src)
 	assert(src, "bad argument 'src' (expected array, got nil)")
 	return M.group_8_ex(src, 1, array.length(src))
@@ -254,11 +197,6 @@ end
 ---
 ---NOTE: the returned index is the index of *the group*
 ---
----@generic T
----@param src avm.seq<T>
----@param src_index integer
----@param src_count integer
----@return fun():integer,T,T,T,T,T,T,T,T
 function M.group_8_ex(src, src_index, src_count)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
 	local i = 0
@@ -276,9 +214,6 @@ end
 ---
 ---NOTE: the returned index is the index of *the group*
 ---
----@generic T
----@param src avm.array<T>
----@return fun():integer,T,T,T,T,T,T,T,T,T
 function M.group_9(src)
 	assert(src, "bad argument 'src' (expected array, got nil)")
 	return M.group_9_ex(src, 1, array.length(src))
@@ -288,11 +223,6 @@ end
 ---
 ---NOTE: the returned index is the index of *the group*
 ---
----@generic T
----@param src avm.seq<T>
----@param src_index integer
----@param src_count integer
----@return fun():integer,T,T,T,T,T,T,T,T,T
 function M.group_9_ex(src, src_index, src_count)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
 	local i = 0
@@ -310,9 +240,6 @@ end
 ---
 ---NOTE: the returned index is the index of *the group*
 ---
----@generic T
----@param src avm.array<T>
----@return fun():integer,T,T,T,T,T,T,T,T,T,T
 function M.group_10(src)
 	assert(src, "bad argument 'src' (expected array, got nil)")
 	return M.group_10_ex(src, 1, array.length(src))
@@ -322,11 +249,6 @@ end
 ---
 ---NOTE: the returned index is the index of *the group*
 ---
----@generic T
----@param src avm.seq<T>
----@param src_index integer
----@param src_count integer
----@return fun():integer,T,T,T,T,T,T,T,T,T,T
 function M.group_10_ex(src, src_index, src_count)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
 	local i = 0
@@ -344,9 +266,6 @@ end
 ---
 ---NOTE: the returned index is the index of *the group*
 ---
----@generic T
----@param src avm.array<T>
----@return fun():integer,T,T,T,T,T,T,T,T,T,T,T
 function M.group_11(src)
 	assert(src, "bad argument 'src' (expected array, got nil)")
 	return M.group_11_ex(src, 1, array.length(src))
@@ -356,11 +275,6 @@ end
 ---
 ---NOTE: the returned index is the index of *the group*
 ---
----@generic T
----@param src avm.seq<T>
----@param src_index integer
----@param src_count integer
----@return fun():integer,T,T,T,T,T,T,T,T,T,T,T
 function M.group_11_ex(src, src_index, src_count)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
 	local i = 0
@@ -378,9 +292,6 @@ end
 ---
 ---NOTE: the returned index is the index of *the group*
 ---
----@generic T
----@param src avm.array<T>
----@return fun():integer,T,T,T,T,T,T,T,T,T,T,T,T
 function M.group_12(src)
 	assert(src, "bad argument 'src' (expected array, got nil)")
 	return M.group_12_ex(src, 1, array.length(src))
@@ -390,11 +301,6 @@ end
 ---
 ---NOTE: the returned index is the index of *the group*
 ---
----@generic T
----@param src avm.seq<T>
----@param src_index integer
----@param src_count integer
----@return fun():integer,T,T,T,T,T,T,T,T,T,T,T,T
 function M.group_12_ex(src, src_index, src_count)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
 	local i = 0
@@ -412,9 +318,6 @@ end
 ---
 ---NOTE: the returned index is the index of *the group*
 ---
----@generic T
----@param src avm.array<T>
----@return fun():integer,T,T,T,T,T,T,T,T,T,T,T,T,T
 function M.group_13(src)
 	assert(src, "bad argument 'src' (expected array, got nil)")
 	return M.group_13_ex(src, 1, array.length(src))
@@ -424,11 +327,6 @@ end
 ---
 ---NOTE: the returned index is the index of *the group*
 ---
----@generic T
----@param src avm.seq<T>
----@param src_index integer
----@param src_count integer
----@return fun():integer,T,T,T,T,T,T,T,T,T,T,T,T,T
 function M.group_13_ex(src, src_index, src_count)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
 	local i = 0
@@ -446,9 +344,6 @@ end
 ---
 ---NOTE: the returned index is the index of *the group*
 ---
----@generic T
----@param src avm.array<T>
----@return fun():integer,T,T,T,T,T,T,T,T,T,T,T,T,T,T
 function M.group_14(src)
 	assert(src, "bad argument 'src' (expected array, got nil)")
 	return M.group_14_ex(src, 1, array.length(src))
@@ -458,11 +353,6 @@ end
 ---
 ---NOTE: the returned index is the index of *the group*
 ---
----@generic T
----@param src avm.seq<T>
----@param src_index integer
----@param src_count integer
----@return fun():integer,T,T,T,T,T,T,T,T,T,T,T,T,T,T
 function M.group_14_ex(src, src_index, src_count)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
 	local i = 0
@@ -480,9 +370,6 @@ end
 ---
 ---NOTE: the returned index is the index of *the group*
 ---
----@generic T
----@param src avm.array<T>
----@return fun():integer,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T
 function M.group_15(src)
 	assert(src, "bad argument 'src' (expected array, got nil)")
 	return M.group_15_ex(src, 1, array.length(src))
@@ -492,11 +379,6 @@ end
 ---
 ---NOTE: the returned index is the index of *the group*
 ---
----@generic T
----@param src avm.seq<T>
----@param src_index integer
----@param src_count integer
----@return fun():integer,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T
 function M.group_15_ex(src, src_index, src_count)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
 	local i = 0
@@ -514,9 +396,6 @@ end
 ---
 ---NOTE: the returned index is the index of *the group*
 ---
----@generic T
----@param src avm.array<T>
----@return fun():integer,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T
 function M.group_16(src)
 	assert(src, "bad argument 'src' (expected array, got nil)")
 	return M.group_16_ex(src, 1, array.length(src))
@@ -526,11 +405,6 @@ end
 ---
 ---NOTE: the returned index is the index of *the group*
 ---
----@generic T
----@param src avm.seq<T>
----@param src_index integer
----@param src_count integer
----@return fun():integer,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T
 function M.group_16_ex(src, src_index, src_count)
 	assert(src, "bad argument 'src' (expected array or sequence, got nil)")
 	local i = 0
@@ -544,7 +418,6 @@ function M.group_16_ex(src, src_index, src_count)
 	end
 end
 
-
 ---Create an iterator over two arrays that returns
 ---```
 ---i, a_i_1, ..., a_i_n, b_i_1, ..., b_i_n
@@ -553,10 +426,6 @@ end
 ---`a_i_j` is the `j`'th element of group `i` of `a` and
 ---`b_i_j` is the `j`'th element of group `i` of `b`
 ---
----@generic T
----@param a avm.array<T>
----@param b avm.array<T>
----@return fun():integer,T,T
 function M.zip_1(a, b)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -579,13 +448,6 @@ end
 ---`a_i_j` is the `j`'th element of group `i` of `a` and
 ---`b_i_j` is the `j`'th element of group `i` of `b`
 ---
----@generic T
----@param a avm.seq<T>
----@param a_index integer
----@param a_count integer
----@param b avm.seq<T>
----@param b_index integer
----@return fun():integer,T,T
 function M.zip_1_ex(a, a_index, a_count, b, b_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -609,10 +471,6 @@ end
 ---`a_i_j` is the `j`'th element of group `i` of `a` and
 ---`b_i_j` is the `j`'th element of group `i` of `b`
 ---
----@generic T
----@param a avm.array<T>
----@param b avm.array<T>
----@return fun():integer,T,T,T,T
 function M.zip_2(a, b)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -635,13 +493,6 @@ end
 ---`a_i_j` is the `j`'th element of group `i` of `a` and
 ---`b_i_j` is the `j`'th element of group `i` of `b`
 ---
----@generic T
----@param a avm.seq<T>
----@param a_index integer
----@param a_count integer
----@param b avm.seq<T>
----@param b_index integer
----@return fun():integer,T,T,T,T
 function M.zip_2_ex(a, a_index, a_count, b, b_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -665,10 +516,6 @@ end
 ---`a_i_j` is the `j`'th element of group `i` of `a` and
 ---`b_i_j` is the `j`'th element of group `i` of `b`
 ---
----@generic T
----@param a avm.array<T>
----@param b avm.array<T>
----@return fun():integer,T,T,T,T,T,T
 function M.zip_3(a, b)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -691,13 +538,6 @@ end
 ---`a_i_j` is the `j`'th element of group `i` of `a` and
 ---`b_i_j` is the `j`'th element of group `i` of `b`
 ---
----@generic T
----@param a avm.seq<T>
----@param a_index integer
----@param a_count integer
----@param b avm.seq<T>
----@param b_index integer
----@return fun():integer,T,T,T,T,T,T
 function M.zip_3_ex(a, a_index, a_count, b, b_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -721,10 +561,6 @@ end
 ---`a_i_j` is the `j`'th element of group `i` of `a` and
 ---`b_i_j` is the `j`'th element of group `i` of `b`
 ---
----@generic T
----@param a avm.array<T>
----@param b avm.array<T>
----@return fun():integer,T,T,T,T,T,T,T,T
 function M.zip_4(a, b)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -747,13 +583,6 @@ end
 ---`a_i_j` is the `j`'th element of group `i` of `a` and
 ---`b_i_j` is the `j`'th element of group `i` of `b`
 ---
----@generic T
----@param a avm.seq<T>
----@param a_index integer
----@param a_count integer
----@param b avm.seq<T>
----@param b_index integer
----@return fun():integer,T,T,T,T,T,T,T,T
 function M.zip_4_ex(a, a_index, a_count, b, b_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -777,10 +606,6 @@ end
 ---`a_i_j` is the `j`'th element of group `i` of `a` and
 ---`b_i_j` is the `j`'th element of group `i` of `b`
 ---
----@generic T
----@param a avm.array<T>
----@param b avm.array<T>
----@return fun():integer,T,T,T,T,T,T,T,T,T,T
 function M.zip_5(a, b)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -803,13 +628,6 @@ end
 ---`a_i_j` is the `j`'th element of group `i` of `a` and
 ---`b_i_j` is the `j`'th element of group `i` of `b`
 ---
----@generic T
----@param a avm.seq<T>
----@param a_index integer
----@param a_count integer
----@param b avm.seq<T>
----@param b_index integer
----@return fun():integer,T,T,T,T,T,T,T,T,T,T
 function M.zip_5_ex(a, a_index, a_count, b, b_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -833,10 +651,6 @@ end
 ---`a_i_j` is the `j`'th element of group `i` of `a` and
 ---`b_i_j` is the `j`'th element of group `i` of `b`
 ---
----@generic T
----@param a avm.array<T>
----@param b avm.array<T>
----@return fun():integer,T,T,T,T,T,T,T,T,T,T,T,T
 function M.zip_6(a, b)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -859,13 +673,6 @@ end
 ---`a_i_j` is the `j`'th element of group `i` of `a` and
 ---`b_i_j` is the `j`'th element of group `i` of `b`
 ---
----@generic T
----@param a avm.seq<T>
----@param a_index integer
----@param a_count integer
----@param b avm.seq<T>
----@param b_index integer
----@return fun():integer,T,T,T,T,T,T,T,T,T,T,T,T
 function M.zip_6_ex(a, a_index, a_count, b, b_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -889,10 +696,6 @@ end
 ---`a_i_j` is the `j`'th element of group `i` of `a` and
 ---`b_i_j` is the `j`'th element of group `i` of `b`
 ---
----@generic T
----@param a avm.array<T>
----@param b avm.array<T>
----@return fun():integer,T,T,T,T,T,T,T,T,T,T,T,T,T,T
 function M.zip_7(a, b)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -915,13 +718,6 @@ end
 ---`a_i_j` is the `j`'th element of group `i` of `a` and
 ---`b_i_j` is the `j`'th element of group `i` of `b`
 ---
----@generic T
----@param a avm.seq<T>
----@param a_index integer
----@param a_count integer
----@param b avm.seq<T>
----@param b_index integer
----@return fun():integer,T,T,T,T,T,T,T,T,T,T,T,T,T,T
 function M.zip_7_ex(a, a_index, a_count, b, b_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -945,10 +741,6 @@ end
 ---`a_i_j` is the `j`'th element of group `i` of `a` and
 ---`b_i_j` is the `j`'th element of group `i` of `b`
 ---
----@generic T
----@param a avm.array<T>
----@param b avm.array<T>
----@return fun():integer,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T
 function M.zip_8(a, b)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -971,13 +763,6 @@ end
 ---`a_i_j` is the `j`'th element of group `i` of `a` and
 ---`b_i_j` is the `j`'th element of group `i` of `b`
 ---
----@generic T
----@param a avm.seq<T>
----@param a_index integer
----@param a_count integer
----@param b avm.seq<T>
----@param b_index integer
----@return fun():integer,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T
 function M.zip_8_ex(a, a_index, a_count, b, b_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -1001,10 +786,6 @@ end
 ---`a_i_j` is the `j`'th element of group `i` of `a` and
 ---`b_i_j` is the `j`'th element of group `i` of `b`
 ---
----@generic T
----@param a avm.array<T>
----@param b avm.array<T>
----@return fun():integer,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T
 function M.zip_9(a, b)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -1027,13 +808,6 @@ end
 ---`a_i_j` is the `j`'th element of group `i` of `a` and
 ---`b_i_j` is the `j`'th element of group `i` of `b`
 ---
----@generic T
----@param a avm.seq<T>
----@param a_index integer
----@param a_count integer
----@param b avm.seq<T>
----@param b_index integer
----@return fun():integer,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T
 function M.zip_9_ex(a, a_index, a_count, b, b_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -1057,10 +831,6 @@ end
 ---`a_i_j` is the `j`'th element of group `i` of `a` and
 ---`b_i_j` is the `j`'th element of group `i` of `b`
 ---
----@generic T
----@param a avm.array<T>
----@param b avm.array<T>
----@return fun():integer,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T
 function M.zip_10(a, b)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -1083,13 +853,6 @@ end
 ---`a_i_j` is the `j`'th element of group `i` of `a` and
 ---`b_i_j` is the `j`'th element of group `i` of `b`
 ---
----@generic T
----@param a avm.seq<T>
----@param a_index integer
----@param a_count integer
----@param b avm.seq<T>
----@param b_index integer
----@return fun():integer,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T
 function M.zip_10_ex(a, a_index, a_count, b, b_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -1113,10 +876,6 @@ end
 ---`a_i_j` is the `j`'th element of group `i` of `a` and
 ---`b_i_j` is the `j`'th element of group `i` of `b`
 ---
----@generic T
----@param a avm.array<T>
----@param b avm.array<T>
----@return fun():integer,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T
 function M.zip_11(a, b)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -1139,13 +898,6 @@ end
 ---`a_i_j` is the `j`'th element of group `i` of `a` and
 ---`b_i_j` is the `j`'th element of group `i` of `b`
 ---
----@generic T
----@param a avm.seq<T>
----@param a_index integer
----@param a_count integer
----@param b avm.seq<T>
----@param b_index integer
----@return fun():integer,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T
 function M.zip_11_ex(a, a_index, a_count, b, b_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -1169,10 +921,6 @@ end
 ---`a_i_j` is the `j`'th element of group `i` of `a` and
 ---`b_i_j` is the `j`'th element of group `i` of `b`
 ---
----@generic T
----@param a avm.array<T>
----@param b avm.array<T>
----@return fun():integer,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T
 function M.zip_12(a, b)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -1195,13 +943,6 @@ end
 ---`a_i_j` is the `j`'th element of group `i` of `a` and
 ---`b_i_j` is the `j`'th element of group `i` of `b`
 ---
----@generic T
----@param a avm.seq<T>
----@param a_index integer
----@param a_count integer
----@param b avm.seq<T>
----@param b_index integer
----@return fun():integer,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T
 function M.zip_12_ex(a, a_index, a_count, b, b_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -1225,10 +966,6 @@ end
 ---`a_i_j` is the `j`'th element of group `i` of `a` and
 ---`b_i_j` is the `j`'th element of group `i` of `b`
 ---
----@generic T
----@param a avm.array<T>
----@param b avm.array<T>
----@return fun():integer,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T
 function M.zip_13(a, b)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -1251,13 +988,6 @@ end
 ---`a_i_j` is the `j`'th element of group `i` of `a` and
 ---`b_i_j` is the `j`'th element of group `i` of `b`
 ---
----@generic T
----@param a avm.seq<T>
----@param a_index integer
----@param a_count integer
----@param b avm.seq<T>
----@param b_index integer
----@return fun():integer,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T
 function M.zip_13_ex(a, a_index, a_count, b, b_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -1281,10 +1011,6 @@ end
 ---`a_i_j` is the `j`'th element of group `i` of `a` and
 ---`b_i_j` is the `j`'th element of group `i` of `b`
 ---
----@generic T
----@param a avm.array<T>
----@param b avm.array<T>
----@return fun():integer,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T
 function M.zip_14(a, b)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -1307,13 +1033,6 @@ end
 ---`a_i_j` is the `j`'th element of group `i` of `a` and
 ---`b_i_j` is the `j`'th element of group `i` of `b`
 ---
----@generic T
----@param a avm.seq<T>
----@param a_index integer
----@param a_count integer
----@param b avm.seq<T>
----@param b_index integer
----@return fun():integer,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T
 function M.zip_14_ex(a, a_index, a_count, b, b_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -1337,10 +1056,6 @@ end
 ---`a_i_j` is the `j`'th element of group `i` of `a` and
 ---`b_i_j` is the `j`'th element of group `i` of `b`
 ---
----@generic T
----@param a avm.array<T>
----@param b avm.array<T>
----@return fun():integer,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T
 function M.zip_15(a, b)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -1363,13 +1078,6 @@ end
 ---`a_i_j` is the `j`'th element of group `i` of `a` and
 ---`b_i_j` is the `j`'th element of group `i` of `b`
 ---
----@generic T
----@param a avm.seq<T>
----@param a_index integer
----@param a_count integer
----@param b avm.seq<T>
----@param b_index integer
----@return fun():integer,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T
 function M.zip_15_ex(a, a_index, a_count, b, b_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -1393,10 +1101,6 @@ end
 ---`a_i_j` is the `j`'th element of group `i` of `a` and
 ---`b_i_j` is the `j`'th element of group `i` of `b`
 ---
----@generic T
----@param a avm.array<T>
----@param b avm.array<T>
----@return fun():integer,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T
 function M.zip_16(a, b)
 	assert(a, "bad argument 'a' (expected array, got nil)")
 	assert(b, "bad argument 'b' (expected array, got nil)")
@@ -1419,13 +1123,6 @@ end
 ---`a_i_j` is the `j`'th element of group `i` of `a` and
 ---`b_i_j` is the `j`'th element of group `i` of `b`
 ---
----@generic T
----@param a avm.seq<T>
----@param a_index integer
----@param a_count integer
----@param b avm.seq<T>
----@param b_index integer
----@return fun():integer,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T
 function M.zip_16_ex(a, a_index, a_count, b, b_index)
 	assert(a, "bad argument 'a' (expected array or sequence, got nil)")
 	assert(b, "bad argument 'b' (expected array or sequence, got nil)")
@@ -1440,6 +1137,5 @@ function M.zip_16_ex(a, a_index, a_count, b, b_index)
 		end
 	end
 end
-
 
 return M
