@@ -1,8 +1,8 @@
 # Arrays, Vectors and Matrices for Lua
 
-AVM is a pure Lua library for working with arrays, vectors and matrices. It operates on flat arrays of numerical data and provides linear algebra operations for vectors and matrices. An array is typically a Lua table, but can be any [compatible object](doc/design.md).
+AVM is a pure Lua library for working with arrays, vectors and matrices. It operates on flat arrays of numerical data and provides linear algebra operations for vectors and matrices. An array is typically a Lua table but can be any compatible userdata.
 
-This README covers installation and basic examples. To dive deeper you can read the full API documentation at [doc/api.md](doc/api.md) and read about the design principles at [doc/design.md](doc/design.md). Reference tests are provided in [tests](tests).
+This README covers installation and basic examples. To dive deeper you can read the full API documentation at [doc/api.md](doc/api.md) and read about the design principles at [doc/design.md](doc/design.md). Reference tests are provided in [tests/](tests).
 
 ## Installation
 
@@ -50,7 +50,7 @@ In addition there are some helper modules:
 
 ## Examples
 
-Here are some introdutory examples. Refer to the source files or [tests][Tests] for further examples.
+Here are some introdutory examples. Refer to the source files or [tests/](tests) for further examples.
 
 ### Basic Usage
 
