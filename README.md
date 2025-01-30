@@ -2,11 +2,11 @@
 
 AVM is a pure Lua library for working with arrays, vectors and matrices. It operates on flat arrays of numerical data and provides linear algebra operations for vectors and matrices. An array is typically a Lua table, but can be any [compatible object](doc/design.md).
 
-This README covers installation and basic examples. To dive deeper you can read the full API documentation at [doc/api.md](doc/api.md) and read about the design principles at [doc/design.md](doc/design.md).
+This README covers installation and basic examples. To dive deeper you can read the full API documentation at [doc/api.md](doc/api.md) and read about the design principles at [doc/design.md](doc/design.md). Reference tests are provided in [tests](tests).
 
 ## Installation
 
-The library is available in different "distributions" provided in this repository (e.g, for [lua 5.1](lua51)). Each of these has a `debug` variant that will perform additional parameter validation at some additional cpu expense.
+The library is available in different "distributions" provided in this repository (e.g, for [lua 5.1](dist/lua51)). Most of these have a `debug` variant that performs additional data validation at run-time.
 
 To install this library first choose a distribution and copy into your local project directory. You can then require each [module](#modules) as needed. For example:
 
@@ -26,13 +26,11 @@ local c = array.add(a, b)
 assert(array.all_equals_constant(c, 11))
 ```
 
-Some distributions like [picotron](picotron) come as a single `avm.lua` file that wraps all functions in an `avm` global. This file can be placed into your project and included as normal:
+Some distributions like [picotron](dist/picotron) come as a single `avm.lua` file that wraps all functions in an `avm` global. This file can be placed into your project and, in the case of picotron, included using the system `include` function:
 
 ```lua
 include 'avm.lua'
-local array = avm.array
-
-local a = array.range(1, 10)
+local one_to_ten = avm.array.range(1, 10)
 ```
 
 ## Modules
@@ -51,6 +49,8 @@ In addition there are some helper modules:
 * `view`: Special view objects
 
 ## Examples
+
+Here are some introdutory examples. Refer to the source files or [tests][Tests] for further examples.
 
 ### Basic Usage
 

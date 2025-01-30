@@ -774,20 +774,20 @@ Apply the greater than or equal to operator to each element of a slice with a co
 ## array.greater_than_or_equal_ex
 
 ```lua
-function array.greater_than_or_equal_ex(a: seq<T>, a_index: integer, a_count: integer, b: seq<T>, b_index: integer)
-  -> boolean[]
-```
-
-Apply the greater than or equal to operator to two slices and return the result
-
-## array.greater_than_or_equal_ex
-
-```lua
 function array.greater_than_or_equal_ex(a: seq<T>, a_index: integer, a_count: integer, b: seq<T>, b_index: integer, dest: seq<boolean>, dest_index?: integer)
   -> nil
 ```
 
 Apply the greater than or equal to operator to two slices and store the result in a destination
+
+## array.greater_than_or_equal_ex
+
+```lua
+function array.greater_than_or_equal_ex(a: seq<T>, a_index: integer, a_count: integer, b: seq<T>, b_index: integer)
+  -> boolean[]
+```
+
+Apply the greater than or equal to operator to two slices and return the result
 
 ## array.grow_array
 
@@ -807,6 +807,17 @@ function array.is_array(src: any)
 ```
 
 Determines if src is an array
+
+Optionally redefine this to support custom platform and userdata
+
+## array.is_seq
+
+```lua
+function array.is_seq(src: any)
+  -> boolean
+```
+
+Determines if src is a seq
 
 Optionally redefine this to support custom platform and userdata
 
@@ -853,22 +864,22 @@ Linearly interpolate between arrays and return an array
 ## array.lerp_ex
 
 ```lua
-function array.lerp_ex(a: seq<T>, a_index: integer, a_count: integer, b: seq<T>, b_index: integer, t: number, dest: seq<T>, dest_index?: integer)
-  -> nil
+function array.lerp_ex(a: seq<T>, a_index: integer, a_count: integer, b: seq<T>, b_index: integer, t: number)
+  -> array<T>
 ```
 
-Linearly interpolate between slices into a destination
+Linearly interpolate between slices and return an array
 
 `{a[i]*(1-t)+b[i]*t}` for all `i` in `[1, #a]`
 
 ## array.lerp_ex
 
 ```lua
-function array.lerp_ex(a: seq<T>, a_index: integer, a_count: integer, b: seq<T>, b_index: integer, t: number)
-  -> array<T>
+function array.lerp_ex(a: seq<T>, a_index: integer, a_count: integer, b: seq<T>, b_index: integer, t: number, dest: seq<T>, dest_index?: integer)
+  -> nil
 ```
 
-Linearly interpolate between slices and return an array
+Linearly interpolate between slices into a destination
 
 `{a[i]*(1-t)+b[i]*t}` for all `i` in `[1, #a]`
 
@@ -1055,20 +1066,20 @@ Apply a function to each element of the arrays and return an array
 ## array.map_3_ex
 
 ```lua
-function array.map_3_ex(f: fun(v1: <T1>, v2: <T2>, v3: <T3>):<U>, a1: seq<T1>, a1_index: any, a1_count: any, a2: seq<T2>, a2_index: any, a3: seq<T3>, a3_index: integer)
-  -> array<U>
-```
-
-Apply a function to each element of the sequences and return an array
-
-## array.map_3_ex
-
-```lua
 function array.map_3_ex(f: fun(v1: <T1>, v2: <T2>, v3: <T3>):<U>, a1: seq<T1>, a1_index: any, a1_count: any, a2: seq<T2>, a2_index: any, a3: seq<T3>, a3_index: integer, dest: seq<U>, dest_index?: integer)
   -> seq<U>
 ```
 
 Apply a function to each element of the sequences and fill a target a destination
+
+## array.map_3_ex
+
+```lua
+function array.map_3_ex(f: fun(v1: <T1>, v2: <T2>, v3: <T3>):<U>, a1: seq<T1>, a1_index: any, a1_count: any, a2: seq<T2>, a2_index: any, a3: seq<T3>, a3_index: integer)
+  -> array<U>
+```
+
+Apply a function to each element of the sequences and return an array
 
 ## array.map_4
 
@@ -1215,20 +1226,20 @@ add_constant({1,2,3,4,...}, {x,y}) -- {1+x, 2+y, 3+x, 4+y}
 ## array.min_constant_ex
 
 ```lua
-function array.min_constant_ex(a: seq<T>, a_index: integer, a_count: integer, c: T)
-  -> array<T>
-```
-
-Apply the minimum operator to each element of a slice with a constant
-
-## array.min_constant_ex
-
-```lua
 function array.min_constant_ex(a: seq<T>, a_index: integer, a_count: integer, c: T, dest: seq<T>, dest_index?: integer)
   -> nil
 ```
 
 Apply the minimum operator to each element of a slice with a constant and store the result in a destination
+
+## array.min_constant_ex
+
+```lua
+function array.min_constant_ex(a: seq<T>, a_index: integer, a_count: integer, c: T)
+  -> array<T>
+```
+
+Apply the minimum operator to each element of a slice with a constant
 
 ## array.min_ex
 
@@ -1299,20 +1310,20 @@ Apply the modulus operator to each element of a slice with a constant
 ## array.mod_ex
 
 ```lua
-function array.mod_ex(a: seq<T>, a_index: integer, a_count: integer, b: seq<T>, b_index: integer)
-  -> array<number>
-```
-
-Apply the modulus operator to two slices and return the result
-
-## array.mod_ex
-
-```lua
 function array.mod_ex(a: seq<T>, a_index: integer, a_count: integer, b: seq<T>, b_index: integer, dest: seq_number, dest_index?: integer)
   -> nil
 ```
 
 Apply the modulus operator to two slices and store the result in a destination
+
+## array.mod_ex
+
+```lua
+function array.mod_ex(a: seq<T>, a_index: integer, a_count: integer, b: seq<T>, b_index: integer)
+  -> array<number>
+```
+
+Apply the modulus operator to two slices and return the result
 
 ## array.mul
 
@@ -1412,20 +1423,20 @@ add_constant({1,2,3,4,...}, {x,y}) -- {1+x, 2+y, 3+x, 4+y}
 ## array.mul_constant_ex
 
 ```lua
-function array.mul_constant_ex(a: seq<T>, a_index: integer, a_count: integer, c: T)
-  -> array<number>
-```
-
-Apply the multiplication operator to each element of a slice with a constant
-
-## array.mul_constant_ex
-
-```lua
 function array.mul_constant_ex(a: seq<T>, a_index: integer, a_count: integer, c: T, dest: seq_number, dest_index?: integer)
   -> nil
 ```
 
 Apply the multiplication operator to each element of a slice with a constant and store the result in a destination
+
+## array.mul_constant_ex
+
+```lua
+function array.mul_constant_ex(a: seq<T>, a_index: integer, a_count: integer, c: T)
+  -> array<number>
+```
+
+Apply the multiplication operator to each element of a slice with a constant
 
 ## array.mul_ex
 
@@ -1531,9 +1542,9 @@ function array.pop(src: array<T>)
 
 Pop a value off the end of an array and return it
 See:
-  * [array.pop_1](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#1461#9)
-  * [array.pop_2](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#1474#9)
-  * [array.pop_3](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#1489#9)
+  * [array.pop_1](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#1487#9)
+  * [array.pop_2](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#1500#9)
+  * [array.pop_3](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#1515#9)
 
 ## array.pop_1
 
@@ -1712,20 +1723,20 @@ add_constant({1,2,3,4,...}, {x,y}) -- {1+x, 2+y, 3+x, 4+y}
 ## array.pow_constant_ex
 
 ```lua
-function array.pow_constant_ex(a: seq<T>, a_index: integer, a_count: integer, c: T)
-  -> array<number>
-```
-
-Apply the exponentiation operator to each element of a slice with a constant
-
-## array.pow_constant_ex
-
-```lua
 function array.pow_constant_ex(a: seq<T>, a_index: integer, a_count: integer, c: T, dest: seq_number, dest_index?: integer)
   -> nil
 ```
 
 Apply the exponentiation operator to each element of a slice with a constant and store the result in a destination
+
+## array.pow_constant_ex
+
+```lua
+function array.pow_constant_ex(a: seq<T>, a_index: integer, a_count: integer, c: T)
+  -> array<number>
+```
+
+Apply the exponentiation operator to each element of a slice with a constant
 
 ## array.pow_ex
 
@@ -1924,8 +1935,8 @@ function array.reshape_into(src: any, dest_size: integer[], dest: any, dest_inde
 
 Reshape a table or an array into a destination
 See:
-  * [array.reshape](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#318#9)
-  * [array.flatten](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#408#9)
+  * [array.reshape](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#344#9)
+  * [array.flatten](file:///c%3A/dev/geo/lib/avm/build/lua52/avm/array.lua#434#9)
 
 ## array.reverse
 
@@ -1939,20 +1950,20 @@ Reverse an array
 ## array.reverse_ex
 
 ```lua
-function array.reverse_ex(src: seq<T>, src_index: integer, src_count: integer, dest: seq<T>, dest_index?: integer)
-  -> nil
-```
-
-Reverse a slice into a destination
-
-## array.reverse_ex
-
-```lua
 function array.reverse_ex(src: seq<T>, src_index: integer, src_count: integer)
   -> array<T>
 ```
 
 Reverse a slice
+
+## array.reverse_ex
+
+```lua
+function array.reverse_ex(src: seq<T>, src_index: integer, src_count: integer, dest: seq<T>, dest_index?: integer)
+  -> nil
+```
+
+Reverse a slice into a destination
 
 ## array.set
 
@@ -2208,20 +2219,20 @@ add_constant({1,2,3,4,...}, {x,y}) -- {1+x, 2+y, 3+x, 4+y}
 ## array.sub_constant_ex
 
 ```lua
-function array.sub_constant_ex(a: seq<T>, a_index: integer, a_count: integer, c: T, dest: seq_number, dest_index?: integer)
-  -> nil
-```
-
-Apply the subtraction operator to each element of a slice with a constant and store the result in a destination
-
-## array.sub_constant_ex
-
-```lua
 function array.sub_constant_ex(a: seq<T>, a_index: integer, a_count: integer, c: T)
   -> array<number>
 ```
 
 Apply the subtraction operator to each element of a slice with a constant
+
+## array.sub_constant_ex
+
+```lua
+function array.sub_constant_ex(a: seq<T>, a_index: integer, a_count: integer, c: T, dest: seq_number, dest_index?: integer)
+  -> nil
+```
+
+Apply the subtraction operator to each element of a slice with a constant and store the result in a destination
 
 ## array.sub_ex
 
