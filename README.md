@@ -50,7 +50,7 @@ In addition there are some helper modules:
 
 ## Examples
 
-Here are some introdutory examples. Refer to the source files or [tests/](tests) for further examples.
+Here are some introductory examples. Refer to the source files or [tests/](tests) for further examples.
 
 ### Basic Usage
 
